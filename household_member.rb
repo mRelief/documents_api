@@ -54,19 +54,19 @@ class HouseholdMember
   end
 
   def documents_based_on_self_employment
-    { "official_name": "Self-Employment Form" } if @self_employed
+    SELF_EMPLOYMENT_FORM if @self_employed
   end
 
   def documents_based_on_child_support
-    { "official_name": "Written Statement" } if @receiving_child_support
+    WRITTEN_CHILD_SUPPORT_STATEMENT if @receiving_child_support
   end
 
   def documents_based_on_disability
-    { "official_name": "Award Letter for Disability" } if @disability_benefits
+    AWARD_LETTER_FOR_DISABILITY if @disability_benefits
   end
 
   def documents_based_on_retirement
-    { "official_name": "Award Letter from Social Security" } if @is_retired
+    AWARD_LETTER_FOR_SOCIAL_SECURITY if @is_retired
   end
 
 end

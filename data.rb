@@ -50,3 +50,19 @@ BANK_STATEMENTS = {
   official_name: "Bank Statements",
   accessible_name: "Bank Statements",
 }.freeze
+
+SELF_EMPLOYMENT_FORM = {
+  official_name: "Self-Employment Form"
+}.freeze
+
+WRITTEN_CHILD_SUPPORT_STATEMENT = {
+  official_name: "Written Child Support Statement"
+}.freeze
+
+AWARD_LETTER_FOR_DISABILITY = {
+  official_name: "Award Letter for Disability"
+}.freeze
+
+AWARD_LETTER_FOR_SOCIAL_SECURITY = {
+  official_name: "Award Letter from Social Security"
+}.freeze

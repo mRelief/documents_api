@@ -73,7 +73,7 @@ describe Api::Documents do
       it "returns the proper documents" do
         expect(household_member_documents.size).to eq 3
         expect(household_member_document_names).to eq [
-          "Social Security Card", "Pay Stubs", "Written Statement"
+          "Social Security Card", "Pay Stubs", "Written Child Support Statement"
         ]
       end
 
