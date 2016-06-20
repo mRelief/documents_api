@@ -20,6 +20,7 @@ describe Api::Documents do
 
       it "should require paystubs documentation and social security card" \
          "with no other documents needed" do
+
         expect(household_member_documents.size).to eq 2
         expect(household_member_document_names).to eq [
           "Social Security Card", "Pay Stubs"
@@ -35,10 +36,12 @@ describe Api::Documents do
       let(:benefits_application) { SINGLE_HOUSEHOLD_MEMBER_SELF_EMPLOYED }
 
       it "should require self-employment form and social security card" do
+
         expect(household_member_documents.size).to eq 2
         expect(household_member_document_names).to eq [
           "Social Security Card", "Self-Employment Form"
         ]
+
       end
 
     end
@@ -80,10 +83,12 @@ describe Api::Documents do
 
       it "returns the proper documents: social security card, pay stubs," \
          "and written child support statement" do
+
         expect(household_member_documents.size).to eq 3
         expect(household_member_document_names).to eq [
           "Social Security Card", "Pay Stubs", "Written Child Support Statement"
         ]
+
       end
 
     end
@@ -106,11 +111,13 @@ describe Api::Documents do
       it "returns the proper documents for each person:" \
          "award letter for retired person, award letter for disabled person," \
          "pay stubs for employee, and social security card for all members" do
+
         expect(document_names_per_household_member).to eq [
           ["Social Security Card", "Award Letter from Social Security"],
           ["Social Security Card", "Award Letter for Disability"],
           ["Social Security Card", "Pay Stubs"]
         ]
+
       end
 
     end
@@ -134,10 +141,12 @@ describe Api::Documents do
          "employee should submit pay stubs," \
          "unemployed person should submit award letter for unemployment," \
          "and both household members should submit social security cards" do
+
         expect(document_names_per_household_member).to eq [
           ["Social Security Card", "Award Letter for Unemployment"],
           ["Social Security Card", "Pay Stubs"]
         ]
+
       end
 
     end
