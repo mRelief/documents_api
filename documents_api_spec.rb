@@ -18,7 +18,8 @@ describe Api::Documents do
 
       let(:benefits_application) { SINGLE_HOUSEHOLD_MEMBER_EMPLOYED }
 
-      it "should require paystubs documentation, no other documents needed" do
+      it "should require paystubs documentation and social security card" \
+         "with no other documents needed" do
         expect(household_member_documents.size).to eq 2
         expect(household_member_document_names).to eq [
           "Social Security Card", "Pay Stubs"
@@ -33,7 +34,7 @@ describe Api::Documents do
 
       let(:benefits_application) { SINGLE_HOUSEHOLD_MEMBER_SELF_EMPLOYED }
 
-      it "should require self-employment form" do
+      it "should require self-employment form and social security card" do
         expect(household_member_documents.size).to eq 2
         expect(household_member_document_names).to eq [
           "Social Security Card", "Self-Employment Form"
@@ -47,11 +48,6 @@ describe Api::Documents do
       let(:other_documents_needed) { outcome[:other_documents_needed] }
 
       it "should require bank statements" do
-        expect(household_member_documents.size).to eq 2
-        expect(household_member_document_names).to eq [
-          "Social Security Card", "Self-Employment Form"
-        ]
-
         expect(other_documents_needed.size).to eq 1
         expect(other_documents_needed[0][:official_name]).to eq "Bank Statements"
       end
@@ -78,11 +74,12 @@ describe Api::Documents do
       household_member_documents.map { |document| document[:official_name] }
     }
 
-    describe "head of household receiving child support" do
+    describe "head of household working and receiving child support" do
 
       let(:benefits_application) { MULTI_MEMBER_HOUSEHOLD_RECEIVING_CHILD_SUPPORT }
 
-      it "returns the proper documents" do
+      it "returns the proper documents: social security card, pay stubs," \
+         "and written child support statement" do
         expect(household_member_documents.size).to eq 3
         expect(household_member_document_names).to eq [
           "Social Security Card", "Pay Stubs", "Written Child Support Statement"
@@ -106,7 +103,9 @@ describe Api::Documents do
         end
       }
 
-      it "returns the proper documents" do
+      it "returns the proper documents for each person:" \
+         "award letter for retired person, award letter for disabled person," \
+         "pay stubs for employee, and social security card for all members" do
         expect(document_names_per_household_member).to eq [
           ["Social Security Card", "Award Letter from Social Security"],
           ["Social Security Card", "Award Letter for Disability"],
@@ -131,9 +130,10 @@ describe Api::Documents do
         end
       }
 
-      it "returns the proper documents: both must submit social security" \
-         "cards, working person should submit pay stubs and unemployed" \
-         "person should submit award leeter" do
+      it "returns the proper documents:" \
+         "employee should submit pay stubs," \
+         "unemployed person should submit award letter for unemployment," \
+         "and both household members should submit social security cards" do
         expect(document_names_per_household_member).to eq [
           ["Social Security Card", "Award Letter for Unemployment"],
           ["Social Security Card", "Pay Stubs"]
