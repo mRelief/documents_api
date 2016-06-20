@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mRelief/documents_api.svg)](https://travis-ci.org/mRelief/documents_api)
+
 # About
 
 This is a prototype API to help families applying for public assistance understand the documents they need to submit with their application.
