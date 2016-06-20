@@ -27,6 +27,82 @@ describe Api::Documents do
 
     end
 
+    describe "person is self-employed" do
+
+      let(:benefits_application) { SINGLE_HOUSEHOLD_MEMBER_SELF_EMPLOYED }
+
+      it "should require self-employment form" do
+        expect(household_member_documents.size).to eq 2
+        expect(household_member_document_names).to eq [
+          "Social Security Card", "Self-Employment Form"
+        ]
+      end
+
+    end
+
+    describe "applying for expedited benefits" do
+      let(:benefits_application) { EXPEDITED_BENEFITS }
+      let(:other_documents_needed) { outcome[:other_documents_needed] }
+
+      it "should require bank statements" do
+        expect(household_member_documents.size).to eq 2
+        expect(household_member_document_names).to eq [
+          "Social Security Card", "Self-Employment Form"
+        ]
+
+        expect(other_documents_needed.size).to eq 1
+        expect(other_documents_needed[0][:official_name]).to eq "Bank Statements"
+      end
+
+    end
+
+  end
+
+  describe "a multi-person household" do
+
+    let(:head_of_household) { outcome[:household_members][0] }
+    let(:household_member_documents) { head_of_household[:documents_needed] }
+    let(:household_member_document_names) {
+      household_member_documents.map { |document| document[:official_name] }
+    }
+
+    describe "head of household receiving child support" do
+
+      let(:benefits_application) { MULTI_MEMBER_HOUSEHOLD_RECEIVING_CHILD_SUPPORT }
+
+      it "returns the proper documents" do
+        expect(household_member_documents.size).to eq 3
+        expect(household_member_document_names).to eq [
+          "Social Security Card", "Pay Stubs", "Written Statement"
+        ]
+      end
+
+    end
+
+    describe "multi-member household with 1 retired person, 1 employee, 1 disabled person" do
+
+      let(:benefits_application) {
+        MULTI_MEMBER_HOUSEHOLD_WITH_RETIREE_DISABLED_AND_WORKING
+      }
+
+      let(:document_names_per_household_member) {
+        outcome[:household_members].map do |household_member|
+          household_member[:documents_needed].map do |document|
+            document[:official_name]
+          end
+        end
+      }
+
+      it "returns the proper documents" do
+        expect(document_names_per_household_member).to eq [
+          ["Social Security Card", "Award Letter from Social Security"],
+          ["Social Security Card", "Award Letter for Disability"],
+          ["Social Security Card", "Pay Stubs"]
+        ]
+      end
+
+    end
+
   end
 
 end

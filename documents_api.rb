@@ -12,9 +12,18 @@ module Api
 
       return {
         "benefits_application": {
-          "household_members": household_members_with_documents
+          "household_members": household_members_with_documents,
+          "other_documents_needed": self.other_documents_needed(application)
         }
       }
+    end
+
+    def self.other_documents_needed(application)
+      if application[:benefits_application][:is_applying_for_expedited]
+        [ { "official_name": "Bank Statements" } ]
+      else
+        []
+      end
     end
 
   end
