@@ -4,4 +4,6 @@ rvm:
   - jruby
   - rbx-2
 
+install: gem install rspec
+
 script: rspec documents_api_spec.rb
