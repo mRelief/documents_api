@@ -79,7 +79,8 @@ describe Api::Documents do
 
     end
 
-    describe "multi-member household with 1 retired person, 1 employee, 1 disabled person" do
+    describe "multi-member household with 1 retired person, 1 employee," \
+             "and 1 disabled person" do
 
       let(:benefits_application) {
         MULTI_MEMBER_HOUSEHOLD_WITH_RETIREE_DISABLED_AND_WORKING
@@ -97,6 +98,32 @@ describe Api::Documents do
         expect(document_names_per_household_member).to eq [
           ["Social Security Card", "Award Letter from Social Security"],
           ["Social Security Card", "Award Letter for Disability"],
+          ["Social Security Card", "Pay Stubs"]
+        ]
+      end
+
+    end
+
+    describe "multi-member household with 1 person receiving unemployment" \
+             "and 1 person working" do
+
+      let(:benefits_application) {
+        MULTI_MEMBER_HOUSEHOLD_WITH_UNEMPLOYED_AND_WORKING
+      }
+
+      let(:document_names_per_household_member) {
+        outcome[:household_members].map do |household_member|
+          household_member[:documents_needed].map do |document|
+            document[:official_name]
+          end
+        end
+      }
+
+      it "returns the proper documents: both must submit social security" \
+         "cards, working person should submit pay stubs and unemployed" \
+         "person should submit award leeter" do
+        expect(document_names_per_household_member).to eq [
+          ["Social Security Card", "Award Letter for Unemployment"],
           ["Social Security Card", "Pay Stubs"]
         ]
       end

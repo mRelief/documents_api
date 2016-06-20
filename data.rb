@@ -66,3 +66,7 @@ AWARD_LETTER_FOR_DISABILITY = {
 AWARD_LETTER_FOR_SOCIAL_SECURITY = {
   official_name: "Award Letter from Social Security"
 }.freeze
+
+AWARD_LETTER_FOR_UNEMPLOYMENT = {
+  official_name: "Award Letter for Unemployment"
+}.freeze

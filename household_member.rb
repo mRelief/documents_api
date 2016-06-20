@@ -7,7 +7,8 @@ class HouseholdMember
                  disability_benefits:,
                  receiving_child_support:,
                  self_employed:,
-                 is_retired:)
+                 is_retired:,
+                 receiving_unemployment_benefits:)
 
     @child_under_18 = child_under_18
     @is_employee = is_employee
@@ -15,6 +16,7 @@ class HouseholdMember
     @disability_benefits = disability_benefits
     @receiving_child_support = receiving_child_support
     @is_retired = is_retired
+    @receiving_unemployment_benefits = receiving_unemployment_benefits
   end
 
   def benefits_attributes_with_documents
@@ -29,6 +31,7 @@ class HouseholdMember
       documents_based_on_child_support,
       documents_based_on_disability,
       documents_based_on_retirement,
+      documents_based_on_unemployment,
     ].compact
   end
 
@@ -41,7 +44,8 @@ class HouseholdMember
       self_employed: @self_employed,
       disability_benefits: @disability_benefits,
       receiving_child_support: @receiving_child_support,
-      is_retired: @is_retired
+      is_retired: @is_retired,
+      receiving_unemployment_benefits: @receiving_unemployment_benefits,
     }
   end
 
@@ -67,6 +71,10 @@ class HouseholdMember
 
   def documents_based_on_retirement
     AWARD_LETTER_FOR_SOCIAL_SECURITY if @is_retired
+  end
+
+  def documents_based_on_unemployment
+    AWARD_LETTER_FOR_UNEMPLOYMENT if @receiving_unemployment_benefits
   end
 
 end
