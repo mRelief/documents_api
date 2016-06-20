@@ -43,8 +43,8 @@ benefits_application: {
       receiving_child_support: ... ,
     },
   ],
-  is_applying_for_expedited: ...,
-  has_rental_income: ...
+  is_applying_for_expedited: ...,     # Is this an application for expedited benefits?
+  has_rental_income: ...              # Does the household have any rental income?
 }
 ```
 
@@ -78,6 +78,9 @@ household_members: [
     receiving_child_support: ... ,
     documents_needed: [],
   },
+  other_documents_needed: [
+    ... DATA FOR ADDITIONAL DOCUMENTS NEEDED BY THE HOUSEHOLD ...
+  ]
 ]
 ```
 
