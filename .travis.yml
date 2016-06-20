@@ -1,0 +1,7 @@
+language: ruby
+
+rvm: 2.2.1
+
+install: gem install rspec
+
+script: rspec documents_api_spec.rb
