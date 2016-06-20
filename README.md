@@ -105,7 +105,7 @@ Structure:
   examples: [],
   images: [],
   url_to_document: nil,
-  url_to_explaination: nil,
+  url_to_explanation: nil,
   contact: {
     name: "IL Department of Human Services",
     location: nil,
