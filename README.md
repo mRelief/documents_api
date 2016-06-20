@@ -41,7 +41,8 @@ benefits_application: {
       receiving_child_support: ... ,
     },
   ],
-  is_applying_for_expedited: ...
+  is_applying_for_expedited: ...,
+  has_rental_income: ...
 }
 ```
 

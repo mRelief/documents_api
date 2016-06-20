@@ -19,11 +19,14 @@ module Api
     end
 
     def self.other_documents_needed(application)
-      if application[:benefits_application][:is_applying_for_expedited]
-        [BANK_STATEMENTS]
-      else
-        []
-      end
+      other_documents = []
+
+      expedited = application[:benefits_application][:is_applying_for_expedited]
+      rental_income = application[:benefits_application][:has_rental_income]
+
+      other_documents << BANK_STATEMENTS if (expedited || rental_income)
+
+      return other_documents
     end
 
   end

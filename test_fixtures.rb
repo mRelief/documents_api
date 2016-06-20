@@ -34,6 +34,24 @@ SINGLE_HOUSEHOLD_MEMBER_SELF_EMPLOYED = {
   }
 }.freeze
 
+SINGLE_HOUSEHOLD_MEMBER_WITH_RENTAL_INCOME = {
+  "benefits_application": {
+    "household_members": [
+      {
+        "child_under_18": false,
+        "disability_benefits": false,
+        "is_employee": false,
+        "self_employed": true,
+        "receiving_child_support": false,
+        "is_retired": false,
+        "receiving_unemployment_benefits": false,
+      }
+    ],
+    "is_applying_for_expedited": false,
+    "has_rental_income": true
+  }
+}.freeze
+
 MULTI_MEMBER_HOUSEHOLD_RECEIVING_CHILD_SUPPORT = {
   "benefits_application": {
     "household_members": [

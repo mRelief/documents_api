@@ -18,11 +18,13 @@ describe Api::Documents do
 
       let(:benefits_application) { SINGLE_HOUSEHOLD_MEMBER_EMPLOYED }
 
-      it "should require paystubs documentation" do
+      it "should require paystubs documentation, no other documents needed" do
         expect(household_member_documents.size).to eq 2
         expect(household_member_document_names).to eq [
           "Social Security Card", "Pay Stubs"
         ]
+
+        expect(outcome[:other_documents_needed]).to eq []
       end
 
     end
@@ -54,6 +56,16 @@ describe Api::Documents do
         expect(other_documents_needed[0][:official_name]).to eq "Bank Statements"
       end
 
+    end
+
+    describe "has rental income" do
+      let(:benefits_application) { SINGLE_HOUSEHOLD_MEMBER_WITH_RENTAL_INCOME }
+      let(:other_documents_needed) { outcome[:other_documents_needed] }
+
+      it "should require bank statements" do
+        expect(other_documents_needed.size).to eq 1
+        expect(other_documents_needed[0][:official_name]).to eq "Bank Statements"
+      end
     end
 
   end
