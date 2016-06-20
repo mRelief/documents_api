@@ -45,3 +45,8 @@ SOCIAL_SECURITY_CARD = {
     url: "https://secure.ssa.gov/ICON/main.jsp#officeResults"
   }
 }.freeze
+
+BANK_STATEMENTS = {
+  official_name: "Bank Statements",
+  accessible_name: "Bank Statements",
+}.freeze

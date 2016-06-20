@@ -20,7 +20,7 @@ module Api
 
     def self.other_documents_needed(application)
       if application[:benefits_application][:is_applying_for_expedited]
-        [ { "official_name": "Bank Statements" } ]
+        [BANK_STATEMENTS]
       else
         []
       end
