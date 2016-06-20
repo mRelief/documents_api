@@ -84,23 +84,33 @@ household_members: [
 ]
 ```
 
-# Output - per document
+# Data structure for documents
+
+See `data.rb` for examples.
+
+This is a work in progress.
+
+Structure:
 
 ```
 {
-  official_name: ... ,
-  accessible_name: ... ,
-  description: ... ,
-  instructions: ... ,
-  examples: ... ,
-  images ... ,
-  url_to_document: ... ,
-  url_to_explaination: ... ,
+  official_name: "Pay Stubs",
+  accessible_name: "Pay Stubs",
+  description: "A document describing your income before taxes are taken out",
+  instructions: {
+    text: "If you don't get paystubs from your employer," \
+          " SNAP office will send your employer a letter.",
+    urls: []
+  },
+  examples: [],
+  images: [],
+  url_to_document: nil,
+  url_to_explaination: nil,
   contact: {
-    name: ... ,
-    location: ... ,
-    phone_number: ... ,
-    website: ...
+    name: "IL Department of Human Services",
+    location: nil,
+    phone_number: "800-843-6154",
+    url: "www.dhs.state.il.us"
   }
 }
 ```
