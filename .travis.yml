@@ -3,3 +3,5 @@ rvm:
   - 2.2
   - jruby
   - rbx-2
+
+script: rspec documents_api_spec.rb
