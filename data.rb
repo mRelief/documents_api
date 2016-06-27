@@ -22,6 +22,10 @@ PAY_STUBS = {
 SOCIAL_SECURITY_NUMBER = {
   official_name: "Social Security Number",
   accessible_name: "Social Security Number",
+  instructions: {
+    text: "You may need to bring in your Social Secuity Card " \
+    "if the office is unable to verify your number.",
+  }
 }.freeze
 
 DATE_OF_BIRTH = {

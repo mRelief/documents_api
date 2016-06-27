@@ -19,13 +19,15 @@ class HouseholdMember
     @receiving_unemployment_benefits = receiving_unemployment_benefits
   end
 
-  def benefits_attributes_with_documents
-    to_hash.merge({ documents_needed: documents_needed })
+  def documents_and_info_needed
+    to_hash.merge({
+      documents_needed: documents_needed,
+      information_needed: information_needed,
+    })
   end
 
   def documents_needed
     [
-      documents_based_on_age,
       documents_based_on_employment,
       documents_based_on_self_employment,
       documents_based_on_child_support,
@@ -33,6 +35,13 @@ class HouseholdMember
       documents_based_on_retirement,
       documents_based_on_unemployment,
     ].compact
+  end
+
+  def information_needed
+    [
+      SOCIAL_SECURITY_NUMBER,
+      DATE_OF_BIRTH,
+    ]
   end
 
   private
@@ -47,10 +56,6 @@ class HouseholdMember
       is_retired: @is_retired,
       receiving_unemployment_benefits: @receiving_unemployment_benefits,
     }
-  end
-
-  def documents_based_on_age
-    SOCIAL_SECURITY_CARD unless @child_under_18
   end
 
   def documents_based_on_employment
