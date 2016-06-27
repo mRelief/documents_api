@@ -1,14 +1,14 @@
 require_relative "household_member"
+require_relative "string_parser"
 require          "active_support/all"
 
 module Api
   class Documents
 
     def self.fetch_documents(application)
-      application.deep_symbolize_keys!
-      household_members = application[:household_members]
+      parse_incoming_application_params(application)
 
-      household_members_with_documents = household_members.map do |household_member|
+      household_members_with_documents = application[:household_members].map do |household_member|
         HouseholdMember.new(**household_member).documents_and_info_needed
       end
 
@@ -46,6 +46,19 @@ module Api
           OTHER_ID,
         ]
       }
+    end
+
+    def self.parse_incoming_application_params(application)
+      application.deep_symbolize_keys!
+
+      application[:household_members].each do |person_hash|
+        person_hash.each_pair do |key, value|
+          person_hash[key] = StringParser.new(value).to_boolean
+        end
+      end
+
+      application[:is_applying_for_expedited] = StringParser.new(application[:is_applying_for_expedited]).to_boolean
+      application[:has_rental_income] = StringParser.new(application[:has_rental_income]).to_boolean
     end
 
   end
