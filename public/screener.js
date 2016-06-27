@@ -2,18 +2,52 @@ var dom = React.DOM;
 
 var DocumentScreener = React.createClass({
 
+  getInitialState: function() {
+    return {
+      answeredInitialIncomeQuestion: false,
+      answeredEmploymentQuestion: false,
+      answeredIncomeSourcesQuestion: false,
+      hasIncome: false,
+    };
+  },
+
+  onClickYesIncome: function () {
+    this.setState({
+      answeredInitialIncomeQuestion: true,
+      answeredEmploymentQuestion: false,
+      answeredIncomeSourcesQuestion: false,
+      hasIncome: true,
+    });
+  },
+
+  onClickNoIncome: function () {
+    alert('fetching you info from our API!');
+  },
+
   render: function() {
+    if (this.state.answeredInitialIncomeQuestion === false) {
+      var currentQuestion = this.renderIntitialIncomeQuestion();
+    } else if (this.state.answeredEmploymentQuestion === false) {
+      var currentQuestion = this.renderEmploymentStatusQuestion();
+    } else {
+      var currentQuestion = this.renderIncomeSourcesQuestion();
+    };
+
     return dom.div({},
       dom.h1({}, 'Documents Screener'),
+      currentQuestion
+    )
+  },
+
+  renderIntitialIncomeQuestion: function () {
+    return dom.div({},
       dom.p({}, 'Are you currently receiving any income through employment, the state, or some other means?'),
-      dom.input({ type: 'radio' }),
+      dom.input({ type: 'radio', onClick: this.onClickYesIncome }),
       dom.label({}, 'Yes'),
       dom.br({}),
-      dom.input({ type: 'radio' }),
-      dom.label({}, 'No'),
-      this.renderEmploymentStatusQuestion(),
-      this.renderIncomeSourcesQuestion()
-    )
+      dom.input({ type: 'radio', onClick: this.onClickNoIncome }),
+      dom.label({}, 'No')
+    );
   },
 
   renderEmploymentStatusQuestion: function () {
@@ -32,8 +66,9 @@ var DocumentScreener = React.createClass({
       dom.label({}, 'Unemployed and receiving unemployment benefits'),
       dom.br({}),
       dom.input({ type: 'checkbox'}),
-      dom.label({}, 'Unemployed and not receiving unemployment benefits')
-    )
+      dom.label({}, 'Unemployed and not receiving unemployment benefits'),
+      dom.input({ type: 'submit' })
+    );
   },
 
   renderIncomeSourcesQuestion: function () {
@@ -49,8 +84,9 @@ var DocumentScreener = React.createClass({
       dom.label({}, 'Rental income'),
       dom.br({}),
       dom.input({ type: 'checkbox'}),
-      dom.label({}, 'None of the above')
-    )
+      dom.label({}, 'None of the above'),
+      dom.input({ type: 'submit' })
+    );
   }
 
 });
