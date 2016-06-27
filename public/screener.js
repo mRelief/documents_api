@@ -7,7 +7,13 @@ var DocumentScreener = React.createClass({
       answeredInitialIncomeQuestion: false,
       answeredEmploymentQuestion: false,
       answeredIncomeSourcesQuestion: false,
-      hasIncome: false,
+      hasResponse: false,
+    };
+  },
+
+  getDefaultProps: function() {
+    return {
+      source: 'http://documents-api.herokuapp.com/api/'
     };
   },
 
@@ -16,12 +22,29 @@ var DocumentScreener = React.createClass({
       answeredInitialIncomeQuestion: true,
       answeredEmploymentQuestion: false,
       answeredIncomeSourcesQuestion: false,
-      hasIncome: true,
+      hasResponse: true,
     });
   },
 
   onClickNoIncome: function () {
-    alert('fetching you info from our API!');
+    var queryString = $.param({
+      "household_members": [
+        {
+          "child_under_18": "false",
+          "disability_benefits": "false",
+          "is_employee": "false",
+          "self_employed": "false",
+          "receiving_child_support": "false",
+          "is_retired": "false",
+          "receiving_unemployment_benefits": "false",
+        }
+      ],
+      "is_applying_for_expedited": "false"
+    });
+
+    this.serverRequest = $.get(this.props.source + queryString, function (result) {
+      alert(result);
+    }.bind(this));
   },
 
   render: function() {
