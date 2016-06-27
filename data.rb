@@ -19,6 +19,16 @@ PAY_STUBS = {
   }
 }.freeze
 
+SOCIAL_SECURITY_NUMBER = {
+  official_name: "Social Security Number",
+  accessible_name: "Social Security Number",
+}.freeze
+
+DATE_OF_BIRTH = {
+  official_name: "Date Of Birth",
+  accessible_name: "Date Of Birth",
+}.freeze
+
 SOCIAL_SECURITY_CARD = {
   official_name: "Social Security Card",
   accessible_name: "Social Security Card",
