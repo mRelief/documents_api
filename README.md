@@ -28,7 +28,7 @@ ruby app.rb
 ```
 # Household of family members:
 
-benefits_application: {
+{
   household_members: [
     {
       child_under_18: ... ,

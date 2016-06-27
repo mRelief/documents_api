@@ -6,7 +6,7 @@ module Api
 
     def self.fetch_documents(application)
       application.deep_symbolize_keys!
-      household_members = application[:benefits_application][:household_members]
+      household_members = application[:household_members]
 
       household_members_with_documents = household_members.map do |household_member|
         HouseholdMember.new(**household_member).documents_and_info_needed
@@ -21,8 +21,8 @@ module Api
     def self.other_documents_needed(application)
       other_documents = [residency_documents]
 
-      expedited = application[:benefits_application][:is_applying_for_expedited]
-      rental_income = application[:benefits_application][:has_rental_income]
+      expedited = application[:is_applying_for_expedited]
+      rental_income = application[:has_rental_income]
 
       other_documents << BANK_STATEMENTS if (expedited || rental_income)
 
