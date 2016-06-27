@@ -19,7 +19,7 @@ module Api
     end
 
     def self.other_documents_needed(application)
-      other_documents = []
+      other_documents = [residency_documents]
 
       expedited = application[:benefits_application][:is_applying_for_expedited]
       rental_income = application[:benefits_application][:has_rental_income]
@@ -27,6 +27,25 @@ module Api
       other_documents << BANK_STATEMENTS if (expedited || rental_income)
 
       return other_documents
+    end
+
+    def self.residency_documents
+      return {
+        name: "Residency",
+        number_needed: 1,
+        documents: [
+          DRIVERS_LICENSE, 
+          RENT_RECEIPT, 
+          HOMELESS_SHELTER_STATEMENT, 
+          EMPLOYMENT_RECORDS, 
+          MAIL, 
+          MEDICAL_RECORDS, 
+          HOME_OWNERS_INSURANCE, 
+          PROPERTY_TAX_BILL, 
+          SCHOOL_ENROLLMENT_RECORDS, 
+          OTHER_ID,
+        ]
+      }
     end
 
   end

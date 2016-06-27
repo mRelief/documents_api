@@ -22,7 +22,7 @@ describe Api::Documents do
         expect(document_names.size).to eq 1
         expect(document_names).to eq ["Pay Stubs"]
         expect(information_needed).to eq ["Social Security Number", "Date Of Birth"]
-        expect(outcome[:other_documents_needed]).to eq []
+        expect(outcome[:other_documents_needed]).to eq [subject.residency_documents]
       end
 
     end
@@ -45,7 +45,7 @@ describe Api::Documents do
       let(:other_documents_needed) { outcome[:other_documents_needed] }
 
       it "should require bank statements" do
-        expect(other_documents_needed.size).to eq 1
+        expect(other_documents_needed.size).to eq 2
         expect(other_documents_needed[0][:official_name]).to eq "Bank Statements"
       end
 
@@ -56,7 +56,7 @@ describe Api::Documents do
       let(:other_documents_needed) { outcome[:other_documents_needed] }
 
       it "should require bank statements" do
-        expect(other_documents_needed.size).to eq 1
+        expect(other_documents_needed.size).to eq 2
         expect(other_documents_needed[0][:official_name]).to eq "Bank Statements"
       end
     end
