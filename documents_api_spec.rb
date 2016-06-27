@@ -46,7 +46,9 @@ describe Api::Documents do
 
       it "should require bank statements" do
         expect(other_documents_needed.size).to eq 2
-        expect(other_documents_needed[0][:official_name]).to eq "Bank Statements"
+        expect(other_documents_needed).to eq [
+          subject.residency_documents, BANK_STATEMENTS
+        ]
       end
 
     end
@@ -57,7 +59,9 @@ describe Api::Documents do
 
       it "should require bank statements" do
         expect(other_documents_needed.size).to eq 2
-        expect(other_documents_needed[0][:official_name]).to eq "Bank Statements"
+        expect(other_documents_needed).to eq [
+          subject.residency_documents, BANK_STATEMENTS
+        ]
       end
     end
 
