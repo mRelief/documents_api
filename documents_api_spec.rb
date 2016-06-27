@@ -21,7 +21,7 @@ describe Api::Documents do
 
         expect(document_names.size).to eq 1
         expect(document_names).to eq ["Pay Stubs"]
-
+        expect(information_needed).to eq ["Social Security Number", "Date Of Birth"]
         expect(outcome[:other_documents_needed]).to eq []
       end
 
@@ -69,6 +69,22 @@ describe Api::Documents do
     let(:documents) { applicant[:documents_needed] }
     let(:document_names) { documents.map { |document| document[:official_name] } }
 
+    let(:document_names_per_person) {
+      outcome[:household_members].map do |household_member|
+        household_member[:documents_needed].map do |document|
+          document[:official_name]
+        end
+      end
+    }
+
+    let(:information_needed_per_person) {
+      outcome[:household_members].map do |household_member|
+        household_member[:information_needed].map do |info|
+          info[:official_name]
+        end
+      end
+    }
+
     describe "head of household working and receiving child support" do
 
       let(:benefits_application) { MULTI_MEMBER_HOUSEHOLD_RECEIVING_CHILD_SUPPORT }
@@ -89,22 +105,20 @@ describe Api::Documents do
         MULTI_MEMBER_HOUSEHOLD_WITH_RETIREE_DISABLED_AND_WORKING
       }
 
-      let(:document_names_per_household_member) {
-        outcome[:household_members].map do |household_member|
-          household_member[:documents_needed].map do |document|
-            document[:official_name]
-          end
-        end
-      }
-
       it "returns the proper documents for each person:" \
          "award letter for retired person, award letter for disabled person," \
          "pay stubs for employee" do
 
-        expect(document_names_per_household_member).to eq [
+        expect(document_names_per_person).to eq [
           ["Award Letter from Social Security"],
           ["Award Letter for Disability"],
           ["Pay Stubs"]
+        ]
+
+        expect(information_needed_per_person).to eq [
+          ["Social Security Number", "Date Of Birth"],
+          ["Social Security Number", "Date Of Birth"],
+          ["Social Security Number", "Date Of Birth"]
         ]
 
       end
@@ -118,21 +132,18 @@ describe Api::Documents do
         MULTI_MEMBER_HOUSEHOLD_WITH_UNEMPLOYED_AND_WORKING
       }
 
-      let(:document_names_per_household_member) {
-        outcome[:household_members].map do |household_member|
-          household_member[:documents_needed].map do |document|
-            document[:official_name]
-          end
-        end
-      }
-
       it "returns the proper documents:" \
          "employee should submit pay stubs," \
          "unemployed person should submit award letter for unemployment," do
 
-        expect(document_names_per_household_member).to eq [
+        expect(document_names_per_person).to eq [
           ["Award Letter for Unemployment"],
           ["Pay Stubs"]
+        ]
+
+        expect(information_needed_per_person).to eq [
+          ["Social Security Number", "Date Of Birth"],
+          ["Social Security Number", "Date Of Birth"]
         ]
 
       end
