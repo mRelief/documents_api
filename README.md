@@ -150,6 +150,8 @@ ruby test_queries.rb
 
 # Test queries locally
 
+Start the app on your local machine first.
+
 + [Single employed household member](http://localhost:4567/api/household_members%5B%5D%5Bchild_under_18%5D=false&household_members%5B%5D%5Bdisability_benefits%5D=false&household_members%5B%5D%5Bis_employee%5D=true&household_members%5B%5D%5Bis_retired%5D=false&household_members%5B%5D%5Breceiving_child_support%5D=false&household_members%5B%5D%5Breceiving_unemployment_benefits%5D=false&household_members%5B%5D%5Bself_employed%5D=false&is_applying_for_expedited=false)
 
 + [Single self employed household member](http://localhost:4567/api/household_members%5B%5D%5Bchild_under_18%5D=false&household_members%5B%5D%5Bdisability_benefits%5D=false&household_members%5B%5D%5Bis_employee%5D=false&household_members%5B%5D%5Bis_retired%5D=false&household_members%5B%5D%5Breceiving_child_support%5D=false&household_members%5B%5D%5Breceiving_unemployment_benefits%5D=false&household_members%5B%5D%5Bself_employed%5D=true&is_applying_for_expedited=false)
