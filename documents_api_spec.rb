@@ -8,11 +8,10 @@ describe Api::Documents do
 
   describe "a one-person household" do
 
-    let(:household_member) { outcome[:household_members][0] }
-    let(:household_member_documents) { household_member[:documents_needed] }
-    let(:household_member_document_names) {
-      household_member_documents.map { |document| document[:official_name] }
-    }
+    let(:applicant) { outcome[:household_members][0] }
+    let(:documents) { applicant[:documents_needed] }
+    let(:document_names) { documents.map { |document| document[:official_name] } }
+    let(:information_needed) { applicant[:information_needed].map { |info| info[:official_name] } }
 
     describe "person is an employee" do
 
@@ -20,8 +19,8 @@ describe Api::Documents do
 
       it "should require paystubs documentation" do
 
-        expect(household_member_documents.size).to eq 1
-        expect(household_member_document_names).to eq ["Pay Stubs"]
+        expect(document_names.size).to eq 1
+        expect(document_names).to eq ["Pay Stubs"]
 
         expect(outcome[:other_documents_needed]).to eq []
       end
@@ -34,8 +33,8 @@ describe Api::Documents do
 
       it "should require self-employment form" do
 
-        expect(household_member_documents.size).to eq 1
-        expect(household_member_document_names).to eq ["Self-Employment Form"]
+        expect(document_names.size).to eq 1
+        expect(document_names).to eq ["Self-Employment Form"]
 
       end
 
@@ -66,11 +65,9 @@ describe Api::Documents do
 
   describe "a multi-person household" do
 
-    let(:head_of_household) { outcome[:household_members][0] }
-    let(:household_member_documents) { head_of_household[:documents_needed] }
-    let(:household_member_document_names) {
-      household_member_documents.map { |document| document[:official_name] }
-    }
+    let(:applicant) { outcome[:household_members][0] }
+    let(:documents) { applicant[:documents_needed] }
+    let(:document_names) { documents.map { |document| document[:official_name] } }
 
     describe "head of household working and receiving child support" do
 
@@ -78,8 +75,8 @@ describe Api::Documents do
 
       it "returns the proper documents:, pay stubs, and written child support statement" do
 
-        expect(household_member_documents.size).to eq 2
-        expect(household_member_document_names).to eq ["Pay Stubs", "Written Child Support Statement"]
+        expect(documents.size).to eq 2
+        expect(document_names).to eq ["Pay Stubs", "Written Child Support Statement"]
 
       end
 
