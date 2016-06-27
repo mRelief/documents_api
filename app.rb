@@ -7,5 +7,7 @@ get '/api/:benefits_application' do
 
   @parsed = Rack::Utils.parse_nested_query(params[:benefits_application])
 
-  Api::Documents.fetch_documents(@parsed)
+  @outcome = Api::Documents.fetch_documents(@parsed)
+
+  JSON.pretty_generate(@outcome)
 end
