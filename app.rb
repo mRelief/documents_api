@@ -16,3 +16,7 @@ get '/api/:benefits_application' do
 
   JSON.pretty_generate(@outcome)
 end
+
+get '/screener' do
+  erb :show
+end
