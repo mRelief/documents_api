@@ -17,6 +17,19 @@ class HouseholdMember
     @receiving_child_support = receiving_child_support
     @is_retired = is_retired
     @receiving_unemployment_benefits = receiving_unemployment_benefits
+    raise "Invalid data types" unless valid_types?
+  end
+
+  def attribute_types
+    [ @child_under_18, @is_employee, @self_employed,
+      @disability_benefits, @receiving_child_support,
+      @is_retired, @receiving_unemployment_benefits ].map { |attribute| attribute.class }
+  end
+
+  def valid_types?
+    attribute_types.all? do |class_type|
+      (class_type == TrueClass) || (class_type == FalseClass)
+    end
   end
 
   def documents_and_info_needed

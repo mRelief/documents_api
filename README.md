@@ -17,12 +17,18 @@ Data sources:
 
 If you build social services-related technology and are interested in using this API, please contact [Rose](mailto:rose@mrelief.com) or [Genevieve](mailto:genevieve@mrelief.com).
 
+# Run the app
+
+```
+ruby app.rb
+```
+
 # Input
 
 ```
 # Household of family members:
 
-benefits_application: {
+{
   household_members: [
     {
       child_under_18: ... ,
@@ -52,37 +58,39 @@ benefits_application: {
 # Output - per household
 
 ```
-household_members: [
-  {
-    child_under_18: ... ,
-    disability_benefits: ... ,
-    is_employed: ... ,
-    receiving_child_support: ... ,
-    documents_needed: [
-      { ... DATA FOR SELF EMPLOYMENT DOCUMENTATION ... },
-      { ... DATA FOR SOCIAL SECURITY CARD DOCUMENTATION ... },
-      { ... DATA FOR AWARD LETTER ... },
-    ],
-    information_needed: [
-      { ... DATE OF BIRTH ... }
-    ]
-  },
-  {
-    child_under_18: ... ,
-    disability_benefits: ... ,
-    is_employed: ... ,
-    receiving_child_support: ... ,
-    documents_needed: [ ... ],
-    information_needed: [ ... ],
-  },
-  {
-    child_under_18: ... ,
-    disability_benefits: ... ,
-    is_employed: ... ,
-    receiving_child_support: ... ,
-    documents_needed: [ ... ],
-    information_needed: [ ... ],
-  },
+{
+  household_members: [
+    {
+      child_under_18: ... ,
+      disability_benefits: ... ,
+      is_employed: ... ,
+      receiving_child_support: ... ,
+      documents_needed: [
+        { ... DATA FOR SELF EMPLOYMENT DOCUMENTATION ... },
+        { ... DATA FOR SOCIAL SECURITY CARD DOCUMENTATION ... },
+        { ... DATA FOR AWARD LETTER ... },
+      ],
+      information_needed: [
+        { ... DATE OF BIRTH ... }
+      ]
+    },
+    {
+      child_under_18: ... ,
+      disability_benefits: ... ,
+      is_employed: ... ,
+      receiving_child_support: ... ,
+      documents_needed: [ ... ],
+      information_needed: [ ... ],
+    },
+    {
+      child_under_18: ... ,
+      disability_benefits: ... ,
+      is_employed: ... ,
+      receiving_child_support: ... ,
+      documents_needed: [ ... ],
+      information_needed: [ ... ],
+    },
+  ],
   other_documents_needed: [
     { ... DATA FOR DOCUMENT 1 ... },
     { ... DATA FOR DOCUMENT 2 ... },
@@ -100,7 +108,7 @@ household_members: [
       ]
     }
   ]
-]
+}
 ```
 
 # Data structure for documents
@@ -132,4 +140,11 @@ Structure:
     url: "www.dhs.state.il.us"
   }
 }
+```
+
+# Get queries to test locally
+
+
+```
+ruby test_queries.rb
 ```
