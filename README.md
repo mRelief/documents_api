@@ -61,7 +61,7 @@ household_members: [
     documents_needed: [
       { ... DATA FOR SELF EMPLOYMENT DOCUMENTATION ... },
       { ... DATA FOR SOCIAL SECURITY CARD DOCUMENTATION ... },
-      { ... DATA FOR AWARD LETTER ... }
+      { ... DATA FOR AWARD LETTER ... },
     ]
   },
   {
@@ -79,7 +79,14 @@ household_members: [
     documents_needed: [],
   },
   other_documents_needed: [
-    ... DATA FOR ADDITIONAL DOCUMENTS NEEDED BY THE HOUSEHOLD ...
+    { ... DATA FOR DOCUMENT 1 ... },
+    { ... DATA FOR DOCUMENT 2 ... },
+    "one_of_the_following": [
+      { ... DATA FOR DOCUMENT 3 ... },
+      { ... DATA FOR DOCUMENT 4 ... },
+      { ... DATA FOR DOCUMENT 5 ... },
+      { ... DATA FOR DOCUMENT 6 ... },
+    ]
   ]
 ]
 ```
