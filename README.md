@@ -17,6 +17,12 @@ Data sources:
 
 If you build social services-related technology and are interested in using this API, please contact [Rose](mailto:rose@mrelief.com) or [Genevieve](mailto:genevieve@mrelief.com).
 
+# Run the app
+
+```
+ruby app.rb
+```
+
 # Input
 
 ```
@@ -132,4 +138,11 @@ Structure:
     url: "www.dhs.state.il.us"
   }
 }
+```
+
+# Get queries to test locally
+
+
+```
+ruby test_queries.rb
 ```
