@@ -171,3 +171,49 @@ AWARD_LETTER_FOR_UNEMPLOYMENT = {
     url: nil,
   }
 }.freeze
+
+DRIVERS_LICENSE = {
+  official_name: "Driver's License",
+  description: "Valid Illinois Driver's License",
+}.freeze
+
+RENT_RECEIPT = {
+  official_name: "Rent Receipt",
+  description: "Rent, Lease or mortgage receipt",
+}.freeze
+
+HOMELESS_SHELTER_STATEMENT = {
+  official_name: "Homeless Shelter Statement",
+  description: "Statement from homeless shelter",
+}.freeze
+
+EMPLOYMENT_RECORDS = {
+  official_name: "Employment Records",
+}.freeze
+
+MAIL = {
+  official_name: "Mail",
+  description: "Mail document showing postmark within last 30 days with Illinois address"
+}.freeze
+
+MEDICAL_RECORDS = {
+  official_name: "Medical Records",
+  description: "Medical records/clinic cards"
+}.freeze
+
+HOME_OWNERS_INSURANCE = {
+  official_name: "Home Owners Insurance",
+}.freeze
+
+PROPERTY_TAX_BILL = {
+  official_name: "Property Tax Bill",
+}.freeze
+
+SCHOOL_ENROLLMENT_RECORDS = {
+  official_name: "School Enrollment Records",
+}.freeze
+
+OTHER_ID = {
+  official_name: "Other ID",
+  description: "Other ID with a name and address"
+}.freeze
