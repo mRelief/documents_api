@@ -62,6 +62,9 @@ household_members: [
       { ... DATA FOR SELF EMPLOYMENT DOCUMENTATION ... },
       { ... DATA FOR SOCIAL SECURITY CARD DOCUMENTATION ... },
       { ... DATA FOR AWARD LETTER ... },
+    ],
+    information_needed: [
+      { ... DATE OF BIRTH ... }
     ]
   },
   {
@@ -69,14 +72,16 @@ household_members: [
     disability_benefits: ... ,
     is_employed: ... ,
     receiving_child_support: ... ,
-    documents_needed: [],
+    documents_needed: [ ... ],
+    information_needed: [ ... ],
   },
   {
     child_under_18: ... ,
     disability_benefits: ... ,
     is_employed: ... ,
     receiving_child_support: ... ,
-    documents_needed: [],
+    documents_needed: [ ... ],
+    information_needed: [ ... ],
   },
   other_documents_needed: [
     { ... DATA FOR DOCUMENT 1 ... },
