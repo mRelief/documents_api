@@ -86,8 +86,13 @@ household_members: [
   other_documents_needed: [
     { ... DATA FOR DOCUMENT 1 ... },
     { ... DATA FOR DOCUMENT 2 ... },
+
+    // One document from the following list ...
+
     {
-      "one_of_the_following": [
+      name: "Residency",
+      number_needed: 1,
+      documents: [
         { ... DATA FOR DOCUMENT 3 ... },
         { ... DATA FOR DOCUMENT 4 ... },
         { ... DATA FOR DOCUMENT 5 ... },
