@@ -13,10 +13,8 @@ module Api
       end
 
       return {
-        "benefits_application": {
-          "household_members": household_members_with_documents,
-          "other_documents_needed": self.other_documents_needed(application)
-        }
+        "household_members": household_members_with_documents,
+        "other_documents_needed": self.other_documents_needed(application)
       }
     end
 

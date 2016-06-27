@@ -4,7 +4,7 @@ require_relative "test_fixtures"
 describe Api::Documents do
 
   subject { described_class }
-  let(:outcome) { subject.fetch_documents(benefits_application)[:benefits_application] }
+  let(:outcome) { subject.fetch_documents(benefits_application) }
 
   describe "a one-person household" do
 
