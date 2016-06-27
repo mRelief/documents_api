@@ -2,4 +2,4 @@ language: ruby
 
 rvm: 2.2.1
 
-script: rspec documents_api_spec.rb
+script: bundle exec rspec documents_api_spec.rb
