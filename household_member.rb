@@ -4,7 +4,7 @@ class HouseholdMember
 
   def initialize(child_under_18:,
                  is_employee:,
-                 disability_benefits:,
+                 disability_benefits:,    # Could be from different sources, including Social Security.
                  receiving_child_support:,
                  self_employed:,
                  is_retired:,
