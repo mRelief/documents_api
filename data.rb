@@ -150,7 +150,7 @@ AWARD_LETTER_FOR_SOCIAL_SECURITY = {
 AWARD_LETTER_FOR_UNEMPLOYMENT = {
   official_name: "Award Letter for Unemployment",
   accessible_name: "Award Letter for Unemployment",
-  description: "A Social Security card is a wallet-sized piece of paper" \
+  description: "A Social Security card is a wallet-sized piece of paper",
   instructions: {
     text: "Be sure to submit the most recent letter you that you received" \
     "within the past thirty days",
