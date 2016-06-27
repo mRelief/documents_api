@@ -86,12 +86,14 @@ household_members: [
   other_documents_needed: [
     { ... DATA FOR DOCUMENT 1 ... },
     { ... DATA FOR DOCUMENT 2 ... },
-    "one_of_the_following": [
-      { ... DATA FOR DOCUMENT 3 ... },
-      { ... DATA FOR DOCUMENT 4 ... },
-      { ... DATA FOR DOCUMENT 5 ... },
-      { ... DATA FOR DOCUMENT 6 ... },
-    ]
+    {
+      "one_of_the_following": [
+        { ... DATA FOR DOCUMENT 3 ... },
+        { ... DATA FOR DOCUMENT 4 ... },
+        { ... DATA FOR DOCUMENT 5 ... },
+        { ... DATA FOR DOCUMENT 6 ... },
+      ]
+    }
   ]
 ]
 ```
