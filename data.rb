@@ -4,7 +4,7 @@ PAY_STUBS = {
   description: "A document describing your income before taxes are taken out",
   instructions: {
     text: "If you don't get paystubs from your employer," \
-          " SNAP office will send your employer a letter.",
+          " SNAP office will automatically send your employer a letter.",
     urls: []
   },
   examples: [],
@@ -49,24 +49,111 @@ SOCIAL_SECURITY_CARD = {
 BANK_STATEMENTS = {
   official_name: "Bank Statements",
   accessible_name: "Bank Statements",
+  description: "A document showing the amount of money in your bank account.",
+  instructions: {
+    text: "If you don't have a recent bank statement," \
+          "contact your bank.",
+    urls: []
+  },
+  examples: [],
+  images: [],
+  url_to_document: nil,
+  url_to_explanation: nil,
 }.freeze
 
 SELF_EMPLOYMENT_FORM = {
-  official_name: "Self-Employment Form"
+  official_name: "Self-Employment Form",
+  accessible_name: "Self-Employment Form",
+  description: "A form that contains the number of hours you worked and amount spent. " \
+                "The official name is Form IL 2790.",
+  instructions: {},
+  examples: [],
+  images: [],
+  url_to_document: nil,
+  url_to_explanation: nil,
+  contact: {
+    name: nil,
+    location: nil,
+    phone_number: nil,
+    url: nil,
+  }
 }.freeze
 
 WRITTEN_CHILD_SUPPORT_STATEMENT = {
-  official_name: "Written Child Support Statement"
+  official_name: "Written Child Support Statement",
+  accessible_name: "Written Child Support Statement",
+  description: "Written statement from your partner that they're paying child support",
+  instructions: {},
+  examples: [],
+  images: [],
+  url_to_document: nil,
+  url_to_explanation: nil,
+  contact: {
+    name: nil,
+    location: nil,
+    phone_number: nil,
+    url: nil,
+  }
 }.freeze
 
 AWARD_LETTER_FOR_DISABILITY = {
-  official_name: "Award Letter for Disability"
+  official_name: "Award Letter for Disability",
+  accessible_name: "Award Letter for Disability",
+  description: "Proof that you receive disability benefits.",
+  instructions: {
+    text: nil,
+    urls: []
+  },
+  examples: [],
+  images: [],
+  url_to_document: nil,
+  url_to_explanation: nil,
+  contact: {
+    name: nil,
+    location: nil,
+    phone_number: nil,
+    url: nil,
+  }
 }.freeze
 
 AWARD_LETTER_FOR_SOCIAL_SECURITY = {
-  official_name: "Award Letter from Social Security"
+  official_name: "Award Letter from Social Security",
+  accessible_name: "Award Letter for Social Security",
+  description: "Proof that you receive Social Security benefits.",
+  instructions: {
+    text: nil,
+    urls: [
+    ]
+  },
+  examples: [],
+  images: [],
+  url_to_document: nil,
+  url_to_explanation: nil,
+  contact: {
+    name: nil,
+    location: nil,
+    phone_number: "1-800-772-1213",
+    url: nil,
+  }
 }.freeze
 
 AWARD_LETTER_FOR_UNEMPLOYMENT = {
-  official_name: "Award Letter for Unemployment"
+  official_name: "Award Letter for Unemployment",
+  accessible_name: "Award Letter for Unemployment",
+  description: "A Social Security card is a wallet-sized piece of paper" \
+  instructions: {
+    text: "Be sure to submit the most recent letter you that you received" \
+    "within the past thirty days",
+    urls: []
+  },
+  examples: [],
+  images: [],
+  url_to_document: nil,
+  url_to_explanation: nil,
+  contact: {
+    name: nil,
+    location: nil,
+    phone_number: nil,
+    url: nil,
+  }
 }.freeze
