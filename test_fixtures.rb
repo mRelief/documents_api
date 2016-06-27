@@ -15,7 +15,7 @@ SINGLE_HOUSEHOLD_MEMBER_EMPLOYED = {
     ],
     "is_applying_for_expedited": false
   }
-}.freeze
+}
 
 SINGLE_HOUSEHOLD_MEMBER_SELF_EMPLOYED = {
   "benefits_application": {
@@ -32,7 +32,7 @@ SINGLE_HOUSEHOLD_MEMBER_SELF_EMPLOYED = {
     ],
     "is_applying_for_expedited": false
   }
-}.freeze
+}
 
 SINGLE_HOUSEHOLD_MEMBER_WITH_RENTAL_INCOME = {
   "benefits_application": {
@@ -50,7 +50,7 @@ SINGLE_HOUSEHOLD_MEMBER_WITH_RENTAL_INCOME = {
     "is_applying_for_expedited": false,
     "has_rental_income": true
   }
-}.freeze
+}
 
 MULTI_MEMBER_HOUSEHOLD_RECEIVING_CHILD_SUPPORT = {
   "benefits_application": {
@@ -85,7 +85,7 @@ MULTI_MEMBER_HOUSEHOLD_RECEIVING_CHILD_SUPPORT = {
     ],
     "is_applying_for_expedited": false
   }
-}.freeze
+}
 
 EXPEDITED_BENEFITS = {
   "benefits_application": {
@@ -102,7 +102,7 @@ EXPEDITED_BENEFITS = {
     ],
     "is_applying_for_expedited": true
   }
-}.freeze
+}
 
 MULTI_MEMBER_HOUSEHOLD_WITH_RETIREE_DISABLED_AND_WORKING = {
   "benefits_application": {
@@ -137,7 +137,7 @@ MULTI_MEMBER_HOUSEHOLD_WITH_RETIREE_DISABLED_AND_WORKING = {
     ],
     "is_applying_for_expedited": false
   }
-}.freeze
+}
 
 
 MULTI_MEMBER_HOUSEHOLD_WITH_UNEMPLOYED_AND_WORKING = {
@@ -164,4 +164,4 @@ MULTI_MEMBER_HOUSEHOLD_WITH_UNEMPLOYED_AND_WORKING = {
     ],
     "is_applying_for_expedited": false
   }
-}.freeze
+}
