@@ -5,6 +5,7 @@ module Api
   class Documents
 
     def self.fetch_documents(application)
+      application.deep_symbolize_keys!
       household_members = application[:benefits_application][:household_members]
 
       household_members_with_documents = household_members.map do |household_member|
