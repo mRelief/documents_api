@@ -1,4 +1,4 @@
-require_relative "data"
+require_relative "../data"
 
 class HouseholdMember
 

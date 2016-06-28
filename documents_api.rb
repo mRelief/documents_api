@@ -1,5 +1,5 @@
-require_relative "household_member"
-require_relative "string_parser"
+require_relative "models/household_member"
+require_relative "helpers/string_parser"
 require          "active_support/all"
 
 module Api
