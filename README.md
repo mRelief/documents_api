@@ -153,13 +153,13 @@ Structure:
 Local testing:
 
 ```
-ruby spec/test_queries.rb localhost:4567
+ruby scripts/generate_endpoints.rb localhost:4567
 ```
 
 Testing against Heroku app:
 
 ```
-ruby spec/test_queries.rb documents-api.herokuapp.com
+ruby scripts/generate_endpoints.rb documents-api.herokuapp.com
 ```
 
 # Test queries locally
