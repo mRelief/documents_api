@@ -53,13 +53,13 @@
     "examples": [],
     "images": [],
     "url_to_document": null,
-    "url_to_explanation": null,
+    "url_to_explanation": null
   },
   {
     "official_name": "Self-Employment Form",
     "accessible_name": "Self-Employment Form",
     "description": "A form that contains the number of hours you worked and amount spent. The official name is Form IL 2790.",
-    "instructions": {},
+    "instructions": null,
     "examples": [],
     "images": [],
     "url_to_document": null,
@@ -68,7 +68,7 @@
       "name": null,
       "location": null,
       "phone_number": null,
-      "url": null,
+      "url": null
     }
   },
   {
@@ -84,7 +84,7 @@
       "name": null,
       "location": null,
       "phone_number": null,
-      "url": null,
+      "url": null
     }
   },
   {
@@ -103,7 +103,7 @@
       "name": null,
       "location": null,
       "phone_number": null,
-      "url": null,
+      "url": null
     }
   },
   {
@@ -122,7 +122,7 @@
       "name": null,
       "location": null,
       "phone_number": "1-800-772-1213",
-      "url": null,
+      "url": null
     }
   },
   {
@@ -141,23 +141,23 @@
       "name": null,
       "location": null,
       "phone_number": null,
-      "url": null,
+      "url": null
     }
   },
   {
     "official_name": "Driver's License",
-    "description": "Valid Illinois Driver's License",
+    "description": "Valid Illinois Driver's License"
   },
   {
     "official_name": "Rent Receipt",
-    "description": "Rent, Lease or mortgage receipt",
+    "description": "Rent, Lease or mortgage receipt"
   },
   {
     "official_name": "Homeless Shelter Statement",
-    "description": "Statement from homeless shelter",
+    "description": "Statement from homeless shelter"
   },
   {
-    "official_name": "Employment Records",
+    "official_name": "Employment Records"
   },
   {
     "official_name": "Mail",
@@ -168,13 +168,13 @@
     "description": "Medical records/clinic cards"
   },
   {
-    "official_name": "Home Owners Insurance",
+    "official_name": "Home Owners Insurance"
   },
   {
-    "official_name": "Property Tax Bill",
+    "official_name": "Property Tax Bill"
   },
   {
-    "official_name": "School Enrollment Records",
+    "official_name": "School Enrollment Records"
   },
   {
     "official_name": "Other ID",
@@ -187,11 +187,11 @@
     "official_name": "Social Security Number",
     "accessible_name": "Social Security Number",
     "instructions": {
-      "text": "You may need to bring in your Social Secuity Card if the office is unable to verify your number.",
+      "text": "You may need to bring in your Social Secuity Card if the office is unable to verify your number."
     }
   },
   {
     "official_name": "Date Of Birth",
-    "accessible_name": "Date Of Birth",
+    "accessible_name": "Date Of Birth"
   }
 ]
