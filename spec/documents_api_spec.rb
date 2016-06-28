@@ -1,4 +1,4 @@
-require_relative "documents_api"
+require_relative "../documents_api"
 require_relative "test_fixtures"
 
 describe Api::Documents do

@@ -23,6 +23,12 @@ If you build social services-related technology and are interested in using this
 ruby app.rb
 ```
 
+# Run the tests
+
+```
+rspec spec/documents_api_spec.rb
+```
+
 # Input
 
 ```
@@ -147,13 +153,13 @@ Structure:
 Local testing:
 
 ```
-ruby test_queries.rb localhost:4567
+ruby spec/test_queries.rb localhost:4567
 ```
 
 Testing against Heroku app:
 
 ```
-ruby test_queries.rb documents-api.herokuapp.com
+ruby spec/test_queries.rb documents-api.herokuapp.com
 ```
 
 # Test queries locally
