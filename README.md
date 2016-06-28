@@ -142,10 +142,18 @@ Structure:
 }
 ```
 
-# Get queries to test locally
+# Generate URL endpoints to explore / test against
+
+Local testing:
 
 ```
-ruby test_queries.rb
+ruby test_queries.rb localhost:4567
+```
+
+Testing against Heroku app:
+
+```
+ruby test_queries.rb documents-api.herokuapp.com
 ```
 
 # Test queries locally
