@@ -1,9 +1,6 @@
 require_relative "test_fixtures"
-require          "active_support/all"
 
-@base_url = ARGV[0]
-
-@queries = [
+TEST_QUERIES = [
   {
     description: "Single employed household member",
     ruby_hash: SINGLE_HOUSEHOLD_MEMBER_EMPLOYED
@@ -33,12 +30,3 @@ require          "active_support/all"
     ruby_hash: MULTI_MEMBER_HOUSEHOLD_WITH_UNEMPLOYED_AND_WORKING
   }
 ]
-
-def url_endpoint(base_url, query_data)
-  "http://#{base_url}/api/#{query_data.to_query}"
-end
-
-@queries.each do |query|
-  puts; puts "#{query[:description]}:"
-  puts url_endpoint(@base_url, query[:ruby_hash])
-end
