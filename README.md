@@ -26,7 +26,7 @@ ruby app.rb
 # Run the tests
 
 ```
-rspec spec/documents_api_spec.rb
+rspec spec
 ```
 
 # Input
