@@ -4,13 +4,19 @@ require_relative "spec_helper"
 require_relative "test_queries"
 require_relative "../app"
 
-describe "queries against API endpoints" do
-  it 'does the right thing' do
-    get '/'
-    # Rspec 2.x
-    expect(last_response).to be_ok
+TEST_ENDPOINTS = TEST_QUERIES.map do |query|
+  RSpecMixin.local_endpoint(query[:ruby_hash])
+end
 
-    # Rspec 1.x
-    last_response.should be_ok
+describe "queries against API endpoints" do
+
+  TEST_ENDPOINTS.each do |query|
+
+    it "does the right thing" do
+      get query
+      expect(last_response).to be_ok
+    end
+
   end
+
 end
