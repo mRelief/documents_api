@@ -1,0 +1,197 @@
+[
+  // DOCUMENTS:
+
+  {
+    "official_name": "Pay Stubs",
+    "accessible_name": "Pay Stubs",
+    "description": "A document describing your income before taxes are taken out",
+    "instructions": {
+      "text": "If you don't get paystubs from your employer, the SNAP office will automatically send your employer a letter.",
+      "urls": []
+    },
+    "examples": [],
+    "images": [],
+    "url_to_document": null,
+    "url_to_explanation": null,
+    "contact": {
+      "name": "IL Department of Human Services",
+      "location": null,
+      "phone_number": "800-843-6154",
+      "url": "www.dhs.state.il.us"
+    }
+  },
+  {
+    "official_name": "Social Security Card",
+    "accessible_name": "Social Security Card",
+    "description": "A Social Security card is a wallet-sized piece of paper containing a nine-digit unique number issued to U.S. citizens, permanent residents, and temporary (working) residents.",
+    "instructions": {
+      "text": "To replace your card, you need to have original copies of documents proving your citizenship, age, and identity. More info can be found at these websites:",
+      "urls": [
+        "https://www.ssa.gov/ssnumber/ss5doc.htm",
+        "https://www.ssa.gov/forms/ss-5.pdf"
+      ]
+    },
+    "examples": [],
+    "images": [],
+    "url_to_document": null,
+    "url_to_explanation": null,
+    "contact": {
+      "name": null,
+      "location": null,
+      "phone_number": null,
+      "url": "https://secure.ssa.gov/ICON/main.jsp#officeResults"
+    }
+  },
+  {
+    "official_name": "Bank Statements",
+    "accessible_name": "Bank Statements",
+    "description": "A document showing the amount of money in your bank account.",
+    "instructions": {
+      "text": "If you don't have a recent bank statement, contact your bank.",
+      "urls": []
+    },
+    "examples": [],
+    "images": [],
+    "url_to_document": null,
+    "url_to_explanation": null,
+  },
+  {
+    "official_name": "Self-Employment Form",
+    "accessible_name": "Self-Employment Form",
+    "description": "A form that contains the number of hours you worked and amount spent. The official name is Form IL 2790.",
+    "instructions": {},
+    "examples": [],
+    "images": [],
+    "url_to_document": null,
+    "url_to_explanation": null,
+    "contact": {
+      "name": null,
+      "location": null,
+      "phone_number": null,
+      "url": null,
+    }
+  },
+  {
+    "official_name": "Written Child Support Statement",
+    "accessible_name": "Written Child Support Statement",
+    "description": "Written statement from your partner that they're paying child support",
+    "instructions": {},
+    "examples": [],
+    "images": [],
+    "url_to_document": null,
+    "url_to_explanation": null,
+    "contact": {
+      "name": null,
+      "location": null,
+      "phone_number": null,
+      "url": null,
+    }
+  },
+  {
+    "official_name": "Award Letter for Disability",
+    "accessible_name": "Award Letter for Disability",
+    "description": "Proof that you receive disability benefits.",
+    "instructions": {
+      "text": null,
+      "urls": []
+    },
+    "examples": [],
+    "images": [],
+    "url_to_document": null,
+    "url_to_explanation": null,
+    "contact": {
+      "name": null,
+      "location": null,
+      "phone_number": null,
+      "url": null,
+    }
+  },
+  {
+    "official_name": "Award Letter from Social Security",
+    "accessible_name": "Award Letter for Social Security",
+    "description": "Proof that you receive Social Security benefits.",
+    "instructions": {
+      "text": null,
+      "urls": []
+    },
+    "examples": [],
+    "images": [],
+    "url_to_document": null,
+    "url_to_explanation": null,
+    "contact": {
+      "name": null,
+      "location": null,
+      "phone_number": "1-800-772-1213",
+      "url": null,
+    }
+  },
+  {
+    "official_name": "Award Letter for Unemployment",
+    "accessible_name": "Award Letter for Unemployment",
+    "description": "A Social Security card is a wallet-sized piece of paper",
+    "instructions": {
+      "text": "Be sure to submit the most recent letter you that you received within the past thirty days",
+      "urls": []
+    },
+    "examples": [],
+    "images": [],
+    "url_to_document": null,
+    "url_to_explanation": null,
+    "contact": {
+      "name": null,
+      "location": null,
+      "phone_number": null,
+      "url": null,
+    }
+  },
+  {
+    "official_name": "Driver's License",
+    "description": "Valid Illinois Driver's License",
+  },
+  {
+    "official_name": "Rent Receipt",
+    "description": "Rent, Lease or mortgage receipt",
+  },
+  {
+    "official_name": "Homeless Shelter Statement",
+    "description": "Statement from homeless shelter",
+  },
+  {
+    "official_name": "Employment Records",
+  },
+  {
+    "official_name": "Mail",
+    "description": "Mail document showing postmark within last 30 days with Illinois address"
+  },
+  {
+    "official_name": "Medical Records",
+    "description": "Medical records/clinic cards"
+  },
+  {
+    "official_name": "Home Owners Insurance",
+  },
+  {
+    "official_name": "Property Tax Bill",
+  },
+  {
+    "official_name": "School Enrollment Records",
+  },
+  {
+    "official_name": "Other ID",
+    "description": "Other ID with a name and address"
+  },
+
+  // INFORMATION:
+
+  {
+    "official_name": "Social Security Number",
+    "accessible_name": "Social Security Number",
+    "instructions": {
+      "text": "You may need to bring in your Social Secuity Card if the office is unable to verify your number.",
+    }
+  },
+  {
+    "official_name": "Date Of Birth",
+    "accessible_name": "Date Of Birth",
+  }
+]
