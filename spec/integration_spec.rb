@@ -10,11 +10,16 @@ end
 
 describe "queries against API endpoints" do
 
+  let(:response_json) { JSON.parse(last_response.body) }
+
   TEST_ENDPOINTS.each do |query|
 
-    it "does the right thing" do
+    it "doesn't fail horribly" do
       get query
       expect(last_response).to be_ok
+      expect(response_json.keys).to eq [
+        "household_members", "other_documents_needed"
+      ]
     end
 
   end
