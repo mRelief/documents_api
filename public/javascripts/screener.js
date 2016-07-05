@@ -65,7 +65,10 @@
             hasResponseFromServer: true,
             documentsDataFromServer: result
           });
-        }.bind(this)
+        }.bind(this),
+        error: function (result) {
+          console.log(result);
+        }
       });
     },
 
@@ -98,7 +101,12 @@
             onClickNextFromEmploymentQuestion: this.onClickNextFromEmploymentQuestion
           });
         } else {
-          currentQuestion = currentQuestion = createEl(IncomeSourcesQuestion);
+          currentQuestion = currentQuestion = createEl(IncomeSourcesQuestion, {
+            onCheckDisabilityBenefits: this.onCheckDisabilityBenefits,
+            onCheckChildSupport: this.onCheckChildSupport,
+            onCheckRentalIncome: this.onCheckRentalIncome,
+            onClickNextFromIncomeSourcesQuestion: this.onClickNextFromIncomeSourcesQuestion,
+          });
         };
       }
 
@@ -158,6 +166,46 @@
 
     onClickNextFromEmploymentQuestion: function () {
       this.setState({ answeredEmploymentQuestion: true });
+    },
+
+    onCheckDisabilityBenefits: function () {
+      var userSubmittedData = this.state.userSubmittedData;
+
+      if (event.target.checked) {
+        userSubmittedData["household_members"][0]["disability_benefits"] = "true";
+      } else {
+        userSubmittedData["household_members"][0]["disability_benefits"] = "false";
+      };
+
+      this.setState({ userSubmittedData: userSubmittedData });
+    },
+
+    onCheckChildSupport: function () {
+      var userSubmittedData = this.state.userSubmittedData;
+
+      if (event.target.checked) {
+        userSubmittedData["household_members"][0]["receiving_child_support"] = "true";
+      } else {
+        userSubmittedData["household_members"][0]["receiving_child_support"] = "false";
+      };
+
+      this.setState({ userSubmittedData: userSubmittedData });
+    },
+
+    onCheckRentalIncome: function () {
+      var userSubmittedData = this.state.userSubmittedData;
+
+      if (event.target.checked) {
+        userSubmittedData["has_rental_income"] = "true";
+      } else {
+        userSubmittedData["has_rental_income"] = "false";
+      };
+
+      this.setState({ userSubmittedData: userSubmittedData });
+    },
+
+    onClickNextFromIncomeSourcesQuestion: function () {
+      this.fetchDocumentsFromServer();
     },
 
     renderResultsFromServer: function () {
