@@ -123,7 +123,9 @@
         dom.br({}),
         dom.input({ type: 'checkbox'}),
         dom.label({}, 'Unemployed and not receiving unemployment benefits'),
-        dom.input({ type: 'submit' })
+        dom.br({}),
+        dom.br({}),
+        dom.input({ type: 'submit', value: 'Next' })
       );
     },
 
@@ -141,7 +143,9 @@
         dom.br({}),
         dom.input({ type: 'checkbox'}),
         dom.label({}, 'None of the above'),
-        dom.input({ type: 'submit' })
+        dom.br({}),
+        dom.br({}),
+        dom.input({ type: 'submit', value: 'Next' })
       );
     },
 
