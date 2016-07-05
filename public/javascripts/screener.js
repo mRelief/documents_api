@@ -12,7 +12,21 @@
         answeredEmploymentQuestion: false,
         answeredIncomeSourcesQuestion: false,
         hasResponseFromServer: false,
-        documentsDataFromServer: null
+        documentsDataFromServer: null,
+        userSubmittedData: {
+          "household_members": [
+            {
+              "child_under_18": "false",
+              "disability_benefits": "false",
+              "is_employee": "false",
+              "self_employed": "false",
+              "receiving_child_support": "false",
+              "is_retired": "false",
+              "receiving_unemployment_benefits": "false",
+            }
+          ],
+          "is_applying_for_expedited": "false"
+        }
       };
     },
 
@@ -33,20 +47,11 @@
     },
 
     onClickNoIncome: function () {
-      var queryString = JSON.stringify({
-        "household_members": [
-          {
-            "child_under_18": "false",
-            "disability_benefits": "false",
-            "is_employee": "false",
-            "self_employed": "false",
-            "receiving_child_support": "false",
-            "is_retired": "false",
-            "receiving_unemployment_benefits": "false",
-          }
-        ],
-        "is_applying_for_expedited": "false"
-      });
+      this.fetchDocumentsFromServer();
+    },
+
+    fetchDocumentsFromServer: function () {
+      var queryString = JSON.stringify(this.state.userSubmittedData);
 
       this.serverRequest = $.get({
         url: this.props.source + queryString,
@@ -54,9 +59,6 @@
         contentType: 'application/json',
         success: function (result) {
           this.setState({
-            answeredInitialIncomeQuestion: true,
-            answeredEmploymentQuestion: false,
-            answeredIncomeSourcesQuestion: false,
             hasResponseFromServer: true,
             documentsDataFromServer: result
           });
