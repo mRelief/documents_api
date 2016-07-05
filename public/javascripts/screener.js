@@ -94,7 +94,6 @@
             onCheckSelfEmployed: this.onCheckSelfEmployed,
             onCheckRetired: this.onCheckRetired,
             onCheckUnemployedYesBenefits: this.onCheckUnemployedYesBenefits,
-            onCheckUnemployedNoBenefits: this.onCheckUnemployedNoBenefits,
             onClickNextFromEmploymentQuestion: this.onClickNextFromEmploymentQuestion
           });
         } else {
@@ -121,23 +120,43 @@
     },
 
     onCheckSelfEmployed: function () {
+      var userSubmittedData = this.state.userSubmittedData;
 
+      if (event.target.checked) {
+        userSubmittedData["household_members"][0]["self_employed"] = "true";
+      } else {
+        userSubmittedData["household_members"][0]["self_employed"] = "false";
+      };
+
+      this.setState({ userSubmittedData: userSubmittedData });
     },
 
     onCheckRetired: function () {
+      var userSubmittedData = this.state.userSubmittedData;
 
+      if (event.target.checked) {
+        userSubmittedData["household_members"][0]["is_retired"] = "true";
+      } else {
+        userSubmittedData["household_members"][0]["is_retired"] = "false";
+      };
+
+      this.setState({ userSubmittedData: userSubmittedData });
     },
 
     onCheckUnemployedYesBenefits: function () {
+      var userSubmittedData = this.state.userSubmittedData;
 
-    },
+      if (event.target.checked) {
+        userSubmittedData["household_members"][0]["receiving_unemployment_benefits"] = "true";
+      } else {
+        userSubmittedData["household_members"][0]["receiving_unemployment_benefits"] = "false";
+      };
 
-    onCheckUnemployedNoBenefits: function () {
-
+      this.setState({ userSubmittedData: userSubmittedData });
     },
 
     onClickNextFromEmploymentQuestion: function () {
-
+      this.setState({ answeredEmploymentQuestion: true });
     },
 
     renderIncomeSourcesQuestion: function () {

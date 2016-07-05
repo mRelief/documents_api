@@ -9,7 +9,6 @@
       onCheckSelfEmployed: React.PropTypes.func.isRequired,
       onCheckRetired: React.PropTypes.func.isRequired,
       onCheckUnemployedYesBenefits: React.PropTypes.func.isRequired,
-      onCheckUnemployedNoBenefits: React.PropTypes.func.isRequired,
       onClickNextFromEmploymentQuestion: React.PropTypes.func.isRequired,
     },
 
@@ -19,20 +18,20 @@
         dom.input({ type: 'checkbox', onClick: this.props.onCheckEmployee }),
         dom.label({}, 'Employee or contractor'),
         dom.br({}),
-        dom.input({ type: 'checkbox'}),
+        dom.input({ type: 'checkbox', onClick: this.props.onCheckSelfEmployed }),
         dom.label({}, 'Self-employed'),
         dom.br({}),
-        dom.input({ type: 'checkbox'}),
+        dom.input({ type: 'checkbox', onClick: this.props.onCheckRetired }),
         dom.label({}, 'Retired'),
         dom.br({}),
-        dom.input({ type: 'checkbox'}),
+        dom.input({ type: 'checkbox', onClick: this.props.onCheckUnemployedYesBenefits }),
         dom.label({}, 'Unemployed and receiving unemployment benefits'),
         dom.br({}),
-        dom.input({ type: 'checkbox'}),
+        dom.input({ type: 'checkbox' }),
         dom.label({}, 'Unemployed and not receiving unemployment benefits'),
         dom.br({}),
         dom.br({}),
-        dom.input({ type: 'submit', value: 'Next' })
+        dom.input({ type: 'submit', value: 'Next', onClick: this.props.onClickNextFromEmploymentQuestion })
       );
     }
 
