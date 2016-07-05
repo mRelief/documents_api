@@ -80,7 +80,7 @@
         resultsFromServer = null;
 
         if (this.state.answeredInitialIncomeQuestion === false) {
-          currentQuestion = this.renderIntitialIncomeQuestion();
+          currentQuestion = this.renderInitialIncomeQuestion();
         } else if (this.state.answeredEmploymentQuestion === false) {
           currentQuestion = this.renderEmploymentStatusQuestion();
         } else {
@@ -94,8 +94,9 @@
       )
     },
 
-    renderIntitialIncomeQuestion: function () {
+    renderInitialIncomeQuestion: function () {
       return dom.div({},
+        dom.h1({}, 'See what documents you need for SNAP'),
         dom.p({}, 'Are you currently receiving any income through employment, the state, or some other means?'),
         dom.input({ type: 'radio', onClick: this.onClickYesIncome }),
         dom.label({}, 'Yes'),
