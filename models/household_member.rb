@@ -1,4 +1,4 @@
-require_relative "../data"
+require_relative "../load_documents_data"
 
 class HouseholdMember
 
