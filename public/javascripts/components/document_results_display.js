@@ -20,12 +20,12 @@
       // Assuming single-person household for now
 
       var person = this.householdMembers()[0];
-      var informationNeeded = person.information_needed;
       var documentsNeeded = person.documents_needed;
+      var informationNeeded = person.information_needed;
 
       return dom.div({},
-        this.renderHouseholdMemberInformationNeeded(informationNeeded),
-        this.renderHouseHoldMemberDocumentsNeeded(documentsNeeded)
+        this.renderHouseHoldMemberDocumentsNeeded(documentsNeeded),
+        this.renderHouseholdMemberInformationNeeded(informationNeeded)
       )
     },
 
@@ -50,14 +50,18 @@
       });
 
       return dom.div({},
-        dom.p({}, 'You will need these documents:'),
+        dom.span({}, 'You will need '),
+        dom.span({ style: { fontWeight: 'bold' } }, 'all '),
+        dom.span({}, 'of these documents:'),
         dom.ul({}, listOfPersonDocumentsNeeded)
       );
     },
 
     renderResidencyDocuments: function () {
       return dom.div({},
-        dom.p({}, 'You will need one of the following documents to prove residency:'),
+        dom.span({}, 'You will need '),
+        dom.span({ style: { fontWeight: 'bold' } }, 'one '),
+        dom.span({}, 'of the following documents to prove residency:'),
         dom.ul({},
           this.residencyDocumentNameList()
         )
