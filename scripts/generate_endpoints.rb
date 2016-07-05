@@ -14,6 +14,6 @@ def url_endpoint(base_url, query_data)
 end
 
 TEST_QUERIES.each do |query|
-  puts; puts "#{query[:description]}:"
-  puts url_endpoint(@base_url, query[:ruby_hash])
+  puts
+  puts "+ [#{query[:description]}](#{url_endpoint(@base_url, query[:ruby_hash])})"
 end
