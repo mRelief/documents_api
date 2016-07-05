@@ -56,7 +56,6 @@
     },
 
     renderResidencyDocuments: function () {
-      console.log(this.residencyDocumentOfficialNames());
       return dom.div({},
         dom.p({}, 'You will need one of the following documents to prove residency:'),
         dom.ul({},

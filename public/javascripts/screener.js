@@ -61,6 +61,7 @@
         dataType: 'json',
         contentType: 'application/json',
         success: function (result) {
+          console.log(result);
           this.setState({
             hasResponseFromServer: true,
             documentsDataFromServer: result
@@ -188,6 +189,8 @@
       } else {
         userSubmittedData["household_members"][0]["receiving_child_support"] = "false";
       };
+
+      console.log(userSubmittedData);
 
       this.setState({ userSubmittedData: userSubmittedData });
     },
