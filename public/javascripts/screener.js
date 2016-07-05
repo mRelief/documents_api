@@ -35,7 +35,7 @@
 
     getDefaultProps: function() {
       return {
-        source: 'http://localhost:4567/api/'
+        source: 'https://documents-api.herokuapp.com/api/'
       };
     },
 
