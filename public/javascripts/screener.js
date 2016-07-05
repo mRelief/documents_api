@@ -90,7 +90,6 @@
       }
 
       return dom.div({},
-        dom.h1({}, 'Documents Screener'),
         currentQuestion,
         resultsFromServer
       )
