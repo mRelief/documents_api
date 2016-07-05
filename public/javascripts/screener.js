@@ -129,7 +129,7 @@
       this.setState({ userSubmittedData: userSubmittedData });
     },
 
-    onCheckSelfEmployed: function () {
+    onCheckSelfEmployed: function (event) {
       var userSubmittedData = this.state.userSubmittedData;
 
       if (event.target.checked) {
@@ -141,7 +141,7 @@
       this.setState({ userSubmittedData: userSubmittedData });
     },
 
-    onCheckRetired: function () {
+    onCheckRetired: function (event) {
       var userSubmittedData = this.state.userSubmittedData;
 
       if (event.target.checked) {
@@ -153,7 +153,7 @@
       this.setState({ userSubmittedData: userSubmittedData });
     },
 
-    onCheckUnemployedYesBenefits: function () {
+    onCheckUnemployedYesBenefits: function (event) {
       var userSubmittedData = this.state.userSubmittedData;
 
       if (event.target.checked) {
@@ -169,7 +169,7 @@
       this.setState({ answeredEmploymentQuestion: true });
     },
 
-    onCheckDisabilityBenefits: function () {
+    onCheckDisabilityBenefits: function (event) {
       var userSubmittedData = this.state.userSubmittedData;
 
       if (event.target.checked) {
@@ -181,7 +181,7 @@
       this.setState({ userSubmittedData: userSubmittedData });
     },
 
-    onCheckChildSupport: function () {
+    onCheckChildSupport: function (event) {
       var userSubmittedData = this.state.userSubmittedData;
 
       if (event.target.checked) {
@@ -195,7 +195,7 @@
       this.setState({ userSubmittedData: userSubmittedData });
     },
 
-    onCheckRentalIncome: function () {
+    onCheckRentalIncome: function (event) {
       var userSubmittedData = this.state.userSubmittedData;
 
       if (event.target.checked) {
