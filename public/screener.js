@@ -13,7 +13,7 @@ var DocumentScreener = React.createClass({
 
   getDefaultProps: function() {
     return {
-      source: 'http://documents-api.herokuapp.com/api/'
+      source: 'http://localhost:4567/api/'
     };
   },
 
@@ -27,7 +27,7 @@ var DocumentScreener = React.createClass({
   },
 
   onClickNoIncome: function () {
-    var queryString = $.param({
+    var queryString = JSON.stringify({
       "household_members": [
         {
           "child_under_18": "false",
@@ -42,9 +42,12 @@ var DocumentScreener = React.createClass({
       "is_applying_for_expedited": "false"
     });
 
-    this.serverRequest = $.get(this.props.source + queryString, function (result) {
-      alert(result);
-    }.bind(this));
+    this.serverRequest = $.get({
+      url: this.props.source + queryString,
+      dataType: 'json',
+      contentType: 'application/json',
+      success: function (result) { alert(result); }
+    });
   },
 
   render: function() {

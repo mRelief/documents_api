@@ -10,7 +10,7 @@ end
 get '/api/:benefits_application' do
   content_type :json
 
-  @parsed = Rack::Utils.parse_nested_query(params[:benefits_application])
+  @parsed = ActiveSupport::JSON.decode(params[:benefits_application])
 
   @outcome = Api::Documents.fetch_documents(@parsed)
 
