@@ -27,7 +27,12 @@
         dom.label({}, 'None of the above'),
         dom.br({}),
         dom.br({}),
-        dom.input({ type: 'submit', value: 'Next', onClick: this.props.onClickNextFromIncomeSourcesQuestion })
+        dom.input({
+          type: 'submit',
+          value: 'Next',
+          onClick: this.props.onClickNextFromIncomeSourcesQuestion,
+          style: window.shared.ButtonStyle
+        })
       );
     },
 

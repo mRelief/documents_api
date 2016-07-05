@@ -31,7 +31,12 @@
         dom.label({}, 'Unemployed and not receiving unemployment benefits'),
         dom.br({}),
         dom.br({}),
-        dom.input({ type: 'submit', value: 'Next', onClick: this.props.onClickNextFromEmploymentQuestion })
+        dom.input({
+          type: 'submit',
+          value: 'Next',
+          onClick: this.props.onClickNextFromEmploymentQuestion,
+          style: window.shared.ButtonStyle
+        })
       );
     }
 
