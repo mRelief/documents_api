@@ -1,13 +1,14 @@
 require_relative "../spec/test_queries"
+require_relative "../lib/endpoint_generator"
 require          "active_support/all"
 
 @base_url = ARGV[0]
 
-def url_endpoint(base_url, query_data)
-  "http://#{base_url}/api/#{query_data.to_query}"
-end
+raise "Base URL required" if @base_url.nil?
 
 TEST_QUERIES.each do |query|
-  puts; puts "#{query[:description]}:"
-  puts url_endpoint(@base_url, query[:ruby_hash])
+  url = EndpointGenerator.new(@base_url, query[:ruby_hash]).generate_url
+
+  puts
+  puts "+ [#{query[:description]}](#{url})"
 end
