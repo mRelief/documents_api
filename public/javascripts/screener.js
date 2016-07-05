@@ -4,6 +4,7 @@
   var createEl = React.createElement.bind(React);
   var DocumentResultsDisplay = window.shared.DocumentResultsDisplay;
   var InitialIncomeQuestion = window.shared.InitialIncomeQuestion;
+  var EmploymentQuestion = window.shared.EmploymentQuestion;
 
   var DocumentScreener = React.createClass({
 
@@ -88,7 +89,7 @@
             onClickYesIncome: this.onClickYesIncome
           });
         } else if (this.state.answeredEmploymentQuestion === false) {
-          currentQuestion = this.renderEmploymentStatusQuestion();
+          currentQuestion = createEl(EmploymentQuestion, {});
         } else {
           currentQuestion = this.renderIncomeSourcesQuestion();
         };
@@ -98,29 +99,6 @@
         currentQuestion,
         resultsFromServer
       )
-    },
-
-    renderEmploymentStatusQuestion: function () {
-      return dom.div({},
-        dom.p({}, 'Select all that apply to your employment status:'),
-        dom.input({ type: 'checkbox'}),
-        dom.label({}, 'Employee or contractor'),
-        dom.br({}),
-        dom.input({ type: 'checkbox'}),
-        dom.label({}, 'Self-employed'),
-        dom.br({}),
-        dom.input({ type: 'checkbox'}),
-        dom.label({}, 'Retired'),
-        dom.br({}),
-        dom.input({ type: 'checkbox'}),
-        dom.label({}, 'Unemployed and receiving unemployment benefits'),
-        dom.br({}),
-        dom.input({ type: 'checkbox'}),
-        dom.label({}, 'Unemployed and not receiving unemployment benefits'),
-        dom.br({}),
-        dom.br({}),
-        dom.input({ type: 'submit', value: 'Next' })
-      );
     },
 
     renderIncomeSourcesQuestion: function () {
