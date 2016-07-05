@@ -5,6 +5,7 @@
   var DocumentResultsDisplay = window.shared.DocumentResultsDisplay;
   var InitialIncomeQuestion = window.shared.InitialIncomeQuestion;
   var EmploymentQuestion = window.shared.EmploymentQuestion;
+  var IncomeSourcesQuestion = window.shared.IncomeSourcesQuestion;
 
   var DocumentScreener = React.createClass({
 
@@ -97,7 +98,7 @@
             onClickNextFromEmploymentQuestion: this.onClickNextFromEmploymentQuestion
           });
         } else {
-          currentQuestion = this.renderIncomeSourcesQuestion();
+          currentQuestion = currentQuestion = createEl(IncomeSourcesQuestion);
         };
       }
 
@@ -157,26 +158,6 @@
 
     onClickNextFromEmploymentQuestion: function () {
       this.setState({ answeredEmploymentQuestion: true });
-    },
-
-    renderIncomeSourcesQuestion: function () {
-      return dom.div({},
-        dom.p({}, 'Which of the following do you receive:'),
-        dom.input({ type: 'checkbox'}),
-        dom.label({}, 'Disability benefits'),
-        dom.br({}),
-        dom.input({ type: 'checkbox'}),
-        dom.label({}, 'Child support'),
-        dom.br({}),
-        dom.input({ type: 'checkbox'}),
-        dom.label({}, 'Rental income'),
-        dom.br({}),
-        dom.input({ type: 'checkbox'}),
-        dom.label({}, 'None of the above'),
-        dom.br({}),
-        dom.br({}),
-        dom.input({ type: 'submit', value: 'Next' })
-      );
     },
 
     renderResultsFromServer: function () {
