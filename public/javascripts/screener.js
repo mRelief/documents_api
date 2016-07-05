@@ -53,7 +53,6 @@
         dataType: 'json',
         contentType: 'application/json',
         success: function (result) {
-          console.log(result);
           this.setState({
             answeredInitialIncomeQuestion: true,
             answeredEmploymentQuestion: false,
