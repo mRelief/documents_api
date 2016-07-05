@@ -7,7 +7,8 @@ var DocumentScreener = React.createClass({
       answeredInitialIncomeQuestion: false,
       answeredEmploymentQuestion: false,
       answeredIncomeSourcesQuestion: false,
-      hasResponse: false,
+      hasResponseFromServer: false,
+      documentsDataFromServer: null
     };
   },
 
@@ -22,7 +23,8 @@ var DocumentScreener = React.createClass({
       answeredInitialIncomeQuestion: true,
       answeredEmploymentQuestion: false,
       answeredIncomeSourcesQuestion: false,
-      hasResponse: true,
+      hasResponseFromServer: false,
+      documentsDataFromServer: null
     });
   },
 
@@ -46,22 +48,47 @@ var DocumentScreener = React.createClass({
       url: this.props.source + queryString,
       dataType: 'json',
       contentType: 'application/json',
-      success: function (result) { alert(result); }
+      success: function (result) {
+        console.log(result);
+        this.setState({
+          answeredInitialIncomeQuestion: true,
+          answeredEmploymentQuestion: false,
+          answeredIncomeSourcesQuestion: false,
+          hasResponseFromServer: true,
+          documentsDataFromServer: result
+        });
+      }.bind(this)
     });
   },
 
   render: function() {
-    if (this.state.answeredInitialIncomeQuestion === false) {
-      var currentQuestion = this.renderIntitialIncomeQuestion();
-    } else if (this.state.answeredEmploymentQuestion === false) {
-      var currentQuestion = this.renderEmploymentStatusQuestion();
+    var currentQuestion;
+    var resultsFromServer;
+
+    if (this.state.hasResponseFromServer === true) {
+      // If we have document results from the server, serve that and no questions:
+
+      currentQuestion = null;
+      resultsFromServer = this.renderResultsFromServer();
+
     } else {
-      var currentQuestion = this.renderIncomeSourcesQuestion();
-    };
+      // Otherwise, serve the appropriate question in the screener:
+
+      resultsFromServer = null;
+
+      if (this.state.answeredInitialIncomeQuestion === false) {
+        currentQuestion = this.renderIntitialIncomeQuestion();
+      } else if (this.state.answeredEmploymentQuestion === false) {
+        currentQuestion = this.renderEmploymentStatusQuestion();
+      } else {
+        currentQuestion = this.renderIncomeSourcesQuestion();
+      };
+    }
 
     return dom.div({},
       dom.h1({}, 'Documents Screener'),
-      currentQuestion
+      currentQuestion,
+      resultsFromServer
     )
   },
 
@@ -113,6 +140,15 @@ var DocumentScreener = React.createClass({
       dom.label({}, 'None of the above'),
       dom.input({ type: 'submit' })
     );
+  },
+
+  renderResultsFromServer: function () {
+    var results = this.state.documentsDataFromServer;
+
+    return dom.div({},
+      dom.p({}, results.other_documents_needed[0].name),
+      dom.p({}, results.household_members[0].information_needed[0].accessible_name)
+    )
   }
 
 });
