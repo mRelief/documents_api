@@ -89,7 +89,14 @@
             onClickYesIncome: this.onClickYesIncome
           });
         } else if (this.state.answeredEmploymentQuestion === false) {
-          currentQuestion = createEl(EmploymentQuestion, {});
+          currentQuestion = createEl(EmploymentQuestion, {
+            onCheckEmployee: this.onCheckEmployee,
+            onCheckSelfEmployed: this.onCheckSelfEmployed,
+            onCheckRetired: this.onCheckRetired,
+            onCheckUnemployedYesBenefits: this.onCheckUnemployedYesBenefits,
+            onCheckUnemployedNoBenefits: this.onCheckUnemployedNoBenefits,
+            onClickNextFromEmploymentQuestion: this.onClickNextFromEmploymentQuestion
+          });
         } else {
           currentQuestion = this.renderIncomeSourcesQuestion();
         };
@@ -99,6 +106,38 @@
         currentQuestion,
         resultsFromServer
       )
+    },
+
+    onCheckEmployee: function (event) {
+      var userSubmittedData = this.state.userSubmittedData;
+
+      if (event.target.checked) {
+        userSubmittedData["household_members"][0]["is_employee"] = "true";
+      } else {
+        userSubmittedData["household_members"][0]["is_employee"] = "false";
+      };
+
+      this.setState({ userSubmittedData: userSubmittedData });
+    },
+
+    onCheckSelfEmployed: function () {
+
+    },
+
+    onCheckRetired: function () {
+
+    },
+
+    onCheckUnemployedYesBenefits: function () {
+
+    },
+
+    onCheckUnemployedNoBenefits: function () {
+
+    },
+
+    onClickNextFromEmploymentQuestion: function () {
+
     },
 
     renderIncomeSourcesQuestion: function () {

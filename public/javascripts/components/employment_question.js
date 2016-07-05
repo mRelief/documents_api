@@ -4,10 +4,19 @@
 
   window.shared.EmploymentQuestion = React.createClass({
 
+    propTypes: {
+      onCheckEmployee: React.PropTypes.func.isRequired,
+      onCheckSelfEmployed: React.PropTypes.func.isRequired,
+      onCheckRetired: React.PropTypes.func.isRequired,
+      onCheckUnemployedYesBenefits: React.PropTypes.func.isRequired,
+      onCheckUnemployedNoBenefits: React.PropTypes.func.isRequired,
+      onClickNextFromEmploymentQuestion: React.PropTypes.func.isRequired,
+    },
+
     render: function () {
       return dom.div({},
         dom.p({}, 'Select all that apply to your employment status:'),
-        dom.input({ type: 'checkbox'}),
+        dom.input({ type: 'checkbox', onClick: this.props.onCheckEmployee }),
         dom.label({}, 'Employee or contractor'),
         dom.br({}),
         dom.input({ type: 'checkbox'}),
