@@ -3,6 +3,7 @@
   var dom = React.DOM;
   var createEl = React.createElement.bind(React);
   var DocumentResultsDisplay = window.shared.DocumentResultsDisplay;
+  var InitialIncomeQuestion = window.shared.InitialIncomeQuestion;
 
   var DocumentScreener = React.createClass({
 
@@ -82,7 +83,10 @@
         resultsFromServer = null;
 
         if (this.state.answeredInitialIncomeQuestion === false) {
-          currentQuestion = this.renderInitialIncomeQuestion();
+          currentQuestion = createEl(InitialIncomeQuestion, {
+            onClickNoIncome: this.onClickNoIncome,
+            onClickYesIncome: this.onClickYesIncome
+          });
         } else if (this.state.answeredEmploymentQuestion === false) {
           currentQuestion = this.renderEmploymentStatusQuestion();
         } else {
@@ -94,18 +98,6 @@
         currentQuestion,
         resultsFromServer
       )
-    },
-
-    renderInitialIncomeQuestion: function () {
-      return dom.div({},
-        dom.h1({}, 'See what documents you need for SNAP'),
-        dom.p({}, 'Are you currently receiving any income through employment, the state, or some other means?'),
-        dom.input({ type: 'radio', onClick: this.onClickYesIncome }),
-        dom.label({}, 'Yes'),
-        dom.br({}),
-        dom.input({ type: 'radio', onClick: this.onClickNoIncome }),
-        dom.label({}, 'No')
-      );
     },
 
     renderEmploymentStatusQuestion: function () {
