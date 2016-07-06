@@ -95,13 +95,14 @@
 
     renderOtherDocumentsNeeded: function () {
       var otherDocumentsNeeded = this.otherDocumentsNeeded();
-      if (otherDocumentsNeeded.length === 0) return null;
 
       var listOfOtherDocumentsNeeded = otherDocumentsNeeded.filter(function(doc) {
         return doc.name !== 'Residency';
       }).map(function (doc) {
         return dom.li({}, doc.official_name);
       });
+
+      if (listOfOtherDocumentsNeeded.length === 0) return null;
 
       return dom.div({},
         dom.span({}, 'You will need '),
