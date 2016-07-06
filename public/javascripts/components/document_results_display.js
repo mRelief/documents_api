@@ -12,7 +12,9 @@
       return dom.div({},
         dom.h1({}, 'What You Will Need'),
         this.renderResidencyDocuments(),
-        this.renderOtherDocumentsNeeded(),
+        // this.renderOtherDocumentsNeeded(), // <-- merging into household member
+                                              // required docs since we are only covering
+                                              // the single-member househodl right now
         this.renderHouseholdMember()
       )
     },
@@ -44,7 +46,7 @@
     },
 
     renderHouseHoldMemberDocumentsNeeded: function (documentsNeeded) {
-      if (documentsNeeded.length === 0) return null;
+      if (documentsNeeded.length === 0 && this.listOfOtherDocumentsNeeded() === 0) return null;
 
       var listOfPersonDocumentsNeeded = documentsNeeded.map(function (doc) {
         return dom.li({}, doc.official_name);
@@ -53,8 +55,11 @@
       return dom.div({},
         dom.span({}, 'You will need '),
         dom.span({ style: { fontWeight: 'bold' } }, 'all '),
-        dom.span({}, 'of these documents for yourself:'),
-        dom.ul({}, listOfPersonDocumentsNeeded)
+        dom.span({}, 'of these documents:'),
+        dom.ul({},
+          listOfPersonDocumentsNeeded,
+          this.listOfOtherDocumentsNeeded()
+        )
       );
     },
 
@@ -93,23 +98,12 @@
       return this.props.results.other_documents_needed;
     },
 
-    renderOtherDocumentsNeeded: function () {
-      var otherDocumentsNeeded = this.otherDocumentsNeeded();
-
-      var listOfOtherDocumentsNeeded = otherDocumentsNeeded.filter(function(doc) {
+    listOfOtherDocumentsNeeded: function () {
+      return this.otherDocumentsNeeded().filter(function(doc) {
         return doc.name !== 'Residency';
       }).map(function (doc) {
         return dom.li({}, doc.official_name);
       });
-
-      if (listOfOtherDocumentsNeeded.length === 0) return null;
-
-      return dom.div({},
-        dom.span({}, 'You will need '),
-        dom.span({ style: { fontWeight: 'bold' } }, 'all '),
-        dom.span({}, 'of these documents along with your application:'),
-        dom.ul({}, listOfOtherDocumentsNeeded)
-      );
     },
 
     householdMembers: function () {
