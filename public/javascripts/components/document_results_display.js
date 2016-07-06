@@ -46,7 +46,7 @@
     },
 
     renderHouseHoldMemberDocumentsNeeded: function (documentsNeeded) {
-      if (documentsNeeded.length === 0 && this.listOfOtherDocumentsNeeded() === 0) return null;
+      if (documentsNeeded.length === 0 && this.listOfOtherDocumentsNeeded().length === 0) return null;
 
       var listOfPersonDocumentsNeeded = documentsNeeded.map(function (doc) {
         return dom.li({}, doc.official_name);
