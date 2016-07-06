@@ -3,33 +3,34 @@ require_relative "helpers/string_parser"
 require          "active_support/all"
 
 module Api
-  class Documents
+  class DocumentsRequest
 
-    def self.fetch_documents(application)
-      parse_incoming_application_params(application)
+    def initialize(household_members:, is_applying_for_expedited:, has_rental_income:)
+      @household_members = reformat_household_members(household_members)
+      @is_applying_for_expedited = StringParser.new(is_applying_for_expedited).to_boolean
+      @has_rental_income = StringParser.new(has_rental_income).to_boolean
 
-      household_members_with_documents = application[:household_members].map do |household_member|
-        HouseholdMember.new(**household_member).documents_and_info_needed
-      end
+      raise "Badly formatted request" if @is_applying_for_expedited.nil? || @has_rental_income.nil?
+    end
+
+    def fetch_documents
+      household_with_docs = @household_members.map { |person| person.documents_and_info_needed }
 
       return {
-        "household_members": household_members_with_documents,
-        "other_documents_needed": self.other_documents_needed(application)
+        "household_members": household_with_docs,
+        "other_documents_needed": other_documents_needed
       }
     end
 
-    def self.other_documents_needed(application)
+    def other_documents_needed
       other_documents = [residency_documents]
 
-      expedited = application[:is_applying_for_expedited]
-      rental_income = application[:has_rental_income]
-
-      other_documents << BANK_STATEMENTS if (expedited || rental_income)
+      other_documents << BANK_STATEMENTS if (@is_applying_for_expedited || @has_rental_income)
 
       return other_documents
     end
 
-    def self.residency_documents
+    def residency_documents
       return {
         name: "Residency",
         number_needed: 1,
@@ -48,17 +49,18 @@ module Api
       }
     end
 
-    def self.parse_incoming_application_params(application)
-      application.deep_symbolize_keys!
+    def reformat_household_members(household_members)
+      # NOTE: This is only written to handle a single household member.
+      #       Larger households come later since the V1 prototype is about a
+      #       single-member household.
 
-      application[:household_members].each do |person_hash|
-        person_hash.each_pair do |key, value|
-          person_hash[key] = StringParser.new(value).to_boolean
-        end
+      household_member_hash = household_members.to_a[0][1].symbolize_keys!
+
+      household_member_hash.each_key do |k|
+        household_member_hash[k] = StringParser.new(household_member_hash[k]).to_boolean
       end
 
-      application[:is_applying_for_expedited] = StringParser.new(application[:is_applying_for_expedited]).to_boolean
-      application[:has_rental_income] = StringParser.new(application[:has_rental_income]).to_boolean
+      [HouseholdMember.new(household_member_hash)]
     end
 
   end

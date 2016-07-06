@@ -7,12 +7,16 @@ configure do
   enable :cross_origin
 end
 
-get '/api/:benefits_application' do
+get '/api' do
   content_type :json
 
-  @parsed = ActiveSupport::JSON.decode(params[:benefits_application])
+  documents_request = Api::DocumentsRequest.new(
+    household_members: params["household_members"],
+    is_applying_for_expedited: params["is_applying_for_expedited"],
+    has_rental_income: params["has_rental_income"],
+  )
 
-  @outcome = Api::Documents.fetch_documents(@parsed)
+  @outcome = documents_request.fetch_documents
 
   JSON.pretty_generate(@outcome)
 end
