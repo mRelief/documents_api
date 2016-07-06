@@ -35,7 +35,7 @@
 
     getDefaultProps: function() {
       return {
-        source: 'https://documents-api.herokuapp.com/api/'
+        source: 'https://documents-api.herokuapp.com/api'
       };
     },
 
@@ -54,10 +54,9 @@
     },
 
     fetchDocumentsFromServer: function () {
-      var queryString = JSON.stringify(this.state.userSubmittedData);
-
       this.serverRequest = $.get({
-        url: this.props.source + queryString,
+        url: this.props.source,
+        data: this.state.userSubmittedData,
         dataType: 'json',
         contentType: 'application/json',
         success: function (result) {
