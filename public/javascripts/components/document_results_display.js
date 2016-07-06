@@ -12,6 +12,7 @@
       return dom.div({},
         dom.h1({}, 'What You Will Need'),
         this.renderResidencyDocuments(),
+        this.renderOtherDocumentsNeeded(),
         this.renderHouseholdMember()
       )
     },
@@ -52,7 +53,7 @@
       return dom.div({},
         dom.span({}, 'You will need '),
         dom.span({ style: { fontWeight: 'bold' } }, 'all '),
-        dom.span({}, 'of these documents:'),
+        dom.span({}, 'of these documents for yourself:'),
         dom.ul({}, listOfPersonDocumentsNeeded)
       );
     },
@@ -90,6 +91,24 @@
 
     otherDocumentsNeeded: function () {
       return this.props.results.other_documents_needed;
+    },
+
+    renderOtherDocumentsNeeded: function () {
+      var otherDocumentsNeeded = this.otherDocumentsNeeded();
+      if (otherDocumentsNeeded.length === 0) return null;
+
+      var listOfOtherDocumentsNeeded = otherDocumentsNeeded.filter(function(doc) {
+        return doc.name !== 'Residency';
+      }).map(function (doc) {
+        return dom.li({}, doc.official_name);
+      });
+
+      return dom.div({},
+        dom.span({}, 'You will need '),
+        dom.span({ style: { fontWeight: 'bold' } }, 'all '),
+        dom.span({}, 'of these documents along with your application:'),
+        dom.ul({}, listOfOtherDocumentsNeeded)
+      );
     },
 
     householdMembers: function () {
