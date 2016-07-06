@@ -97,7 +97,9 @@
       var otherDocumentsNeeded = this.otherDocumentsNeeded();
       if (otherDocumentsNeeded.length === 0) return null;
 
-      var listOfOtherDocumentsNeeded = otherDocumentsNeeded.map(function (doc) {
+      var listOfOtherDocumentsNeeded = otherDocumentsNeeded.filter(function(doc) {
+        return doc.name !== 'Residency';
+      }).map(function (doc) {
         return dom.li({}, doc.official_name);
       });
 
