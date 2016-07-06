@@ -12,8 +12,8 @@
       return dom.div({},
         dom.h1({}, 'What You Will Need'),
         this.renderResidencyDocuments(),
-        this.renderHouseholdMember(),
-        this.renderOtherDocumentsNeeded()
+        this.renderOtherDocumentsNeeded(),
+        this.renderHouseholdMember()
       )
     },
 
