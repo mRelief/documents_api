@@ -35,7 +35,7 @@
 
     getDefaultProps: function() {
       return {
-        source: 'https://documents-api.herokuapp.com/api/'
+        source: 'https://documents-api.herokuapp.com/api'
       };
     },
 
