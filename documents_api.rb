@@ -42,9 +42,7 @@ module Api
           MAIL,
           MEDICAL_RECORDS,
           HOME_OWNERS_INSURANCE,
-          PROPERTY_TAX_BILL,
-          SCHOOL_ENROLLMENT_RECORDS,
-          OTHER_ID,
+          PROPERTY_TAX_BILL
         ]
       }
     end

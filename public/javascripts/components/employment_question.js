@@ -22,7 +22,7 @@
       return dom.div({},
         dom.p({}, 'Select all that apply to you:'),
         dom.input({ type: 'checkbox', onClick: this.props.onCheckEmployee }),
-        dom.label({}, 'Employee or contractor'),
+        dom.label({}, 'Employed'),
         dom.br({}),
         dom.input({ type: 'checkbox', onClick: this.props.onCheckSelfEmployed }),
         dom.label({}, 'Self-employed'),
