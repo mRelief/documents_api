@@ -8,6 +8,12 @@
       results: React.PropTypes.object.isRequired
     },
 
+    getInitialState: function () {
+      return {
+        showMoreResidencyDocs: false
+      };
+    },
+
     render: function () {
       return dom.div({},
         dom.h1({}, 'What You Will Need'),
@@ -75,20 +81,49 @@
     },
 
     residencyDocumentNameList: function () {
-      return this.residencyDocumentOfficialNames().map(function (document_name) {
+      var residencyDocsList = this.residencyDocumentOfficialNames().map(function (document_name) {
         return dom.li({}, document_name);
       });
+
+      var firstTwoResidencyDocs = residencyDocsList.splice(0, 2);
+
+      if (this.state.showMoreResidencyDocs === false) { residencyDocsList = null };
+
+      var toggleShowText = this.toggleShowText();
+
+      return dom.div({},
+        firstTwoResidencyDocs,
+        residencyDocsList,
+        dom.a({
+          onClick: this.onClickShowMoreDocs,
+          style: {
+            color: '#0645AD',
+            fontStyle: 'italic',
+            fontWeight: 'bold',
+            lineHeight: '40px',
+            cursor: 'pointer'
+          }
+        }, toggleShowText)
+      );
+    },
+
+    onClickShowMoreDocs: function () {
+      var currentState = this.state.showMoreResidencyDocs;
+      this.setState({ showMoreResidencyDocs: !currentState });
+    },
+
+    toggleShowText: function () {
+      if (this.state.showMoreResidencyDocs) {
+        return 'Show less';
+      } else {
+        return 'Show more';
+      };
     },
 
     residencyDocumentOfficialNames: function () {
-      var residencyDocumentNames = this.residencyDocuments().map(function (document) {
+      return this.residencyDocuments().map(function (document) {
         return document.official_name;
       });
-
-
-      var firstTwoResidencyDocs = residencyDocumentNames.slice(0, 2);
-
-      return firstTwoResidencyDocs;
     },
 
     residencyDocuments: function () {
