@@ -1,7 +1,7 @@
 require_relative "../documents_api"
 require_relative "test_fixtures"
 
-describe Api::Documents do
+describe Api::DocumentsRequest do
 
   subject { described_class }
   let(:outcome) { subject.fetch_documents(benefits_application) }
