@@ -39,7 +39,6 @@ module Api
           MAIL,
           RENT_RECEIPT,
           HOMELESS_SHELTER_STATEMENT,
-          EMPLOYMENT_RECORDS,
           MEDICAL_RECORDS,
           HOME_OWNERS_INSURANCE,
           PROPERTY_TAX_BILL
