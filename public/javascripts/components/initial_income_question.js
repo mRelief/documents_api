@@ -11,7 +11,7 @@
 
     render: function () {
       return dom.div({},
-        dom.h1({}, 'See what documents you need for SNAP'),
+        dom.h1({}, 'See what documents you need for Food Stamps'),
         dom.p({}, 'Are you currently receiving any income through employment, the state, or some other means?'),
         dom.input({ type: 'radio', onClick: this.props.onClickYesIncome }),
         dom.label({}, 'Yes'),
