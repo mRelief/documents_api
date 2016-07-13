@@ -5,9 +5,9 @@ describe Api::DocumentsRequest do
 
   subject {
     described_class.new(
-      household_members: nil,
-      is_applying_for_expedited: nil,
-      has_rental_income: nil
+      household_members: incoming_params[:household_members],
+      is_applying_for_expedited: incoming_params[:is_applying_for_expedited],
+      has_rental_income: incoming_params[:has_rental_income]
     )
   }
 
@@ -15,14 +15,9 @@ describe Api::DocumentsRequest do
 
   describe "a one-person household" do
 
-    let(:applicant) { outcome[:household_members][0] }
-    let(:documents) { applicant[:documents_needed] }
-    let(:document_names) { documents.map { |document| document[:official_name] } }
-    let(:information_needed) { applicant[:information_needed].map { |info| info[:official_name] } }
-
     describe "person is an employee" do
 
-      let(:benefits_application) { SINGLE_HOUSEHOLD_MEMBER_EMPLOYED }
+      let(:incoming_params) { SINGLE_HOUSEHOLD_MEMBER_EMPLOYED }
 
       it "should require paystubs documentation" do
 
