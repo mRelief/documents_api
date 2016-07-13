@@ -14,7 +14,7 @@
 
     render: function () {
       return dom.div({},
-        dom.p({}, 'Select all that apply to your employment status:'),
+        dom.p({}, 'Select all that apply to you:'),
         dom.input({ type: 'checkbox', onClick: this.props.onCheckEmployee }),
         dom.label({}, 'Employee or contractor'),
         dom.br({}),
