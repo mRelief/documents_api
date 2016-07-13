@@ -1,21 +1,23 @@
 require_relative "../documents_api"
 require_relative "test_fixtures"
 
-describe Api::Documents do
+describe Api::DocumentsRequest do
 
-  subject { described_class }
-  let(:outcome) { subject.fetch_documents(benefits_application) }
+  subject {
+    described_class.new(
+      household_members: incoming_params[:household_members],
+      is_applying_for_expedited: incoming_params[:is_applying_for_expedited],
+      has_rental_income: incoming_params[:has_rental_income]
+    )
+  }
+
+  let(:outcome) { subject.fetch_documents }
 
   describe "a one-person household" do
 
-    let(:applicant) { outcome[:household_members][0] }
-    let(:documents) { applicant[:documents_needed] }
-    let(:document_names) { documents.map { |document| document[:official_name] } }
-    let(:information_needed) { applicant[:information_needed].map { |info| info[:official_name] } }
-
     describe "person is an employee" do
 
-      let(:benefits_application) { SINGLE_HOUSEHOLD_MEMBER_EMPLOYED }
+      let(:incoming_params) { SINGLE_HOUSEHOLD_MEMBER_EMPLOYED }
 
       it "should require paystubs documentation" do
 
