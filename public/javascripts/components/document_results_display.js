@@ -14,7 +14,7 @@
         this.renderResidencyDocuments(),
         // this.renderOtherDocumentsNeeded(), // <-- merging into household member
                                               // required docs since we are only covering
-                                              // the single-member househodl right now
+                                              // the single-member household right now
         this.renderHouseholdMember()
       )
     },
