@@ -3,8 +3,15 @@ require_relative "test_fixtures"
 
 describe Api::DocumentsRequest do
 
-  subject { described_class.new }
-  let(:outcome) { subject.fetch_documents(benefits_application) }
+  subject {
+    described_class.new(
+      household_members: nil,
+      is_applying_for_expedited: nil,
+      has_rental_income: nil
+    )
+  }
+
+  let(:outcome) { subject.fetch_documents }
 
   describe "a one-person household" do
 
