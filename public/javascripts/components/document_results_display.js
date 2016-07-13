@@ -89,8 +89,6 @@
 
       if (this.state.showMoreResidencyDocs === false) { residencyDocsList = null };
 
-      var toggleShowText = this.toggleShowText();
-
       return dom.div({},
         firstTwoResidencyDocs,
         residencyDocsList,
@@ -103,7 +101,7 @@
             lineHeight: '40px',
             cursor: 'pointer'
           }
-        }, toggleShowText)
+        }, this.toggleShowText())
       );
     },
 
@@ -114,9 +112,9 @@
 
     toggleShowText: function () {
       if (this.state.showMoreResidencyDocs) {
-        return 'Show less';
+        return 'Fewer options';
       } else {
-        return 'Show more';
+        return 'More options';
       };
     },
 
