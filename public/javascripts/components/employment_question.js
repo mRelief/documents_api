@@ -19,7 +19,6 @@
     },
 
     render: function () {
-      console.log('state', this.state);
       return dom.div({},
         dom.p({}, 'Select all that apply to you:'),
         dom.input({ type: 'checkbox', onClick: this.props.onCheckEmployee }),
