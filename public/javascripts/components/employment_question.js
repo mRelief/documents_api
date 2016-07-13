@@ -4,6 +4,12 @@
 
   window.shared.EmploymentQuestion = React.createClass({
 
+    getInitialState: function () {
+      return {
+        userCheckedUnemployed: false
+      };
+    },
+
     propTypes: {
       onCheckEmployee: React.PropTypes.func.isRequired,
       onCheckSelfEmployed: React.PropTypes.func.isRequired,
@@ -13,6 +19,7 @@
     },
 
     render: function () {
+      console.log('state', this.state);
       return dom.div({},
         dom.p({}, 'Select all that apply to you:'),
         dom.input({ type: 'checkbox', onClick: this.props.onCheckEmployee }),
@@ -24,10 +31,11 @@
         dom.input({ type: 'checkbox', onClick: this.props.onCheckRetired }),
         dom.label({}, 'Retired'),
         dom.br({}),
-        dom.input({ type: 'checkbox', onClick: this.props.onCheckUnemployed }),
+        dom.input({ type: 'checkbox', onClick: this.onCheckUnemployed }),
         dom.label({}, 'Unemployed'),
         dom.br({}),
         dom.br({}),
+        this.renderUnemploymentBenefitsQuestions(),
         dom.input({
           type: 'submit',
           value: 'Next',
@@ -35,6 +43,27 @@
           style: window.shared.ButtonStyle
         })
       );
+    },
+
+    renderUnemploymentBenefitsQuestions: function () {
+      if (this.state.userCheckedUnemployed === true) {
+        return dom.div({},
+          dom.p({}, 'Are you receiving unemployment benefits?'),
+          dom.input({ type: 'radio' }),
+          dom.label({}, 'Yes'),
+          dom.br({}),
+          dom.input({ type: 'radio' }),
+          dom.label({}, 'No'),
+          dom.br({}),
+          dom.br({})
+        );
+      } else {
+        return null;
+      };
+    },
+
+    onCheckUnemployed: function () {
+      this.setState({ userCheckedUnemployed: true });
     }
 
   });
