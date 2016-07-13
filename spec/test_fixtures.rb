@@ -1,7 +1,7 @@
 ## Fixtures for specs:
 
 SINGLE_HOUSEHOLD_MEMBER_EMPLOYED = {
-  "household_members": [
+  household_members: [
     {
       "child_under_18": "false",
       "disability_benefits": "false",
@@ -12,11 +12,11 @@ SINGLE_HOUSEHOLD_MEMBER_EMPLOYED = {
       "receiving_unemployment_benefits": "false",
     }
   ],
-  "is_applying_for_expedited": "false"
+  is_applying_for_expedited: "false"
 }
 
 SINGLE_HOUSEHOLD_MEMBER_SELF_EMPLOYED = {
-  "household_members": [
+  household_members: [
     {
       "child_under_18": "false",
       "disability_benefits": "false",
@@ -27,11 +27,11 @@ SINGLE_HOUSEHOLD_MEMBER_SELF_EMPLOYED = {
       "receiving_unemployment_benefits": "false",
     }
   ],
-  "is_applying_for_expedited": "false"
+  is_applying_for_expedited: "false"
 }
 
 SINGLE_HOUSEHOLD_MEMBER_WITH_RENTAL_INCOME = {
-  "household_members": [
+  household_members: [
     {
       "child_under_18": "false",
       "disability_benefits": "false",
@@ -42,12 +42,12 @@ SINGLE_HOUSEHOLD_MEMBER_WITH_RENTAL_INCOME = {
       "receiving_unemployment_benefits": "false",
     }
   ],
-  "is_applying_for_expedited": "false",
-  "has_rental_income": "true"
+  is_applying_for_expedited: "false",
+  has_rental_income: "true"
 }
 
 MULTI_MEMBER_HOUSEHOLD_RECEIVING_CHILD_SUPPORT = {
-  "household_members": [
+  household_members: [
     {
       "child_under_18": "false",
       "disability_benefits": "false",
@@ -76,11 +76,11 @@ MULTI_MEMBER_HOUSEHOLD_RECEIVING_CHILD_SUPPORT = {
       "receiving_unemployment_benefits": "false",
     },
   ],
-  "is_applying_for_expedited": "false"
+  is_applying_for_expedited: "false"
 }
 
 EXPEDITED_BENEFITS = {
-  "household_members": [
+  household_members: [
     {
       "child_under_18": "false",
       "disability_benefits": "false",
@@ -91,11 +91,11 @@ EXPEDITED_BENEFITS = {
       "receiving_unemployment_benefits": "false",
     }
   ],
-  "is_applying_for_expedited": "true"
+  is_applying_for_expedited: "true"
 }
 
 MULTI_MEMBER_HOUSEHOLD_WITH_RETIREE_DISABLED_AND_WORKING = {
-  "household_members": [
+  household_members: [
     {
       "child_under_18": "false",
       "disability_benefits": "false",
@@ -124,12 +124,12 @@ MULTI_MEMBER_HOUSEHOLD_WITH_RETIREE_DISABLED_AND_WORKING = {
       "receiving_unemployment_benefits": "false",
     },
   ],
-  "is_applying_for_expedited": "false"
+  is_applying_for_expedited: "false"
 }
 
 
 MULTI_MEMBER_HOUSEHOLD_WITH_UNEMPLOYED_AND_WORKING = {
-  "household_members": [
+  household_members: [
     {
       "child_under_18": "false",
       "disability_benefits": "false",
@@ -149,5 +149,5 @@ MULTI_MEMBER_HOUSEHOLD_WITH_UNEMPLOYED_AND_WORKING = {
       "receiving_unemployment_benefits": "false",
     },
   ],
-  "is_applying_for_expedited": "false"
+  is_applying_for_expedited: "false"
 }
