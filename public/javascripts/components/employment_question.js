@@ -24,11 +24,8 @@
         dom.input({ type: 'checkbox', onClick: this.props.onCheckRetired }),
         dom.label({}, 'Retired'),
         dom.br({}),
-        dom.input({ type: 'checkbox', onClick: this.props.onCheckUnemployedYesBenefits }),
-        dom.label({}, 'Unemployed and receiving unemployment benefits'),
-        dom.br({}),
-        dom.input({ type: 'checkbox' }),
-        dom.label({}, 'Unemployed and not receiving unemployment benefits'),
+        dom.input({ type: 'checkbox', onClick: this.props.onCheckUnemployed }),
+        dom.label({}, 'Unemployed'),
         dom.br({}),
         dom.br({}),
         dom.input({
