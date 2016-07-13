@@ -8,13 +8,19 @@
       results: React.PropTypes.object.isRequired
     },
 
+    getInitialState: function () {
+      return {
+        showMoreResidencyDocs: false
+      };
+    },
+
     render: function () {
       return dom.div({},
         dom.h1({}, 'What You Will Need'),
         this.renderResidencyDocuments(),
         // this.renderOtherDocumentsNeeded(), // <-- merging into household member
                                               // required docs since we are only covering
-                                              // the single-member househodl right now
+                                              // the single-member household right now
         this.renderHouseholdMember()
       )
     },
@@ -75,9 +81,41 @@
     },
 
     residencyDocumentNameList: function () {
-      return this.residencyDocumentOfficialNames().map(function (document_name) {
+      var residencyDocsList = this.residencyDocumentOfficialNames().map(function (document_name) {
         return dom.li({}, document_name);
       });
+
+      var firstTwoResidencyDocs = residencyDocsList.splice(0, 2);
+
+      if (this.state.showMoreResidencyDocs === false) { residencyDocsList = null };
+
+      return dom.div({},
+        firstTwoResidencyDocs,
+        residencyDocsList,
+        dom.a({
+          onClick: this.onClickShowMoreDocs,
+          style: {
+            color: '#0645AD',
+            fontStyle: 'italic',
+            fontWeight: 'bold',
+            lineHeight: '40px',
+            cursor: 'pointer'
+          }
+        }, this.toggleShowText())
+      );
+    },
+
+    onClickShowMoreDocs: function () {
+      var currentState = this.state.showMoreResidencyDocs;
+      this.setState({ showMoreResidencyDocs: !currentState });
+    },
+
+    toggleShowText: function () {
+      if (this.state.showMoreResidencyDocs) {
+        return 'Fewer options';
+      } else {
+        return 'More options';
+      };
     },
 
     residencyDocumentOfficialNames: function () {
