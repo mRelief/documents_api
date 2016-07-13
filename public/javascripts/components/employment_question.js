@@ -62,8 +62,10 @@
       };
     },
 
-    onCheckUnemployed: function () {
-      this.setState({ userCheckedUnemployed: true });
+    onCheckUnemployed: function (event) {
+      var unemployed = event.target.checked;
+
+      this.setState({ userCheckedUnemployed: unemployed });
     }
 
   });
