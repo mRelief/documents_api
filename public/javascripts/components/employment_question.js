@@ -49,10 +49,10 @@
       if (this.state.userCheckedUnemployed === true) {
         return dom.div({},
           dom.p({}, 'Are you receiving unemployment benefits?'),
-          dom.input({ type: 'radio' }),
+          dom.input({ type: 'radio', name: 'unemploymentBeneftQuestion' }),
           dom.label({}, 'Yes'),
           dom.br({}),
-          dom.input({ type: 'radio' }),
+          dom.input({ type: 'radio', name: 'unemploymentBeneftQuestion' }),
           dom.label({}, 'No'),
           dom.br({}),
           dom.br({})
