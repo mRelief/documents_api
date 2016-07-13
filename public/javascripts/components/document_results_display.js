@@ -81,9 +81,14 @@
     },
 
     residencyDocumentOfficialNames: function () {
-      return this.residencyDocuments().map(function (document) {
+      var residencyDocumentNames = this.residencyDocuments().map(function (document) {
         return document.official_name;
       });
+
+
+      var firstTwoResidencyDocs = residencyDocumentNames.slice(0, 2);
+
+      return firstTwoResidencyDocs;
     },
 
     residencyDocuments: function () {
