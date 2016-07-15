@@ -20,7 +20,7 @@ If you build social services-related technology and are interested in using this
 # Run the app
 
 ```
-ruby app.rb
+rerun 'ruby app.rb'
 ```
 
 # Run the tests
