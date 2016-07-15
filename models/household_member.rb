@@ -47,14 +47,12 @@ class HouseholdMember
       documents_based_on_disability,
       documents_based_on_retirement,
       documents_based_on_unemployment,
+      SOCIAL_SECURITY_CARD
     ].compact
   end
 
   def information_needed
-    [
-      SOCIAL_SECURITY_NUMBER,
-      DATE_OF_BIRTH,
-    ]
+    [ DATE_OF_BIRTH ]
   end
 
   private
