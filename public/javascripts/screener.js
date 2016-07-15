@@ -34,12 +34,6 @@
       };
     },
 
-    getDefaultProps: function() {
-      return {
-        source: 'https://documents-api.herokuapp.com/api'
-      };
-    },
-
     onClickYesIncome: function () {
       this.setState({
         answeredInitialIncomeQuestion: true,
@@ -56,7 +50,7 @@
 
     fetchDocumentsFromServer: function () {
       this.serverRequest = $.get({
-        url: this.props.source,
+        url: '/api',
         data: this.state.userSubmittedData,
         dataType: 'json',
         contentType: 'application/json',
