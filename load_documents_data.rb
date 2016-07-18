@@ -85,5 +85,5 @@ DATE_OF_BIRTH = @data[24]
 raise "Wrong variable!" unless DATE_OF_BIRTH[:official_name] == "Date Of Birth"
 
 I_90_DOCUMENTATION = @data[25]
-raise "Wrong variable!" unless I_90_DOCUMENTATION[:official_name] == "I-90 Documentation"
+raise "Wrong variable!" unless I_90_DOCUMENTATION[:official_name] == "I-90 Documentation (for all non-citizen household members)"
 

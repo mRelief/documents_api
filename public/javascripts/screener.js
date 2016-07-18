@@ -7,6 +7,7 @@
   var EmploymentQuestion = window.shared.EmploymentQuestion;
   var IncomeSourcesQuestion = window.shared.IncomeSourcesQuestion;
   var HousingQuestion = window.shared.HousingQuestion;
+  var CitizenshipQuestion = window.shared.CitizenshipQuestion;
 
   var DocumentScreener = React.createClass({
 
@@ -14,6 +15,7 @@
       return {
         answeredInitialIncomeQuestion: false,
         answeredHousingQuestion: false,
+        answeredCitizenshipQuestion: false,
         answeredEmploymentQuestion: false,
         answeredIncomeSourcesQuestion: false,
         hasResponseFromServer: false,
@@ -37,7 +39,8 @@
           "owns_home": "false",
           "shelter": "false",
           "has_no_income": "true",
-          "living_with_family_or_friends": "false"
+          "living_with_family_or_friends": "false",
+          "all_citizens": "true"
         }
       };
     },
@@ -93,6 +96,8 @@
           currentQuestion = this.renderInitialIncomeQuestion();
         } else if (this.state.answeredHousingQuestion == false) {
           currentQuestion = this.renderHousingQuestion();
+        } else if (this.state.answeredCitizenshipQuestion === false) {
+          currentQuestion = this.renderCitizenshipQuestion();
         } else if (this.state.answeredEmploymentQuestion === false) {
           currentQuestion = this.renderEmploymentQuestion();
         } else {
@@ -104,6 +109,14 @@
         currentQuestion,
         resultsFromServer
       )
+    },
+
+    renderCitizenshipQuestion: function () {
+      return createEl(CitizenshipQuestion, {
+        onCheckNotAllCitizens: this.onCheckNotAllCitizens,
+        onCheckYesAllCitizens: this.onCheckYesAllCitizens,
+        onClickNextFromCitizenshipQuestion: this.onClickNextFromCitizenshipQuestion,
+      });
     },
 
     renderHousingQuestion: function () {
@@ -219,10 +232,26 @@
     },
 
     onClickNextFromHousingQuestion: function () {
+      this.setState({ answeredHousingQuestion: true });
+    },
+
+    onCheckNotAllCitizens: function () {
+      var userSubmittedData = this.state.userSubmittedData;
+      userSubmittedData["all_citizens"] = "false";
+      this.setState({ userSubmittedData: userSubmittedData });
+    },
+
+    onCheckYesAllCitizens: function () {
+      var userSubmittedData = this.state.userSubmittedData;
+      userSubmittedData["all_citizens"] = "true";
+      this.setState({ userSubmittedData: userSubmittedData });
+    },
+
+    onClickNextFromCitizenshipQuestion: function () {
       if (this.state.userSubmittedData['has_no_income'] === 'true') {
         this.fetchDocumentsFromServer();
       } else {
-        this.setState({ answeredHousingQuestion: true });
+        this.setState({ answeredCitizenshipQuestion: true });
       };
     },
 
