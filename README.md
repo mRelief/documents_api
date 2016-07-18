@@ -61,6 +61,7 @@ rspec spec
   owns_home: ...,                     # Is this a homeowning household?
   shelter: ...,                       # Does the household stay in a shelter?
   living_with_family_or_friends: ..., # Is the household living with family or friends?
+  all_citizens: ...,                  # Are all household members citizens?
 }
 ```
 

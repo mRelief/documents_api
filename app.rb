@@ -27,6 +27,7 @@ get '/api' do
     owns_home: params["owns_home"],
     shelter: params["shelter"],
     living_with_family_or_friends: params["living_with_family_or_friends"],
+    all_citizens: params["all_citizens"]
   )
 
   @outcome = documents_request.fetch_documents

@@ -7,7 +7,7 @@ json_string = File.open("public/documents_data.json").read
 
 @data.each { |doc| doc.deep_symbolize_keys! }
 
-raise "Wrong number of docs!" unless @data.size == 25
+raise "Wrong number of docs!" unless @data.size == 26
 
 PAY_STUBS = @data[0]
 raise "Wrong variable!" unless PAY_STUBS[:official_name] == "Pay Stubs"
@@ -83,4 +83,7 @@ raise "Wrong variable!" unless SOCIAL_SECURITY_NUMBER[:official_name] == "Social
 
 DATE_OF_BIRTH = @data[24]
 raise "Wrong variable!" unless DATE_OF_BIRTH[:official_name] == "Date Of Birth"
+
+I_90_DOCUMENTATION = @data[25]
+raise "Wrong variable!" unless I_90_DOCUMENTATION[:official_name] == "I-90 Documentation (for all non-citizen household members)"
 
