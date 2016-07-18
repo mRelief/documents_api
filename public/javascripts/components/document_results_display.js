@@ -3,6 +3,7 @@
   var dom = React.DOM;
   var createEl = React.createElement.bind(React);
   var IdentityDocuments = window.shared.IdentityDocuments;
+  var ResidencyDocuments = window.shared.ResidencyDocuments;
 
   window.shared.DocumentResultsDisplay = React.createClass({
 
@@ -10,16 +11,10 @@
       results: React.PropTypes.object.isRequired
     },
 
-    getInitialState: function () {
-      return {
-        showMoreResidencyDocs: false
-      };
-    },
-
     render: function () {
       return dom.div({},
         dom.h1({}, 'What You Will Need'),
-        this.renderResidencyDocuments(),
+        createEl(ResidencyDocuments, { documents: this.residencyDocuments() }),
         // this.renderOtherDocumentsNeeded(), // <-- merging into household member
                                               // required docs since we are only covering
                                               // the single-member household right now
@@ -58,14 +53,22 @@
 
       var listOfPersonDocumentsNeeded = documentsNeeded.map(function (doc) {
         return dom.li({}, doc.official_name);
+      }).filter(function(doc) {
+        return doc.name !== 'Identity';
       });
 
-      var identityDocuments = documentsNeeded.find(this.findIdentityDocuments).documents;
+      var shouldRenderIdentityDocs = documentsNeeded.find(this.findIdentityDocuments);
 
-      console.log(identityDocuments, 'identityDocuments');
+      if (shouldRenderIdentityDocs) {
+        var identityDocsList = createEl(IdentityDocuments, {
+          documents: shouldRenderIdentityDocs.documents
+        })
+      } else {
+        var identityDocsList = null;
+      }
 
       return dom.div({},
-        createEl(IdentityDocuments, { documents: identityDocuments }),
+        identityDocsList,
         dom.span({}, 'You will need '),
         dom.span({ style: { fontWeight: 'bold' } }, 'all '),
         dom.span({}, 'of these documents:'),
@@ -74,61 +77,6 @@
           this.listOfOtherDocumentsNeeded()
         )
       );
-    },
-
-    renderResidencyDocuments: function () {
-      return dom.div({},
-        dom.span({}, 'You will need '),
-        dom.span({ style: { fontWeight: 'bold' } }, 'one '),
-        dom.span({}, 'of the following documents to prove residency:'),
-        dom.ul({},
-          this.residencyDocumentNameList()
-        )
-      );
-    },
-
-    residencyDocumentNameList: function () {
-      var residencyDocsList = this.residencyDocumentOfficialNames().map(function (document_name) {
-        return dom.li({}, document_name);
-      });
-
-      var firstTwoResidencyDocs = residencyDocsList.splice(0, 2);
-
-      if (this.state.showMoreResidencyDocs === false) { residencyDocsList = null };
-
-      return dom.div({},
-        firstTwoResidencyDocs,
-        residencyDocsList,
-        dom.a({
-          onClick: this.onClickShowMoreDocs,
-          style: {
-            color: '#0645AD',
-            fontStyle: 'italic',
-            fontWeight: 'bold',
-            lineHeight: '40px',
-            cursor: 'pointer'
-          }
-        }, this.toggleShowText())
-      );
-    },
-
-    onClickShowMoreDocs: function () {
-      var currentState = this.state.showMoreResidencyDocs;
-      this.setState({ showMoreResidencyDocs: !currentState });
-    },
-
-    toggleShowText: function () {
-      if (this.state.showMoreResidencyDocs) {
-        return 'Fewer options';
-      } else {
-        return 'More options';
-      };
-    },
-
-    residencyDocumentOfficialNames: function () {
-      return this.residencyDocuments().map(function (document) {
-        return document.official_name;
-      });
     },
 
     residencyDocuments: function () {
@@ -149,7 +97,7 @@
 
     listOfOtherDocumentsNeeded: function () {
       return this.otherDocumentsNeeded().filter(function(doc) {
-        return doc.name !== 'Residency';
+        return (doc.name !== 'Residency' && doc.name !== 'Identity');
       }).map(function (doc) {
         return dom.li({}, doc.official_name);
       });
