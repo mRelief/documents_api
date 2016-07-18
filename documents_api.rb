@@ -11,7 +11,8 @@ module Api
                    has_rental_income:,
                    renting:,
                    owns_home:,
-                   shelter:)
+                   shelter:,
+                   living_with_family_or_friends:)
 
       @household_members = reformat_household_members(household_members)
       @is_applying_for_expedited = StringParser.new(is_applying_for_expedited).to_boolean
@@ -19,6 +20,7 @@ module Api
       @renting = StringParser.new(renting).to_boolean
       @owns_home = StringParser.new(owns_home).to_boolean
       @shelter = StringParser.new(shelter).to_boolean
+      @living_with_family_or_friends = StringParser.new(living_with_family_or_friends).to_boolean
 
       raise "Badly formatted request" if @is_applying_for_expedited.nil? || @has_rental_income.nil?
     end
@@ -34,7 +36,10 @@ module Api
 
     def residency_documents
       return ResidencyDocuments.new(
-        renting: @renting, owns_home: @owns_home, shelter: @shelter
+        renting: @renting,
+        owns_home: @owns_home,
+        shelter: @shelter,
+        living_with_family_or_friends: @living_with_family_or_friends
       )
     end
 

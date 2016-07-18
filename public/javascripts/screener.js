@@ -36,7 +36,8 @@
           "renting": "false",
           "owns_home": "false",
           "shelter": "false",
-          "has_no_income": "true"
+          "has_no_income": "true",
+          "living_with_family_or_friends": "false"
         }
       };
     },
@@ -111,6 +112,7 @@
         onCheckOwnHome: this.onCheckOwnHome,
         onCheckShelter: this.onCheckShelter,
         onClickNextFromHousingQuestion: this.onClickNextFromHousingQuestion,
+        onCheckFamilyOrFriends: this.onCheckFamilyOrFriends,
       });
     },
 
@@ -210,6 +212,10 @@
 
     onCheckShelter: function (event) {
       this.onUpdateHousehold('shelter', event);
+    },
+
+    onCheckFamilyOrFriends: function (event) {
+      this.onUpdateHousehold('living_with_family_or_friends', event);
     },
 
     onClickNextFromHousingQuestion: function () {

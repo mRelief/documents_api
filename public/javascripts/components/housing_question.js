@@ -9,6 +9,7 @@
       onCheckOwnHome: React.PropTypes.func.isRequired,
       onCheckShelter: React.PropTypes.func.isRequired,
       onClickNextFromHousingQuestion: React.PropTypes.func.isRequired,
+      onCheckFamilyOrFriends: React.PropTypes.func.isRequired
     },
 
     render: function () {
@@ -20,10 +21,10 @@
         dom.input({ type: 'checkbox', onClick: this.props.onCheckOwnHome }),
         dom.label({}, 'Own home'),
         dom.br({}),
-        dom.input({ type: 'checkbox' }),
+        dom.input({ type: 'checkbox', onClick: this.props.onCheckFamilyOrFriends }),
         dom.label({}, 'Living with family/friends'),
         dom.br({}),
-        dom.input({ type: 'checkbox', onClick: this.onCheckShelter }),
+        dom.input({ type: 'checkbox', onClick: this.props.onCheckShelter }),
         dom.label({}, 'Shelter'),
         dom.br({}),
         dom.input({ type: 'checkbox' }),
