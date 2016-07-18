@@ -1,4 +1,5 @@
 require_relative "../load_documents_data"
+require_relative "identity_documents"
 
 class HouseholdMember
 
@@ -47,6 +48,7 @@ class HouseholdMember
       documents_based_on_disability,
       documents_based_on_retirement,
       documents_based_on_unemployment,
+      documents_based_on_identity,
       SOCIAL_SECURITY_CARD
     ].compact
   end
@@ -91,6 +93,18 @@ class HouseholdMember
 
   def documents_based_on_unemployment
     AWARD_LETTER_FOR_UNEMPLOYMENT if @receiving_unemployment_benefits
+  end
+
+  def needs_identity_docs?
+    !@is_employee &&
+    !@self_employed &&
+    !@disability_benefits &&
+    !@receiving_child_support &&
+    !@receiving_unemployment_benefits
+  end
+
+  def documents_based_on_identity
+    IdentityDocuments.list if needs_identity_docs?
   end
 
 end
