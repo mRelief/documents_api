@@ -6,12 +6,14 @@
   var InitialIncomeQuestion = window.shared.InitialIncomeQuestion;
   var EmploymentQuestion = window.shared.EmploymentQuestion;
   var IncomeSourcesQuestion = window.shared.IncomeSourcesQuestion;
+  var HousingQuestion = window.shared.HousingQuestion;
 
   var DocumentScreener = React.createClass({
 
     getInitialState: function() {
       return {
         answeredInitialIncomeQuestion: false,
+        answeredHousingQuestion: false,
         answeredEmploymentQuestion: false,
         answeredIncomeSourcesQuestion: false,
         hasResponseFromServer: false,
@@ -79,29 +81,16 @@
 
       } else {
         // Otherwise, serve the appropriate question in the screener:
-
         resultsFromServer = null;
 
         if (this.state.answeredInitialIncomeQuestion === false) {
-          currentQuestion = createEl(InitialIncomeQuestion, {
-            onClickNoIncome: this.onClickNoIncome,
-            onClickYesIncome: this.onClickYesIncome
-          });
+          currentQuestion = this.renderInitialIncomeQuestion();
+        } else if (this.state.answeredHousingQuestion == false) {
+          currentQuestion = this.renderHousingQuestion();
         } else if (this.state.answeredEmploymentQuestion === false) {
-          currentQuestion = createEl(EmploymentQuestion, {
-            onCheckEmployee: this.onCheckEmployee,
-            onCheckSelfEmployed: this.onCheckSelfEmployed,
-            onCheckRetired: this.onCheckRetired,
-            onCheckUnemployedYesBenefits: this.onCheckUnemployedYesBenefits,
-            onClickNextFromEmploymentQuestion: this.onClickNextFromEmploymentQuestion
-          });
+          currentQuestion = this.renderEmploymentQuestion();
         } else {
-          currentQuestion = currentQuestion = createEl(IncomeSourcesQuestion, {
-            onCheckDisabilityBenefits: this.onCheckDisabilityBenefits,
-            onCheckChildSupport: this.onCheckChildSupport,
-            onCheckRentalIncome: this.onCheckRentalIncome,
-            onClickNextFromIncomeSourcesQuestion: this.onClickNextFromIncomeSourcesQuestion,
-          });
+          currentQuestion = this.renderIncomeSourcesQuestion();
         };
       }
 
@@ -109,6 +98,41 @@
         currentQuestion,
         resultsFromServer
       )
+    },
+
+    renderHousingQuestion: function () {
+      return createEl(HousingQuestion, {
+        onCheckRenting: this.onCheckRenting,
+        onCheckOwnHome: this.onCheckOwnHome,
+        onCheckShelter: this.onCheckShelter,
+        onClickNextFromHousingQuestion: this.onClickNextFromHousingQuestion,
+      });
+    },
+
+    renderInitialIncomeQuestion: function () {
+      return createEl(InitialIncomeQuestion, {
+        onClickNoIncome: this.onClickNoIncome,
+        onClickYesIncome: this.onClickYesIncome
+      });
+    },
+
+    renderEmploymentQuestion: function () {
+      return createEl(EmploymentQuestion, {
+        onCheckEmployee: this.onCheckEmployee,
+        onCheckSelfEmployed: this.onCheckSelfEmployed,
+        onCheckRetired: this.onCheckRetired,
+        onCheckUnemployedYesBenefits: this.onCheckUnemployedYesBenefits,
+        onClickNextFromEmploymentQuestion: this.onClickNextFromEmploymentQuestion
+      });
+    },
+
+    renderIncomeSourcesQuestion: function () {
+      return createEl(IncomeSourcesQuestion, {
+        onCheckDisabilityBenefits: this.onCheckDisabilityBenefits,
+        onCheckChildSupport: this.onCheckChildSupport,
+        onCheckRentalIncome: this.onCheckRentalIncome,
+        onClickNextFromIncomeSourcesQuestion: this.onClickNextFromIncomeSourcesQuestion,
+      });
     },
 
     onCheckEmployee: function (event) {
@@ -204,6 +228,23 @@
     onClickNextFromIncomeSourcesQuestion: function () {
       this.fetchDocumentsFromServer();
     },
+
+    onCheckRenting: function () {
+      return null;
+    },
+
+    onCheckOwnHome: function () {
+      return null;
+    },
+
+    onCheckShelter: function () {
+      return null;
+    },
+
+    onClickNextFromHousingQuestion: function () {
+      return null;
+    },
+
 
     renderResultsFromServer: function () {
       return createEl(DocumentResultsDisplay,
