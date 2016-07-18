@@ -5,10 +5,19 @@ require          "active_support/all"
 module Api
   class DocumentsRequest
 
-    def initialize(household_members:, is_applying_for_expedited:, has_rental_income:)
+    def initialize(household_members:,
+                   is_applying_for_expedited:,
+                   has_rental_income:
+                   renting:,
+                   owns_home:,
+                   shelter:)
+
       @household_members = reformat_household_members(household_members)
       @is_applying_for_expedited = StringParser.new(is_applying_for_expedited).to_boolean
       @has_rental_income = StringParser.new(has_rental_income).to_boolean
+      @renting = StringParser.new(renting).to_boolean
+      @owns_home = StringParser.new(owns_home).to_boolean
+      @shelter = StringParser.new(shelter).to_boolean
 
       raise "Badly formatted request" if @is_applying_for_expedited.nil? || @has_rental_income.nil?
     end

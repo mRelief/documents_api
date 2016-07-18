@@ -56,7 +56,10 @@ rspec spec
     },
   ],
   is_applying_for_expedited: ...,     # Is this an application for expedited benefits?
-  has_rental_income: ...              # Does the household have any rental income?
+  has_rental_income: ...,             # Does the household have any rental income?
+  renting: ...,                       # Is the household renting?
+  owns_home: ...,                     # Is this a homeowning household?
+  shelter: ...,                       # Does the household stay in a shelter?
 }
 ```
 

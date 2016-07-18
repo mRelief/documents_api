@@ -31,7 +31,10 @@
             }
           ],
           "is_applying_for_expedited": "false",
-          "has_rental_income": "false"
+          "has_rental_income": "false",
+          "renting": "false",
+          "owns_home": "false",
+          "shelter": "false",
         }
       };
     },
@@ -147,6 +150,18 @@
       this.setState({ userSubmittedData: userSubmittedData });
     },
 
+    onUpdateHousehold: function (attribute_name, event) {
+      var userSubmittedData = this.state.userSubmittedData;
+
+      if (event.target.checked) {
+        userSubmittedData[attribute_name] = "true";
+      } else {
+        userSubmittedData[attribute_name] = "false";
+      };
+
+      this.setState({ userSubmittedData: userSubmittedData });
+    },
+
     onCheckEmployee: function (event) {
       this.onUpdateHouseholdMember("is_employee", event);
     },
@@ -176,15 +191,7 @@
     },
 
     onCheckRentalIncome: function (event) {
-      var userSubmittedData = this.state.userSubmittedData;
-
-      if (event.target.checked) {
-        userSubmittedData["has_rental_income"] = "true";
-      } else {
-        userSubmittedData["has_rental_income"] = "false";
-      };
-
-      this.setState({ userSubmittedData: userSubmittedData });
+      this.onUpdateHousehold('has_rental_income', event);
     },
 
     onClickNextFromIncomeSourcesQuestion: function () {
@@ -192,21 +199,20 @@
     },
 
     onCheckRenting: function () {
-      return null;
+      this.onUpdateHousehold('renting', event);
     },
 
     onCheckOwnHome: function () {
-      return null;
+      this.onUpdateHousehold('owns_home', event);
     },
 
     onCheckShelter: function () {
-      return null;
+      this.onUpdateHousehold('shelter', event);
     },
 
     onClickNextFromHousingQuestion: function () {
-      return null;
+      this.setState({ answeredHousingQuestion: true });
     },
-
 
     renderResultsFromServer: function () {
       return createEl(DocumentResultsDisplay,
