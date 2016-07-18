@@ -27,8 +27,14 @@
       };
     },
 
-    render: function () {
-      var docsList = this.props.documents.map(function (document_name) {
+    docOfficialNames: function () {
+      return this.props.documents.map(function (document) {
+        return document.official_name;
+      });
+    },
+
+    toggleableDocsList: function () {
+      var docsList = this.docOfficialNames().map(function (document_name) {
         return dom.li({}, document_name);
       });
 
@@ -49,6 +55,17 @@
             cursor: 'pointer'
           }
         }, this.toggleShowText())
+      );
+    },
+
+    render: function () {
+      return dom.div({},
+        dom.span({}, 'You will need '),
+        dom.span({ style: { fontWeight: 'bold' } }, 'one '),
+        dom.span({}, 'of the following documents to prove identity:'),
+        dom.ul({},
+          this.toggleableDocsList()
+        )
       );
     }
 
