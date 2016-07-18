@@ -6,17 +6,20 @@
   var InitialIncomeQuestion = window.shared.InitialIncomeQuestion;
   var EmploymentQuestion = window.shared.EmploymentQuestion;
   var IncomeSourcesQuestion = window.shared.IncomeSourcesQuestion;
+  var HousingQuestion = window.shared.HousingQuestion;
 
   var DocumentScreener = React.createClass({
 
     getInitialState: function() {
       return {
         answeredInitialIncomeQuestion: false,
+        answeredHousingQuestion: false,
         answeredEmploymentQuestion: false,
         answeredIncomeSourcesQuestion: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
         userSubmittedData: {
+          // Defaults:
           "household_members": [
             {
               "child_under_18": "false",
@@ -29,23 +32,28 @@
             }
           ],
           "is_applying_for_expedited": "false",
-          "has_rental_income": "false"
+          "has_rental_income": "false",
+          "renting": "false",
+          "owns_home": "false",
+          "shelter": "false",
+          "has_no_income": "true",
+          "living_with_family_or_friends": "false"
         }
       };
     },
 
     onClickYesIncome: function () {
+      var userSubmittedData = this.state.userSubmittedData;
+      userSubmittedData["has_no_income"] = "false";
+
       this.setState({
         answeredInitialIncomeQuestion: true,
-        answeredEmploymentQuestion: false,
-        answeredIncomeSourcesQuestion: false,
-        hasResponseFromServer: false,
-        documentsDataFromServer: null
+        userSubmittedData: userSubmittedData
       });
     },
 
     onClickNoIncome: function () {
-      this.fetchDocumentsFromServer();
+      this.setState({ answeredInitialIncomeQuestion: true });
     },
 
     fetchDocumentsFromServer: function () {
@@ -79,29 +87,16 @@
 
       } else {
         // Otherwise, serve the appropriate question in the screener:
-
         resultsFromServer = null;
 
         if (this.state.answeredInitialIncomeQuestion === false) {
-          currentQuestion = createEl(InitialIncomeQuestion, {
-            onClickNoIncome: this.onClickNoIncome,
-            onClickYesIncome: this.onClickYesIncome
-          });
+          currentQuestion = this.renderInitialIncomeQuestion();
+        } else if (this.state.answeredHousingQuestion == false) {
+          currentQuestion = this.renderHousingQuestion();
         } else if (this.state.answeredEmploymentQuestion === false) {
-          currentQuestion = createEl(EmploymentQuestion, {
-            onCheckEmployee: this.onCheckEmployee,
-            onCheckSelfEmployed: this.onCheckSelfEmployed,
-            onCheckRetired: this.onCheckRetired,
-            onCheckUnemployedYesBenefits: this.onCheckUnemployedYesBenefits,
-            onClickNextFromEmploymentQuestion: this.onClickNextFromEmploymentQuestion
-          });
+          currentQuestion = this.renderEmploymentQuestion();
         } else {
-          currentQuestion = currentQuestion = createEl(IncomeSourcesQuestion, {
-            onCheckDisabilityBenefits: this.onCheckDisabilityBenefits,
-            onCheckChildSupport: this.onCheckChildSupport,
-            onCheckRentalIncome: this.onCheckRentalIncome,
-            onClickNextFromIncomeSourcesQuestion: this.onClickNextFromIncomeSourcesQuestion,
-          });
+          currentQuestion = this.renderIncomeSourcesQuestion();
         };
       }
 
@@ -111,52 +106,80 @@
       )
     },
 
-    onCheckEmployee: function (event) {
+    renderHousingQuestion: function () {
+      return createEl(HousingQuestion, {
+        onCheckRenting: this.onCheckRenting,
+        onCheckOwnHome: this.onCheckOwnHome,
+        onCheckShelter: this.onCheckShelter,
+        onClickNextFromHousingQuestion: this.onClickNextFromHousingQuestion,
+        onCheckFamilyOrFriends: this.onCheckFamilyOrFriends,
+      });
+    },
+
+    renderInitialIncomeQuestion: function () {
+      return createEl(InitialIncomeQuestion, {
+        onClickNoIncome: this.onClickNoIncome,
+        onClickYesIncome: this.onClickYesIncome
+      });
+    },
+
+    renderEmploymentQuestion: function () {
+      return createEl(EmploymentQuestion, {
+        onCheckEmployee: this.onCheckEmployee,
+        onCheckSelfEmployed: this.onCheckSelfEmployed,
+        onCheckRetired: this.onCheckRetired,
+        onCheckUnemployedYesBenefits: this.onCheckUnemployedYesBenefits,
+        onClickNextFromEmploymentQuestion: this.onClickNextFromEmploymentQuestion
+      });
+    },
+
+    renderIncomeSourcesQuestion: function () {
+      return createEl(IncomeSourcesQuestion, {
+        onCheckDisabilityBenefits: this.onCheckDisabilityBenefits,
+        onCheckChildSupport: this.onCheckChildSupport,
+        onCheckRentalIncome: this.onCheckRentalIncome,
+        onClickNextFromIncomeSourcesQuestion: this.onClickNextFromIncomeSourcesQuestion,
+      });
+    },
+
+    onUpdateHouseholdMember: function (attribute_name, event) {
       var userSubmittedData = this.state.userSubmittedData;
 
       if (event.target.checked) {
-        userSubmittedData["household_members"][0]["is_employee"] = "true";
+        userSubmittedData["household_members"][0][attribute_name] = "true";
       } else {
-        userSubmittedData["household_members"][0]["is_employee"] = "false";
+        userSubmittedData["household_members"][0][attribute_name] = "false";
       };
 
       this.setState({ userSubmittedData: userSubmittedData });
+    },
+
+    onUpdateHousehold: function (attribute_name, event) {
+      var userSubmittedData = this.state.userSubmittedData;
+
+      if (event.target.checked) {
+        userSubmittedData[attribute_name] = "true";
+      } else {
+        userSubmittedData[attribute_name] = "false";
+      };
+
+      this.setState({ userSubmittedData: userSubmittedData });
+    },
+
+    onCheckEmployee: function (event) {
+      this.onUpdateHouseholdMember("is_employee", event);
     },
 
     onCheckSelfEmployed: function (event) {
-      var userSubmittedData = this.state.userSubmittedData;
-
-      if (event.target.checked) {
-        userSubmittedData["household_members"][0]["self_employed"] = "true";
-      } else {
-        userSubmittedData["household_members"][0]["self_employed"] = "false";
-      };
-
-      this.setState({ userSubmittedData: userSubmittedData });
+      this.onUpdateHouseholdMember("self_employed", event);
     },
 
     onCheckRetired: function (event) {
-      var userSubmittedData = this.state.userSubmittedData;
-
-      if (event.target.checked) {
-        userSubmittedData["household_members"][0]["is_retired"] = "true";
-      } else {
-        userSubmittedData["household_members"][0]["is_retired"] = "false";
-      };
-
-      this.setState({ userSubmittedData: userSubmittedData });
+      this.onUpdateHouseholdMember("is_retired", event);
     },
 
     onCheckUnemployedYesBenefits: function (event) {
-      var userSubmittedData = this.state.userSubmittedData;
-
-      if (event.target.checked) {
-        userSubmittedData["household_members"][0]["receiving_unemployment_benefits"] = "true";
-      } else {
-        userSubmittedData["household_members"][0]["receiving_unemployment_benefits"] = "false";
-      };
-
-      this.setState({ userSubmittedData: userSubmittedData });
+      this.onUpdateHouseholdMember("receiving_unemployment_benefits", event);
     },
 
     onClickNextFromEmploymentQuestion: function () {
@@ -164,45 +187,43 @@
     },
 
     onCheckDisabilityBenefits: function (event) {
-      var userSubmittedData = this.state.userSubmittedData;
-
-      if (event.target.checked) {
-        userSubmittedData["household_members"][0]["disability_benefits"] = "true";
-      } else {
-        userSubmittedData["household_members"][0]["disability_benefits"] = "false";
-      };
-
-      this.setState({ userSubmittedData: userSubmittedData });
+      this.onUpdateHouseholdMember("disability_benefits", event);
     },
 
     onCheckChildSupport: function (event) {
-      var userSubmittedData = this.state.userSubmittedData;
-
-      if (event.target.checked) {
-        userSubmittedData["household_members"][0]["receiving_child_support"] = "true";
-      } else {
-        userSubmittedData["household_members"][0]["receiving_child_support"] = "false";
-      };
-
-      console.log(userSubmittedData);
-
-      this.setState({ userSubmittedData: userSubmittedData });
+      this.onUpdateHouseholdMember("receiving_child_support", event);
     },
 
     onCheckRentalIncome: function (event) {
-      var userSubmittedData = this.state.userSubmittedData;
-
-      if (event.target.checked) {
-        userSubmittedData["has_rental_income"] = "true";
-      } else {
-        userSubmittedData["has_rental_income"] = "false";
-      };
-
-      this.setState({ userSubmittedData: userSubmittedData });
+      this.onUpdateHousehold('has_rental_income', event);
     },
 
     onClickNextFromIncomeSourcesQuestion: function () {
       this.fetchDocumentsFromServer();
+    },
+
+    onCheckRenting: function (event) {
+      this.onUpdateHousehold('renting', event);
+    },
+
+    onCheckOwnHome: function (event) {
+      this.onUpdateHousehold('owns_home', event);
+    },
+
+    onCheckShelter: function (event) {
+      this.onUpdateHousehold('shelter', event);
+    },
+
+    onCheckFamilyOrFriends: function (event) {
+      this.onUpdateHousehold('living_with_family_or_friends', event);
+    },
+
+    onClickNextFromHousingQuestion: function () {
+      if (this.state.userSubmittedData['has_no_income'] === 'true') {
+        this.fetchDocumentsFromServer();
+      } else {
+        this.setState({ answeredHousingQuestion: true });
+      };
     },
 
     renderResultsFromServer: function () {

@@ -1,14 +1,26 @@
 require_relative "models/household_member"
+require_relative "models/residency_documents"
 require_relative "helpers/string_parser"
 require          "active_support/all"
 
 module Api
   class DocumentsRequest
 
-    def initialize(household_members:, is_applying_for_expedited:, has_rental_income:)
+    def initialize(household_members:,
+                   is_applying_for_expedited:,
+                   has_rental_income:,
+                   renting:,
+                   owns_home:,
+                   shelter:,
+                   living_with_family_or_friends:)
+
       @household_members = reformat_household_members(household_members)
       @is_applying_for_expedited = StringParser.new(is_applying_for_expedited).to_boolean
       @has_rental_income = StringParser.new(has_rental_income).to_boolean
+      @renting = StringParser.new(renting).to_boolean
+      @owns_home = StringParser.new(owns_home).to_boolean
+      @shelter = StringParser.new(shelter).to_boolean
+      @living_with_family_or_friends = StringParser.new(living_with_family_or_friends).to_boolean
 
       raise "Badly formatted request" if @is_applying_for_expedited.nil? || @has_rental_income.nil?
     end
@@ -22,28 +34,21 @@ module Api
       }
     end
 
+    def residency_documents
+      return ResidencyDocuments.new(
+        renting: @renting,
+        owns_home: @owns_home,
+        shelter: @shelter,
+        living_with_family_or_friends: @living_with_family_or_friends
+      )
+    end
+
     def other_documents_needed
-      other_documents = [residency_documents]
+      other_documents = [residency_documents.list]
 
       other_documents << BANK_STATEMENTS if (@is_applying_for_expedited || @has_rental_income)
 
       return other_documents
-    end
-
-    def residency_documents
-      return {
-        name: "Residency",
-        number_needed: 1,
-        documents: [
-          DRIVERS_LICENSE,
-          MAIL,
-          RENT_RECEIPT,
-          HOMELESS_SHELTER_STATEMENT,
-          MEDICAL_RECORDS,
-          HOME_OWNERS_INSURANCE,
-          PROPERTY_TAX_BILL
-        ]
-      }
     end
 
     def reformat_household_members(household_members)

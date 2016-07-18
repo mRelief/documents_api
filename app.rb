@@ -23,6 +23,10 @@ get '/api' do
     household_members: params["household_members"],
     is_applying_for_expedited: params["is_applying_for_expedited"],
     has_rental_income: params["has_rental_income"],
+    renting: params["renting"],
+    owns_home: params["owns_home"],
+    shelter: params["shelter"],
+    living_with_family_or_friends: params["living_with_family_or_friends"],
   )
 
   @outcome = documents_request.fetch_documents
