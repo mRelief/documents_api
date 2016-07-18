@@ -51,10 +51,10 @@
     renderHouseHoldMemberDocumentsNeeded: function (documentsNeeded) {
       if (documentsNeeded.length === 0 && this.listOfOtherDocumentsNeeded().length === 0) return null;
 
-      var listOfPersonDocumentsNeeded = documentsNeeded.map(function (doc) {
-        return dom.li({}, doc.official_name);
-      }).filter(function(doc) {
+      var listOfPersonDocumentsNeeded = documentsNeeded.filter(function(doc) {
         return doc.name !== 'Identity';
+      }).map(function(doc) {
+        return dom.li({}, doc.official_name);
       });
 
       var shouldRenderIdentityDocs = documentsNeeded.find(this.findIdentityDocuments);
