@@ -177,8 +177,20 @@
     "official_name": "School Enrollment Records"
   },
   {
-    "official_name": "Other ID",
-    "description": "Other ID with a name and address"
+    "official_name": "Federal, State, or Local ­Government issued ID",
+    "description": "Federal, State, or Local ­Government issued ID"
+  },
+  {
+    "official_name": "School Photo ID"
+  },
+  {
+    "official_name": "U.S. Military ID Card"
+  },
+  {
+    "official_name": "Voter Registration Card"
+  },
+  {
+    "official_name": "Birth Certificate"
   },
 
   // INFORMATION:
