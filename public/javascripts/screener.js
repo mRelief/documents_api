@@ -135,52 +135,32 @@
       });
     },
 
-    onCheckEmployee: function (event) {
+    onUpdateHouseholdMember: function (attribute_name, event) {
       var userSubmittedData = this.state.userSubmittedData;
 
       if (event.target.checked) {
-        userSubmittedData["household_members"][0]["is_employee"] = "true";
+        userSubmittedData["household_members"][0][attribute_name] = "true";
       } else {
-        userSubmittedData["household_members"][0]["is_employee"] = "false";
+        userSubmittedData["household_members"][0][attribute_name] = "false";
       };
 
       this.setState({ userSubmittedData: userSubmittedData });
+    },
+
+    onCheckEmployee: function (event) {
+      this.onUpdateHouseholdMember("is_employee", event);
     },
 
     onCheckSelfEmployed: function (event) {
-      var userSubmittedData = this.state.userSubmittedData;
-
-      if (event.target.checked) {
-        userSubmittedData["household_members"][0]["self_employed"] = "true";
-      } else {
-        userSubmittedData["household_members"][0]["self_employed"] = "false";
-      };
-
-      this.setState({ userSubmittedData: userSubmittedData });
+      this.onUpdateHouseholdMember("self_employed", event);
     },
 
     onCheckRetired: function (event) {
-      var userSubmittedData = this.state.userSubmittedData;
-
-      if (event.target.checked) {
-        userSubmittedData["household_members"][0]["is_retired"] = "true";
-      } else {
-        userSubmittedData["household_members"][0]["is_retired"] = "false";
-      };
-
-      this.setState({ userSubmittedData: userSubmittedData });
+      this.onUpdateHouseholdMember("is_retired", event);
     },
 
     onCheckUnemployedYesBenefits: function (event) {
-      var userSubmittedData = this.state.userSubmittedData;
-
-      if (event.target.checked) {
-        userSubmittedData["household_members"][0]["receiving_unemployment_benefits"] = "true";
-      } else {
-        userSubmittedData["household_members"][0]["receiving_unemployment_benefits"] = "false";
-      };
-
-      this.setState({ userSubmittedData: userSubmittedData });
+      this.onUpdateHouseholdMember("receiving_unemployment_benefits", event);
     },
 
     onClickNextFromEmploymentQuestion: function () {
@@ -188,29 +168,11 @@
     },
 
     onCheckDisabilityBenefits: function (event) {
-      var userSubmittedData = this.state.userSubmittedData;
-
-      if (event.target.checked) {
-        userSubmittedData["household_members"][0]["disability_benefits"] = "true";
-      } else {
-        userSubmittedData["household_members"][0]["disability_benefits"] = "false";
-      };
-
-      this.setState({ userSubmittedData: userSubmittedData });
+      this.onUpdateHouseholdMember("disability_benefits", event);
     },
 
     onCheckChildSupport: function (event) {
-      var userSubmittedData = this.state.userSubmittedData;
-
-      if (event.target.checked) {
-        userSubmittedData["household_members"][0]["receiving_child_support"] = "true";
-      } else {
-        userSubmittedData["household_members"][0]["receiving_child_support"] = "false";
-      };
-
-      console.log(userSubmittedData);
-
-      this.setState({ userSubmittedData: userSubmittedData });
+      this.onUpdateHouseholdMember("receiving_child_support", event);
     },
 
     onCheckRentalIncome: function (event) {
