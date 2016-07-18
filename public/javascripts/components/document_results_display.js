@@ -1,6 +1,8 @@
 (function() {
   window.shared || (window.shared = {});
   var dom = React.DOM;
+  var createEl = React.createElement.bind(React);
+  var IdentityDocuments = window.shared.IdentityDocuments;
 
   window.shared.DocumentResultsDisplay = React.createClass({
 
@@ -58,7 +60,12 @@
         return dom.li({}, doc.official_name);
       });
 
+      var identityDocuments = documentsNeeded.find(this.findIdentityDocuments).documents;
+
+      console.log(identityDocuments, 'identityDocuments');
+
       return dom.div({},
+        createEl(IdentityDocuments, { documents: identityDocuments }),
         dom.span({}, 'You will need '),
         dom.span({ style: { fontWeight: 'bold' } }, 'all '),
         dom.span({}, 'of these documents:'),
@@ -130,6 +137,10 @@
 
     findResidencyDocuments: function (documents) {
       return documents.name === 'Residency';
+    },
+
+    findIdentityDocuments: function (documents) {
+      return documents.name === 'Identity';
     },
 
     otherDocumentsNeeded: function () {
