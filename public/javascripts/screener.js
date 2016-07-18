@@ -19,6 +19,7 @@
         hasResponseFromServer: false,
         documentsDataFromServer: null,
         userSubmittedData: {
+          // Defaults:
           "household_members": [
             {
               "child_under_18": "false",
@@ -35,22 +36,23 @@
           "renting": "false",
           "owns_home": "false",
           "shelter": "false",
+          "has_no_income": "true"
         }
       };
     },
 
     onClickYesIncome: function () {
+      var userSubmittedData = this.state.userSubmittedData;
+      userSubmittedData["has_no_income"] = "false";
+
       this.setState({
         answeredInitialIncomeQuestion: true,
-        answeredEmploymentQuestion: false,
-        answeredIncomeSourcesQuestion: false,
-        hasResponseFromServer: false,
-        documentsDataFromServer: null
+        userSubmittedData: userSubmittedData
       });
     },
 
     onClickNoIncome: function () {
-      this.fetchDocumentsFromServer();
+      this.setState({ answeredInitialIncomeQuestion: true });
     },
 
     fetchDocumentsFromServer: function () {
@@ -211,7 +213,11 @@
     },
 
     onClickNextFromHousingQuestion: function () {
-      this.setState({ answeredHousingQuestion: true });
+      if (this.state.userSubmittedData['has_no_income'] === 'true') {
+        this.fetchDocumentsFromServer();
+      } else {
+        this.setState({ answeredHousingQuestion: true });
+      };
     },
 
     renderResultsFromServer: function () {
