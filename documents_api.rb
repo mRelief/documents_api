@@ -1,4 +1,5 @@
 require_relative "models/household_member"
+require_relative "models/residency_documents"
 require_relative "helpers/string_parser"
 require          "active_support/all"
 
@@ -32,27 +33,11 @@ module Api
     end
 
     def other_documents_needed
-      other_documents = [residency_documents]
+      other_documents = [ResidencyDocuments.list]
 
       other_documents << BANK_STATEMENTS if (@is_applying_for_expedited || @has_rental_income)
 
       return other_documents
-    end
-
-    def residency_documents
-      return {
-        name: "Residency",
-        number_needed: 1,
-        documents: [
-          DRIVERS_LICENSE,
-          MAIL,
-          RENT_RECEIPT,
-          HOMELESS_SHELTER_STATEMENT,
-          MEDICAL_RECORDS,
-          HOME_OWNERS_INSURANCE,
-          PROPERTY_TAX_BILL
-        ]
-      }
     end
 
     def reformat_household_members(household_members)
