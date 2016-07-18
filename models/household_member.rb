@@ -1,4 +1,5 @@
 require_relative "../load_documents_data"
+require_relative "identity_documents"
 
 class HouseholdMember
 
