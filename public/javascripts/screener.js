@@ -200,15 +200,15 @@
       this.fetchDocumentsFromServer();
     },
 
-    onCheckRenting: function () {
+    onCheckRenting: function (event) {
       this.onUpdateHousehold('renting', event);
     },
 
-    onCheckOwnHome: function () {
+    onCheckOwnHome: function (event) {
       this.onUpdateHousehold('owns_home', event);
     },
 
-    onCheckShelter: function () {
+    onCheckShelter: function (event) {
       this.onUpdateHousehold('shelter', event);
     },
 

@@ -8,7 +8,7 @@ module Api
 
     def initialize(household_members:,
                    is_applying_for_expedited:,
-                   has_rental_income:
+                   has_rental_income:,
                    renting:,
                    owns_home:,
                    shelter:)
@@ -32,8 +32,14 @@ module Api
       }
     end
 
+    def residency_documents
+      return ResidencyDocuments.new(
+        renting: @renting, owns_home: @owns_home, shelter: @shelter
+      )
+    end
+
     def other_documents_needed
-      other_documents = [ResidencyDocuments.list]
+      other_documents = [residency_documents.list]
 
       other_documents << BANK_STATEMENTS if (@is_applying_for_expedited || @has_rental_income)
 
