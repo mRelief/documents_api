@@ -1,6 +1,4 @@
 [
-  // DOCUMENTS:
-
   {
     "official_name": "Pay Stubs",
     "accessible_name": "Pay Stubs",
@@ -196,9 +194,6 @@
     "official_name": "Letter from Family or Friend",
     "description": "A signed letter from the family or friends that you are living with stating that they are staying there and the length of time they have been there."
   },
-
-  // INFORMATION:
-
   {
     "official_name": "Social Security Number",
     "accessible_name": "Social Security Number",
