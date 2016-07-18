@@ -7,7 +7,7 @@ json_string = File.open("public/documents_data.json").read
 
 @data.each { |doc| doc.deep_symbolize_keys! }
 
-raise "Wrong number of docs!" unless @data.size == 20
+raise "Wrong number of docs!" unless @data.size == 24
 
 PAY_STUBS = @data[0]
 raise "Wrong variable!" unless PAY_STUBS[:official_name] == "Pay Stubs"
@@ -34,7 +34,7 @@ AWARD_LETTER_FOR_UNEMPLOYMENT = @data[7]
 raise "Wrong variable!" unless AWARD_LETTER_FOR_UNEMPLOYMENT[:official_name] == "Award Letter for Unemployment"
 
 DRIVERS_LICENSE = @data[8]
-raise "Wrong variable!" unless DRIVERS_LICENSE[:official_name] == "Driver's License"
+raise "Wrong variable!" unless DRIVERS_LICENSE[:official_name] == "Valid Illinois Driver's License"
 
 RENT_RECEIPT = @data[9]
 raise "Wrong variable!" unless RENT_RECEIPT[:official_name] == "Rent Receipt"
@@ -60,12 +60,24 @@ raise "Wrong variable!" unless PROPERTY_TAX_BILL[:official_name] == "Property Ta
 SCHOOL_ENROLLMENT_RECORDS = @data[16]
 raise "Wrong variable!" unless SCHOOL_ENROLLMENT_RECORDS[:official_name] == "School Enrollment Records"
 
-OTHER_ID = @data[17]
-raise "Wrong variable!" unless OTHER_ID[:official_name] == "Other ID"
+FEDERAL_STATE_LOCAL_ID = @data[17]
+raise "Wrong variable!" unless FEDERAL_STATE_LOCAL_ID[:official_name] == "Federal, State, or Local ­Government issued ID"
 
-SOCIAL_SECURITY_NUMBER = @data[18]
+SCHOOL_PHOTO_ID = @data[18]
+raise "Wrong variable!" unless SCHOOL_PHOTO_ID[:official_name] == "School Photo ID"
+
+US_MILITARY_CARD = @data[19]
+raise "Wrong variable!" unless US_MILITARY_CARD[:official_name] == "U.S. Military ID Card"
+
+VOTER_REGISTRATION_CARD = @data[20]
+raise "Wrong variable!" unless VOTER_REGISTRATION_CARD[:official_name] == "Voter Registration Card"
+
+BIRTH_CERTIFICATE = @data[21]
+raise "Wrong variable!" unless BIRTH_CERTIFICATE[:official_name] == "Birth Certificate"
+
+SOCIAL_SECURITY_NUMBER = @data[22]
 raise "Wrong variable!" unless SOCIAL_SECURITY_NUMBER[:official_name] == "Social Security Number"
 
-DATE_OF_BIRTH = @data[19]
+DATE_OF_BIRTH = @data[23]
 raise "Wrong variable!" unless DATE_OF_BIRTH[:official_name] == "Date Of Birth"
 
