@@ -46,7 +46,6 @@ class HouseholdMember
       documents_based_on_retirement,
       documents_based_on_unemployment,
       documents_based_on_identity,
-      SOCIAL_SECURITY_CARD
     ].compact
   end
 
