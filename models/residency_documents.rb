@@ -23,7 +23,6 @@ class ResidencyDocuments
       shelter_documents,
       living_with_family_or_friends_documents,
       MAIL,
-      DRIVERS_LICENSE,
       MEDICAL_RECORDS,
     ].flatten.compact
   end
