@@ -53,13 +53,15 @@
     renderDocsNeeded: function () {
       return dom.div({},
         this.renderStateId(),
-        this.renderAdditionalDocsNeeded(),
         this.renderAlternateDocs(),
+        this.renderAdditionalDocsNeeded(),
         createEl(ReactTooltip, { id: 'state-id-explanation', type: 'info' })
       );
     },
 
     renderStateId: function () {
+      if (this.state.showMoreOptions === true) return null;
+
       return dom.div({},
         dom.span({},
           dom.span({}, 'You will need your '),

@@ -30,9 +30,9 @@
 
     render: function () {
       return dom.div({},
-        dom.span({}, 'You could also use '),
+        dom.span({}, 'You can use '),
         dom.span({ style: { fontWeight: 'bold' } }, 'any '),
-        dom.span({}, 'of the following documents to prove identity:'),
+        dom.span({}, 'of the following documents besides State ID to prove your identity:'),
         dom.ul({},
           this.docsList()
         )
