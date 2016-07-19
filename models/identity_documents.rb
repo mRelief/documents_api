@@ -6,7 +6,7 @@ class IdentityDocuments
       number_needed: 1,
       documents: [
         DRIVERS_LICENSE,
-        FEDERAL_STATE_LOCAL_ID,
+        STATE_ID,
         SCHOOL_PHOTO_ID,
         US_MILITARY_CARD,
         VOTER_REGISTRATION_CARD,

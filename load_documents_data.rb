@@ -60,8 +60,8 @@ raise "Wrong variable!" unless PROPERTY_TAX_BILL[:official_name] == "Property Ta
 SCHOOL_ENROLLMENT_RECORDS = @data[16]
 raise "Wrong variable!" unless SCHOOL_ENROLLMENT_RECORDS[:official_name] == "School Enrollment Records"
 
-FEDERAL_STATE_LOCAL_ID = @data[17]
-raise "Wrong variable!" unless FEDERAL_STATE_LOCAL_ID[:official_name] == "Federal, State, or Local ­Government issued ID"
+STATE_ID = @data[17]
+raise "Wrong variable!" unless STATE_ID[:official_name] == "State ID"
 
 SCHOOL_PHOTO_ID = @data[18]
 raise "Wrong variable!" unless SCHOOL_PHOTO_ID[:official_name] == "School Photo ID"
