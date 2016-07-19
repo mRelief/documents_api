@@ -76,7 +76,8 @@
         dom.a({
           onClick: this.toggleShowMoreOptions,
           style: LinkStyle
-        }, 'I don\'t have a state ID.')
+        }, 'I don\'t have a state ID.'),
+        dom.br({})
       );
     },
 
@@ -113,6 +114,15 @@
       var additionalDocsNeeded = this.additionalDocsNeeded();
 
       if (additionalDocsNeeded.length === 0) return null;
+
+      if (additionalDocsNeeded.length === 1) return dom.div({},
+        dom.span({}, 'You will also need your '),
+        dom.span(
+          { style: { fontWeight: 'bold' } },
+        additionalDocsNeeded[0].official_name + '.'),
+        dom.br({}),
+        dom.br({})
+      );
 
       return dom.div({},
         dom.span({}, 'You will also need '),
