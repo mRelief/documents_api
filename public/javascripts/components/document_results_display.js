@@ -54,7 +54,8 @@
       return dom.div({},
         this.renderStateId(),
         this.renderAdditionalDocsNeeded(),
-        this.renderAlternateDocs()
+        this.renderAlternateDocs(),
+        createEl(ReactTooltip, { id: 'state-id-explanation', type: 'info' })
       );
     },
 
@@ -68,7 +69,8 @@
         dom.a({
           onClick: this.toggleIdExplanation,
           style: LinkStyle,
-          title: this.stateIdExplanation()
+          'data-for': 'state-id-explanation',
+          'data-tip': this.stateIdExplanation()
         }, 'Why?'),
         dom.span({}, '\u00a0 \u00a0'),
         dom.a({
