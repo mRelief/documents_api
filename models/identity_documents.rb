@@ -5,11 +5,11 @@ class IdentityDocuments
       name: "Identity",
       number_needed: 1,
       documents: [
-        DRIVERS_LICENSE,
         STATE_ID,
         SCHOOL_PHOTO_ID,
         US_MILITARY_CARD,
         VOTER_REGISTRATION_CARD,
+        DRIVERS_LICENSE,
         BIRTH_CERTIFICATE
       ]
     }

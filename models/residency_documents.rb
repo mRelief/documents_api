@@ -17,12 +17,13 @@ class ResidencyDocuments
 
   def documents
     [
-      DRIVERS_LICENSE,
+      STATE_ID,
       rental_documents,
       homeowner_documents,
       shelter_documents,
       living_with_family_or_friends_documents,
       MAIL,
+      DRIVERS_LICENSE,
       MEDICAL_RECORDS,
     ].flatten.compact
   end
