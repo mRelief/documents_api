@@ -34,10 +34,7 @@ class HouseholdMember
   end
 
   def documents_and_info_needed
-    to_hash.merge({
-      documents_needed: documents_needed,
-      information_needed: information_needed,
-    })
+    to_hash.merge({ documents_needed: documents_needed })
   end
 
   def documents_needed
@@ -51,10 +48,6 @@ class HouseholdMember
       documents_based_on_identity,
       SOCIAL_SECURITY_CARD
     ].compact
-  end
-
-  def information_needed
-    [ DATE_OF_BIRTH ]
   end
 
   private

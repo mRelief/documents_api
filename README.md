@@ -81,9 +81,6 @@ rspec spec
         { ... DATA FOR SOCIAL SECURITY CARD DOCUMENTATION ... },
         { ... DATA FOR AWARD LETTER ... },
       ],
-      information_needed: [
-        { ... DATE OF BIRTH ... }
-      ]
     },
     {
       child_under_18: ... ,
@@ -91,7 +88,6 @@ rspec spec
       is_employed: ... ,
       receiving_child_support: ... ,
       documents_needed: [ ... ],
-      information_needed: [ ... ],
     },
     {
       child_under_18: ... ,
@@ -99,7 +95,6 @@ rspec spec
       is_employed: ... ,
       receiving_child_support: ... ,
       documents_needed: [ ... ],
-      information_needed: [ ... ],
     },
   ],
   other_documents_needed: [

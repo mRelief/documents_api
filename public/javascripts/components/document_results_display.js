@@ -27,25 +27,8 @@
 
       var person = this.householdMembers()[0];
       var documentsNeeded = person.documents_needed;
-      var informationNeeded = person.information_needed;
 
-      return dom.div({},
-        this.renderHouseHoldMemberDocumentsNeeded(documentsNeeded),
-        this.renderHouseholdMemberInformationNeeded(informationNeeded)
-      )
-    },
-
-    renderHouseholdMemberInformationNeeded: function (informationNeeded) {
-      if (informationNeeded.length === 0) return null;
-
-      var listOfInformationNeeded = informationNeeded.map(function (info) {
-        return dom.li({}, "Your " + info.official_name);
-      });
-
-      return dom.div({},
-        dom.p({}, 'You will need to know:'),
-        dom.ul({}, listOfInformationNeeded)
-      );
+      return this.renderHouseHoldMemberDocumentsNeeded(documentsNeeded);
     },
 
     renderHouseHoldMemberDocumentsNeeded: function (documentsNeeded) {
