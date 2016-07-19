@@ -5,7 +5,8 @@
     color: '#0645AD',
     textDecoration: 'underline',
     lineHeight: '40px',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    fontSize: '13px'
   };
 
 })();

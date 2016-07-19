@@ -34,7 +34,10 @@ class HouseholdMember
   end
 
   def documents_and_info_needed
-    to_hash.merge({ documents_needed: documents_needed })
+    to_hash.merge({
+      documents_needed: documents_needed,
+      needs_identity_docs: needs_identity_docs?
+    })
   end
 
   def documents_needed

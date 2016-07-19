@@ -256,8 +256,12 @@
     },
 
     renderResultsFromServer: function () {
-      return createEl(DocumentResultsDisplay,
-        { results: this.state.documentsDataFromServer }
+      var results = this.state.documentsDataFromServer;
+
+      return createEl(DocumentResultsDisplay, {
+          householdMembers: results['household_members'],
+          otherDocumentsNeeded: results['other_documents_needed']
+        }
       );
     }
 
