@@ -104,7 +104,7 @@
         var reasons = 'residency.'
       };
 
-      return 'You need to bring your State ID to prove ' + reasons;
+      return 'You need your State ID to prove ' + reasons;
     },
 
     toggleShowMoreOptions: function () {
