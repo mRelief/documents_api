@@ -17,6 +17,7 @@
     propTypes: {
       householdMembers: React.PropTypes.array.isRequired,
       otherDocumentsNeeded: React.PropTypes.array.isRequired,
+      onClickStartOver: React.PropTypes.func.isRequired
     },
 
     applicant: function () {
@@ -46,8 +47,19 @@
     render: function () {
       return dom.div({},
         dom.h1({}, 'What You Will Need'),
-        this.renderDocsNeeded()
+        this.renderDocsNeeded(),
+        dom.br({}),
+        this.renderStartOverButton()
       );
+    },
+
+    renderStartOverButton: function () {
+      return dom.input({
+        type: 'submit',
+        value: 'Start Over',
+        onClick: this.props.onClickStartOver,
+        style: window.shared.ButtonStyle
+      });
     },
 
     renderDocsNeeded: function () {
