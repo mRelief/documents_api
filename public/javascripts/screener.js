@@ -129,6 +129,7 @@
         onCheckShelter: this.onCheckShelter,
         onClickNextFromHousingQuestion: this.onClickNextFromHousingQuestion,
         onCheckFamilyOrFriends: this.onCheckFamilyOrFriends,
+        onLivingSituationWithoutSpecialDocuments: this.onLivingSituationWithoutSpecialDocuments
       });
     },
 
@@ -190,6 +191,17 @@
       userSubmittedData['shelter'] = "false";
       userSubmittedData['living_with_family_or_friends'] = "false";
       userSubmittedData[attribute_name] = "true";
+
+      this.setState({ userSubmittedData: userSubmittedData });
+    },
+
+    onLivingSituationWithoutSpecialDocuments: function () {
+      var userSubmittedData = this.state.userSubmittedData;
+
+      userSubmittedData['renting'] = "false";
+      userSubmittedData['owns_home'] = "false";
+      userSubmittedData['shelter'] = "false";
+      userSubmittedData['living_with_family_or_friends'] = "false";
 
       this.setState({ userSubmittedData: userSubmittedData });
     },
