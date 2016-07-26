@@ -179,6 +179,18 @@
       this.setState({ userSubmittedData: userSubmittedData });
     },
 
+    onUpdateLivingSituation: function (attribute_name) {
+      var userSubmittedData = this.state.userSubmittedData;
+
+      userSubmittedData['renting'] = "false";
+      userSubmittedData['owns_home'] = "false";
+      userSubmittedData['shelter'] = "false";
+      userSubmittedData['living_with_family_or_friends'] = "false";
+      userSubmittedData[attribute_name] = "true";
+
+      this.setState({ userSubmittedData: userSubmittedData });
+    },
+
     onCheckEmployee: function (event) {
       this.onUpdateHouseholdMember("is_employee", event);
     },
@@ -216,19 +228,19 @@
     },
 
     onCheckRenting: function (event) {
-      this.onUpdateHousehold('renting', event);
+      this.onUpdateLivingSituation('renting');
     },
 
     onCheckOwnHome: function (event) {
-      this.onUpdateHousehold('owns_home', event);
+      this.onUpdateLivingSituation('owns_home');
     },
 
     onCheckShelter: function (event) {
-      this.onUpdateHousehold('shelter', event);
+      this.onUpdateLivingSituation('shelter');
     },
 
     onCheckFamilyOrFriends: function (event) {
-      this.onUpdateHousehold('living_with_family_or_friends', event);
+      this.onUpdateLivingSituation('living_with_family_or_friends');
     },
 
     onClickNextFromHousingQuestion: function () {
