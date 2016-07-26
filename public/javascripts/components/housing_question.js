@@ -4,6 +4,12 @@
 
   window.shared.HousingQuestion = React.createClass({
 
+    getInitialState: function() {
+      return {
+        showMoreOptions: false,
+      };
+    },
+
     propTypes: {
       onCheckRenting: React.PropTypes.func.isRequired,
       onCheckOwnHome: React.PropTypes.func.isRequired,
@@ -27,16 +33,8 @@
         dom.input({ type: 'radio', name: 'livingQuestion', onClick: this.props.onCheckShelter }),
         dom.label({}, 'Shelter'),
         dom.br({}),
-        dom.input({ type: 'radio', name: 'livingQuestion' }),
-        dom.label({}, 'Car'),
-        dom.br({}),
-        dom.input({ type: 'radio', name: 'livingQuestion' }),
-        dom.label({}, 'Motel'),
-        dom.br({}),
-        dom.input({ type: 'radio', name: 'livingQuestion' }),
-        dom.label({}, 'In Kind'),
-        dom.br({}),
-        dom.input({ type: 'radio', name: 'livingQuestion' }),
+        this.renderAdditionalOptions(),
+        dom.input({ type: 'radio', name: 'livingQuestion', onClick: this.toggleAdditionalOptions }),
         dom.label({}, 'None of the above'),
         dom.br({}),
         dom.br({}),
@@ -46,6 +44,26 @@
           onClick: this.props.onClickNextFromHousingQuestion,
           style: window.shared.ButtonStyle
         })
+      );
+    },
+
+    toggleAdditionalOptions: function () {
+      currentState = this.state.showMoreOptions;
+      this.setState({ showMoreOptions: !currentState });
+    },
+
+    renderAdditionalOptions: function () {
+      if (this.state.showMoreOptions === false) return null;
+
+      return dom.div({},
+        dom.input({ type: 'radio', name: 'livingQuestion' }),
+        dom.label({}, 'Car'),
+        dom.br({}),
+        dom.input({ type: 'radio', name: 'livingQuestion' }),
+        dom.label({}, 'Motel'),
+        dom.br({}),
+        dom.input({ type: 'radio', name: 'livingQuestion' }),
+        dom.label({}, 'In Kind')
       );
     }
 
