@@ -38,3 +38,7 @@ end
 get '/screener' do
   erb :show
 end
+
+get '/' do
+  redirect to '/screener'
+end
