@@ -15,7 +15,8 @@
       onCheckOwnHome: React.PropTypes.func.isRequired,
       onCheckShelter: React.PropTypes.func.isRequired,
       onClickNextFromHousingQuestion: React.PropTypes.func.isRequired,
-      onCheckFamilyOrFriends: React.PropTypes.func.isRequired
+      onCheckFamilyOrFriends: React.PropTypes.func.isRequired,
+      onLivingSituationWithoutSpecialDocuments: React.PropTypes.func.isRequired,
     },
 
     render: function () {
@@ -48,6 +49,9 @@
     },
 
     toggleAdditionalOptions: function () {
+      this.props.onLivingSituationWithoutSpecialDocuments();  // If the user leaves this as the
+                                                              // selected radio button, clear all
+                                                              // other living situation fields
       currentState = this.state.showMoreOptions;
       this.setState({ showMoreOptions: !currentState });
     },
@@ -56,13 +60,13 @@
       if (this.state.showMoreOptions === false) return null;
 
       return dom.div({},
-        dom.input({ type: 'radio', name: 'livingQuestion' }),
+        dom.input({ type: 'radio', name: 'livingQuestion', onClick: this.props.onLivingSituationWithoutSpecialDocuments }),
         dom.label({}, 'Car'),
         dom.br({}),
-        dom.input({ type: 'radio', name: 'livingQuestion' }),
+        dom.input({ type: 'radio', name: 'livingQuestion', onClick: this.props.onLivingSituationWithoutSpecialDocuments }),
         dom.label({}, 'Motel'),
         dom.br({}),
-        dom.input({ type: 'radio', name: 'livingQuestion' }),
+        dom.input({ type: 'radio', name: 'livingQuestion', onClick: this.props.onLivingSituationWithoutSpecialDocuments }),
         dom.label({}, 'In Kind')
       );
     }
