@@ -52,8 +52,7 @@
       this.props.onLivingSituationWithoutSpecialDocuments();  // If the user leaves this as the
                                                               // selected radio button, clear all
                                                               // other living situation fields
-      currentState = this.state.showMoreOptions;
-      this.setState({ showMoreOptions: !currentState });
+      this.setState({ showMoreOptions: true });
     },
 
     renderAdditionalOptions: function () {
