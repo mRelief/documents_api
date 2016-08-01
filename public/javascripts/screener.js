@@ -18,6 +18,7 @@
     getInitialState: function() {
       return {
         answeredFirstPage: false,
+        answeredSecondPage: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
         userSubmittedData: DefaultData,
@@ -56,7 +57,7 @@
         return this.renderResultsFromServer();
       } else if (this.state.answeredFirstPage === false) {
         return this.renderFirstPage();
-      } else {
+      } else if (this.state.answeredSecondPage === false) {
         return this.renderSecondPage();
       };
     },
@@ -77,6 +78,10 @@
     },
 
     renderSecondPage: function () {
+      return this.renderInitialIncomeQuestion();
+    },
+
+    renderThirdPage: function () {
       return dom.div({},
         this.renderInitialIncomeQuestion(),
         this.renderEmploymentQuestion(),
@@ -101,7 +106,6 @@
 
     renderNumberOfPeople: function () {
       return createEl(NumberOfPeopleQuestion, {
-        onClickJustMe: this.onClickJustMe,
         onClickMyFamily: this.onClickMyFamily
       });
     },

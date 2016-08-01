@@ -7,7 +7,6 @@
     propTypes: {
       onCheckNotAllCitizens: React.PropTypes.func.isRequired,
       onCheckYesAllCitizens: React.PropTypes.func.isRequired,
-      onClickNextFromCitizenshipQuestion: React.PropTypes.func.isRequired,
     },
 
     render: function () {

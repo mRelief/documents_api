@@ -5,7 +5,6 @@
   window.shared.NumberOfPeopleQuestion = React.createClass({
 
     propTypes: {
-      onClickJustMe: React.PropTypes.func.isRequired,
       onClickMyFamily: React.PropTypes.func.isRequired
     },
 
