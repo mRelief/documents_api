@@ -54,22 +54,22 @@
       if (this.state.hasResponseFromServer === true) {
         return this.renderResultsFromServer();
       } else {
-        return dom.div({},
-          this.renderNumberOfPeople(),
-          this.renderHousingQuestion(),
-          this.renderCitizenshipQuestion(),
-          dom.br({}),
-          dom.input({
-            type: 'submit',
-            value: 'Next',
-            style: window.shared.ButtonStyle
-          })
-
-          // this.renderInitialIncomeQuestion(),
-          // this.renderEmploymentQuestion(),
-          // this.renderIncomeSourcesQuestion()
-        );
+        return this.renderFirstPage();
       };
+    },
+
+    renderFirstPage: function () {
+      return dom.div({},
+        this.renderNumberOfPeople(),
+        this.renderHousingQuestion(),
+        this.renderCitizenshipQuestion(),
+        dom.br({}),
+        dom.input({
+          type: 'submit',
+          value: 'Next',
+          style: window.shared.ButtonStyle
+        })
+      );
     },
 
     renderNumberOfPeople: function () {
