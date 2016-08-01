@@ -56,7 +56,7 @@
       } else {
         return dom.div({},
           this.renderNumberOfPeople(),
-          this.renderInitialIncomeQuestion(),
+          // this.renderInitialIncomeQuestion(),
           this.renderHousingQuestion(),
           this.renderCitizenshipQuestion()
           // this.renderEmploymentQuestion(),
