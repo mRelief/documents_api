@@ -52,6 +52,8 @@
         return this.renderFirstPage();
       } else if (this.state.answeredSecondPage === false) {
         return this.renderSecondPage();
+      } else {
+        return this.renderThirdPage();
       };
     },
 
@@ -83,7 +85,7 @@
           type: 'submit',
           value: 'Done',
           style: window.shared.ButtonStyle,
-          onClick: this.onClickNextFromSecondPage
+          onClick: this.fetchDocumentsFromServer
         })
       );
     },
