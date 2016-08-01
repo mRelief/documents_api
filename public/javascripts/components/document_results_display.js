@@ -15,6 +15,7 @@
     },
 
     propTypes: {
+      singlePersonHousehold: React.PropTypes.bool.isRequired,
       householdMembers: React.PropTypes.array.isRequired,
       otherDocumentsNeeded: React.PropTypes.array.isRequired,
       onClickStartOver: React.PropTypes.func.isRequired
@@ -36,12 +37,20 @@
       return documents.name === 'Identity';
     },
 
+    findCitizenshipDocuments: function (documents) {
+      return documents.official_name === 'I-90 Documentation (for all non-citizen family members)';
+    },
+
     identityDocs: function () {
       return this.applicant().documents_needed.find(this.findIdentityDocuments).documents;
     },
 
     residencyDocs: function () {
       return this.props.otherDocumentsNeeded.find(this.findResidencyDocuments).documents;
+    },
+
+    citizenshipDocs: function () {
+      return this.props.otherDocumentsNeeded.find(this.findCitizenshipDocuments);
     },
 
     render: function () {
@@ -64,22 +73,21 @@
 
     renderDocsNeeded: function () {
       return dom.div({},
-        this.renderStateId(),
+        this.renderStateIdSection(),
         this.renderAlternateDocs(),
         this.renderAdditionalDocsNeeded(),
+        this.renderCitizenshipDocs(),
         createEl(ReactTooltip, { id: 'state-id-explanation', type: 'info' })
       );
     },
 
-    renderStateId: function () {
+    renderStateIdSection: function () {
       if (this.state.showMoreOptions === true) return null;
 
       return dom.div({},
-        dom.span({},
-          dom.span({}, 'You will need your '),
-          dom.span({ style: { fontWeight: 'bold' } }, 'State ID.')
-        ),
+        this.renderStateIdStatement(),
         dom.span({}, '\u00a0 \u00a0'),
+        dom.br({}),
         dom.a({
           onClick: this.toggleIdExplanation,
           style: LinkStyle,
@@ -90,9 +98,33 @@
         dom.a({
           onClick: this.toggleShowMoreOptions,
           style: LinkStyle
-        }, 'I don\'t have a state ID.'),
+        }, this.noStateIdString()),
+        dom.br({}),
         dom.br({})
       );
+    },
+
+    renderStateIdStatement: function () {
+      if (this.props.singlePersonHousehold) {
+        return dom.span({},
+          dom.span({}, 'You will need your '),
+          dom.span({ style: { fontWeight: 'bold' } }, 'State ID.')
+        )
+      } else {
+        return dom.span({},
+          dom.span({}, 'You will need a '),
+          dom.span({ style: { fontWeight: 'bold' } }, 'State ID'),
+          dom.span({}, ' for all adult members of your family.')
+        )
+      }
+    },
+
+    noStateIdString: function () {
+      if (this.props.singlePersonHousehold) {
+        return 'I don\'t have a state ID.';
+      } else {
+        return 'Someone doesn\'t have a state ID.';
+      }
     },
 
     renderAlternateDocs: function () {
@@ -138,14 +170,21 @@
         dom.br({})
       );
 
-      return dom.div({},
-        dom.span({}, 'You will also need '),
-        dom.span({ style: { fontWeight: 'bold' } }, 'all '),
-        dom.span({}, 'of the following documents:'),
-        dom.ul({},
-          this.additionalDocsList()
-        )
-      );
+      if (this.props.singlePersonHousehold) {
+        return dom.div({},
+          dom.span({}, 'You will also need '),
+          dom.span({ style: { fontWeight: 'bold' } }, 'all '),
+          dom.span({}, 'of the following documents:'),
+          dom.ul({}, this.additionalDocsList())
+        );
+      } else {
+        return dom.div({},
+          dom.span({}, 'You will also need '),
+          dom.span({ style: { fontWeight: 'bold' } }, 'all '),
+          dom.span({}, 'of these documents for family members receiving income:'),
+          dom.ul({}, this.additionalDocsList())
+        );
+      }
     },
 
     additionalDocsList: function () {
@@ -163,11 +202,23 @@
       });
 
       var otherDocs = this.props.otherDocumentsNeeded.filter(function (document) {
-        return document.name !== 'Residency';
+        return (document.name !== 'Residency' && document.official_name !== 'I-90 Documentation (for all non-citizen family members)');
       });
 
       return householdDocs.concat(otherDocs);
     },
+
+    renderCitizenshipDocs: function () {
+      var citizenshipDocs = this.citizenshipDocs();
+      if (!citizenshipDocs) return null;
+
+      return dom.div({},
+        dom.span({}, 'You will need '),
+        dom.span({ style: { fontWeight: 'bold' } }, 'I-90 Documentation'),
+        dom.span({}, ' for all non-citizen family members.'),
+        dom.br({})
+      );
+    }
 
   });
 })();
