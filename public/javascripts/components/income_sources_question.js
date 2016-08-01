@@ -5,6 +5,7 @@
   window.shared.IncomeSourcesQuestion = React.createClass({
 
     propTypes: {
+      singlePersonHousehold: React.PropTypes.bool.isRequired,
       onCheckDisabilityBenefits: React.PropTypes.func.isRequired,
       onCheckChildSupport: React.PropTypes.func.isRequired,
       onCheckRentalIncome: React.PropTypes.func.isRequired,

@@ -126,6 +126,7 @@
 
     renderInitialIncomeQuestion: function () {
       return createEl(InitialIncomeQuestion, {
+        singlePersonHousehold: this.state.singlePersonHousehold,
         onClickNoIncome: this.onClickNoIncome,
         onClickYesIncome: this.onClickYesIncome
       });
@@ -133,6 +134,7 @@
 
     renderEmploymentQuestion: function () {
       return createEl(EmploymentQuestion, {
+        singlePersonHousehold: this.state.singlePersonHousehold,
         onCheckEmployee: this.onCheckEmployee,
         onCheckSelfEmployed: this.onCheckSelfEmployed,
         onCheckRetired: this.onCheckRetired,
@@ -143,6 +145,7 @@
 
     renderIncomeSourcesQuestion: function () {
       return createEl(IncomeSourcesQuestion, {
+        singlePersonHousehold: this.state.singlePersonHousehold,
         onCheckDisabilityBenefits: this.onCheckDisabilityBenefits,
         onCheckChildSupport: this.onCheckChildSupport,
         onCheckRentalIncome: this.onCheckRentalIncome,

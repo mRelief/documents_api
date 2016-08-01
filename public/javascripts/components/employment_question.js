@@ -11,6 +11,7 @@
     },
 
     propTypes: {
+      singlePersonHousehold: React.PropTypes.bool.isRequired,
       onCheckEmployee: React.PropTypes.func.isRequired,
       onCheckSelfEmployed: React.PropTypes.func.isRequired,
       onCheckRetired: React.PropTypes.func.isRequired,
