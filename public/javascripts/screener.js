@@ -29,8 +29,14 @@
     onClickYesIncome: function () {
       var userSubmittedData = this.state.userSubmittedData;
       userSubmittedData["has_no_income"] = "false";
+      this.setState({
+        userSubmittedData: userSubmittedData,
+        answeredSecondPage: true
+      });
+    },
 
-      this.setState({ userSubmittedData: userSubmittedData });
+    onClickNoIncome: function () {
+      this.fetchDocumentsFromServer();
     },
 
     fetchDocumentsFromServer: function () {
