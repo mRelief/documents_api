@@ -6,6 +6,7 @@
   var DefaultData = window.shared.DefaultData;
 
   var DocumentResultsDisplay = window.shared.DocumentResultsDisplay;
+  var NumberOfPeopleQuestion = window.shared.NumberOfPeopleQuestion;
   var InitialIncomeQuestion = window.shared.InitialIncomeQuestion;
   var EmploymentQuestion = window.shared.EmploymentQuestion;
   var IncomeSourcesQuestion = window.shared.IncomeSourcesQuestion;
@@ -16,6 +17,7 @@
 
     getInitialState: function() {
       return {
+        answeredNumberOfPeople: false,
         answeredInitialIncomeQuestion: false,
         answeredHousingQuestion: false,
         answeredCitizenshipQuestion: false,
@@ -74,7 +76,9 @@
         // Otherwise, serve the appropriate question in the screener:
         resultsFromServer = null;
 
-        if (this.state.answeredInitialIncomeQuestion === false) {
+        if (this.state.answeredNumberOfPeople === false) {
+          currentQuestion = this.renderNumberOfPeople();
+        } else if (this.state.answeredInitialIncomeQuestion === false) {
           currentQuestion = this.renderInitialIncomeQuestion();
         } else if (this.state.answeredHousingQuestion == false) {
           currentQuestion = this.renderHousingQuestion();
@@ -91,6 +95,10 @@
         currentQuestion,
         resultsFromServer
       )
+    },
+
+    renderNumberOfPeople: function () {
+      return createEl(NumberOfPeopleQuestion, {});
     },
 
     renderCitizenshipQuestion: function () {
