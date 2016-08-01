@@ -25,7 +25,8 @@
         answeredIncomeSourcesQuestion: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
-        userSubmittedData: DefaultData
+        userSubmittedData: DefaultData,
+        singlePersonHousehold: true
       };
     },
 
@@ -98,7 +99,10 @@
     },
 
     renderNumberOfPeople: function () {
-      return createEl(NumberOfPeopleQuestion, {});
+      return createEl(NumberOfPeopleQuestion, {
+        onClickJustMe: this.onClickJustMe,
+        onClickMyFamily: this.onClickMyFamily
+      });
     },
 
     renderCitizenshipQuestion: function () {
@@ -168,6 +172,17 @@
       };
 
       this.setState({ userSubmittedData: userSubmittedData });
+    },
+
+    onClickJustMe: function () {
+      this.setState({ answeredNumberOfPeople: true });
+    },
+
+    onClickMyFamily: function () {
+      this.setState({
+        answeredNumberOfPeople: true,
+        singlePersonHousehold: false,
+      });
     },
 
     onUpdateLivingSituation: function (attribute_name) {
