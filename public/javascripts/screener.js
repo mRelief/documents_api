@@ -17,6 +17,7 @@
 
     getInitialState: function() {
       return {
+        answeredFirstPage: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
         userSubmittedData: DefaultData,
@@ -53,8 +54,10 @@
     render: function() {
       if (this.state.hasResponseFromServer === true) {
         return this.renderResultsFromServer();
-      } else {
+      } else if (this.state.answeredFirstPage === false) {
         return this.renderFirstPage();
+      } else {
+        return this.renderSecondPage();
       };
     },
 
@@ -67,9 +70,18 @@
         dom.input({
           type: 'submit',
           value: 'Next',
-          style: window.shared.ButtonStyle
+          style: window.shared.ButtonStyle,
+          onClick: this.onClickNextFromFirstPage
         })
       );
+    },
+
+    renderSecondPage: function () {
+      return null;
+    },
+
+    onClickNextFromFirstPage: function () {
+      this.setState({ answeredFirstPage: true });
     },
 
     renderNumberOfPeople: function () {
