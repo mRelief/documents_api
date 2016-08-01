@@ -9,7 +9,6 @@
       onCheckDisabilityBenefits: React.PropTypes.func.isRequired,
       onCheckChildSupport: React.PropTypes.func.isRequired,
       onCheckRentalIncome: React.PropTypes.func.isRequired,
-      onClickNextFromIncomeSourcesQuestion: React.PropTypes.func.isRequired,
     },
 
     render: function () {

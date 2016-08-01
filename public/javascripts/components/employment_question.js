@@ -16,7 +16,6 @@
       onCheckSelfEmployed: React.PropTypes.func.isRequired,
       onCheckRetired: React.PropTypes.func.isRequired,
       onCheckUnemployedYesBenefits: React.PropTypes.func.isRequired,
-      onClickNextFromEmploymentQuestion: React.PropTypes.func.isRequired,
     },
 
     render: function () {

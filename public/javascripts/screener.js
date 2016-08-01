@@ -76,7 +76,6 @@
       return createEl(CitizenshipQuestion, {
         onCheckNotAllCitizens: this.onCheckNotAllCitizens,
         onCheckYesAllCitizens: this.onCheckYesAllCitizens,
-        onClickNextFromCitizenshipQuestion: this.onClickNextFromCitizenshipQuestion,
       });
     },
 
@@ -85,7 +84,6 @@
         onCheckRenting: this.onCheckRenting,
         onCheckOwnHome: this.onCheckOwnHome,
         onCheckShelter: this.onCheckShelter,
-        onClickNextFromHousingQuestion: this.onClickNextFromHousingQuestion,
         onCheckFamilyOrFriends: this.onCheckFamilyOrFriends,
         onLivingSituationWithoutSpecialDocuments: this.onLivingSituationWithoutSpecialDocuments
       });
@@ -106,7 +104,6 @@
         onCheckSelfEmployed: this.onCheckSelfEmployed,
         onCheckRetired: this.onCheckRetired,
         onCheckUnemployedYesBenefits: this.onCheckUnemployedYesBenefits,
-        onClickNextFromEmploymentQuestion: this.onClickNextFromEmploymentQuestion
       });
     },
 
@@ -116,7 +113,6 @@
         onCheckDisabilityBenefits: this.onCheckDisabilityBenefits,
         onCheckChildSupport: this.onCheckChildSupport,
         onCheckRentalIncome: this.onCheckRentalIncome,
-        onClickNextFromIncomeSourcesQuestion: this.onClickNextFromIncomeSourcesQuestion,
       });
     },
 
@@ -197,10 +193,6 @@
 
     onCheckRentalIncome: function (event) {
       this.onUpdateHousehold('has_rental_income', event);
-    },
-
-    onClickNextFromIncomeSourcesQuestion: function () {
-      this.fetchDocumentsFromServer();
     },
 
     onCheckRenting: function (event) {

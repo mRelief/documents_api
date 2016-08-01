@@ -14,7 +14,6 @@
       onCheckRenting: React.PropTypes.func.isRequired,
       onCheckOwnHome: React.PropTypes.func.isRequired,
       onCheckShelter: React.PropTypes.func.isRequired,
-      onClickNextFromHousingQuestion: React.PropTypes.func.isRequired,
       onCheckFamilyOrFriends: React.PropTypes.func.isRequired,
       onLivingSituationWithoutSpecialDocuments: React.PropTypes.func.isRequired,
     },
