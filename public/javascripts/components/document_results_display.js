@@ -78,6 +78,7 @@
       return dom.div({},
         this.renderStateIdStatement(),
         dom.span({}, '\u00a0 \u00a0'),
+        dom.br({}),
         dom.a({
           onClick: this.toggleIdExplanation,
           style: LinkStyle,
@@ -89,6 +90,7 @@
           onClick: this.toggleShowMoreOptions,
           style: LinkStyle
         }, this.noStateIdString()),
+        dom.br({}),
         dom.br({})
       );
     },
