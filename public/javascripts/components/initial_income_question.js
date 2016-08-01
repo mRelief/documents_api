@@ -25,7 +25,9 @@
           onClick: this.props.onClickNoIncome,
           name: 'overallIncomeQuestion'
         }),
-        dom.label({}, 'No')
+        dom.label({}, 'No'),
+        dom.br({}),
+        dom.br({})
       );
     },
 
