@@ -2,6 +2,9 @@
   window.shared || (window.shared = {});
   var dom = React.DOM;
   var createEl = React.createElement.bind(React);
+
+  var DefaultData = window.shared.DefaultData;
+
   var DocumentResultsDisplay = window.shared.DocumentResultsDisplay;
   var InitialIncomeQuestion = window.shared.InitialIncomeQuestion;
   var EmploymentQuestion = window.shared.EmploymentQuestion;
@@ -12,9 +15,6 @@
   var DocumentScreener = React.createClass({
 
     getInitialState: function() {
-      // Any changes made to this data structure should also be reflected
-      // in `onClickStartOver` at the bottom of this file.
-
       return {
         answeredInitialIncomeQuestion: false,
         answeredHousingQuestion: false,
@@ -23,28 +23,7 @@
         answeredIncomeSourcesQuestion: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
-        userSubmittedData: {
-          // Defaults:
-          "household_members": [
-            {
-              "child_under_18": "false",
-              "disability_benefits": "false",
-              "is_employee": "false",
-              "self_employed": "false",
-              "receiving_child_support": "false",
-              "is_retired": "false",
-              "receiving_unemployment_benefits": "false",
-            }
-          ],
-          "is_applying_for_expedited": "false",
-          "has_rental_income": "false",
-          "renting": "false",
-          "owns_home": "false",
-          "shelter": "false",
-          "has_no_income": "true",
-          "living_with_family_or_friends": "false",
-          "all_citizens": "true"
-        }
+        userSubmittedData: DefaultData
       };
     },
 
@@ -291,28 +270,7 @@
         answeredIncomeSourcesQuestion: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
-        userSubmittedData: {
-          // Defaults:
-          "household_members": [
-            {
-              "child_under_18": "false",
-              "disability_benefits": "false",
-              "is_employee": "false",
-              "self_employed": "false",
-              "receiving_child_support": "false",
-              "is_retired": "false",
-              "receiving_unemployment_benefits": "false",
-            }
-          ],
-          "is_applying_for_expedited": "false",
-          "has_rental_income": "false",
-          "renting": "false",
-          "owns_home": "false",
-          "shelter": "false",
-          "has_no_income": "true",
-          "living_with_family_or_friends": "false",
-          "all_citizens": "true"
-        }
+        userSubmittedData: DefaultData
       });
     },
 
