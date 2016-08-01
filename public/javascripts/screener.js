@@ -58,9 +58,9 @@
           this.renderNumberOfPeople(),
           this.renderInitialIncomeQuestion(),
           this.renderHousingQuestion(),
-          this.renderCitizenshipQuestion(),
-          this.renderEmploymentQuestion(),
-          this.renderIncomeSourcesQuestion()
+          this.renderCitizenshipQuestion()
+          // this.renderEmploymentQuestion(),
+          // this.renderIncomeSourcesQuestion()
         );
       };
     },
