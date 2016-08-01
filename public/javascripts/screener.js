@@ -96,7 +96,7 @@
     },
 
     onClickNextFromSecondPage: function () {
-      return null;
+      this.fetchDocumentsFromServer();
     },
 
     renderNumberOfPeople: function () {
