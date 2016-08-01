@@ -71,12 +71,11 @@
     },
 
     renderSecondPage: function () {
-      return this.renderInitialIncomeQuestion();
+      return this.renderOverallIncomeQuestion();
     },
 
     renderThirdPage: function () {
       return dom.div({},
-        this.renderInitialIncomeQuestion(),
         this.renderEmploymentQuestion(),
         this.renderIncomeSourcesQuestion(),
         dom.br({}),
@@ -120,7 +119,7 @@
       });
     },
 
-    renderInitialIncomeQuestion: function () {
+    renderOverallIncomeQuestion: function () {
       return createEl(OverallIncomeQuestion, {
         singlePersonHousehold: this.state.singlePersonHousehold,
         onClickNoIncome: this.onClickNoIncome,
