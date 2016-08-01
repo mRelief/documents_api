@@ -77,7 +77,7 @@
         this.renderAlternateDocs(),
         this.renderAdditionalDocsNeeded(),
         this.renderCitizenshipDocs(),
-        createEl(ReactTooltip, { id: 'state-id-explanation', type: 'info' })
+        createEl(ReactTooltip, { id: 'state-id-explanation' })
       );
     },
 
