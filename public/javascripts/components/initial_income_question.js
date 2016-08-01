@@ -13,10 +13,18 @@
     render: function () {
       return dom.div({},
         dom.p({}, this.question()),
-        dom.input({ type: 'radio', onClick: this.props.onClickYesIncome }),
+        dom.input({
+          type: 'radio',
+          onClick: this.props.onClickYesIncome,
+          name: 'overallIncomeQuestion'
+        }),
         dom.label({}, 'Yes'),
         dom.br({}),
-        dom.input({ type: 'radio', onClick: this.props.onClickNoIncome }),
+        dom.input({
+          type: 'radio',
+          onClick: this.props.onClickNoIncome,
+          name: 'overallIncomeQuestion'
+        }),
         dom.label({}, 'No')
       );
     },
