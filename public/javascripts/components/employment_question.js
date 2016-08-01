@@ -11,6 +11,7 @@
     },
 
     propTypes: {
+      singlePersonHousehold: React.PropTypes.bool.isRequired,
       onCheckEmployee: React.PropTypes.func.isRequired,
       onCheckSelfEmployed: React.PropTypes.func.isRequired,
       onCheckRetired: React.PropTypes.func.isRequired,
@@ -20,7 +21,7 @@
 
     render: function () {
       return dom.div({},
-        dom.p({}, 'Select all that apply to you:'),
+        dom.p({}, this.renderInstructions()),
         dom.input({ type: 'checkbox', onClick: this.props.onCheckEmployee }),
         dom.label({}, 'Employed'),
         dom.br({}),
@@ -42,6 +43,18 @@
           style: window.shared.ButtonStyle
         })
       );
+    },
+
+    renderInstructions: function () {
+      return 'Select all that apply to ' + this.familyOrSinglePersonString() + ':';
+    },
+
+    familyOrSinglePersonString: function () {
+      if (this.props.singlePersonHousehold) {
+        return 'you';
+      } else {
+        return 'the members of your household who receive income';
+      };
     },
 
     renderUnemploymentBenefitsQuestions: function () {

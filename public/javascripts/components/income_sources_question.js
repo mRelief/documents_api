@@ -5,6 +5,7 @@
   window.shared.IncomeSourcesQuestion = React.createClass({
 
     propTypes: {
+      singlePersonHousehold: React.PropTypes.bool.isRequired,
       onCheckDisabilityBenefits: React.PropTypes.func.isRequired,
       onCheckChildSupport: React.PropTypes.func.isRequired,
       onCheckRentalIncome: React.PropTypes.func.isRequired,
@@ -13,7 +14,7 @@
 
     render: function () {
       return dom.div({},
-        dom.p({}, 'Which of the following do you receive:'),
+        dom.p({}, this.question()),
         dom.input({ type: 'checkbox', onClick: this.props.onCheckDisabilityBenefits }),
         dom.label({}, 'Disability benefits'),
         dom.br({}),
@@ -34,6 +35,18 @@
           style: window.shared.ButtonStyle
         })
       );
+    },
+
+    question: function () {
+      return 'Which of the following do ' + this.familyOrSinglePersonString() + ' receive:'
+    },
+
+    familyOrSinglePersonString: function () {
+      if (this.props.singlePersonHousehold) {
+        return 'you';
+      } else {
+        return 'your household';
+      };
     },
 
   });

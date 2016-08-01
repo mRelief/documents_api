@@ -2,7 +2,11 @@
   window.shared || (window.shared = {});
   var dom = React.DOM;
   var createEl = React.createElement.bind(React);
+
+  var DefaultData = window.shared.DefaultData;
+
   var DocumentResultsDisplay = window.shared.DocumentResultsDisplay;
+  var NumberOfPeopleQuestion = window.shared.NumberOfPeopleQuestion;
   var InitialIncomeQuestion = window.shared.InitialIncomeQuestion;
   var EmploymentQuestion = window.shared.EmploymentQuestion;
   var IncomeSourcesQuestion = window.shared.IncomeSourcesQuestion;
@@ -12,10 +16,8 @@
   var DocumentScreener = React.createClass({
 
     getInitialState: function() {
-      // Any changes made to this data structure should also be reflected
-      // in `onClickStartOver` at the bottom of this file.
-
       return {
+        answeredNumberOfPeople: false,
         answeredInitialIncomeQuestion: false,
         answeredHousingQuestion: false,
         answeredCitizenshipQuestion: false,
@@ -23,28 +25,8 @@
         answeredIncomeSourcesQuestion: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
-        userSubmittedData: {
-          // Defaults:
-          "household_members": [
-            {
-              "child_under_18": "false",
-              "disability_benefits": "false",
-              "is_employee": "false",
-              "self_employed": "false",
-              "receiving_child_support": "false",
-              "is_retired": "false",
-              "receiving_unemployment_benefits": "false",
-            }
-          ],
-          "is_applying_for_expedited": "false",
-          "has_rental_income": "false",
-          "renting": "false",
-          "owns_home": "false",
-          "shelter": "false",
-          "has_no_income": "true",
-          "living_with_family_or_friends": "false",
-          "all_citizens": "true"
-        }
+        userSubmittedData: DefaultData,
+        singlePersonHousehold: true
       };
     },
 
@@ -95,7 +77,9 @@
         // Otherwise, serve the appropriate question in the screener:
         resultsFromServer = null;
 
-        if (this.state.answeredInitialIncomeQuestion === false) {
+        if (this.state.answeredNumberOfPeople === false) {
+          currentQuestion = this.renderNumberOfPeople();
+        } else if (this.state.answeredInitialIncomeQuestion === false) {
           currentQuestion = this.renderInitialIncomeQuestion();
         } else if (this.state.answeredHousingQuestion == false) {
           currentQuestion = this.renderHousingQuestion();
@@ -112,6 +96,13 @@
         currentQuestion,
         resultsFromServer
       )
+    },
+
+    renderNumberOfPeople: function () {
+      return createEl(NumberOfPeopleQuestion, {
+        onClickJustMe: this.onClickJustMe,
+        onClickMyFamily: this.onClickMyFamily
+      });
     },
 
     renderCitizenshipQuestion: function () {
@@ -135,6 +126,7 @@
 
     renderInitialIncomeQuestion: function () {
       return createEl(InitialIncomeQuestion, {
+        singlePersonHousehold: this.state.singlePersonHousehold,
         onClickNoIncome: this.onClickNoIncome,
         onClickYesIncome: this.onClickYesIncome
       });
@@ -142,6 +134,7 @@
 
     renderEmploymentQuestion: function () {
       return createEl(EmploymentQuestion, {
+        singlePersonHousehold: this.state.singlePersonHousehold,
         onCheckEmployee: this.onCheckEmployee,
         onCheckSelfEmployed: this.onCheckSelfEmployed,
         onCheckRetired: this.onCheckRetired,
@@ -152,6 +145,7 @@
 
     renderIncomeSourcesQuestion: function () {
       return createEl(IncomeSourcesQuestion, {
+        singlePersonHousehold: this.state.singlePersonHousehold,
         onCheckDisabilityBenefits: this.onCheckDisabilityBenefits,
         onCheckChildSupport: this.onCheckChildSupport,
         onCheckRentalIncome: this.onCheckRentalIncome,
@@ -181,6 +175,17 @@
       };
 
       this.setState({ userSubmittedData: userSubmittedData });
+    },
+
+    onClickJustMe: function () {
+      this.setState({ answeredNumberOfPeople: true });
+    },
+
+    onClickMyFamily: function () {
+      this.setState({
+        answeredNumberOfPeople: true,
+        singlePersonHousehold: false,
+      });
     },
 
     onUpdateLivingSituation: function (attribute_name) {
@@ -291,28 +296,7 @@
         answeredIncomeSourcesQuestion: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
-        userSubmittedData: {
-          // Defaults:
-          "household_members": [
-            {
-              "child_under_18": "false",
-              "disability_benefits": "false",
-              "is_employee": "false",
-              "self_employed": "false",
-              "receiving_child_support": "false",
-              "is_retired": "false",
-              "receiving_unemployment_benefits": "false",
-            }
-          ],
-          "is_applying_for_expedited": "false",
-          "has_rental_income": "false",
-          "renting": "false",
-          "owns_home": "false",
-          "shelter": "false",
-          "has_no_income": "true",
-          "living_with_family_or_friends": "false",
-          "all_citizens": "true"
-        }
+        userSubmittedData: DefaultData
       });
     },
 
