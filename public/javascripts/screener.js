@@ -56,9 +56,16 @@
       } else {
         return dom.div({},
           this.renderNumberOfPeople(),
-          // this.renderInitialIncomeQuestion(),
           this.renderHousingQuestion(),
-          this.renderCitizenshipQuestion()
+          this.renderCitizenshipQuestion(),
+          dom.br({}),
+          dom.input({
+            type: 'submit',
+            value: 'Next',
+            style: window.shared.ButtonStyle
+          })
+
+          // this.renderInitialIncomeQuestion(),
           // this.renderEmploymentQuestion(),
           // this.renderIncomeSourcesQuestion()
         );
