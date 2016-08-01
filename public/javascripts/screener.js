@@ -17,12 +17,6 @@
 
     getInitialState: function() {
       return {
-        answeredNumberOfPeople: false,
-        answeredInitialIncomeQuestion: false,
-        answeredHousingQuestion: false,
-        answeredCitizenshipQuestion: false,
-        answeredEmploymentQuestion: false,
-        answeredIncomeSourcesQuestion: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
         userSubmittedData: DefaultData,
@@ -34,14 +28,7 @@
       var userSubmittedData = this.state.userSubmittedData;
       userSubmittedData["has_no_income"] = "false";
 
-      this.setState({
-        answeredInitialIncomeQuestion: true,
-        userSubmittedData: userSubmittedData
-      });
-    },
-
-    onClickNoIncome: function () {
-      this.setState({ answeredInitialIncomeQuestion: true });
+      this.setState({ userSubmittedData: userSubmittedData });
     },
 
     fetchDocumentsFromServer: function () {
@@ -64,38 +51,18 @@
     },
 
     render: function() {
-      var currentQuestion;
-      var resultsFromServer;
-
       if (this.state.hasResponseFromServer === true) {
-        // If we have document results from the server, serve that and no questions:
-
-        currentQuestion = null;
-        resultsFromServer = this.renderResultsFromServer();
-
+        return this.renderResultsFromServer();
       } else {
-        // Otherwise, serve the appropriate question in the screener:
-        resultsFromServer = null;
-
-        if (this.state.answeredNumberOfPeople === false) {
-          currentQuestion = this.renderNumberOfPeople();
-        } else if (this.state.answeredInitialIncomeQuestion === false) {
-          currentQuestion = this.renderInitialIncomeQuestion();
-        } else if (this.state.answeredHousingQuestion == false) {
-          currentQuestion = this.renderHousingQuestion();
-        } else if (this.state.answeredCitizenshipQuestion === false) {
-          currentQuestion = this.renderCitizenshipQuestion();
-        } else if (this.state.answeredEmploymentQuestion === false) {
-          currentQuestion = this.renderEmploymentQuestion();
-        } else {
-          currentQuestion = this.renderIncomeSourcesQuestion();
-        };
-      }
-
-      return dom.div({},
-        currentQuestion,
-        resultsFromServer
-      )
+        return dom.div({},
+          this.renderNumberOfPeople(),
+          this.renderInitialIncomeQuestion(),
+          this.renderHousingQuestion(),
+          this.renderCitizenshipQuestion(),
+          this.renderEmploymentQuestion(),
+          this.renderIncomeSourcesQuestion()
+        );
+      };
     },
 
     renderNumberOfPeople: function () {
@@ -177,15 +144,8 @@
       this.setState({ userSubmittedData: userSubmittedData });
     },
 
-    onClickJustMe: function () {
-      this.setState({ answeredNumberOfPeople: true });
-    },
-
     onClickMyFamily: function () {
-      this.setState({
-        answeredNumberOfPeople: true,
-        singlePersonHousehold: false,
-      });
+      this.setState({ singlePersonHousehold: false, });
     },
 
     onUpdateLivingSituation: function (attribute_name) {
@@ -227,10 +187,6 @@
       this.onUpdateHouseholdMember("receiving_unemployment_benefits", event);
     },
 
-    onClickNextFromEmploymentQuestion: function () {
-      this.setState({ answeredEmploymentQuestion: true });
-    },
-
     onCheckDisabilityBenefits: function (event) {
       this.onUpdateHouseholdMember("disability_benefits", event);
     },
@@ -263,10 +219,6 @@
       this.onUpdateLivingSituation('living_with_family_or_friends');
     },
 
-    onClickNextFromHousingQuestion: function () {
-      this.setState({ answeredHousingQuestion: true });
-    },
-
     onCheckNotAllCitizens: function () {
       var userSubmittedData = this.state.userSubmittedData;
       userSubmittedData["all_citizens"] = "false";
@@ -279,21 +231,8 @@
       this.setState({ userSubmittedData: userSubmittedData });
     },
 
-    onClickNextFromCitizenshipQuestion: function () {
-      if (this.state.userSubmittedData['has_no_income'] === 'true') {
-        this.fetchDocumentsFromServer();
-      } else {
-        this.setState({ answeredCitizenshipQuestion: true });
-      };
-    },
-
     onClickStartOver: function () {
       this.setState({
-        answeredInitialIncomeQuestion: false,
-        answeredHousingQuestion: false,
-        answeredCitizenshipQuestion: false,
-        answeredEmploymentQuestion: false,
-        answeredIncomeSourcesQuestion: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
         userSubmittedData: DefaultData

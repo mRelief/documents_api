@@ -35,13 +35,7 @@
         dom.label({}, 'Unemployed'),
         dom.br({}),
         dom.br({}),
-        this.renderUnemploymentBenefitsQuestions(),
-        dom.input({
-          type: 'submit',
-          value: 'Next',
-          onClick: this.props.onClickNextFromEmploymentQuestion,
-          style: window.shared.ButtonStyle
-        })
+        this.renderUnemploymentBenefitsQuestions()
       );
     },
 
