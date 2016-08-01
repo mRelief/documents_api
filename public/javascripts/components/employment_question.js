@@ -16,7 +16,6 @@
       onCheckSelfEmployed: React.PropTypes.func.isRequired,
       onCheckRetired: React.PropTypes.func.isRequired,
       onCheckUnemployedYesBenefits: React.PropTypes.func.isRequired,
-      onClickNextFromEmploymentQuestion: React.PropTypes.func.isRequired,
     },
 
     render: function () {
@@ -35,13 +34,7 @@
         dom.label({}, 'Unemployed'),
         dom.br({}),
         dom.br({}),
-        this.renderUnemploymentBenefitsQuestions(),
-        dom.input({
-          type: 'submit',
-          value: 'Next',
-          onClick: this.props.onClickNextFromEmploymentQuestion,
-          style: window.shared.ButtonStyle
-        })
+        this.renderUnemploymentBenefitsQuestions()
       );
     },
 

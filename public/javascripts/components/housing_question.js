@@ -14,7 +14,6 @@
       onCheckRenting: React.PropTypes.func.isRequired,
       onCheckOwnHome: React.PropTypes.func.isRequired,
       onCheckShelter: React.PropTypes.func.isRequired,
-      onClickNextFromHousingQuestion: React.PropTypes.func.isRequired,
       onCheckFamilyOrFriends: React.PropTypes.func.isRequired,
       onLivingSituationWithoutSpecialDocuments: React.PropTypes.func.isRequired,
     },
@@ -38,13 +37,7 @@
         dom.input({ type: 'radio', name: 'livingQuestion', onClick: this.toggleAdditionalOptions }),
         dom.label({}, 'None of the above'),
         dom.br({}),
-        dom.br({}),
-        dom.input({
-          type: 'submit',
-          value: 'Next',
-          onClick: this.props.onClickNextFromHousingQuestion,
-          style: window.shared.ButtonStyle
-        })
+        dom.br({})
       );
     },
 

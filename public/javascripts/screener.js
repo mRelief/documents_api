@@ -7,7 +7,7 @@
 
   var DocumentResultsDisplay = window.shared.DocumentResultsDisplay;
   var NumberOfPeopleQuestion = window.shared.NumberOfPeopleQuestion;
-  var InitialIncomeQuestion = window.shared.InitialIncomeQuestion;
+  var OverallIncomeQuestion = window.shared.OverallIncomeQuestion;
   var EmploymentQuestion = window.shared.EmploymentQuestion;
   var IncomeSourcesQuestion = window.shared.IncomeSourcesQuestion;
   var HousingQuestion = window.shared.HousingQuestion;
@@ -17,31 +17,13 @@
 
     getInitialState: function() {
       return {
-        answeredNumberOfPeople: false,
-        answeredInitialIncomeQuestion: false,
-        answeredHousingQuestion: false,
-        answeredCitizenshipQuestion: false,
-        answeredEmploymentQuestion: false,
-        answeredIncomeSourcesQuestion: false,
+        answeredFirstPage: false,
+        answeredSecondPage: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
         userSubmittedData: DefaultData,
         singlePersonHousehold: true
       };
-    },
-
-    onClickYesIncome: function () {
-      var userSubmittedData = this.state.userSubmittedData;
-      userSubmittedData["has_no_income"] = "false";
-
-      this.setState({
-        answeredInitialIncomeQuestion: true,
-        userSubmittedData: userSubmittedData
-      });
-    },
-
-    onClickNoIncome: function () {
-      this.setState({ answeredInitialIncomeQuestion: true });
     },
 
     fetchDocumentsFromServer: function () {
@@ -64,43 +46,60 @@
     },
 
     render: function() {
-      var currentQuestion;
-      var resultsFromServer;
-
       if (this.state.hasResponseFromServer === true) {
-        // If we have document results from the server, serve that and no questions:
-
-        currentQuestion = null;
-        resultsFromServer = this.renderResultsFromServer();
-
+        return this.renderResultsFromServer();
+      } else if (this.state.answeredFirstPage === false) {
+        return this.renderFirstPage();
+      } else if (this.state.answeredSecondPage === false) {
+        return this.renderSecondPage();
       } else {
-        // Otherwise, serve the appropriate question in the screener:
-        resultsFromServer = null;
+        return this.renderThirdPage();
+      };
+    },
 
-        if (this.state.answeredNumberOfPeople === false) {
-          currentQuestion = this.renderNumberOfPeople();
-        } else if (this.state.answeredInitialIncomeQuestion === false) {
-          currentQuestion = this.renderInitialIncomeQuestion();
-        } else if (this.state.answeredHousingQuestion == false) {
-          currentQuestion = this.renderHousingQuestion();
-        } else if (this.state.answeredCitizenshipQuestion === false) {
-          currentQuestion = this.renderCitizenshipQuestion();
-        } else if (this.state.answeredEmploymentQuestion === false) {
-          currentQuestion = this.renderEmploymentQuestion();
-        } else {
-          currentQuestion = this.renderIncomeSourcesQuestion();
-        };
-      }
-
+    renderFirstPage: function () {
       return dom.div({},
-        currentQuestion,
-        resultsFromServer
-      )
+        this.renderNumberOfPeople(),
+        this.renderHousingQuestion(),
+        this.renderCitizenshipQuestion(),
+        dom.br({}),
+        dom.input({
+          type: 'submit',
+          value: 'Next',
+          style: window.shared.ButtonStyle,
+          onClick: this.onClickNextFromFirstPage
+        })
+      );
+    },
+
+    renderSecondPage: function () {
+      return this.renderOverallIncomeQuestion();
+    },
+
+    renderThirdPage: function () {
+      return dom.div({},
+        this.renderEmploymentQuestion(),
+        this.renderIncomeSourcesQuestion(),
+        dom.br({}),
+        dom.input({
+          type: 'submit',
+          value: 'Done',
+          style: window.shared.ButtonStyle,
+          onClick: this.fetchDocumentsFromServer
+        })
+      );
+    },
+
+    onClickNextFromFirstPage: function () {
+      this.setState({ answeredFirstPage: true });
+    },
+
+    onClickNextFromSecondPage: function () {
+      this.fetchDocumentsFromServer();
     },
 
     renderNumberOfPeople: function () {
       return createEl(NumberOfPeopleQuestion, {
-        onClickJustMe: this.onClickJustMe,
         onClickMyFamily: this.onClickMyFamily
       });
     },
@@ -109,7 +108,6 @@
       return createEl(CitizenshipQuestion, {
         onCheckNotAllCitizens: this.onCheckNotAllCitizens,
         onCheckYesAllCitizens: this.onCheckYesAllCitizens,
-        onClickNextFromCitizenshipQuestion: this.onClickNextFromCitizenshipQuestion,
       });
     },
 
@@ -118,18 +116,30 @@
         onCheckRenting: this.onCheckRenting,
         onCheckOwnHome: this.onCheckOwnHome,
         onCheckShelter: this.onCheckShelter,
-        onClickNextFromHousingQuestion: this.onClickNextFromHousingQuestion,
         onCheckFamilyOrFriends: this.onCheckFamilyOrFriends,
         onLivingSituationWithoutSpecialDocuments: this.onLivingSituationWithoutSpecialDocuments
       });
     },
 
-    renderInitialIncomeQuestion: function () {
-      return createEl(InitialIncomeQuestion, {
+    renderOverallIncomeQuestion: function () {
+      return createEl(OverallIncomeQuestion, {
         singlePersonHousehold: this.state.singlePersonHousehold,
         onClickNoIncome: this.onClickNoIncome,
         onClickYesIncome: this.onClickYesIncome
       });
+    },
+
+    onClickYesIncome: function () {
+      var userSubmittedData = this.state.userSubmittedData;
+      userSubmittedData["has_no_income"] = "false";
+      this.setState({
+        userSubmittedData: userSubmittedData,
+        answeredSecondPage: true
+      });
+    },
+
+    onClickNoIncome: function () {
+      this.fetchDocumentsFromServer();
     },
 
     renderEmploymentQuestion: function () {
@@ -139,7 +149,6 @@
         onCheckSelfEmployed: this.onCheckSelfEmployed,
         onCheckRetired: this.onCheckRetired,
         onCheckUnemployedYesBenefits: this.onCheckUnemployedYesBenefits,
-        onClickNextFromEmploymentQuestion: this.onClickNextFromEmploymentQuestion
       });
     },
 
@@ -149,7 +158,6 @@
         onCheckDisabilityBenefits: this.onCheckDisabilityBenefits,
         onCheckChildSupport: this.onCheckChildSupport,
         onCheckRentalIncome: this.onCheckRentalIncome,
-        onClickNextFromIncomeSourcesQuestion: this.onClickNextFromIncomeSourcesQuestion,
       });
     },
 
@@ -177,15 +185,8 @@
       this.setState({ userSubmittedData: userSubmittedData });
     },
 
-    onClickJustMe: function () {
-      this.setState({ answeredNumberOfPeople: true });
-    },
-
     onClickMyFamily: function () {
-      this.setState({
-        answeredNumberOfPeople: true,
-        singlePersonHousehold: false,
-      });
+      this.setState({ singlePersonHousehold: false, });
     },
 
     onUpdateLivingSituation: function (attribute_name) {
@@ -227,10 +228,6 @@
       this.onUpdateHouseholdMember("receiving_unemployment_benefits", event);
     },
 
-    onClickNextFromEmploymentQuestion: function () {
-      this.setState({ answeredEmploymentQuestion: true });
-    },
-
     onCheckDisabilityBenefits: function (event) {
       this.onUpdateHouseholdMember("disability_benefits", event);
     },
@@ -241,10 +238,6 @@
 
     onCheckRentalIncome: function (event) {
       this.onUpdateHousehold('has_rental_income', event);
-    },
-
-    onClickNextFromIncomeSourcesQuestion: function () {
-      this.fetchDocumentsFromServer();
     },
 
     onCheckRenting: function (event) {
@@ -263,10 +256,6 @@
       this.onUpdateLivingSituation('living_with_family_or_friends');
     },
 
-    onClickNextFromHousingQuestion: function () {
-      this.setState({ answeredHousingQuestion: true });
-    },
-
     onCheckNotAllCitizens: function () {
       var userSubmittedData = this.state.userSubmittedData;
       userSubmittedData["all_citizens"] = "false";
@@ -279,24 +268,14 @@
       this.setState({ userSubmittedData: userSubmittedData });
     },
 
-    onClickNextFromCitizenshipQuestion: function () {
-      if (this.state.userSubmittedData['has_no_income'] === 'true') {
-        this.fetchDocumentsFromServer();
-      } else {
-        this.setState({ answeredCitizenshipQuestion: true });
-      };
-    },
-
     onClickStartOver: function () {
       this.setState({
-        answeredInitialIncomeQuestion: false,
-        answeredHousingQuestion: false,
-        answeredCitizenshipQuestion: false,
-        answeredEmploymentQuestion: false,
-        answeredIncomeSourcesQuestion: false,
+        answeredFirstPage: false,
+        answeredSecondPage: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
-        userSubmittedData: DefaultData
+        userSubmittedData: DefaultData,
+        singlePersonHousehold: true
       });
     },
 

@@ -2,7 +2,7 @@
   window.shared || (window.shared = {});
   var dom = React.DOM;
 
-  window.shared.InitialIncomeQuestion = React.createClass({
+  window.shared.OverallIncomeQuestion = React.createClass({
 
     propTypes: {
       singlePersonHousehold: React.PropTypes.bool.isRequired,
@@ -13,11 +13,21 @@
     render: function () {
       return dom.div({},
         dom.p({}, this.question()),
-        dom.input({ type: 'radio', onClick: this.props.onClickYesIncome }),
+        dom.input({
+          type: 'radio',
+          onClick: this.props.onClickYesIncome,
+          name: 'overallIncomeQuestion'
+        }),
         dom.label({}, 'Yes'),
         dom.br({}),
-        dom.input({ type: 'radio', onClick: this.props.onClickNoIncome }),
-        dom.label({}, 'No')
+        dom.input({
+          type: 'radio',
+          onClick: this.props.onClickNoIncome,
+          name: 'overallIncomeQuestion'
+        }),
+        dom.label({}, 'No'),
+        dom.br({}),
+        dom.br({})
       );
     },
 

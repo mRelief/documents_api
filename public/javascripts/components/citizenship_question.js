@@ -7,12 +7,14 @@
     propTypes: {
       onCheckNotAllCitizens: React.PropTypes.func.isRequired,
       onCheckYesAllCitizens: React.PropTypes.func.isRequired,
-      onClickNextFromCitizenshipQuestion: React.PropTypes.func.isRequired,
     },
 
     render: function () {
       return dom.div({},
         dom.p({}, 'Is everyone in your household a US citizen?'),
+        dom.em({}, 'NOTE: We do not store your response to this question.'),
+        dom.br({}),
+        dom.br({}),
         dom.input({
           type: 'radio',
           name: 'citizenshipQuestion',
@@ -27,16 +29,7 @@
         }),
         dom.label({}, 'No'),
         dom.br({}),
-        dom.br({}),
-        dom.em({}, 'NOTE: We do not store your response to this question.'),
-        dom.br({}),
-        dom.br({}),
-        dom.input({
-          type: 'submit',
-          value: 'Next',
-          onClick: this.props.onClickNextFromCitizenshipQuestion,
-          style: window.shared.ButtonStyle
-        })
+        dom.br({})
       );
     }
 

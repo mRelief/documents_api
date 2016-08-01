@@ -9,7 +9,6 @@
       onCheckDisabilityBenefits: React.PropTypes.func.isRequired,
       onCheckChildSupport: React.PropTypes.func.isRequired,
       onCheckRentalIncome: React.PropTypes.func.isRequired,
-      onClickNextFromIncomeSourcesQuestion: React.PropTypes.func.isRequired,
     },
 
     render: function () {
@@ -27,13 +26,7 @@
         dom.input({ type: 'checkbox'}),
         dom.label({}, 'None of the above'),
         dom.br({}),
-        dom.br({}),
-        dom.input({
-          type: 'submit',
-          value: 'Next',
-          onClick: this.props.onClickNextFromIncomeSourcesQuestion,
-          style: window.shared.ButtonStyle
-        })
+        dom.br({})
       );
     },
 
