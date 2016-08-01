@@ -88,7 +88,7 @@
         dom.a({
           onClick: this.toggleShowMoreOptions,
           style: LinkStyle
-        }, 'I don\'t have a state ID.'),
+        }, this.noStateIdString()),
         dom.br({})
       );
     },
@@ -105,6 +105,14 @@
           dom.span({ style: { fontWeight: 'bold' } }, 'State ID'),
           dom.span({}, ' for all adult members of your family.')
         )
+      }
+    },
+
+    noStateIdString: function () {
+      if (this.props.singlePersonHousehold) {
+        return 'I don\'t have a state ID.';
+      } else {
+        return 'Someone doesn\'t have a state ID.';
       }
     },
 
