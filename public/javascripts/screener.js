@@ -270,9 +270,12 @@
 
     onClickStartOver: function () {
       this.setState({
+        answeredFirstPage: false,
+        answeredSecondPage: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
-        userSubmittedData: DefaultData
+        userSubmittedData: DefaultData,
+        singlePersonHousehold: true
       });
     },
 
