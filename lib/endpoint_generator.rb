@@ -1,5 +1,6 @@
 require "uri"
 require "json"
+require "active_support/all"
 
 class EndpointGenerator < Struct.new :base_url, :query_data
 
