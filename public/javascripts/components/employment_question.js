@@ -46,14 +46,14 @@
     },
 
     renderInstructions: function () {
-      return 'Select all that apply to ' + this.familyOrSinglePersonString() + ':';
+      return 'Select all that describe ' + this.familyOrSinglePersonString() + ':';
     },
 
     familyOrSinglePersonString: function () {
       if (this.props.singlePersonHousehold) {
         return 'you';
       } else {
-        return 'the members of your household who receive income';
+        return 'you and your family';
       };
     },
 
