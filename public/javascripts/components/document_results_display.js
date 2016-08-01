@@ -15,6 +15,7 @@
     },
 
     propTypes: {
+      singlePersonHousehold: React.PropTypes.bool.isRequired,
       householdMembers: React.PropTypes.array.isRequired,
       otherDocumentsNeeded: React.PropTypes.array.isRequired,
       onClickStartOver: React.PropTypes.func.isRequired
@@ -64,21 +65,18 @@
 
     renderDocsNeeded: function () {
       return dom.div({},
-        this.renderStateId(),
+        this.renderStateIdSection(),
         this.renderAlternateDocs(),
         this.renderAdditionalDocsNeeded(),
         createEl(ReactTooltip, { id: 'state-id-explanation', type: 'info' })
       );
     },
 
-    renderStateId: function () {
+    renderStateIdSection: function () {
       if (this.state.showMoreOptions === true) return null;
 
       return dom.div({},
-        dom.span({},
-          dom.span({}, 'You will need your '),
-          dom.span({ style: { fontWeight: 'bold' } }, 'State ID.')
-        ),
+        this.renderStateIdStatement(),
         dom.span({}, '\u00a0 \u00a0'),
         dom.a({
           onClick: this.toggleIdExplanation,
@@ -93,6 +91,21 @@
         }, 'I don\'t have a state ID.'),
         dom.br({})
       );
+    },
+
+    renderStateIdStatement: function () {
+      if (this.props.singlePersonHousehold) {
+        return dom.span({},
+          dom.span({}, 'You will need your '),
+          dom.span({ style: { fontWeight: 'bold' } }, 'State ID.')
+        )
+      } else {
+        return dom.span({},
+          dom.span({}, 'You will need a '),
+          dom.span({ style: { fontWeight: 'bold' } }, 'State ID'),
+          dom.span({}, ' for all adult members of your family.')
+        )
+      }
     },
 
     renderAlternateDocs: function () {
