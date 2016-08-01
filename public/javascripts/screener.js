@@ -77,11 +77,26 @@
     },
 
     renderSecondPage: function () {
-      return null;
+      return dom.div({},
+        this.renderInitialIncomeQuestion(),
+        this.renderEmploymentQuestion(),
+        this.renderIncomeSourcesQuestion(),
+        dom.br({}),
+        dom.input({
+          type: 'submit',
+          value: 'Done',
+          style: window.shared.ButtonStyle,
+          onClick: this.onClickNextFromSecondPage
+        })
+      );
     },
 
     onClickNextFromFirstPage: function () {
       this.setState({ answeredFirstPage: true });
+    },
+
+    onClickNextFromSecondPage: function () {
+      return null;
     },
 
     renderNumberOfPeople: function () {
