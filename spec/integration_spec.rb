@@ -11,10 +11,10 @@ describe "queries against API endpoints" do
 
   TEST_QUERIES.each do |query|
 
-    url = EndpointGenerator.new(nil, query[:ruby_hash]).generate_url
+    path = "/api?#{query[:ruby_hash].to_query}"
 
     it "doesn't fail horribly" do
-      get url, format: :json
+      get path, format: :json
 
       expect(last_response).to be_ok
       expect(response_json.keys).to eq [ "household_members", "other_documents_needed" ]
