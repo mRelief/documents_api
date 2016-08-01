@@ -38,14 +38,14 @@
     },
 
     question: function () {
-      return 'Which of the following do ' + this.familyOrSinglePersonString() + ' receive:'
+      return 'Which of the following ' + this.familyOrSinglePersonString() + ':'
     },
 
     familyOrSinglePersonString: function () {
       if (this.props.singlePersonHousehold) {
-        return 'you';
+        return 'do you receive';
       } else {
-        return 'your household';
+        return 'does your family receive';
       };
     },
 
