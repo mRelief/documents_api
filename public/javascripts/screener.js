@@ -26,19 +26,6 @@
       };
     },
 
-    onClickYesIncome: function () {
-      var userSubmittedData = this.state.userSubmittedData;
-      userSubmittedData["has_no_income"] = "false";
-      this.setState({
-        userSubmittedData: userSubmittedData,
-        answeredSecondPage: true
-      });
-    },
-
-    onClickNoIncome: function () {
-      this.fetchDocumentsFromServer();
-    },
-
     fetchDocumentsFromServer: function () {
       this.serverRequest = $.get({
         url: '/api',
@@ -139,6 +126,19 @@
         onClickNoIncome: this.onClickNoIncome,
         onClickYesIncome: this.onClickYesIncome
       });
+    },
+
+    onClickYesIncome: function () {
+      var userSubmittedData = this.state.userSubmittedData;
+      userSubmittedData["has_no_income"] = "false";
+      this.setState({
+        userSubmittedData: userSubmittedData,
+        answeredSecondPage: true
+      });
+    },
+
+    onClickNoIncome: function () {
+      this.fetchDocumentsFromServer();
     },
 
     renderEmploymentQuestion: function () {
