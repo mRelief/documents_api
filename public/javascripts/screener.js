@@ -7,7 +7,7 @@
 
   var DocumentResultsDisplay = window.shared.DocumentResultsDisplay;
   var NumberOfPeopleQuestion = window.shared.NumberOfPeopleQuestion;
-  var InitialIncomeQuestion = window.shared.InitialIncomeQuestion;
+  var OverallIncomeQuestion = window.shared.OverallIncomeQuestion;
   var EmploymentQuestion = window.shared.EmploymentQuestion;
   var IncomeSourcesQuestion = window.shared.IncomeSourcesQuestion;
   var HousingQuestion = window.shared.HousingQuestion;
@@ -128,7 +128,7 @@
     },
 
     renderInitialIncomeQuestion: function () {
-      return createEl(InitialIncomeQuestion, {
+      return createEl(OverallIncomeQuestion, {
         singlePersonHousehold: this.state.singlePersonHousehold,
         onClickNoIncome: this.onClickNoIncome,
         onClickYesIncome: this.onClickYesIncome
