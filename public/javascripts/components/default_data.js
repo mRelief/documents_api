@@ -13,7 +13,6 @@
         "receiving_unemployment_benefits": "false",
       }
     ],
-    "is_applying_for_expedited": "false",
     "has_rental_income": "false",
     "renting": "false",
     "owns_home": "false",

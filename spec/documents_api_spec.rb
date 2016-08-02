@@ -6,7 +6,6 @@ describe Api::DocumentsRequest do
   subject {
     described_class.new(
       household_members: incoming_params[:household_members],
-      is_applying_for_expedited: incoming_params[:is_applying_for_expedited],
       has_rental_income: incoming_params[:has_rental_income]
     )
   }
