@@ -56,9 +56,19 @@
     render: function () {
       return dom.div({},
         dom.h1({}, 'What You Will Need'),
-        this.renderDocsNeeded(),
+        this.renderDocs(),
         dom.br({}),
         this.renderStartOverButton()
+      );
+    },
+
+    renderDocs: function () {
+      return dom.div({},
+        this.renderStateIdSection(),
+        this.renderMoreResidencyAndIdentityOptions(),
+        this.renderIncomeDocs(),
+        this.renderCitizenshipDocs(),
+        createEl(ReactTooltip, { id: 'state-id-explanation' })
       );
     },
 
@@ -71,15 +81,6 @@
       });
     },
 
-    renderDocsNeeded: function () {
-      return dom.div({},
-        this.renderStateIdSection(),
-        this.renderAlternateDocs(),
-        this.renderAdditionalDocsNeeded(),
-        this.renderCitizenshipDocs(),
-        createEl(ReactTooltip, { id: 'state-id-explanation' })
-      );
-    },
 
     renderStateIdSection: function () {
       if (this.state.showMoreOptions === true) return null;
@@ -127,7 +128,7 @@
       }
     },
 
-    renderAlternateDocs: function () {
+    renderMoreResidencyAndIdentityOptions: function () {
       if (this.state.showMoreOptions === false) return null;
 
       if (this.needsIdentityDocs()) {
@@ -156,16 +157,16 @@
       this.setState({ showMoreOptions: !currentStatus });
     },
 
-    renderAdditionalDocsNeeded: function () {
-      var additionalDocsNeeded = this.additionalDocsNeeded();
+    renderIncomeDocs: function () {
+      var docs = this.incomeDocsNeeded();
 
-      if (additionalDocsNeeded.length === 0) return null;
+      if (docs.length === 0) return null;
 
-      if (additionalDocsNeeded.length === 1) return dom.div({},
+      if (docs.length === 1) return dom.div({},
         dom.span({}, 'You will also need your '),
         dom.span(
           { style: { fontWeight: 'bold' } },
-        additionalDocsNeeded[0].official_name + '.'),
+        docs[0].official_name + '.'),
         dom.br({}),
         dom.br({})
       );
@@ -175,25 +176,25 @@
           dom.span({}, 'You will also need '),
           dom.span({ style: { fontWeight: 'bold' } }, 'all '),
           dom.span({}, 'of the following documents:'),
-          dom.ul({}, this.additionalDocsList())
+          dom.ul({}, this.incomeDocsList())
         );
       } else {
         return dom.div({},
           dom.span({}, 'You will also need '),
           dom.span({ style: { fontWeight: 'bold' } }, 'all '),
           dom.span({}, 'of these documents for family members receiving income:'),
-          dom.ul({}, this.additionalDocsList())
+          dom.ul({}, this.incomeDocsList())
         );
       }
     },
 
-    additionalDocsList: function () {
-      return this.additionalDocsNeeded().map(function (document) {
+    incomeDocsList: function () {
+      return this.incomeDocsNeeded().map(function (document) {
         return dom.li({}, document.official_name);
       });
     },
 
-    additionalDocsNeeded: function () {
+    incomeDocsNeeded: function () {
       // Merge together household member docs needed (besides Identity)
       // with other docs needed (besides Residency):
 
