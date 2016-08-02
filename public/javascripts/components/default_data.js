@@ -4,7 +4,6 @@
   window.shared.DefaultData = {
     "household_members": [
       {
-        "child_under_18": "false",
         "disability_benefits": "false",
         "employee": "false",
         "self_employed": "false",
