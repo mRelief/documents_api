@@ -39,20 +39,14 @@ rspec spec
     {
       child_under_18: ... ,
       disability_benefits: ... ,
-      is_employed: ... ,
-      receiving_child_support: ... ,
     },
     {
       child_under_18: ... ,
       disability_benefits: ... ,
-      is_employed: ... ,
-      receiving_child_support: ... ,
     },
     {
       child_under_18: ... ,
       disability_benefits: ... ,
-      is_employed: ... ,
-      receiving_child_support: ... ,
     },
   ],
   has_rental_income: ...,             # Does the household have any rental income?
@@ -73,8 +67,6 @@ rspec spec
     {
       child_under_18: ... ,
       disability_benefits: ... ,
-      is_employed: ... ,
-      receiving_child_support: ... ,
       documents_needed: [
         { ... DATA FOR SELF EMPLOYMENT DOCUMENTATION ... },
         { ... DATA FOR SOCIAL SECURITY CARD DOCUMENTATION ... },
@@ -84,15 +76,11 @@ rspec spec
     {
       child_under_18: ... ,
       disability_benefits: ... ,
-      is_employed: ... ,
-      receiving_child_support: ... ,
       documents_needed: [ ... ],
     },
     {
       child_under_18: ... ,
       disability_benefits: ... ,
-      is_employed: ... ,
-      receiving_child_support: ... ,
       documents_needed: [ ... ],
     },
   ],
