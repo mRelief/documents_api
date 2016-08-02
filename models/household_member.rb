@@ -50,8 +50,6 @@ class HouseholdMember
     ].compact
   end
 
-  private
-
   def to_hash
     {
       employee: @employee,
