@@ -4,27 +4,27 @@ require_relative "identity_documents"
 class HouseholdMember
 
   def initialize(child_under_18:,
-                 is_employee:,
+                 employee:,
                  disability_benefits:,    # Could be from different sources, including Social Security.
-                 receiving_child_support:,
+                 child_support:,
                  self_employed:,
-                 is_retired:,
-                 receiving_unemployment_benefits:)
+                 retired:,
+                 unemployment_benefits:)
 
     @child_under_18 = child_under_18
-    @is_employee = is_employee
+    @employee = employee
     @self_employed = self_employed
     @disability_benefits = disability_benefits
-    @receiving_child_support = receiving_child_support
-    @is_retired = is_retired
-    @receiving_unemployment_benefits = receiving_unemployment_benefits
+    @child_support = child_support
+    @retired = retired
+    @unemployment_benefits = unemployment_benefits
     raise "Invalid data types" unless valid_types?
   end
 
   def attribute_types
-    [ @child_under_18, @is_employee, @self_employed,
-      @disability_benefits, @receiving_child_support,
-      @is_retired, @receiving_unemployment_benefits ].map { |attribute| attribute.class }
+    [ @child_under_18, @employee, @self_employed,
+      @disability_benefits, @child_support,
+      @retired, @unemployment_benefits ].map { |attribute| attribute.class }
   end
 
   def valid_types?
@@ -57,17 +57,17 @@ class HouseholdMember
   def to_hash
     {
       child_under_18: @child_under_18,
-      is_employee: @is_employee,
+      employee: @employee,
       self_employed: @self_employed,
       disability_benefits: @disability_benefits,
-      receiving_child_support: @receiving_child_support,
-      is_retired: @is_retired,
-      receiving_unemployment_benefits: @receiving_unemployment_benefits,
+      child_support: @child_support,
+      retired: @retired,
+      unemployment_benefits: @unemployment_benefits,
     }
   end
 
   def documents_based_on_employment
-    PAY_STUBS if @is_employee
+    PAY_STUBS if @employee
   end
 
   def documents_based_on_self_employment
@@ -75,7 +75,7 @@ class HouseholdMember
   end
 
   def documents_based_on_child_support
-    WRITTEN_CHILD_SUPPORT_STATEMENT if @receiving_child_support
+    WRITTEN_CHILD_SUPPORT_STATEMENT if @child_support
   end
 
   def documents_based_on_disability
@@ -83,19 +83,19 @@ class HouseholdMember
   end
 
   def documents_based_on_retirement
-    AWARD_LETTER_FOR_SOCIAL_SECURITY if @is_retired
+    AWARD_LETTER_FOR_SOCIAL_SECURITY if @retired
   end
 
   def documents_based_on_unemployment
-    AWARD_LETTER_FOR_UNEMPLOYMENT if @receiving_unemployment_benefits
+    AWARD_LETTER_FOR_UNEMPLOYMENT if @unemployment_benefits
   end
 
   def needs_identity_docs?
-    !@is_employee &&
+    !@employee &&
     !@self_employed &&
     !@disability_benefits &&
-    !@receiving_child_support &&
-    !@receiving_unemployment_benefits
+    !@child_support &&
+    !@unemployment_benefits
   end
 
   def documents_based_on_identity

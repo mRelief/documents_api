@@ -213,7 +213,7 @@
     },
 
     onCheckEmployee: function (event) {
-      this.onUpdateHouseholdMember("is_employee", event);
+      this.onUpdateHouseholdMember("employee", event);
     },
 
     onCheckSelfEmployed: function (event) {
@@ -221,11 +221,11 @@
     },
 
     onCheckRetired: function (event) {
-      this.onUpdateHouseholdMember("is_retired", event);
+      this.onUpdateHouseholdMember("retired", event);
     },
 
     onCheckUnemployedYesBenefits: function (event) {
-      this.onUpdateHouseholdMember("receiving_unemployment_benefits", event);
+      this.onUpdateHouseholdMember("unemployment_benefits", event);
     },
 
     onCheckDisabilityBenefits: function (event) {
@@ -233,7 +233,7 @@
     },
 
     onCheckChildSupport: function (event) {
-      this.onUpdateHouseholdMember("receiving_child_support", event);
+      this.onUpdateHouseholdMember("child_support", event);
     },
 
     onCheckRentalIncome: function (event) {
