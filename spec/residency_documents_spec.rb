@@ -17,7 +17,7 @@ describe ResidencyDocuments do
 
       it 'includes homeowner insurance and property tax bill' do
         expect(residency_documents_request.documents.map { |doc| doc[:official_name] }).to eq [
-          "Valid Illinois Driver's License",
+          "State ID",
           "Home Owners Insurance",
           "Property Tax Bill",
           "Mail",
@@ -38,7 +38,7 @@ describe ResidencyDocuments do
 
       it 'includes letter from family or friends' do
         expect(residency_documents_request.documents.map { |doc| doc[:official_name] }).to eq [
-          "Valid Illinois Driver's License",
+          "State ID",
           "Letter from Family or Friend",
           "Mail",
           "Medical Records"
