@@ -6,11 +6,11 @@
       {
         "child_under_18": "false",
         "disability_benefits": "false",
-        "is_employee": "false",
+        "employee": "false",
         "self_employed": "false",
-        "receiving_child_support": "false",
-        "is_retired": "false",
-        "receiving_unemployment_benefits": "false",
+        "child_support": "false",
+        "retired": "false",
+        "unemployment_benefits": "false",
       }
     ],
     "has_rental_income": "false",
