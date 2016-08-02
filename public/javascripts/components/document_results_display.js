@@ -56,9 +56,19 @@
     render: function () {
       return dom.div({},
         dom.h1({}, 'What You Will Need'),
-        this.renderDocsNeeded(),
+        this.renderDocs(),
         dom.br({}),
         this.renderStartOverButton()
+      );
+    },
+
+    renderDocs: function () {
+      return dom.div({},
+        this.renderStateIdSection(),
+        this.renderAlternateDocs(),
+        this.renderAdditionalDocsNeeded(),
+        this.renderCitizenshipDocs(),
+        createEl(ReactTooltip, { id: 'state-id-explanation' })
       );
     },
 
@@ -71,15 +81,6 @@
       });
     },
 
-    renderDocsNeeded: function () {
-      return dom.div({},
-        this.renderStateIdSection(),
-        this.renderAlternateDocs(),
-        this.renderAdditionalDocsNeeded(),
-        this.renderCitizenshipDocs(),
-        createEl(ReactTooltip, { id: 'state-id-explanation' })
-      );
-    },
 
     renderStateIdSection: function () {
       if (this.state.showMoreOptions === true) return null;
