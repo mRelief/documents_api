@@ -7,7 +7,6 @@ module Api
   class DocumentsRequest
 
     def initialize(household_members:,
-                   is_applying_for_expedited:,
                    has_rental_income:,
                    renting:,
                    owns_home:,
@@ -17,7 +16,6 @@ module Api
     )
 
       @household_members = reformat_household_members(household_members)
-      @is_applying_for_expedited = StringParser.new(is_applying_for_expedited).to_boolean
       @has_rental_income = StringParser.new(has_rental_income).to_boolean
       @renting = StringParser.new(renting).to_boolean
       @owns_home = StringParser.new(owns_home).to_boolean
@@ -25,7 +23,7 @@ module Api
       @living_with_family_or_friends = StringParser.new(living_with_family_or_friends).to_boolean
       @all_citizens = StringParser.new(all_citizens).to_boolean
 
-      raise "Badly formatted request" if @is_applying_for_expedited.nil? || @has_rental_income.nil?
+      raise "Badly formatted request" if @has_rental_income.nil?
     end
 
     def fetch_documents
@@ -49,7 +47,7 @@ module Api
     def other_documents_needed
       other_documents = [residency_documents.list]
 
-      other_documents << BANK_STATEMENTS if (@is_applying_for_expedited || @has_rental_income)
+      other_documents << BANK_STATEMENTS if @has_rental_income
 
       other_documents << I_90_DOCUMENTATION unless @all_citizens
 
