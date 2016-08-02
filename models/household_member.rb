@@ -16,17 +16,17 @@ class HouseholdMember
     @child_support = child_support
     @retired = retired
     @unemployment_benefits = unemployment_benefits
-    raise "Invalid data types" unless valid_types?
+    raise "Invalid data" unless valid_data?
   end
 
-  def attribute_types
+  def attribute_classes
     [ @employee, @self_employed,
       @disability_benefits, @child_support,
       @retired, @unemployment_benefits ].map { |attribute| attribute.class }
   end
 
-  def valid_types?
-    attribute_types.all? do |class_type|
+  def valid_data?
+    attribute_classes.all? do |class_type|
       (class_type == TrueClass) || (class_type == FalseClass)
     end
   end
