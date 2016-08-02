@@ -3,15 +3,13 @@ require_relative "identity_documents"
 
 class HouseholdMember
 
-  def initialize(child_under_18:,
-                 employee:,
+  def initialize(employee:,
                  disability_benefits:,    # Could be from different sources, including Social Security.
                  child_support:,
                  self_employed:,
                  retired:,
                  unemployment_benefits:)
 
-    @child_under_18 = child_under_18
     @employee = employee
     @self_employed = self_employed
     @disability_benefits = disability_benefits
@@ -22,7 +20,7 @@ class HouseholdMember
   end
 
   def attribute_types
-    [ @child_under_18, @employee, @self_employed,
+    [ @employee, @self_employed,
       @disability_benefits, @child_support,
       @retired, @unemployment_benefits ].map { |attribute| attribute.class }
   end
@@ -56,7 +54,6 @@ class HouseholdMember
 
   def to_hash
     {
-      child_under_18: @child_under_18,
       employee: @employee,
       self_employed: @self_employed,
       disability_benefits: @disability_benefits,

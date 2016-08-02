@@ -7,7 +7,6 @@ describe HouseholdMember do
     context "person has no income" do
       let(:person) {
         HouseholdMember.new(
-          child_under_18: false,
           is_employee: false,
           disability_benefits: false,
           receiving_child_support: false,
@@ -27,7 +26,6 @@ describe HouseholdMember do
     context "person receiving disability benefits" do
       let(:person) {
         HouseholdMember.new(
-          child_under_18: false,
           is_employee: false,
           disability_benefits: true,
           receiving_child_support: false,

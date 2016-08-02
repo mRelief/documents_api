@@ -35,20 +35,7 @@ rspec spec
 # Household of family members:
 
 {
-  household_members: [
-    {
-      child_under_18: ... ,
-      disability_benefits: ... ,
-    },
-    {
-      child_under_18: ... ,
-      disability_benefits: ... ,
-    },
-    {
-      child_under_18: ... ,
-      disability_benefits: ... ,
-    },
-  ],
+  household_members: [ ... ],
   has_rental_income: ...,             # Does the household have any rental income?
   renting: ...,                       # Is the household renting?
   owns_home: ...,                     # Is this a homeowning household?
@@ -65,8 +52,6 @@ rspec spec
 {
   household_members: [
     {
-      child_under_18: ... ,
-      disability_benefits: ... ,
       documents_needed: [
         { ... DATA FOR SELF EMPLOYMENT DOCUMENTATION ... },
         { ... DATA FOR SOCIAL SECURITY CARD DOCUMENTATION ... },
@@ -74,13 +59,9 @@ rspec spec
       ],
     },
     {
-      child_under_18: ... ,
-      disability_benefits: ... ,
       documents_needed: [ ... ],
     },
     {
-      child_under_18: ... ,
-      disability_benefits: ... ,
       documents_needed: [ ... ],
     },
   ],
