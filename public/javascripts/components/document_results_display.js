@@ -66,7 +66,7 @@
       return dom.div({},
         this.renderStateIdSection(),
         this.renderMoreResidencyAndIdentityOptions(),
-        this.renderAdditionalDocsNeeded(),
+        this.renderIncomeDocs(),
         this.renderCitizenshipDocs(),
         createEl(ReactTooltip, { id: 'state-id-explanation' })
       );
@@ -157,7 +157,7 @@
       this.setState({ showMoreOptions: !currentStatus });
     },
 
-    renderAdditionalDocsNeeded: function () {
+    renderIncomeDocs: function () {
       var additionalDocsNeeded = this.additionalDocsNeeded();
 
       if (additionalDocsNeeded.length === 0) return null;
