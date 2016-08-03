@@ -32,21 +32,24 @@ rspec spec
 # Input
 
 ```
-# Household of family members:
-
 {
-  household_members: [ ... ],
   has_rental_income: ...,             # Does the household have any rental income?
   renting: ...,                       # Is the household renting?
   owns_home: ...,                     # Is this a homeowning household?
   shelter: ...,                       # Does the household stay in a shelter?
   living_with_family_or_friends: ..., # Is the household living with family or friends?
   all_citizens: ...,                  # Are all household members citizens?
+  employee: ...,                      # Is someone in the family an employee?
+  self_employed: ...,                 # Is someone in the family self-employed?
+  disability_benefits: ...,           # Is someone in the family receiving disability?
+  child_support: ...,                 # Is someone in the family receiving child support?
+  retired: ...,                       # Is someone in the family receiving retirement benefits?
+  unemployment_benefits: ...,         # Is someone in the family receiving unemployment benefits?
 }
 ```
 
 
-# Documents output
+# Output
 
 ```
 {

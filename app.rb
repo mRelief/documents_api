@@ -17,13 +17,18 @@ get '/api' do
   content_type :json
 
   documents_request = Api::DocumentsRequest.new(
-    household_members: params["household_members"],
     has_rental_income: params["has_rental_income"],
     renting: params["renting"],
     owns_home: params["owns_home"],
     shelter: params["shelter"],
     living_with_family_or_friends: params["living_with_family_or_friends"],
-    all_citizens: params["all_citizens"]
+    all_citizens: params["all_citizens"],
+    employee: params["employee"],
+    disability_benefits: params["disability_benefits"],
+    child_support: params["child_support"],
+    self_employed: params["self_employed"],
+    retired: params["retired"],
+    unemployment_benefits: params["unemployment_benefits"],
   )
 
   @outcome = documents_request.fetch_documents
