@@ -127,6 +127,7 @@ module Api
         documents_based_on_disability,
         documents_based_on_retirement,
         documents_based_on_unemployment,
+        documents_based_on_rental_income,
       ].compact
     end
 
@@ -152,6 +153,10 @@ module Api
 
     def documents_based_on_unemployment
       AWARD_LETTER_FOR_UNEMPLOYMENT if @unemployment_benefits
+    end
+
+    def documents_based_on_rental_income
+      BANK_STATEMENTS if @has_rental_income
     end
 
   end
