@@ -84,7 +84,7 @@ class HouseholdMember
     AWARD_LETTER_FOR_UNEMPLOYMENT if @unemployment_benefits
   end
 
-  def needs_identity_docs?
+  def needs_identity_docs
     !@employee &&
     !@self_employed &&
     !@disability_benefits &&
@@ -93,7 +93,7 @@ class HouseholdMember
   end
 
   def documents_based_on_identity
-    IdentityDocuments.list if needs_identity_docs?
+    needs_identity_docs ? IdentityDocuments.documents : []
   end
 
 end

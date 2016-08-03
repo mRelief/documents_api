@@ -5,26 +5,15 @@
   window.shared.IdentityDocuments = React.createClass({
 
     propTypes: {
-      documents: React.PropTypes.object.isRequired
-    },
-
-    filteredDocs: function () {
-      // Exclude State ID because it's shown up top.
-
-      return this.props.documents.filter(function (document) {
-        return document.official_name !== 'State ID';
-      });
-    },
-
-    docOfficialNames: function () {
-      return this.filteredDocs().map(function (document) {
-        return document.official_name;
-      });
+      documents: React.PropTypes.array.isRequired
     },
 
     docsList: function () {
-      return this.docOfficialNames().map(function (document_name) {
-        return dom.li({}, document_name);
+      return this.props.documents.filter(function (document) {
+        // Exclude State ID because it's shown up top.
+        return document.official_name !== 'State ID';
+      }).map(function (document) {
+        return dom.li({}, document.official_name);
       });
     },
 

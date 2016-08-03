@@ -7,14 +7,6 @@ class ResidencyDocuments
     @living_with_family_or_friends = living_with_family_or_friends
   end
 
-  def list
-    return {
-      name: "Residency",
-      number_needed: 1,
-      documents: documents
-    }
-  end
-
   def documents
     [
       STATE_ID,

@@ -41,11 +41,11 @@ module Api
         owns_home: @owns_home,
         shelter: @shelter,
         living_with_family_or_friends: @living_with_family_or_friends
-      ).list
+      ).documents
     end
 
     def identity_documents
-      [@household_member.documents_based_on_identity].compact
+      @household_member.documents_based_on_identity
     end
 
     def citizenship_documents
