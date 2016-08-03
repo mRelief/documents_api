@@ -54,4 +54,20 @@ describe "queries against API endpoints" do
 
   end
 
+  context "receiving disability benefits" do
+    let(:params) do
+      these_params = default_params
+      these_params[:disability_benefits] = "true"
+      these_params
+    end
+
+    it "returns correct income documents" do
+      get path, format: :json
+      expect(response_json["income_documents"].size).to eq 1
+      expect(response_json["income_documents"][0]["official_name"]).to eq "Award Letter for Disability"
+    end
+
+  end
+
+
 end
