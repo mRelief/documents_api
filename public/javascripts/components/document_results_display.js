@@ -20,36 +20,24 @@
       onClickStartOver: React.PropTypes.func.isRequired
     },
 
-    applicant: function () {
-      return this.props.householdMembers[0];
-    },
-
     needsIdentityDocs: function () {
-      return this.applicant().needs_identity_docs;
-    },
-
-    findResidencyDocuments: function (documents) {
-      return documents.name === 'Residency';
-    },
-
-    findIdentityDocuments: function (documents) {
-      return documents.name === 'Identity';
-    },
-
-    findCitizenshipDocuments: function (documents) {
-      return documents.official_name === 'I-90 Documentation (for all non-citizen family members)';
+      return (this.props.results.identity_documents.length > 0);
     },
 
     identityDocs: function () {
-      return this.applicant().documents_needed.find(this.findIdentityDocuments).documents;
+      return this.props.results.identity_documents;
     },
 
     residencyDocs: function () {
-      return this.props.otherDocumentsNeeded.find(this.findResidencyDocuments).documents;
+      return this.props.results.residency_documents;
     },
 
     citizenshipDocs: function () {
-      return this.props.otherDocumentsNeeded.find(this.findCitizenshipDocuments);
+      return this.props.results.citizenship_documents;
+    },
+
+    incomeDocs: function () {
+      return this.props.results.income_documents;
     },
 
     render: function () {
@@ -157,7 +145,7 @@
     },
 
     renderIncomeDocs: function () {
-      var docs = this.incomeDocsNeeded();
+      var docs = this.incomeDocs();
 
       if (docs.length === 0) return null;
 
@@ -188,24 +176,9 @@
     },
 
     incomeDocsList: function () {
-      return this.incomeDocsNeeded().map(function (document) {
+      return this.incomeDocs().map(function (document) {
         return dom.li({}, document.official_name);
       });
-    },
-
-    incomeDocsNeeded: function () {
-      // Merge together household member docs needed (besides Identity)
-      // with other docs needed (besides Residency):
-
-      var householdDocs = this.applicant().documents_needed.filter(function (document) {
-        return document.name !== 'Identity';
-      });
-
-      var otherDocs = this.props.otherDocumentsNeeded.filter(function (document) {
-        return (document.name !== 'Residency' && document.official_name !== 'I-90 Documentation (for all non-citizen family members)');
-      });
-
-      return householdDocs.concat(otherDocs);
     },
 
     renderCitizenshipDocs: function () {
