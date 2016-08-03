@@ -1,6 +1,5 @@
 require 'rack/test'
 
-require_relative "../lib/endpoint_generator"
 require_relative "support/spec_helper"
 require_relative "../app"
 
