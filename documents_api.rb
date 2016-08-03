@@ -53,7 +53,7 @@ module Api
     end
 
     def income_documents
-      @household_member.documents_needed
+      @household_member.documents_based_on_income
     end
 
     def get_household_member_data(data)

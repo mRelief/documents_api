@@ -38,7 +38,7 @@ class HouseholdMember
     })
   end
 
-  def documents_needed
+  def documents_based_on_income
     [
       documents_based_on_employment,
       documents_based_on_self_employment,
@@ -46,7 +46,6 @@ class HouseholdMember
       documents_based_on_disability,
       documents_based_on_retirement,
       documents_based_on_unemployment,
-      documents_based_on_identity,
     ].compact
   end
 
