@@ -36,6 +36,11 @@ describe "queries against API endpoints" do
       expect(response_json.keys).to eq  [
         "residency_documents", "identity_documents", "citizenship_documents", "income_documents"
       ]
+
+      expect(response_json["residency_documents"].size).to eq 3
+      expect(response_json["identity_documents"].size).to eq 5
+      expect(response_json["citizenship_documents"].size).to eq 0
+      expect(response_json["income_documents"].size).to eq 0
     end
   end
 
