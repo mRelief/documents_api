@@ -56,7 +56,6 @@ describe "queries against API endpoints" do
       expect(response_json["citizenship_documents"].size).to eq 1
       expect(response_json["citizenship_documents"][0]["official_name"]).to eq "I-90 Documentation (for all non-citizen family members)"
     end
-
   end
 
   context "receiving disability benefits" do
@@ -71,8 +70,23 @@ describe "queries against API endpoints" do
       expect(response_json["income_documents"].size).to eq 1
       expect(response_json["income_documents"][0]["official_name"]).to eq "Award Letter for Disability"
     end
-
   end
 
+  context "living in a shelter" do
+    let(:params) do
+      these_params = default_params
+      these_params[:shelter] = "true"
+      these_params
+    end
 
+    let(:residency_document_names) {
+      response_json["residency_documents"].map { |doc| doc["official_name"] }
+    }
+
+    it "returns correct income documents" do
+      get path, format: :json
+      expect(response_json["residency_documents"].size).to eq 4
+      expect(residency_document_names).to include "Homeless Shelter Statement"
+    end
+  end
 end
