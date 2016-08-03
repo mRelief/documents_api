@@ -182,8 +182,7 @@
     },
 
     renderCitizenshipDocs: function () {
-      var citizenshipDocs = this.citizenshipDocs();
-      if (!citizenshipDocs) return null;
+      if (this.citizenshipDocs().length === 0) return null;
 
       return dom.div({},
         dom.span({}, 'You will need '),
