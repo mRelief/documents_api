@@ -1,5 +1,5 @@
 require_relative "load_documents_data"
-require_relative "models/residency_documents"
+require_relative "residency_documents"
 require_relative "helpers/string_parser"
 require          "active_support/all"
 
