@@ -161,18 +161,6 @@
       });
     },
 
-    onUpdateHouseholdMember: function (attribute_name, event) {
-      var userSubmittedData = this.state.userSubmittedData;
-
-      if (event.target.checked) {
-        userSubmittedData["household_members"][0][attribute_name] = "true";
-      } else {
-        userSubmittedData["household_members"][0][attribute_name] = "false";
-      };
-
-      this.setState({ userSubmittedData: userSubmittedData });
-    },
-
     onUpdateHousehold: function (attribute_name, event) {
       var userSubmittedData = this.state.userSubmittedData;
 
@@ -213,27 +201,27 @@
     },
 
     onCheckEmployee: function (event) {
-      this.onUpdateHouseholdMember("employee", event);
+      this.onUpdateHousehold("employee", event);
     },
 
     onCheckSelfEmployed: function (event) {
-      this.onUpdateHouseholdMember("self_employed", event);
+      this.onUpdateHousehold("self_employed", event);
     },
 
     onCheckRetired: function (event) {
-      this.onUpdateHouseholdMember("retired", event);
+      this.onUpdateHousehold("retired", event);
     },
 
     onCheckUnemployedYesBenefits: function (event) {
-      this.onUpdateHouseholdMember("unemployment_benefits", event);
+      this.onUpdateHousehold("unemployment_benefits", event);
     },
 
     onCheckDisabilityBenefits: function (event) {
-      this.onUpdateHouseholdMember("disability_benefits", event);
+      this.onUpdateHousehold("disability_benefits", event);
     },
 
     onCheckChildSupport: function (event) {
-      this.onUpdateHouseholdMember("child_support", event);
+      this.onUpdateHousehold("child_support", event);
     },
 
     onCheckRentalIncome: function (event) {
