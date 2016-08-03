@@ -60,13 +60,9 @@ rspec spec
 }
 ```
 
-# Data structure for documents
+# Documents data
 
 See `data.rb` for examples.
-
-This is a work in progress.
-
-Structure:
 
 ```
 {
