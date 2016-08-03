@@ -44,4 +44,37 @@ describe Api::DocumentsRequest do
     end
   end
 
+  context "employee" do
+    let(:params) do
+      these_params = default_params
+      these_params[:employee] = "true"
+      these_params
+    end
+
+    it "returns correct income documents" do
+      expect(subject.fetch_documents[:income_documents].size).to eq 1
+      expect(subject.fetch_documents[:income_documents][0][:official_name]).to eq 'Pay Stubs'
+    end
+
+  end
+
+  context "homeowning family" do
+    let(:params) do
+      these_params = default_params
+      these_params[:owns_home] = "true"
+      these_params
+    end
+
+    let(:residency_document_names) {
+      subject.fetch_documents[:residency_documents].map { |doc| doc[:official_name] }
+    }
+
+    it "returns correct residency documents" do
+      expect(residency_document_names.size).to eq 5
+      expect(residency_document_names).to include "Home Owners Insurance"
+      expect(residency_document_names).to include "Property Tax Bill"
+    end
+
+  end
+
 end
