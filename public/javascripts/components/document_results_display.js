@@ -16,8 +16,7 @@
 
     propTypes: {
       singlePersonHousehold: React.PropTypes.bool.isRequired,
-      householdMembers: React.PropTypes.array.isRequired,
-      otherDocumentsNeeded: React.PropTypes.array.isRequired,
+      results: React.PropTypes.object.isRequired,
       onClickStartOver: React.PropTypes.func.isRequired
     },
 
