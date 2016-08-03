@@ -280,12 +280,9 @@
     },
 
     renderResultsFromServer: function () {
-      var results = this.state.documentsDataFromServer;
-
       return createEl(DocumentResultsDisplay, {
           singlePersonHousehold: this.state.singlePersonHousehold,
-          householdMembers: results['household_members'],
-          otherDocumentsNeeded: results['other_documents_needed'],
+          results: this.state.documentsDataFromServer,
           onClickStartOver: this.onClickStartOver
         }
       );

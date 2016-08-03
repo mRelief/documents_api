@@ -46,42 +46,14 @@ rspec spec
 ```
 
 
-# Output - per household
+# Documents output
 
 ```
 {
-  household_members: [
-    {
-      documents_needed: [
-        { ... DATA FOR SELF EMPLOYMENT DOCUMENTATION ... },
-        { ... DATA FOR SOCIAL SECURITY CARD DOCUMENTATION ... },
-        { ... DATA FOR AWARD LETTER ... },
-      ],
-    },
-    {
-      documents_needed: [ ... ],
-    },
-    {
-      documents_needed: [ ... ],
-    },
-  ],
-  other_documents_needed: [
-    { ... DATA FOR DOCUMENT 1 ... },
-    { ... DATA FOR DOCUMENT 2 ... },
-
-    // One document from the following list ...
-
-    {
-      name: "Residency",
-      number_needed: 1,
-      documents: [
-        { ... DATA FOR DOCUMENT 3 ... },
-        { ... DATA FOR DOCUMENT 4 ... },
-        { ... DATA FOR DOCUMENT 5 ... },
-        { ... DATA FOR DOCUMENT 6 ... },
-      ]
-    }
-  ]
+  residency_documents: [ ... ],       # 1 required to prove residency
+  identity_documents: [ ... ],        # 1 required to prove identity
+  citizenship_documents: [ ... ],     # 1 document
+  income_documents: [ ... ],          # All documents required to verify income
 }
 ```
 

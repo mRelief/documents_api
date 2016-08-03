@@ -15,7 +15,7 @@ module Api
                    all_citizens:
     )
 
-      @household_members = reformat_household_members(household_members)
+      @household_member = get_household_member_data(household_members)
       @has_rental_income = StringParser.new(has_rental_income).to_boolean
       @renting = StringParser.new(renting).to_boolean
       @owns_home = StringParser.new(owns_home).to_boolean
@@ -27,11 +27,11 @@ module Api
     end
 
     def fetch_documents
-      household_with_docs = @household_members.map { |person| person.documents_and_info_needed }
-
       return {
-        "household_members": household_with_docs,
-        "other_documents_needed": other_documents_needed
+        "residency_documents": residency_documents,
+        "identity_documents": identity_documents,
+        "citizenship_documents": citizenship_documents,
+        "income_documents": income_documents,
       }
     end
 
@@ -41,31 +41,29 @@ module Api
         owns_home: @owns_home,
         shelter: @shelter,
         living_with_family_or_friends: @living_with_family_or_friends
-      )
+      ).documents
     end
 
-    def other_documents_needed
-      other_documents = [residency_documents.list]
-
-      other_documents << BANK_STATEMENTS if @has_rental_income
-
-      other_documents << I_90_DOCUMENTATION unless @all_citizens
-
-      return other_documents
+    def identity_documents
+      @household_member.documents_based_on_identity
     end
 
-    def reformat_household_members(household_members)
-      # NOTE: This is only written to handle a single household member.
-      #       Larger households come later since the V1 prototype is about a
-      #       single-member household.
+    def citizenship_documents
+      @all_citizens ? [] : [I_90_DOCUMENTATION]
+    end
 
-      household_member_hash = household_members.to_a[0][1].symbolize_keys!
+    def income_documents
+      @household_member.documents_based_on_income
+    end
+
+    def get_household_member_data(data)
+      household_member_hash = data.to_a[0][1].symbolize_keys!
 
       household_member_hash.each_key do |k|
         household_member_hash[k] = StringParser.new(household_member_hash[k]).to_boolean
       end
 
-      [HouseholdMember.new(household_member_hash)]
+      return HouseholdMember.new(household_member_hash)
     end
 
   end

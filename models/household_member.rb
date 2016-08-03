@@ -38,7 +38,7 @@ class HouseholdMember
     })
   end
 
-  def documents_needed
+  def documents_based_on_income
     [
       documents_based_on_employment,
       documents_based_on_self_employment,
@@ -46,11 +46,8 @@ class HouseholdMember
       documents_based_on_disability,
       documents_based_on_retirement,
       documents_based_on_unemployment,
-      documents_based_on_identity,
     ].compact
   end
-
-  private
 
   def to_hash
     {
@@ -87,7 +84,7 @@ class HouseholdMember
     AWARD_LETTER_FOR_UNEMPLOYMENT if @unemployment_benefits
   end
 
-  def needs_identity_docs?
+  def needs_identity_docs
     !@employee &&
     !@self_employed &&
     !@disability_benefits &&
@@ -96,7 +93,7 @@ class HouseholdMember
   end
 
   def documents_based_on_identity
-    IdentityDocuments.list if needs_identity_docs?
+    needs_identity_docs ? IdentityDocuments.documents : []
   end
 
 end
