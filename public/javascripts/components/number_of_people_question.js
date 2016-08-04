@@ -10,7 +10,7 @@
 
     render: function () {
       return dom.div({},
-        dom.h1({}, 'See what documents you need for Food Stamps:'),
+        dom.h1({ id: 'screener-title' }, 'See what documents you need for Food Stamps:'),
         dom.br({}),
         dom.p({}, 'How many people are you applying for?'),
         dom.input({
