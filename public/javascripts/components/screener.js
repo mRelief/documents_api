@@ -54,9 +54,9 @@
       } else if (this.state.answeredFirstPage === false) {
         return this.renderFirstPage();
       } else if (this.state.answeredSecondPage === false) {
-        return this.renderSecondPage();
+        return this.renderOverallIncomeQuestion();
       } else {
-        return this.renderThirdPage();
+        return this.renderIncomeQuestionsPage();
       };
     },
 
@@ -75,11 +75,7 @@
       );
     },
 
-    renderSecondPage: function () {
-      return this.renderOverallIncomeQuestion();
-    },
-
-    renderThirdPage: function () {
+    renderIncomeQuestionsPage: function () {
       return createEl(IncomeQuestionsPage, {
         fetchDocumentsFromServer: this.fetchDocumentsFromServer,
         singlePersonHousehold: this.state.singlePersonHousehold,
