@@ -11,10 +11,7 @@
     },
 
     propTypes: {
-      onCheckRenting: React.PropTypes.func.isRequired,
-      onCheckOwnHome: React.PropTypes.func.isRequired,
-      onCheckShelter: React.PropTypes.func.isRequired,
-      onCheckFamilyOrFriends: React.PropTypes.func.isRequired,
+      onUpdateLivingSituationField: React.PropTypes.func.isRequired,
       onLivingSituationWithoutSpecialDocuments: React.PropTypes.func.isRequired,
     },
 
@@ -24,7 +21,7 @@
         dom.input({
           type: 'radio',
           name: 'livingQuestion',
-          onClick: this.props.onCheckRenting,
+          onClick: this.props.onUpdateLivingSituationField,
           data: 'renting'
         }),
         dom.label({}, 'Renting'),
@@ -32,7 +29,7 @@
         dom.input({
           type: 'radio',
           name: 'livingQuestion',
-          onClick: this.props.onCheckOwnHome,
+          onClick: this.props.onUpdateLivingSituationField,
           data: 'owns_home'
         }),
         dom.label({}, 'Own home'),
@@ -40,7 +37,7 @@
         dom.input({
           type: 'radio',
           name: 'livingQuestion',
-          onClick: this.props.onCheckFamilyOrFriends,
+          onClick: this.props.onUpdateLivingSituationField,
           data: 'living_with_family_or_friends'
         }),
         dom.label({}, 'Living with family/friends'),
@@ -48,7 +45,7 @@
         dom.input({
           type: 'radio',
           name: 'livingQuestion',
-          onClick: this.props.onCheckShelter,
+          onClick: this.props.onUpdateLivingSituationField,
           data: 'shelter'
         }),
         dom.label({}, 'Shelter'),

@@ -119,10 +119,7 @@
 
     renderHousingQuestion: function () {
       return createEl(HousingQuestion, {
-        onCheckRenting: this.onUpdateLivingSituationField,
-        onCheckOwnHome: this.onUpdateLivingSituationField,
-        onCheckShelter: this.onUpdateLivingSituationField,
-        onCheckFamilyOrFriends: this.onUpdateLivingSituationField,
+        onUpdateLivingSituationField: this.onUpdateLivingSituationField,
         onLivingSituationWithoutSpecialDocuments: this.onLivingSituationWithoutSpecialDocuments
       });
     },
