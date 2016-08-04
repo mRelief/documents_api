@@ -21,16 +21,36 @@
     render: function () {
       return dom.div({},
         dom.p({}, 'Describe your living situation:'),
-        dom.input({ type: 'radio', name: 'livingQuestion', onClick: this.props.onCheckRenting }),
+        dom.input({
+          type: 'radio',
+          name: 'livingQuestion',
+          onClick: this.props.onCheckRenting,
+          data: 'renting'
+        }),
         dom.label({}, 'Renting'),
         dom.br({}),
-        dom.input({ type: 'radio', name: 'livingQuestion', onClick: this.props.onCheckOwnHome }),
+        dom.input({
+          type: 'radio',
+          name: 'livingQuestion',
+          onClick: this.props.onCheckOwnHome,
+          data: 'owns_home'
+        }),
         dom.label({}, 'Own home'),
         dom.br({}),
-        dom.input({ type: 'radio', name: 'livingQuestion', onClick: this.props.onCheckFamilyOrFriends }),
+        dom.input({
+          type: 'radio',
+          name: 'livingQuestion',
+          onClick: this.props.onCheckFamilyOrFriends,
+          data: 'living_with_family_or_friends'
+        }),
         dom.label({}, 'Living with family/friends'),
         dom.br({}),
-        dom.input({ type: 'radio', name: 'livingQuestion', onClick: this.props.onCheckShelter }),
+        dom.input({
+          type: 'radio',
+          name: 'livingQuestion',
+          onClick: this.props.onCheckShelter,
+          data: 'shelter'
+        }),
         dom.label({}, 'Shelter'),
         dom.br({}),
         this.renderAdditionalOptions(),
