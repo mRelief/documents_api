@@ -87,11 +87,11 @@
         onCheckChildSupport: this.onCheckChildSupport,
         onCheckRentalIncome: this.onCheckRentalIncome,
         singlePersonHousehold: this.state.singlePersonHousehold,
-        onUpdateEmployment: this.onUpdateEmployment
+        onUpdateDataField: this.onUpdateDataField
       });
     },
 
-    onUpdateEmployment: function (event) {
+    onUpdateDataField: function (event) {
       var dataField = event.target.getAttribute('data');
       var userSubmittedData = this.state.userSubmittedData;
 

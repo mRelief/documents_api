@@ -12,7 +12,7 @@
 
     propTypes: {
       singlePersonHousehold: React.PropTypes.bool.isRequired,
-      onUpdateEmployment: React.PropTypes.func.isRequired,
+      onUpdateDataField: React.PropTypes.func.isRequired,
     },
 
     render: function () {
@@ -20,21 +20,21 @@
         dom.p({}, this.renderInstructions()),
         dom.input({
           type: 'checkbox',
-          onClick: this.props.onUpdateEmployment,
+          onClick: this.props.onUpdateDataField,
           data: 'employee'
         }),
         dom.label({}, 'Employed'),
         dom.br({}),
         dom.input({
           type: 'checkbox',
-          onClick: this.props.onUpdateEmployment,
+          onClick: this.props.onUpdateDataField,
           data: 'self_employed'
         }),
         dom.label({}, 'Self-employed'),
         dom.br({}),
         dom.input({
           type: 'checkbox',
-          onClick: this.props.onUpdateEmployment,
+          onClick: this.props.onUpdateDataField,
           data: 'retired'
         }),
         dom.label({}, 'Retired'),
@@ -69,7 +69,7 @@
           dom.input({
             type: 'radio',
             name: 'unemploymentBeneftQuestion',
-            onClick: this.props.onUpdateEmployment,
+            onClick: this.props.onUpdateDataField,
             data: 'unemployment_benefits'
           }),
           dom.label({}, 'Yes'),

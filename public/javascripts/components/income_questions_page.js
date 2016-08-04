@@ -14,7 +14,7 @@
       onCheckChildSupport: React.PropTypes.func.isRequired,
       onCheckRentalIncome: React.PropTypes.func.isRequired,
       singlePersonHousehold: React.PropTypes.bool.isRequired,
-      onUpdateEmployment: React.PropTypes.func.isRequired
+      onUpdateDataField: React.PropTypes.func.isRequired
     },
 
     render: function () {
@@ -34,7 +34,7 @@
     renderEmploymentQuestion: function () {
       return createEl(EmploymentQuestion, {
         singlePersonHousehold: this.props.singlePersonHousehold,
-        onUpdateEmployment: this.props.onUpdateEmployment,
+        onUpdateDataField: this.props.onUpdateDataField,
       });
     },
 
