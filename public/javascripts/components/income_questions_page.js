@@ -22,7 +22,7 @@
           type: 'submit',
           value: 'Done',
           style: window.shared.ButtonStyle,
-          onClick: this.props.fetchDocumentsFromServer
+          onClick: this.onClickNext
         })
       );
     },
@@ -40,6 +40,18 @@
         onUpdateDataField: this.props.onUpdateDataField,
       });
     },
+
+    onClickNext: function () {
+      if (this.questionsAnswered()) {
+        this.props.fetchDocumentsFromServer();
+      } else {
+        // send message about answering all questions
+      };
+    },
+
+    questionsAnswered: function () {
+      return null;
+    }
 
   });
 })();
