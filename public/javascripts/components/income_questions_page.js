@@ -41,9 +41,9 @@
     renderIncomeSourcesQuestion: function () {
       return createEl(IncomeSourcesQuestion, {
         singlePersonHousehold: this.props.singlePersonHousehold,
-        onCheckDisabilityBenefits: this.props.onCheckDisabilityBenefits,
-        onCheckChildSupport: this.props.onCheckChildSupport,
-        onCheckRentalIncome: this.props.onCheckRentalIncome,
+        onCheckDisabilityBenefits: this.props.onUpdateDataField,
+        onCheckChildSupport: this.props.onUpdateDataField,
+        onCheckRentalIncome: this.props.onUpdateDataField,
       });
     },
 
