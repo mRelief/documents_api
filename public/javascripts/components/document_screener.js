@@ -82,10 +82,6 @@
     renderThirdPage: function () {
       return createEl(IncomeQuestionsPage, {
         fetchDocumentsFromServer: this.fetchDocumentsFromServer,
-        onCheckUnemployedYesBenefits: this.onCheckUnemployedYesBenefits,
-        onCheckDisabilityBenefits: this.onCheckDisabilityBenefits,
-        onCheckChildSupport: this.onCheckChildSupport,
-        onCheckRentalIncome: this.onCheckRentalIncome,
         singlePersonHousehold: this.state.singlePersonHousehold,
         onUpdateDataField: this.onUpdateDataField
       });
@@ -189,22 +185,6 @@
       userSubmittedData['living_with_family_or_friends'] = "false";
 
       this.setState({ userSubmittedData: userSubmittedData });
-    },
-
-    onCheckUnemployedYesBenefits: function (event) {
-      this.onUpdateHousehold("unemployment_benefits", event);
-    },
-
-    onCheckDisabilityBenefits: function (event) {
-      this.onUpdateHousehold("disability_benefits", event);
-    },
-
-    onCheckChildSupport: function (event) {
-      this.onUpdateHousehold("child_support", event);
-    },
-
-    onCheckRentalIncome: function (event) {
-      this.onUpdateHousehold('has_rental_income', event);
     },
 
     onCheckRenting: function (event) {

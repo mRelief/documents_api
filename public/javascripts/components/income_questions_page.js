@@ -9,10 +9,6 @@
 
     propTypes: {
       fetchDocumentsFromServer: React.PropTypes.func.isRequired,
-      onCheckUnemployedYesBenefits: React.PropTypes.func.isRequired,
-      onCheckDisabilityBenefits: React.PropTypes.func.isRequired,
-      onCheckChildSupport: React.PropTypes.func.isRequired,
-      onCheckRentalIncome: React.PropTypes.func.isRequired,
       singlePersonHousehold: React.PropTypes.bool.isRequired,
       onUpdateDataField: React.PropTypes.func.isRequired
     },
@@ -41,9 +37,7 @@
     renderIncomeSourcesQuestion: function () {
       return createEl(IncomeSourcesQuestion, {
         singlePersonHousehold: this.props.singlePersonHousehold,
-        onCheckDisabilityBenefits: this.props.onUpdateDataField,
-        onCheckChildSupport: this.props.onUpdateDataField,
-        onCheckRentalIncome: this.props.onUpdateDataField,
+        onUpdateDataField: this.props.onUpdateDataField,
       });
     },
 
