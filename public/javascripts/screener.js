@@ -22,7 +22,8 @@
         hasResponseFromServer: false,
         documentsDataFromServer: null,
         userSubmittedData: DefaultData,
-        singlePersonHousehold: true
+        singlePersonHousehold: true,
+        errorFromServer: false
       };
     },
 
@@ -33,7 +34,6 @@
         dataType: 'json',
         contentType: 'application/json',
         success: function (result) {
-          console.log(result);
           this.setState({
             hasResponseFromServer: true,
             documentsDataFromServer: result
@@ -41,13 +41,16 @@
         }.bind(this),
         error: function (result) {
           console.log(result);
-        }
+          this.setState({ errorFromServer: true });
+        }.bind(this)
       });
     },
 
     render: function() {
       if (this.state.hasResponseFromServer === true) {
         return this.renderResultsFromServer();
+      } else if (this.state.errorFromServer == true) {
+        return this.renderErrorFromServer();
       } else if (this.state.answeredFirstPage === false) {
         return this.renderFirstPage();
       } else if (this.state.answeredSecondPage === false) {
@@ -263,7 +266,8 @@
         hasResponseFromServer: false,
         documentsDataFromServer: null,
         userSubmittedData: DefaultData,
-        singlePersonHousehold: true
+        singlePersonHousehold: true,
+        errorFromServer: false
       });
     },
 
@@ -274,7 +278,19 @@
           onClickStartOver: this.onClickStartOver
         }
       );
-    }
+    },
+
+    renderErrorFromServer: function () {
+      return dom.div({},
+        dom.p({}, 'Ooops, something went wrong. We apologize.'),
+        dom.input({
+          type: 'submit',
+          value: 'Start Over',
+          onClick: this.onClickStartOver,
+          style: window.shared.ButtonStyle
+        })
+      );
+    },
 
   });
 
