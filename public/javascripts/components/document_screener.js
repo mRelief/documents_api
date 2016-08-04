@@ -14,7 +14,7 @@
   var CitizenshipQuestion = window.shared.CitizenshipQuestion;
   var ErrorPage = window.shared.ErrorPage;
 
-  var DocumentScreener = React.createClass({
+  window.shared.DocumentScreener = React.createClass({
 
     getInitialState: function() {
       return {
@@ -282,8 +282,4 @@
     },
 
   });
-
-  var mainElement = document.getElementById("screener");
-
-  ReactDOM.render(React.createElement(DocumentScreener), mainElement);
 })();
