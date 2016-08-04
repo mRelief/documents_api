@@ -8,11 +8,10 @@
   var DocumentResultsDisplay = window.shared.DocumentResultsDisplay;
   var NumberOfPeopleQuestion = window.shared.NumberOfPeopleQuestion;
   var OverallIncomeQuestion = window.shared.OverallIncomeQuestion;
-  var EmploymentQuestion = window.shared.EmploymentQuestion;
-  var IncomeSourcesQuestion = window.shared.IncomeSourcesQuestion;
   var HousingQuestion = window.shared.HousingQuestion;
   var CitizenshipQuestion = window.shared.CitizenshipQuestion;
   var ErrorPage = window.shared.ErrorPage;
+  var IncomeQuestionsPage = window.shared.IncomeQuestionsPage;
 
   window.shared.DocumentScreener = React.createClass({
 
@@ -81,17 +80,17 @@
     },
 
     renderThirdPage: function () {
-      return dom.div({},
-        this.renderEmploymentQuestion(),
-        this.renderIncomeSourcesQuestion(),
-        dom.br({}),
-        dom.input({
-          type: 'submit',
-          value: 'Done',
-          style: window.shared.ButtonStyle,
-          onClick: this.fetchDocumentsFromServer
-        })
-      );
+      return createEl(IncomeQuestionsPage, {
+        fetchDocumentsFromServer: this.fetchDocumentsFromServer,
+        onCheckEmployee: this.onCheckEmployee,
+        onCheckSelfEmployed: this.onCheckSelfEmployed,
+        onCheckRetired: this.onCheckRetired,
+        onCheckUnemployedYesBenefits: this.onCheckUnemployedYesBenefits,
+        onCheckDisabilityBenefits: this.onCheckDisabilityBenefits,
+        onCheckChildSupport: this.onCheckChildSupport,
+        onCheckRentalIncome: this.onCheckRentalIncome,
+        singlePersonHousehold: this.state.singlePersonHousehold,
+      });
     },
 
     onClickNextFromFirstPage: function () {
@@ -140,25 +139,6 @@
 
     onClickNoIncome: function () {
       this.fetchDocumentsFromServer();
-    },
-
-    renderEmploymentQuestion: function () {
-      return createEl(EmploymentQuestion, {
-        singlePersonHousehold: this.state.singlePersonHousehold,
-        onCheckEmployee: this.onCheckEmployee,
-        onCheckSelfEmployed: this.onCheckSelfEmployed,
-        onCheckRetired: this.onCheckRetired,
-        onCheckUnemployedYesBenefits: this.onCheckUnemployedYesBenefits,
-      });
-    },
-
-    renderIncomeSourcesQuestion: function () {
-      return createEl(IncomeSourcesQuestion, {
-        singlePersonHousehold: this.state.singlePersonHousehold,
-        onCheckDisabilityBenefits: this.onCheckDisabilityBenefits,
-        onCheckChildSupport: this.onCheckChildSupport,
-        onCheckRentalIncome: this.onCheckRentalIncome,
-      });
     },
 
     onUpdateHousehold: function (attribute_name, event) {
