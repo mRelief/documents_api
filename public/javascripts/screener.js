@@ -12,6 +12,7 @@
   var IncomeSourcesQuestion = window.shared.IncomeSourcesQuestion;
   var HousingQuestion = window.shared.HousingQuestion;
   var CitizenshipQuestion = window.shared.CitizenshipQuestion;
+  var ErrorPage = window.shared.ErrorPage;
 
   var DocumentScreener = React.createClass({
 
@@ -277,15 +278,7 @@
     },
 
     renderErrorFromServer: function () {
-      return dom.div({},
-        dom.p({}, 'Ooops, something went wrong. We apologize.'),
-        dom.input({
-          type: 'submit',
-          value: 'Start Over',
-          onClick: this.onClickStartOver,
-          style: window.shared.ButtonStyle
-        })
-      );
+      return createEl(ErrorPage, { onClickStartOver: this.onClickStartOver });
     },
 
   });
