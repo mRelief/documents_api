@@ -90,7 +90,21 @@
         onCheckChildSupport: this.onCheckChildSupport,
         onCheckRentalIncome: this.onCheckRentalIncome,
         singlePersonHousehold: this.state.singlePersonHousehold,
+        onUpdateEmployment: this.onUpdateEmployment
       });
+    },
+
+    onUpdateEmployment: function (event) {
+      var dataField = event.target.getAttribute('data');
+      var userSubmittedData = this.state.userSubmittedData;
+
+      if (event.target.checked) {
+        userSubmittedData[dataField] = "true";
+      } else {
+        userSubmittedData[dataField] = "false";
+      };
+
+      this.setState({ userSubmittedData: userSubmittedData });
     },
 
     onClickNextFromFirstPage: function () {

@@ -17,6 +17,7 @@
       onCheckChildSupport: React.PropTypes.func.isRequired,
       onCheckRentalIncome: React.PropTypes.func.isRequired,
       singlePersonHousehold: React.PropTypes.bool.isRequired,
+      onUpdateEmployment: React.PropTypes.func.isRequired
     },
 
     render: function () {
@@ -36,10 +37,10 @@
     renderEmploymentQuestion: function () {
       return createEl(EmploymentQuestion, {
         singlePersonHousehold: this.props.singlePersonHousehold,
-        onCheckEmployee: this.props.onCheckEmployee,
-        onCheckSelfEmployed: this.props.onCheckSelfEmployed,
-        onCheckRetired: this.props.onCheckRetired,
-        onCheckUnemployedYesBenefits: this.props.onCheckUnemployedYesBenefits,
+        onCheckEmployee: this.props.onUpdateEmployment,
+        onCheckSelfEmployed: this.props.onUpdateEmployment,
+        onCheckRetired: this.props.onUpdateEmployment,
+        onCheckUnemployedYesBenefits: this.props.onUpdateEmployment,
       });
     },
 
