@@ -152,7 +152,7 @@
       this.setState({ singlePersonHousehold: false, });
     },
 
-    onUpdateLivingSituationField: function () {
+    onUpdateLivingSituationField: function (event) {
       var dataField = event.target.getAttribute('data');
       var userSubmittedData = this.state.userSubmittedData;
 
