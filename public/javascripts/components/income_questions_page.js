@@ -9,9 +9,6 @@
 
     propTypes: {
       fetchDocumentsFromServer: React.PropTypes.func.isRequired,
-      onCheckEmployee: React.PropTypes.func.isRequired,
-      onCheckSelfEmployed: React.PropTypes.func.isRequired,
-      onCheckRetired: React.PropTypes.func.isRequired,
       onCheckUnemployedYesBenefits: React.PropTypes.func.isRequired,
       onCheckDisabilityBenefits: React.PropTypes.func.isRequired,
       onCheckChildSupport: React.PropTypes.func.isRequired,

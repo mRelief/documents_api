@@ -82,9 +82,6 @@
     renderThirdPage: function () {
       return createEl(IncomeQuestionsPage, {
         fetchDocumentsFromServer: this.fetchDocumentsFromServer,
-        onCheckEmployee: this.onCheckEmployee,
-        onCheckSelfEmployed: this.onCheckSelfEmployed,
-        onCheckRetired: this.onCheckRetired,
         onCheckUnemployedYesBenefits: this.onCheckUnemployedYesBenefits,
         onCheckDisabilityBenefits: this.onCheckDisabilityBenefits,
         onCheckChildSupport: this.onCheckChildSupport,
@@ -192,18 +189,6 @@
       userSubmittedData['living_with_family_or_friends'] = "false";
 
       this.setState({ userSubmittedData: userSubmittedData });
-    },
-
-    onCheckEmployee: function (event) {
-      this.onUpdateHousehold("employee", event);
-    },
-
-    onCheckSelfEmployed: function (event) {
-      this.onUpdateHousehold("self_employed", event);
-    },
-
-    onCheckRetired: function (event) {
-      this.onUpdateHousehold("retired", event);
     },
 
     onCheckUnemployedYesBenefits: function (event) {
