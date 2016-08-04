@@ -148,18 +148,6 @@
       this.fetchDocumentsFromServer();
     },
 
-    onUpdateHousehold: function (attribute_name, event) {
-      var userSubmittedData = this.state.userSubmittedData;
-
-      if (event.target.checked) {
-        userSubmittedData[attribute_name] = "true";
-      } else {
-        userSubmittedData[attribute_name] = "false";
-      };
-
-      this.setState({ userSubmittedData: userSubmittedData });
-    },
-
     onClickMyFamily: function () {
       this.setState({ singlePersonHousehold: false, });
     },
