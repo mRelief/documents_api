@@ -119,10 +119,10 @@
 
     renderHousingQuestion: function () {
       return createEl(HousingQuestion, {
-        onCheckRenting: this.onCheckRenting,
-        onCheckOwnHome: this.onCheckOwnHome,
-        onCheckShelter: this.onCheckShelter,
-        onCheckFamilyOrFriends: this.onCheckFamilyOrFriends,
+        onCheckRenting: this.onUpdateLivingSituationField,
+        onCheckOwnHome: this.onUpdateLivingSituationField,
+        onCheckShelter: this.onUpdateLivingSituationField,
+        onCheckFamilyOrFriends: this.onUpdateLivingSituationField,
         onLivingSituationWithoutSpecialDocuments: this.onLivingSituationWithoutSpecialDocuments
       });
     },
@@ -152,14 +152,15 @@
       this.setState({ singlePersonHousehold: false, });
     },
 
-    onUpdateLivingSituation: function (attribute_name) {
+    onUpdateLivingSituationField: function () {
+      var dataField = event.target.getAttribute('data');
       var userSubmittedData = this.state.userSubmittedData;
 
       userSubmittedData['renting'] = "false";
       userSubmittedData['owns_home'] = "false";
       userSubmittedData['shelter'] = "false";
       userSubmittedData['living_with_family_or_friends'] = "false";
-      userSubmittedData[attribute_name] = "true";
+      userSubmittedData[dataField] = "true";
 
       this.setState({ userSubmittedData: userSubmittedData });
     },
