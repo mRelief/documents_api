@@ -82,15 +82,22 @@
     renderThirdPage: function () {
       return createEl(IncomeQuestionsPage, {
         fetchDocumentsFromServer: this.fetchDocumentsFromServer,
-        onCheckEmployee: this.onCheckEmployee,
-        onCheckSelfEmployed: this.onCheckSelfEmployed,
-        onCheckRetired: this.onCheckRetired,
-        onCheckUnemployedYesBenefits: this.onCheckUnemployedYesBenefits,
-        onCheckDisabilityBenefits: this.onCheckDisabilityBenefits,
-        onCheckChildSupport: this.onCheckChildSupport,
-        onCheckRentalIncome: this.onCheckRentalIncome,
         singlePersonHousehold: this.state.singlePersonHousehold,
+        onUpdateDataField: this.onUpdateDataField
       });
+    },
+
+    onUpdateDataField: function (event) {
+      var dataField = event.target.getAttribute('data');
+      var userSubmittedData = this.state.userSubmittedData;
+
+      if (event.target.checked) {
+        userSubmittedData[dataField] = "true";
+      } else {
+        userSubmittedData[dataField] = "false";
+      };
+
+      this.setState({ userSubmittedData: userSubmittedData });
     },
 
     onClickNextFromFirstPage: function () {
@@ -141,18 +148,6 @@
       this.fetchDocumentsFromServer();
     },
 
-    onUpdateHousehold: function (attribute_name, event) {
-      var userSubmittedData = this.state.userSubmittedData;
-
-      if (event.target.checked) {
-        userSubmittedData[attribute_name] = "true";
-      } else {
-        userSubmittedData[attribute_name] = "false";
-      };
-
-      this.setState({ userSubmittedData: userSubmittedData });
-    },
-
     onClickMyFamily: function () {
       this.setState({ singlePersonHousehold: false, });
     },
@@ -178,34 +173,6 @@
       userSubmittedData['living_with_family_or_friends'] = "false";
 
       this.setState({ userSubmittedData: userSubmittedData });
-    },
-
-    onCheckEmployee: function (event) {
-      this.onUpdateHousehold("employee", event);
-    },
-
-    onCheckSelfEmployed: function (event) {
-      this.onUpdateHousehold("self_employed", event);
-    },
-
-    onCheckRetired: function (event) {
-      this.onUpdateHousehold("retired", event);
-    },
-
-    onCheckUnemployedYesBenefits: function (event) {
-      this.onUpdateHousehold("unemployment_benefits", event);
-    },
-
-    onCheckDisabilityBenefits: function (event) {
-      this.onUpdateHousehold("disability_benefits", event);
-    },
-
-    onCheckChildSupport: function (event) {
-      this.onUpdateHousehold("child_support", event);
-    },
-
-    onCheckRentalIncome: function (event) {
-      this.onUpdateHousehold('has_rental_income', event);
     },
 
     onCheckRenting: function (event) {

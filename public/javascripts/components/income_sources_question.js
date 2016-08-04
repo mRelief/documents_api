@@ -6,21 +6,31 @@
 
     propTypes: {
       singlePersonHousehold: React.PropTypes.bool.isRequired,
-      onCheckDisabilityBenefits: React.PropTypes.func.isRequired,
-      onCheckChildSupport: React.PropTypes.func.isRequired,
-      onCheckRentalIncome: React.PropTypes.func.isRequired,
+      onUpdateDataField: React.PropTypes.func.isRequired,
     },
 
     render: function () {
       return dom.div({},
         dom.p({}, this.question()),
-        dom.input({ type: 'checkbox', onClick: this.props.onCheckDisabilityBenefits }),
+        dom.input({
+          type: 'checkbox',
+          onClick: this.props.onUpdateDataField,
+          data: 'disability_benefits',
+        }),
         dom.label({}, 'Disability benefits'),
         dom.br({}),
-        dom.input({ type: 'checkbox', onClick: this.props.onCheckChildSupport }),
+        dom.input({
+          type: 'checkbox',
+          onClick: this.props.onUpdateDataField,
+          data: 'child_support',
+        }),
         dom.label({}, 'Child support'),
         dom.br({}),
-        dom.input({ type: 'checkbox', onClick: this.props.onCheckRentalIncome }),
+        dom.input({
+          type: 'checkbox',
+          onClick: this.props.onUpdateDataField,
+          data: 'has_rental_income',
+        }),
         dom.label({}, 'Rental income'),
         dom.br({}),
         dom.input({ type: 'checkbox'}),

@@ -12,25 +12,37 @@
 
     propTypes: {
       singlePersonHousehold: React.PropTypes.bool.isRequired,
-      onCheckEmployee: React.PropTypes.func.isRequired,
-      onCheckSelfEmployed: React.PropTypes.func.isRequired,
-      onCheckRetired: React.PropTypes.func.isRequired,
-      onCheckUnemployedYesBenefits: React.PropTypes.func.isRequired,
+      onUpdateDataField: React.PropTypes.func.isRequired,
     },
 
     render: function () {
       return dom.div({},
         dom.p({}, this.renderInstructions()),
-        dom.input({ type: 'checkbox', onClick: this.props.onCheckEmployee }),
+        dom.input({
+          type: 'checkbox',
+          onClick: this.props.onUpdateDataField,
+          data: 'employee'
+        }),
         dom.label({}, 'Employed'),
         dom.br({}),
-        dom.input({ type: 'checkbox', onClick: this.props.onCheckSelfEmployed }),
+        dom.input({
+          type: 'checkbox',
+          onClick: this.props.onUpdateDataField,
+          data: 'self_employed'
+        }),
         dom.label({}, 'Self-employed'),
         dom.br({}),
-        dom.input({ type: 'checkbox', onClick: this.props.onCheckRetired }),
+        dom.input({
+          type: 'checkbox',
+          onClick: this.props.onUpdateDataField,
+          data: 'retired'
+        }),
         dom.label({}, 'Retired'),
         dom.br({}),
-        dom.input({ type: 'checkbox', onClick: this.onCheckUnemployed }),
+        dom.input({
+          type: 'checkbox',
+          onClick: this.onCheckUnemployed
+        }),
         dom.label({}, 'Unemployed'),
         dom.br({}),
         dom.br({}),
@@ -57,7 +69,8 @@
           dom.input({
             type: 'radio',
             name: 'unemploymentBeneftQuestion',
-            onClick: this.props.onCheckUnemployedYesBenefits
+            onClick: this.props.onUpdateDataField,
+            data: 'unemployment_benefits'
           }),
           dom.label({}, 'Yes'),
           dom.br({}),
