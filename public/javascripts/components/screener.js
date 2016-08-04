@@ -13,7 +13,7 @@
   var ErrorPage = window.shared.ErrorPage;
   var IncomeQuestionsPage = window.shared.IncomeQuestionsPage;
 
-  window.shared.DocumentScreener = React.createClass({
+  window.shared.Screener = React.createClass({
 
     getInitialState: function() {
       return {
