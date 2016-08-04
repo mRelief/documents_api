@@ -1,6 +1,6 @@
 (function() {
   window.shared || (window.shared = {});
-  var DocumentScreener = window.shared.DocumentScreener;
+  var Screener = window.shared.Screener;
   var mainElement = document.getElementById("screener");
-  ReactDOM.render(React.createElement(DocumentScreener), mainElement);
+  ReactDOM.render(React.createElement(Screener), mainElement);
 })();
