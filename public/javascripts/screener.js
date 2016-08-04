@@ -97,10 +97,6 @@
       this.setState({ answeredFirstPage: true });
     },
 
-    onClickNextFromSecondPage: function () {
-      this.fetchDocumentsFromServer();
-    },
-
     renderNumberOfPeople: function () {
       return createEl(NumberOfPeopleQuestion, {
         onClickMyFamily: this.onClickMyFamily
