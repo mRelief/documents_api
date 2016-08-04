@@ -176,22 +176,6 @@
       this.setState({ userSubmittedData: userSubmittedData });
     },
 
-    onCheckRenting: function (event) {
-      this.onUpdateLivingSituation('renting');
-    },
-
-    onCheckOwnHome: function (event) {
-      this.onUpdateLivingSituation('owns_home');
-    },
-
-    onCheckShelter: function (event) {
-      this.onUpdateLivingSituation('shelter');
-    },
-
-    onCheckFamilyOrFriends: function (event) {
-      this.onUpdateLivingSituation('living_with_family_or_friends');
-    },
-
     onCheckNotAllCitizens: function () {
       var userSubmittedData = this.state.userSubmittedData;
       userSubmittedData["all_citizens"] = "false";
