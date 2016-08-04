@@ -34,10 +34,7 @@
     renderEmploymentQuestion: function () {
       return createEl(EmploymentQuestion, {
         singlePersonHousehold: this.props.singlePersonHousehold,
-        onCheckEmployee: this.props.onUpdateEmployment,
-        onCheckSelfEmployed: this.props.onUpdateEmployment,
-        onCheckRetired: this.props.onUpdateEmployment,
-        onCheckUnemployedYesBenefits: this.props.onUpdateEmployment,
+        onUpdateEmployment: this.props.onUpdateEmployment,
       });
     },
 
