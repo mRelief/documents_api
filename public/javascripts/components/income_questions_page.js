@@ -13,6 +13,10 @@
       onUpdateDataField: React.PropTypes.func.isRequired
     },
 
+    getInitialState: function() {
+      return { showRequiredQuestionsWarning: false };
+    },
+
     render: function () {
       return dom.div({},
         this.renderEmploymentQuestion(),
@@ -45,7 +49,7 @@
       if (this.questionsAnswered()) {
         this.props.fetchDocumentsFromServer();
       } else {
-        // send message about answering all questions
+        this.setState({ showRequiredQuestionsWarning: true });
       };
     },
 
