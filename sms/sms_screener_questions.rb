@@ -17,11 +17,6 @@ SMS_SCREENER = {
     'Is everyone in your household a US citizen? ' +
     'Yes or No.'
   ),
-  'overall_income_question' => (
-    'Are you currently receiving any income ' +
-    'through employment, public aid, or some other means? ' +
-    'Yes or No.'
-  ),
   'employment_question' => (
     'Select all that describe you: ' +
     'A. Employed. ' +
