@@ -10,7 +10,7 @@ class DocumentResultsMessage < Struct.new :original_session
 
   def results_with_state_id
     'You will need these documents: ' +
-    [state_id, income_docs].flatten.compact.join(', ') +
+    [state_id, citizenship_docs, income_docs].flatten.compact.join(', ') +
     '.'
   end
 
@@ -70,8 +70,8 @@ class DocumentResultsMessage < Struct.new :original_session
     'Bank Statements' if session.has_rental_income?
   end
 
-  def citizenship_docs_question
-    return
+  def citizenship_docs
+    'I-90 Documentation for all non-citizen family members' unless session.all_citizens?
   end
 
   def session
