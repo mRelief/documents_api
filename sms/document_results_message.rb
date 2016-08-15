@@ -58,7 +58,7 @@ class DocumentResultsMessage < Struct.new :original_session
       owns_home: session.owns_home?,
       shelter: session.shelter?,
       living_with_family_or_friends: session.living_with_family_or_friends?,
-    )
+    ).documents
 
     p 'documents'
     p documents
