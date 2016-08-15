@@ -42,8 +42,4 @@ class IncomeDocuments < Struct.new :unwrapped_session
     'Bank Statements' if session.has_rental_income?
   end
 
-  def citizenship_docs
-    'I-90 Documentation for all non-citizen family members' unless session.all_citizens?
-  end
-
 end
