@@ -48,6 +48,8 @@ end
 
 post '/sms' do
   session[:counter] ||= 0
+  p 'session!'
+  p session
   IncomingMessageHandler.new(params[:From], params[:Body], session[:counter]).respond
   session[:counter] += 1
 end
