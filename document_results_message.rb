@@ -20,7 +20,7 @@ class DocumentResultsMessage < Struct.new :original_session
 
   def state_id
     if session.single_person_household?
-      'Your State ID'
+      'State ID'
     else
       'State IDs for everyone you are applying for'
     end
