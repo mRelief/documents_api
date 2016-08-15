@@ -34,6 +34,8 @@ class IncomingMessageHandler < Struct.new :from, :body, :session
       new_session['disability_benefits'] = 'true' if body.upcase == 'A'
       new_session['child_support'] = 'true' if body.upcase == 'B'
       new_session['has_rental_income'] = 'true' if body.upcase == 'C'
+    when 'state_id_question'
+      new_session['has_state_id'] = 'false' if body.upcase == 'NO'
     end
 
     return new_session

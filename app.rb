@@ -66,6 +66,7 @@ post '/sms' do
   session["has_rental_income"] ||= "false"
   session["disability_benefits"] ||= "false"
   session["child_support"] ||= "false"
+  session["has_state_id"] ||= "true"
 
   handler = IncomingMessageHandler.new(params[:From], params[:Body], session)
   handler.respond
