@@ -52,8 +52,12 @@ end
 
 post '/sms' do
   session["step"] ||= "initial"
-  IncomingMessageHandler.new(params[:From], params[:Body], session["step"]).respond
-  session["step"] = "housing"
+  step = session["step"]
+
+  handler = IncomingMessageHandler.new(params[:From], params[:Body], step)
+  handler.respond
+  session["step"] = handler.next_step
+
   return nil
 end
 
