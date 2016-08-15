@@ -42,7 +42,8 @@ class IncomingMessageHandler < Struct.new :from, :body, :session
   end
 
   def next_step
-    screener_steps[current_step_index + 1]
+    return screener_steps[0] if body.upcase == 'RESET'
+    return screener_steps[current_step_index + 1]
   end
 
   private
