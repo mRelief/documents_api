@@ -62,6 +62,7 @@ class IncomingMessageHandler < Struct.new :from, :body, :session
       'overall_income_question',
       'employment_question',
       'other_income_sources_question',
+      'state_id_question'
       'result',
     ]
   end

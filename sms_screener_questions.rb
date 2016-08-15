@@ -35,5 +35,8 @@ SMS_SCREENER = {
     'B. Child support ' +
     'C. Rental income ' +
     'D. None of the above '
+  ),
+  'state_id_question' => (
+    'Do you have a State ID? Yes or No.'
   )
 }
