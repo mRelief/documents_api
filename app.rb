@@ -52,6 +52,7 @@ post '/sms' do
   p session
   IncomingMessageHandler.new(params[:From], params[:Body], session["counter"]).respond
   session["counter"] += 1
+  return nil
 end
 
 get '/' do
