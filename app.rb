@@ -47,10 +47,16 @@ end
 post '/sms' do
   @client = Twilio::REST::Client.new(ENV['account_sid'], ENV['auth_token'])
 
+  welcome_message = 'Welcome. Here you can find out what ' +
+                    'documents you need to apply for Food Stamps. '
+
+  first_question = 'How many people are you applying for? ' +
+                   'A. Just Me. B. My Family.'
+
   @client.messages.create(
     from: ENV['twilio_number'],
     to: params[:From],
-    body: 'Hey there!'
+    body: (welcome_message + first_question)
   )
 end
 
