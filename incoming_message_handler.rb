@@ -6,7 +6,7 @@ class IncomingMessageHandler < Struct.new :from, :body, :step
     client.messages.create(
       from: ENV['twilio_number'],
       to: from,
-      body: SMS_SCREENER[step]
+      body: message
     )
   end
 
@@ -16,6 +16,11 @@ class IncomingMessageHandler < Struct.new :from, :body, :step
 
   private
 
+  def message
+    return 'Here is your result!' if step == 'result'
+    return SMS_SCREENER[step]
+  end
+
   def screener_steps
     [
       'initial',
@@ -24,6 +29,7 @@ class IncomingMessageHandler < Struct.new :from, :body, :step
       'overall_income_question',
       'employment_question',
       'other_income_sources_question',
+      'result',
     ]
   end
 
