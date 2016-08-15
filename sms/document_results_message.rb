@@ -89,7 +89,9 @@ class DocumentResultsMessage < Struct.new :original_session
 
   def citizenship_plus_income_section
     return if citizenship_plus_income_docs.size == 0
-    return 'You will also need a ' + citizenship_plus_income_docs.first if citizenship_plus_income_docs.size == 1
+
+    return ('You will also need a ' + citizenship_plus_income_docs.first + '.') if citizenship_plus_income_docs.size == 1
+
     return 'You will also need these documents: ' + [
       citizenship_docs,
       income_docs
