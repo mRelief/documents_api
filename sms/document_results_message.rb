@@ -39,7 +39,8 @@ class DocumentResultsMessage < Struct.new :original_session
   end
 
   def no_state_id_statement
-    'Since you don\'t have a State ID, you will need to prove residency and identity.'
+    return 'Since you don\'t have a State ID, you will need to prove residency.' unless needs_identity_docs
+    return 'Since you don\'t have a State ID, you will need to prove residency and identity.'
   end
 
   def citizenship_plus_income_docs
