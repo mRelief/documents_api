@@ -15,7 +15,11 @@ class DocumentResultsMessage < Struct.new :original_session
   end
 
   def results_without_state_id
-    return
+    [no_state_id_statement].join(' ')
+  end
+
+  def no_state_id_statement
+    'Since you don\'t have a State ID, you will need to prove residency and identity.'
   end
 
   def state_id
