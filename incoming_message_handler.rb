@@ -1,4 +1,4 @@
-class IncomingMessageHandler < Struct.new :from, :body
+class IncomingMessageHandler < Struct.new :from, :body, :count
 
   def client
     @client ||= Twilio::REST::Client.new(ENV['account_sid'], ENV['auth_token'])
@@ -16,7 +16,7 @@ class IncomingMessageHandler < Struct.new :from, :body
     @client.messages.create(
       from: ENV['twilio_number'],
       to: from,
-      body: (welcome_message + first_question)
+      body: (welcome_message + first_question + count.to_s)
     )
   end
 

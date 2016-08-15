@@ -47,7 +47,9 @@ get '/screener' do
 end
 
 post '/sms' do
-  IncomingMessageHandler.new(params[:From], params[:Body]).respond
+  session[:counter] ||= 0
+  IncomingMessageHandler.new(params[:From], params[:Body], session[:counter]).respond
+  session[:counter] += 1
 end
 
 get '/' do
