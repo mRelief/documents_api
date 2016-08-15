@@ -40,6 +40,10 @@ get '/screener' do
   erb :show
 end
 
+get '/sms' do
+  'sms'
+end
+
 get '/' do
   redirect to '/screener'
 end
