@@ -63,7 +63,7 @@ class DocumentResultsMessage < Struct.new :original_session
     p 'documents'
     p documents
 
-    with_names = documents.map { |doc| doc['official_name'] }
+    with_names = documents.map { |doc| doc[:official_name] }
 
     p 'with_names'
     p with_names
