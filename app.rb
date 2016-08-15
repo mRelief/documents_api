@@ -10,6 +10,7 @@ require_relative "incoming_message_handler"
 
 configure do
   enable :cross_origin
+  enable :sessions
 end
 
 options "*" do
