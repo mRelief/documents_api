@@ -26,14 +26,14 @@ class IncomingMessageHandler < Struct.new :from, :body, :session
       new_session["all_citizens"] = "false" if body.upcase == 'NO'
     when 'overall_income_question'
     when 'employment_question'
-      new_session["employee"] ||= "true" if body.upcase == 'A'
-      new_session["self_employed"] ||= "true" if body.upcase == 'B'
-      new_session["retired"] ||= "true" if body.upcase == 'C'
-      new_session["unemployment_benefits"] ||= "true" if body.upcase == 'D'
+      new_session["employee"] = "true" if body.upcase == 'A'
+      new_session["self_employed"] = "true" if body.upcase == 'B'
+      new_session["retired"] = "true" if body.upcase == 'C'
+      new_session["unemployment_benefits"] = "true" if body.upcase == 'D'
     when 'other_income_sources_question'
-      new_session["disability_benefits"] = "true" if body.upcase = 'A'
-      new_session["child_support"] = "true" if body.upcase = 'B'
-      new_session["has_rental_income"] = "true" if body.upcase = 'C'
+      new_session["disability_benefits"] = "true" if body.upcase == 'A'
+      new_session["child_support"] = "true" if body.upcase == 'B'
+      new_session["has_rental_income"] = "true" if body.upcase == 'C'
     end
 
     return new_session
