@@ -51,7 +51,9 @@ get '/' do
 end
 
 post '/sms' do
-  IncomingMessageHandler.new(params[:From], params[:Body], session).respond
+  session["step"] ||= "initial"
+  IncomingMessageHandler.new(params[:From], params[:Body], session["step"]).respond
+  session["step"] = "housing"
   return nil
 end
 
