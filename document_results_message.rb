@@ -3,33 +3,27 @@ require_relative 'helpers/session_unwrapper'
 class DocumentResultsMessage < Struct.new :original_session
 
   def body
-    [
-      state_id_section,
-      income_docs_section,
-      citizenship_docs_question
-    ].compact.join(' ')
+    session.has_state_id? ? results_with_state_id : results_without_state_id
   end
 
   private
 
-  def state_id_section
+  def results_with_state_id
+    'You will need these documents: ' +
+    [state_id, income_docs].flatten.compact.join(', ') +
+    '.'
+  end
+
+  def results_without_state_id
+    return
+  end
+
+  def state_id
     if session.single_person_household?
-      state_id_solo
+      'Your State ID'
     else
-      state_id_household
+      'State IDs for everyone you are applying for'
     end
-  end
-
-  def state_id_household
-    'You will need a State ID for all adult members of your household.'
-  end
-
-  def state_id_solo
-    'You will need your State ID.'
-  end
-
-  def income_docs_section
-    'You will need all of the following documents:' + income_docs_list
   end
 
   def income_docs_list
