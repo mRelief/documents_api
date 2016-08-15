@@ -18,7 +18,7 @@ SMS_SCREENER = {
     'Yes or No.'
   ),
   'overall_income_question' => (
-    'Are you currently receiving any income' +
+    'Are you currently receiving any income ' +
     'through employment, public aid, or some other means? ' +
     'Yes or No'
   ),
@@ -30,7 +30,7 @@ SMS_SCREENER = {
     'D. Unemployed '
   ),
   'other_income_sources_question' => (
-    'Which of the following do you receive:' +
+    'Which of the following do you receive: ' +
     'A. Disability benefits ' +
     'B. Child support ' +
     'C. Rental income ' +
