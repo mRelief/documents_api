@@ -10,6 +10,35 @@ class IncomingMessageHandler < Struct.new :from, :body, :session
     )
   end
 
+  def updated_session
+    new_session = session.clone
+    new_session["step"] = next_step
+
+    case step
+    when 'initial'
+      new_session["single_person_household"] = "false" if body.upcase == 'B'
+    when 'housing_question'
+      new_session["renting"] = "true" if body.upcase == 'A'
+      new_session["owns_home"] = "true" if body.upcase == 'B'
+      new_session["living_with_family_or_friends"] = "true" if body.upcase == 'C'
+      new_session["shelter"] = "true" if body.upcase == 'D'
+    when 'citizenship_question'
+      new_session["all_citizens"] = "false" if body.upcase == 'NO'
+    when 'overall_income_question'
+    when 'employment_question'
+      new_session["employee"] ||= "true" if body.upcase == 'A'
+      new_session["self_employed"] ||= "true" if body.upcase == 'B'
+      new_session["retired"] ||= "true" if body.upcase == 'C'
+      new_session["unemployment_benefits"] ||= "true" if body.upcase == 'D'
+    when 'other_income_sources_question'
+      new_session["disability_benefits"] = "true" if body.upcase = 'A'
+      new_session["child_support"] = "true" if body.upcase = 'B'
+      new_session["has_rental_income"] = "true" if body.upcase = 'C'
+    end
+
+    return new_session
+  end
+
   def next_step
     screener_steps[current_step_index + 1]
   end
@@ -21,7 +50,7 @@ class IncomingMessageHandler < Struct.new :from, :body, :session
   end
 
   def message
-    return 'Here is your result!' if step == 'result'
+    return 'Here is your result!' + updated_session.to_s if step == 'result'
     return SMS_SCREENER[step]
   end
 

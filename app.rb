@@ -51,11 +51,25 @@ get '/' do
 end
 
 post '/sms' do
+  # Set up defaults
   session["step"] ||= "initial"
+  session["single_person_household"] ||= "true"
+  session["renting"] ||= "false"
+  session["owns_home"] ||= "false"
+  session["shelter"] ||= "false"
+  session["living_with_family_or_friends"] ||= "false"
+  session["all_citizens"] ||= "true"
+  session["employee"] ||= "false"
+  session["self_employed"] ||= "false"
+  session["retired"] ||= "false"
+  session["unemployment_benefits"] ||= "false"
+  session["has_rental_income"] ||= "false"
+  session["disability_benefits"] ||= "false"
+  session["child_support"] ||= "false"
 
   handler = IncomingMessageHandler.new(params[:From], params[:Body], session)
   handler.respond
-  session["step"] = handler.next_step
+  session = handler.updated_session
 
   return nil
 end
