@@ -2,7 +2,7 @@ require_relative 'document_results_message'
 require_relative 'sms_screener_questions'
 require_relative 'helpers/session_updater'
 
-class IncomingMessageHandler < Struct.new :from, :body, :session
+class IncomingMessageHandler < Struct.new :from, :original_body, :session
 
   def respond
     client.messages.create(
@@ -18,7 +18,7 @@ class IncomingMessageHandler < Struct.new :from, :body, :session
   end
 
   def next_step
-    return screener_steps[0] if body.upcase == 'RESET'
+    return screener_steps[0] if body == 'RESET'
     return screener_steps[current_step_index + 1]
   end
 
@@ -26,6 +26,10 @@ class IncomingMessageHandler < Struct.new :from, :body, :session
 
   def step
     session['step']
+  end
+
+  def body
+    original_body.upcase
   end
 
   def message
