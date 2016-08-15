@@ -46,13 +46,12 @@ get '/screener' do
   erb :show
 end
 
-post '/sms' do
-  session["counter"] ||= 0
-  IncomingMessageHandler.new(params[:From], params[:Body], session["counter"]).respond
-  session["counter"] += 1
-  return nil
-end
-
 get '/' do
   redirect to '/screener'
 end
+
+post '/sms' do
+  IncomingMessageHandler.new(params[:From], params[:Body], session).respond
+  return nil
+end
+
