@@ -13,7 +13,6 @@ class IncomingMessageHandler < Struct.new :from, :body, :session
 
   def updated_session
     @new_session = session.clone
-    @new_session['step'] = next_step
 
     case step
     when 'initial'
@@ -39,6 +38,7 @@ class IncomingMessageHandler < Struct.new :from, :body, :session
       @new_session['has_state_id'] = 'false' if body.upcase == 'NO'
     end
 
+    @new_session['step'] = next_step
     return @new_session
   end
 
