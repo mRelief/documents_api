@@ -60,18 +60,9 @@ class DocumentResultsMessage < Struct.new :original_session
       living_with_family_or_friends: session.living_with_family_or_friends?,
     ).documents
 
-    p 'documents'
-    p documents
-
     with_names = documents.map { |doc| doc[:official_name] }
 
-    p 'with_names'
-    p with_names
-
     without_state_id = with_names.select { |doc_name| doc_name != 'State ID' }
-
-    p 'without_state_id'
-    p without_state_id
 
     return without_state_id
   end
