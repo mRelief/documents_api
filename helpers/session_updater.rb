@@ -13,7 +13,6 @@ class SessionUpdater < Struct.new :session, :body, :next_step
       new_session['shelter'] = 'true' if body == 'D'
     when 'citizenship_question'
       new_session['all_citizens'] = 'false' if body == 'NO'
-    when 'overall_income_question'
     when 'employment_question'
       new_session['employee'] = 'true' if body == 'A'
       new_session['self_employed'] = 'true' if body == 'B'
