@@ -89,7 +89,7 @@ class DocumentResultsMessage < Struct.new :original_session
     !session.self_employed? &&
     !session.disability_benefits? &&
     !session.child_support? &&
-    !session.unemployment_benefits
+    !session.unemployment_benefits?
   end
 
   def citizenship_plus_income_section
