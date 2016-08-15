@@ -22,7 +22,8 @@ SMS_SCREENER = {
     'A. Employed. ' +
     'B. Self-employed. ' +
     'C. Retired. ' +
-    'D. Receiving unemployment benefits.'
+    'D. Receiving unemployment benefits. ' +
+    'E. None of the above.'
   ),
   'other_income_sources_question' => (
     'Which of the following do you receive: ' +
