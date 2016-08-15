@@ -1,6 +1,6 @@
 require_relative 'sms_screener_questions'
 
-class IncomingMessageHandler < Struct.new :from, :body, :step
+class IncomingMessageHandler < Struct.new :from, :body, :session
 
   def respond
     client.messages.create(
@@ -15,6 +15,10 @@ class IncomingMessageHandler < Struct.new :from, :body, :step
   end
 
   private
+
+  def step
+    session["step"]
+  end
 
   def message
     return 'Here is your result!' if step == 'result'
