@@ -42,10 +42,10 @@ class IncomingMessageHandler < Struct.new :from, :original_body, :session
       'initial',
       'housing_question',
       'citizenship_question',
+      'state_id_question',
       'overall_income_question',
       'employment_question',
       'other_income_sources_question',
-      'state_id_question',
       'result',
     ]
   end
