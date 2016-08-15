@@ -20,21 +20,21 @@ SMS_SCREENER = {
   'overall_income_question' => (
     'Are you currently receiving any income ' +
     'through employment, public aid, or some other means? ' +
-    'Yes or No'
+    'Yes or No.'
   ),
   'employment_question' => (
     'Select all that describe you: ' +
-    'A. Employed ' +
-    'B. Self-employed ' +
-    'C. Retired ' +
-    'D. Receiving unemployment benefits'
+    'A. Employed. ' +
+    'B. Self-employed. ' +
+    'C. Retired. ' +
+    'D. Receiving unemployment benefits.'
   ),
   'other_income_sources_question' => (
     'Which of the following do you receive: ' +
-    'A. Disability benefits ' +
-    'B. Child support ' +
-    'C. Rental income ' +
-    'D. None of the above '
+    'A. Disability benefits. ' +
+    'B. Child support. ' +
+    'C. Rental income. ' +
+    'D. None of the above.'
   ),
   'state_id_question' => (
     'Do you have a State ID? Yes or No.'
