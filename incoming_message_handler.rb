@@ -1,3 +1,4 @@
+require_relative 'document_results_message'
 require_relative 'sms_screener_questions'
 
 class IncomingMessageHandler < Struct.new :from, :body, :session
