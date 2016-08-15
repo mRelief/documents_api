@@ -1,4 +1,4 @@
-require_relative 'helpers/session_unwrapper'
+require_relative '../helpers/session_unwrapper'
 
 class DocumentResultsMessage < Struct.new :original_session
 

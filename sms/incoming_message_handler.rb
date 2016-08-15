@@ -1,6 +1,6 @@
 require_relative 'document_results_message'
 require_relative 'sms_screener_questions'
-require_relative 'helpers/session_updater'
+require_relative '../helpers/session_updater'
 
 class IncomingMessageHandler < Struct.new :from, :original_body, :session
 

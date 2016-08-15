@@ -6,7 +6,7 @@ require          'twilio-ruby'
 require './local_env' if File.exists?('local_env.rb')
 
 require_relative 'documents_api'
-require_relative 'incoming_message_handler'
+require_relative 'sms/incoming_message_handler'
 
 configure do
   enable :cross_origin
