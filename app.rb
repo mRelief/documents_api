@@ -1,6 +1,9 @@
 require          "sinatra"
 require          "sinatra/cross_origin"
 require          "json"
+
+require "./local_env" if File.exists?("local_env.rb")
+
 require_relative "documents_api"
 
 configure do
@@ -41,7 +44,13 @@ get '/screener' do
 end
 
 get '/sms' do
-  'sms'
+  @client = Twilio::REST::Client.new(ENV['account_sid'], ENV['auth_token'])
+
+  @client.messages.create(
+    from: ENV['twilio_number'],
+    to: params[:From],
+    body: 'Hey there!'
+  )
 end
 
 get '/' do
