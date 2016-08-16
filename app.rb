@@ -6,7 +6,9 @@ require          'twilio-ruby'
 require './local_env' if File.exists?('local_env.rb')
 
 require_relative 'api/documents_api'
-require_relative 'sms/incoming_message_handler'
+require_relative 'sms/responder'
+require_relative 'sms/session_data_updater'
+require_relative 'sms/session_step_incrementer'
 
 configure do
   enable :cross_origin
@@ -51,8 +53,8 @@ get '/' do
 end
 
 post '/sms' do
-  # Set up defaults
-  session['step'] ||= 'initial'
+  # Set up defaults in case the user is starting from scratch
+  session['count'] ||= 0
   session['single_person_household'] ||= 'true'
   session['renting'] ||= 'false'
   session['owns_home'] ||= 'false'
@@ -68,9 +70,18 @@ post '/sms' do
   session['child_support'] ||= 'false'
   session['has_state_id'] ||= 'true'
 
-  handler = IncomingMessageHandler.new(params[:From], params[:Body], session)
-  response = handler.respond
-  session = handler.updated_session
+  # Update the session data
+  new_session = SessionDataUpdater.new(session, params[:Body]).update_data
+  session = new_session
+
+  # Send a response
+  response = Responder.new(params[:From], session).respond
+
+  # Increment the session step
+  new_session = SessionStepIncrementer.new(session).increment
+  session = new_session
+
+  # Return the response for testing purposes
   return response
 end
 
