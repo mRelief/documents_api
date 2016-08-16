@@ -31,7 +31,4 @@ class SessionUpdater < Struct.new :session, :body, :next_step
     return new_session
   end
 
-  def reset_to_defaults
-  end
-
 end
