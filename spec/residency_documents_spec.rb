@@ -1,5 +1,5 @@
-require_relative "../load_documents_data"
-require_relative "../residency_documents"
+require_relative "../api/load_documents_data"
+require_relative "../api/residency_documents"
 
 describe ResidencyDocuments do
 

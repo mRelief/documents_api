@@ -1,4 +1,4 @@
-require_relative "../documents_api"
+require_relative "../api/documents_api"
 
 describe Api::DocumentsRequest do
 

@@ -1,6 +1,6 @@
 require_relative '../helpers/session_unwrapper'
 require_relative 'income_documents'
-require_relative '../residency_documents'
+require_relative '../api/residency_documents'
 
 class DocumentResultsMessage < Struct.new :original_session
 
