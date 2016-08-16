@@ -7,6 +7,7 @@ require './local_env' if File.exists?('local_env.rb')
 
 require_relative 'api/documents_api'
 require_relative 'sms/incoming_message_handler'
+require_relative 'helpers/session_updater'
 
 configure do
   enable :cross_origin
@@ -51,7 +52,7 @@ get '/' do
 end
 
 post '/sms' do
-  # Set up defaults
+  # Set up defaults in case the user is starting from scratch
   session['step'] ||= 'initial'
   session['single_person_household'] ||= 'true'
   session['renting'] ||= 'false'
@@ -68,9 +69,14 @@ post '/sms' do
   session['child_support'] ||= 'false'
   session['has_state_id'] ||= 'true'
 
-  handler = IncomingMessageHandler.new(params[:From], params[:Body], session)
+  # Use the object to increment the session data with user's answers
+
+  # Send a response
   response = handler.respond
-  session = handler.updated_session
+
+  # Increment the session step
+
+  # Return the response for testing purposes
   return response
 end
 
