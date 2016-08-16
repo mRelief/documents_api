@@ -15,13 +15,17 @@ class IncomingMessageHandler < Struct.new :from, :original_body, :session
   end
 
   def updated_session
-    @new_session = SessionUpdater.new(session, body, next_step).update
+    @new_session = SessionUpdater.new(session, body, next_step, previous_step).update
     return @new_session
   end
 
   def next_step
     return screener_steps[0] if body == 'RESET'
     return screener_steps[current_step_index + 1]
+  end
+
+  def previous_step
+    screener_steps[current_step_index - 1]
   end
 
   private

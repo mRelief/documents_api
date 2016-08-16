@@ -1,9 +1,9 @@
-class SessionUpdater < Struct.new :session, :body, :next_step
+class SessionUpdater < Struct.new :session, :body, :next_step, :previous_step
 
   def update
     new_session = session.clone
 
-    case new_session['step']
+    case previous_step
     when 'initial'
       new_session['single_person_household'] = 'false' if body == 'B'
     when 'housing_question'
