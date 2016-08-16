@@ -7,7 +7,7 @@ require './local_env' if File.exists?('local_env.rb')
 
 require_relative 'api/documents_api'
 require_relative 'sms/incoming_message_handler'
-require_relative 'helpers/session_updater'
+require_relative 'sms/session_data_updater'
 
 configure do
   enable :cross_origin
@@ -69,14 +69,16 @@ post '/sms' do
   session['child_support'] ||= 'false'
   session['has_state_id'] ||= 'true'
 
-  # Use the object to increment the session data with user's answers
+  # Update the session data with user's answers
+  updated_session = SessionDataUpdater.new(session, params[:Body]).update_data
+  session = updated_session
 
   # Send a response
-  response = handler.respond
+  # response = handler.respond
 
   # Increment the session step
 
   # Return the response for testing purposes
-  return response
+  return nil
 end
 

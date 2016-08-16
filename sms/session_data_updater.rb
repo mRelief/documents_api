@@ -1,9 +1,9 @@
-class SessionUpdater < Struct.new :session, :body, :next_step, :previous_step
+class SessionDataUpdater < Struct.new :session, :original_body
 
-  def update
+  def update_data
     new_session = session.clone
 
-    case previous_step
+    case new_session[:step]
     when 'initial'
       new_session['single_person_household'] = 'false' if body == 'B'
     when 'housing_question'
@@ -26,9 +26,11 @@ class SessionUpdater < Struct.new :session, :body, :next_step, :previous_step
       new_session['has_state_id'] = 'false' if body == 'NO'
     end
 
-    new_session['step'] = next_step
-
     return new_session
+  end
+
+  def body
+    original_body.upcase
   end
 
 end

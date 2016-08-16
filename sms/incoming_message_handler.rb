@@ -1,6 +1,5 @@
 require_relative 'document_results_message'
 require_relative 'sms_screener_questions'
-require_relative '../helpers/session_updater'
 
 class IncomingMessageHandler < Struct.new :from, :original_body, :session
 
@@ -34,10 +33,6 @@ class IncomingMessageHandler < Struct.new :from, :original_body, :session
 
   def send_results?
     step == 'result'
-  end
-
-  def body
-    original_body.upcase
   end
 
   def message
