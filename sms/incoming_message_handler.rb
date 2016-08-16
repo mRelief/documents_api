@@ -35,7 +35,7 @@ class IncomingMessageHandler < Struct.new :from, :original_body, :session
   end
 
   def message
-    return DocumentResultsMessage.new(@new_session).body if step == 'result'
+    return DocumentResultsMessage.new(session).body if step == 'result'
     return SMS_SCREENER[step]
   end
 
