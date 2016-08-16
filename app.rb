@@ -69,9 +69,8 @@ post '/sms' do
   session['has_state_id'] ||= 'true'
 
   handler = IncomingMessageHandler.new(params[:From], params[:Body], session)
+  response = handler.respond
   session = handler.updated_session
-  handler.respond
-
-  return nil
+  return response
 end
 
