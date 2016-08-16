@@ -15,8 +15,7 @@ class IncomingMessageHandler < Struct.new :from, :original_body, :session
   end
 
   def updated_session
-    @new_session = SessionUpdater.new(session, body, next_step, previous_step).update
-    return @new_session
+    SessionUpdater.new(session, body, next_step, previous_step).update
   end
 
   def next_step
