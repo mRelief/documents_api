@@ -20,8 +20,7 @@ class IncomingMessageHandler < Struct.new :from, :original_body, :session
   end
 
   def next_step
-    return screener_steps[0] if body == 'RESET'
-    return screener_steps[current_step_index + 1]
+    screener_steps[current_step_index + 1]
   end
 
   def previous_step
