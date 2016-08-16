@@ -6,7 +6,7 @@ require          'twilio-ruby'
 require './local_env' if File.exists?('local_env.rb')
 
 require_relative 'api/documents_api'
-require_relative 'sms/incoming_message_handler'
+require_relative 'sms/responder'
 require_relative 'sms/session_data_updater'
 require_relative 'sms/session_step_incrementer'
 
@@ -75,14 +75,13 @@ post '/sms' do
   session = new_session
 
   # Send a response
-  # handler =
-  # response = handler.respond
+  response = Responder.new(params[:From], session).respond
 
   # Increment the session step
   new_session = SessionStepIncrementer.new(session).increment
   session = new_session
 
   # Return the response for testing purposes
-  return nil
+  return response
 end
 

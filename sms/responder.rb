@@ -1,7 +1,7 @@
 require_relative 'document_results_message'
 require_relative 'sms_screener_questions'
 
-class IncomingMessageHandler < Struct.new :from, :original_body, :session
+class Responder < Struct.new :from, :session
 
   def respond
     client.messages.create(
@@ -13,8 +13,14 @@ class IncomingMessageHandler < Struct.new :from, :original_body, :session
     return message
   end
 
+  private
+
   def send_results?
     step == 'result'
+  end
+
+  def step
+    session['step']
   end
 
   def message
