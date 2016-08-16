@@ -15,24 +15,26 @@ describe 'SMS conversation' do
     }
   end
 
-  let(:result) { last_response.body }
-
   describe '1 person, renting, citizen, self-employed, no other income, has state ID' do
+    let(:expected_documents) {
+      'You will need these documents: State ID, Self-Employment Form.'
+    }
+
     it 'responds with the correct documents' do
       send_sms('Hi!')
-      expect(result).to eq SMS_SCREENER['initial']
+      expect(last_response.body).to eq SMS_SCREENER['initial']
       send_sms('A')    # Just Me
-      expect(result).to eq SMS_SCREENER['housing_question']
+      expect(last_response.body).to eq SMS_SCREENER['housing_question']
       send_sms('A')    # Renting
-      expect(result).to eq SMS_SCREENER['citizenship_question']
+      expect(last_response.body).to eq SMS_SCREENER['citizenship_question']
       send_sms('YES')  # All citizens
-      expect(result).to eq SMS_SCREENER['employment_question']
+      expect(last_response.body).to eq SMS_SCREENER['employment_question']
       send_sms('B')    # Self-employed
-      expect(result).to eq SMS_SCREENER['other_income_sources_question']
+      expect(last_response.body).to eq SMS_SCREENER['other_income_sources_question']
       send_sms('D')    # None of the above
-      expect(result).to eq SMS_SCREENER['state_id_question']
+      expect(last_response.body).to eq SMS_SCREENER['state_id_question']
       send_sms('YES')  # Has State ID
-      expect(result).to eq 'You will need these documents: State ID, Self-Employment Form.'
+      expect(last_response.body).to eq expected_documents
     end
   end
 end
