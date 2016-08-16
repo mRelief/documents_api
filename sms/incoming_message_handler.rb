@@ -13,24 +13,6 @@ class IncomingMessageHandler < Struct.new :from, :original_body, :session
     return message
   end
 
-  def updated_session
-    SessionUpdater.new(session, body, next_step, previous_step).update
-  end
-
-  def next_step
-    screener_steps[current_step_index + 1]
-  end
-
-  def previous_step
-    screener_steps[current_step_index - 1]
-  end
-
-  private
-
-  def step
-    session['step']
-  end
-
   def send_results?
     step == 'result'
   end
@@ -41,22 +23,6 @@ class IncomingMessageHandler < Struct.new :from, :original_body, :session
     else
       SMS_SCREENER[step]
     end
-  end
-
-  def screener_steps
-    [
-      'initial',
-      'housing_question',
-      'citizenship_question',
-      'employment_question',
-      'other_income_sources_question',
-      'state_id_question',
-      'result',
-    ]
-  end
-
-  def current_step_index
-    screener_steps.index(step)
   end
 
   def client
