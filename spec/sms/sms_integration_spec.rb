@@ -17,19 +17,20 @@ describe 'SMS conversation' do
 
   describe 'has State ID' do
 
-    describe '1 person, renting, citizen, self-employed, no other income, has state ID' do
+    describe 'family, renting, citizens, self-employed, no other income, has state ID' do
       let(:expected_documents) {
-        'You will need these documents: State ID, Self-Employment Form.'
+        'You will need these documents: ' +
+        'State IDs for everyone you are applying for, Self-Employment Form.'
       }
 
       it 'responds with the correct documents' do
         send_sms('Hi!')
-        send_sms('A')    # Just Me
+        send_sms('B')    # My Family
         send_sms('A')    # Renting
         send_sms('YES')  # All citizens
         send_sms('B')    # Self-employed
         send_sms('D')    # None of the above
-        send_sms('YES')  # Has State ID
+        send_sms('YES')   # No State ID
         expect(last_response.body).to eq expected_documents
       end
     end
@@ -75,8 +76,11 @@ describe 'SMS conversation' do
 
     describe '1 person, renting, not citizen, self-employed, no other income, no state ID' do
       let(:expected_documents) {
-        'You will need these documents: ' +
-        'State ID, I-90 Documentation for all non-citizen family members, Self-Employment Form.'
+        'Since you don\'t have a State ID, you will need to prove residency. ' +
+        'You will need *ONE* of the following to prove residency: ' +
+        'Rent Receipt, Mail, Medical Records. ' +
+        'You will also need these documents: ' +
+        'I-90 Documentation for all non-citizen family members, Self-Employment Form.'
       }
 
       it 'responds with the correct documents' do
@@ -91,20 +95,22 @@ describe 'SMS conversation' do
       end
     end
 
-    describe 'family, renting, citizens, self-employed, no other income, has state ID' do
+    describe '1 person, renting, citizen, self-employed, no other income, no state ID' do
       let(:expected_documents) {
-        'You will need these documents: ' +
-        'State IDs for everyone you are applying for, Self-Employment Form.'
+        'Since you don\'t have a State ID, you will need to prove residency. ' +
+        'You will need *ONE* of the following to prove residency: ' +
+        'Rent Receipt, Mail, Medical Records. ' +
+        'You will also need a Self-Employment Form.'
       }
 
       it 'responds with the correct documents' do
         send_sms('Hi!')
-        send_sms('B')    # My Family
+        send_sms('A')    # Just Me
         send_sms('A')    # Renting
         send_sms('YES')  # All citizens
         send_sms('B')    # Self-employed
         send_sms('D')    # None of the above
-        send_sms('NO')   # No State ID
+        send_sms('NO')  # No State ID
         expect(last_response.body).to eq expected_documents
       end
     end
