@@ -74,6 +74,22 @@ describe 'SMS conversation' do
     end
   end
 
+  describe '1 person, renting, citizen, employee, no other income, has state ID' do
+    let(:expected_documents) {
+      'You will need these documents: State ID, Pay Stubs.'
+    }
+
+    it 'responds with the correct documents' do
+      send_sms('Hi!')
+      send_sms('A')    # Just Me
+      send_sms('A')    # Renting
+      send_sms('YES')  # All citizens
+      send_sms('A')    # Employee
+      send_sms('D')    # None of the above
+      send_sms('YES')  # Has State ID
+      expect(last_response.body).to eq expected_documents
+    end
+  end
 
 end
 
