@@ -45,6 +45,15 @@ module Api
       }
     end
 
+    def fetch_document_names
+      return {
+        "residency_documents": residency_documents.map { |doc| doc[:official_name] },
+        "identity_documents": identity_documents.map { |doc| doc[:official_name] },
+        "citizenship_documents": citizenship_documents.map { |doc| doc[:official_name] },
+        "income_documents": income_documents.map { |doc| doc[:official_name] },
+      }
+    end
+
     private
 
     ## DATA VALIDATION ##
