@@ -32,13 +32,20 @@ class IncomingMessageHandler < Struct.new :from, :original_body, :session
     session['step']
   end
 
+  def send_results?
+    step == 'result'
+  end
+
   def body
     original_body.upcase
   end
 
   def message
-    return DocumentResultsMessage.new(session).body if step == 'result'
-    return SMS_SCREENER[step]
+    if send_results?
+      DocumentResultsMessage.new(session).body
+    else
+      SMS_SCREENER[step]
+    end
   end
 
   def screener_steps
