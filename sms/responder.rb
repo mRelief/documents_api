@@ -16,11 +16,11 @@ class Responder < Struct.new :from, :session
   private
 
   def send_results?
-    step == 'result'
+    session[:count] == 6
   end
 
   def step
-    session['step']
+    session[:count]
   end
 
   def message

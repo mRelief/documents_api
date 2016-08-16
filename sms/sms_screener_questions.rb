@@ -1,11 +1,11 @@
 SMS_SCREENER = {
-  'initial' => (
+  0 => (
     'Welcome. ' +
     'Here you can find out what documents you need to apply for Food Stamps. ' +
     'How many people are you applying for? ' +
     'A. Just Me. B. My Family.'
   ),
-  'housing_question' => (
+  1 => (
     'Describe your living situation: ' +
     'A. Renting. ' +
     'B. Own home. ' +
@@ -13,11 +13,11 @@ SMS_SCREENER = {
     'D. Shelter. ' +
     'E. None of the above. '
   ),
-  'citizenship_question' => (
+  2 => (
     'Is everyone in your household a US citizen? ' +
     'Yes or No.'
   ),
-  'employment_question' => (
+  3 => (
     'Select all that describe you: ' +
     'A. Employed. ' +
     'B. Self-employed. ' +
@@ -25,14 +25,14 @@ SMS_SCREENER = {
     'D. Receiving unemployment benefits. ' +
     'E. None of the above.'
   ),
-  'other_income_sources_question' => (
+  4 => (
     'Which of the following do you receive: ' +
     'A. Disability benefits. ' +
     'B. Child support. ' +
     'C. Rental income. ' +
     'D. None of the above.'
   ),
-  'state_id_question' => (
+  5 => (
     'Do you have a State ID? Yes or No.'
   )
 }

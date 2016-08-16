@@ -54,7 +54,7 @@ end
 
 post '/sms' do
   # Set up defaults in case the user is starting from scratch
-  session['step'] ||= 'initial'
+  session['count'] ||= 0
   session['single_person_household'] ||= 'true'
   session['renting'] ||= 'false'
   session['owns_home'] ||= 'false'
@@ -70,7 +70,7 @@ post '/sms' do
   session['child_support'] ||= 'false'
   session['has_state_id'] ||= 'true'
 
-  # Update the session data with user's answers
+  # Update the session data
   new_session = SessionDataUpdater.new(session, params[:Body]).update_data
   session = new_session
 

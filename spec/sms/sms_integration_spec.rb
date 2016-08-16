@@ -22,17 +22,11 @@ describe 'SMS conversation' do
 
     it 'responds with the correct documents' do
       send_sms('Hi!')
-      expect(last_response.body).to eq SMS_SCREENER['initial']
       send_sms('A')    # Just Me
-      expect(last_response.body).to eq SMS_SCREENER['housing_question']
       send_sms('A')    # Renting
-      expect(last_response.body).to eq SMS_SCREENER['citizenship_question']
       send_sms('YES')  # All citizens
-      expect(last_response.body).to eq SMS_SCREENER['employment_question']
       send_sms('B')    # Self-employed
-      expect(last_response.body).to eq SMS_SCREENER['other_income_sources_question']
       send_sms('D')    # None of the above
-      expect(last_response.body).to eq SMS_SCREENER['state_id_question']
       send_sms('YES')  # Has State ID
       expect(last_response.body).to eq expected_documents
     end
