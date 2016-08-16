@@ -71,7 +71,5 @@ post '/sms' do
   handler = IncomingMessageHandler.new(params[:From], params[:Body], session)
   session = handler.updated_session
   handler.respond
-
-  return nil
 end
 

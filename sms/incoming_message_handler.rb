@@ -10,6 +10,8 @@ class IncomingMessageHandler < Struct.new :from, :original_body, :session
       to: from,
       body: message
     )
+
+    return message
   end
 
   def updated_session
