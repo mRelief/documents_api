@@ -42,7 +42,7 @@
 
     render: function () {
       return dom.div({},
-        dom.h1({}, 'What You Will Need'),
+        dom.h1({}, 'What Documents You Need To Apply For Food Stamps'),
         this.renderDocs(),
         dom.br({}),
         this.renderStartOverButton()
