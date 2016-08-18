@@ -6,7 +6,7 @@
     textDecoration: 'underline',
     lineHeight: '40px',
     cursor: 'pointer',
-    fontSize: '13px'
+    fontStyle: 'italic'
   };
 
 })();
