@@ -12,9 +12,6 @@
     render: function () {
       return dom.div({},
         dom.p({}, 'Is everyone in your household a US citizen?'),
-        dom.em({}, 'NOTE: We do not store your response to this question.'),
-        dom.br({}),
-        dom.br({}),
         dom.input({
           type: 'radio',
           name: 'citizenshipQuestion',
