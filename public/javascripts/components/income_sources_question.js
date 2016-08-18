@@ -41,7 +41,9 @@
     },
 
     question: function () {
-      return 'Which of the following ' + this.familyOrSinglePersonString() + ':'
+      return 'Which of the following ' +
+              this.familyOrSinglePersonString() +
+              ' (you can select multiple options):';
     },
 
     familyOrSinglePersonString: function () {

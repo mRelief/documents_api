@@ -51,7 +51,9 @@
     },
 
     renderInstructions: function () {
-      return 'Select all that describe ' + this.familyOrSinglePersonString() + ':';
+      return 'Select all that describe ' +
+              this.familyOrSinglePersonString() +
+              ' (you can select multiple options):';
     },
 
     familyOrSinglePersonString: function () {
