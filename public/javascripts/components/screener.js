@@ -7,7 +7,6 @@
 
   var DocumentResultsDisplay = window.shared.DocumentResultsDisplay;
   var NumberOfPeopleQuestion = window.shared.NumberOfPeopleQuestion;
-  var OverallIncomeQuestion = window.shared.OverallIncomeQuestion;
   var HousingQuestion = window.shared.HousingQuestion;
   var ErrorPage = window.shared.ErrorPage;
   var IncomeQuestionsPage = window.shared.IncomeQuestionsPage;
