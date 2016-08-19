@@ -18,7 +18,6 @@
     getInitialState: function() {
       return {
         answeredFirstPage: false,
-        answeredSecondPage: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
         userSubmittedData: DefaultData,
@@ -56,9 +55,6 @@
       } else if (this.state.answeredFirstPage === false) {
         // First page
         return this.renderFirstPage();
-      } else if (this.state.answeredSecondPage === false) {
-        // Overall income question
-        return this.renderOverallIncomeQuestion();
       } else {
         // Detailed income questions page
         return this.renderIncomeQuestionsPage();
@@ -133,19 +129,6 @@
       });
     },
 
-    onClickYesIncome: function () {
-      var userSubmittedData = this.state.userSubmittedData;
-      userSubmittedData["has_no_income"] = "false";
-      this.setState({
-        userSubmittedData: userSubmittedData,
-        answeredSecondPage: true
-      });
-    },
-
-    onClickNoIncome: function () {
-      this.fetchDocumentsFromServer();
-    },
-
     onClickMyFamily: function () {
       this.setState({ singlePersonHousehold: false, });
     },
@@ -189,7 +172,6 @@
     onClickStartOver: function () {
       this.setState({
         answeredFirstPage: false,
-        answeredSecondPage: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
         userSubmittedData: DefaultData,
