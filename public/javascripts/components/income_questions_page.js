@@ -9,12 +9,12 @@
   window.shared.IncomeQuestionsPage = React.createClass({
 
     propTypes: {
-      fetchDocumentsFromServer: React.PropTypes.func.isRequired,
       singlePersonHousehold: React.PropTypes.bool.isRequired,
       onUpdateDataField: React.PropTypes.func.isRequired,
       onCheckNotAllCitizens: React.PropTypes.func.isRequired,
       onCheckYesAllCitizens: React.PropTypes.func.isRequired,
-      singlePersonHousehold: React.PropTypes.bool.isRequired
+      singlePersonHousehold: React.PropTypes.bool.isRequired,
+      onClickNext: React.PropTypes.func.isRequired
     },
 
     getInitialState: function() {
@@ -61,7 +61,7 @@
 
     onClickNext: function () {
       if (this.atLeastOneChecked()) {
-        this.props.fetchDocumentsFromServer();
+        this.props.onClickNext();
       } else {
         this.setState({ showRequiredQuestionsWarning: true });
       };

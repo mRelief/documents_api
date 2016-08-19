@@ -10,12 +10,14 @@
   var HousingQuestion = window.shared.HousingQuestion;
   var ErrorPage = window.shared.ErrorPage;
   var IncomeQuestionsPage = window.shared.IncomeQuestionsPage;
+  var ConfirmationPage = window.shared.ConfirmationPage;
 
   window.shared.Screener = React.createClass({
 
     getInitialState: function() {
       return {
         answeredFirstPage: false,
+        answeredSecondPage: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
         userSubmittedData: DefaultData,
@@ -53,10 +55,20 @@
       } else if (this.state.answeredFirstPage === false) {
         // First page
         return this.renderFirstPage();
-      } else {
+      } else if (this.state.answeredSecondPage === false) {
         // Detailed income questions page
         return this.renderIncomeQuestionsPage();
+      } else {
+        // Confirmation page
+        return this.renderConfirmationPage();
       };
+    },
+
+    renderConfirmationPage: function () {
+      return createEl(ConfirmationPage, {
+        userSubmittedData: this.state.userSubmittedData,
+        singlePersonHousehold: this.state.singlePersonHousehold
+      });
     },
 
     renderFirstPage: function () {
@@ -75,12 +87,12 @@
 
     renderIncomeQuestionsPage: function () {
       return createEl(IncomeQuestionsPage, {
-        fetchDocumentsFromServer: this.fetchDocumentsFromServer,
         singlePersonHousehold: this.state.singlePersonHousehold,
         onUpdateDataField: this.onUpdateDataField,
         onCheckNotAllCitizens: this.onCheckNotAllCitizens,
         onCheckYesAllCitizens: this.onCheckYesAllCitizens,
-        singlePersonHousehold: this.state.singlePersonHousehold
+        singlePersonHousehold: this.state.singlePersonHousehold,
+        onClickNext: this.onClickNextFromSecondPage
       });
     },
 
@@ -99,6 +111,10 @@
 
     onClickNextFromFirstPage: function () {
       this.setState({ answeredFirstPage: true });
+    },
+
+    onClickNextFromSecondPage: function () {
+      this.setState({ answeredSecondPage: true });
     },
 
     renderNumberOfPeople: function () {
