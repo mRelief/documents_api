@@ -4,13 +4,16 @@
   var createEl = React.createElement.bind(React);
   var EmploymentQuestion = window.shared.EmploymentQuestion;
   var IncomeSourcesQuestion = window.shared.IncomeSourcesQuestion;
+  var CitizenshipQuestion = window.shared.CitizenshipQuestion;
 
   window.shared.IncomeQuestionsPage = React.createClass({
 
     propTypes: {
       fetchDocumentsFromServer: React.PropTypes.func.isRequired,
       singlePersonHousehold: React.PropTypes.bool.isRequired,
-      onUpdateDataField: React.PropTypes.func.isRequired
+      onUpdateDataField: React.PropTypes.func.isRequired,
+      onCheckNotAllCitizens: React.PropTypes.func.isRequired,
+      onCheckYesAllCitizens: React.PropTypes.func.isRequired
     },
 
     getInitialState: function() {
@@ -21,6 +24,7 @@
       return dom.div({},
         this.renderEmploymentQuestion(),
         this.renderIncomeSourcesQuestion(),
+        this.renderCitizenshipQuestion(),
         dom.br({}),
         this.requiredQuestionWarning(),
         dom.input({
@@ -43,6 +47,13 @@
       return createEl(IncomeSourcesQuestion, {
         singlePersonHousehold: this.props.singlePersonHousehold,
         onUpdateDataField: this.props.onUpdateDataField,
+      });
+    },
+
+    renderCitizenshipQuestion: function () {
+      return createEl(CitizenshipQuestion, {
+        onCheckNotAllCitizens: this.props.onCheckNotAllCitizens,
+        onCheckYesAllCitizens: this.props.onCheckYesAllCitizens,
       });
     },
 

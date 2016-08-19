@@ -9,7 +9,6 @@
   var NumberOfPeopleQuestion = window.shared.NumberOfPeopleQuestion;
   var OverallIncomeQuestion = window.shared.OverallIncomeQuestion;
   var HousingQuestion = window.shared.HousingQuestion;
-  var CitizenshipQuestion = window.shared.CitizenshipQuestion;
   var ErrorPage = window.shared.ErrorPage;
   var IncomeQuestionsPage = window.shared.IncomeQuestionsPage;
 
@@ -65,7 +64,6 @@
       return dom.div({},
         this.renderNumberOfPeople(),
         this.renderHousingQuestion(),
-        this.renderCitizenshipQuestion(),
         dom.br({}),
         dom.input({
           type: 'submit',
@@ -80,7 +78,9 @@
       return createEl(IncomeQuestionsPage, {
         fetchDocumentsFromServer: this.fetchDocumentsFromServer,
         singlePersonHousehold: this.state.singlePersonHousehold,
-        onUpdateDataField: this.onUpdateDataField
+        onUpdateDataField: this.onUpdateDataField,
+        onCheckNotAllCitizens: this.onCheckNotAllCitizens,
+        onCheckYesAllCitizens: this.onCheckYesAllCitizens,
       });
     },
 
@@ -104,13 +104,6 @@
     renderNumberOfPeople: function () {
       return createEl(NumberOfPeopleQuestion, {
         onClickMyFamily: this.onClickMyFamily
-      });
-    },
-
-    renderCitizenshipQuestion: function () {
-      return createEl(CitizenshipQuestion, {
-        onCheckNotAllCitizens: this.onCheckNotAllCitizens,
-        onCheckYesAllCitizens: this.onCheckYesAllCitizens,
       });
     },
 
