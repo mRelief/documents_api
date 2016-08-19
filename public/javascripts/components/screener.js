@@ -48,14 +48,19 @@
 
     render: function() {
       if (this.state.hasResponseFromServer === true) {
+        // Results from server
         return this.renderResultsFromServer();
       } else if (this.state.errorFromServer == true) {
+        // Error from server
         return this.renderErrorFromServer();
       } else if (this.state.answeredFirstPage === false) {
+        // First page
         return this.renderFirstPage();
       } else if (this.state.answeredSecondPage === false) {
+        // Overall income question
         return this.renderOverallIncomeQuestion();
       } else {
+        // Detailed income questions page
         return this.renderIncomeQuestionsPage();
       };
     },
