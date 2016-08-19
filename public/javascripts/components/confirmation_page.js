@@ -94,12 +94,17 @@
     },
 
     renderCitizenshipStatus: function () {
-      var userSubmittedData = this.props.userSubmittedData;
+      var all_citizens = this.props.userSubmittedData.all_citizens;
+      var single_person = this.props.singlePersonHousehold;
 
-      if (userSubmittedData.all_citizens) {
+      if (all_citizens && single_person) {
         return 'You are a citizen.';
-      } else {
+      } else if (all_citizens && !single_person) {
+        return 'Everyone in your household is a citizen.';
+      } else if (!all_citizens && single_person) {
         return 'You are not a citizen.';
+      } else if (!all_citizens && !single_person) {
+        return 'Not everyone in your household is a citizen.';
       };
     }
 
