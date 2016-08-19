@@ -81,6 +81,7 @@
         onUpdateDataField: this.onUpdateDataField,
         onCheckNotAllCitizens: this.onCheckNotAllCitizens,
         onCheckYesAllCitizens: this.onCheckYesAllCitizens,
+        singlePersonHousehold: this.state.singlePersonHousehold
       });
     },
 
