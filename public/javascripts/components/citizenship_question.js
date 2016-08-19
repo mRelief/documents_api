@@ -7,11 +7,12 @@
     propTypes: {
       onCheckNotAllCitizens: React.PropTypes.func.isRequired,
       onCheckYesAllCitizens: React.PropTypes.func.isRequired,
+      singlePersonHousehold: React.PropTypes.bool.isRequired
     },
 
     render: function () {
       return dom.div({},
-        dom.p({}, 'Is everyone in your household a US citizen?'),
+        dom.p({}, this.renderQuestionString()),
         dom.input({
           type: 'radio',
           name: 'citizenshipQuestion',
@@ -28,6 +29,14 @@
         dom.br({}),
         dom.br({})
       );
+    },
+
+    renderQuestionString: function () {
+      if (this.props.singlePersonHousehold) {
+        return 'Are you a US citizen?';
+      } else {
+        return 'Is everyone in your household a US citizen?';
+      };
     }
 
   });

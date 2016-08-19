@@ -13,7 +13,8 @@
       singlePersonHousehold: React.PropTypes.bool.isRequired,
       onUpdateDataField: React.PropTypes.func.isRequired,
       onCheckNotAllCitizens: React.PropTypes.func.isRequired,
-      onCheckYesAllCitizens: React.PropTypes.func.isRequired
+      onCheckYesAllCitizens: React.PropTypes.func.isRequired,
+      singlePersonHousehold: React.PropTypes.bool.isRequired
     },
 
     getInitialState: function() {
@@ -54,6 +55,7 @@
       return createEl(CitizenshipQuestion, {
         onCheckNotAllCitizens: this.props.onCheckNotAllCitizens,
         onCheckYesAllCitizens: this.props.onCheckYesAllCitizens,
+        singlePersonHousehold: this.props.singlePersonHousehold
       });
     },
 
