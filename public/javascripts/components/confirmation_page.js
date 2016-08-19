@@ -7,7 +7,8 @@
 
     propTypes: {
       userSubmittedData: React.PropTypes.object.isRequired,
-      singlePersonHousehold: React.PropTypes.bool.isRequired
+      singlePersonHousehold: React.PropTypes.bool.isRequired,
+      fetchDocumentsFromServer: React.PropTypes.func.isRequired
     },
 
     render: function () {
@@ -31,7 +32,16 @@
         this.renderOtherIncomeSources(),
         dom.br({}),
         dom.br({}),
-        this.renderCitizenshipStatus()
+        this.renderCitizenshipStatus(),
+        dom.br({}),
+        dom.br({}),
+        dom.input({
+          type: 'submit',
+          value: 'Correct',
+          style: window.shared.ButtonStyle,
+          onClick: this.props.fetchDocumentsFromServer
+        })
+
       );
     },
 

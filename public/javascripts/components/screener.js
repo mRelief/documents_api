@@ -67,7 +67,8 @@
     renderConfirmationPage: function () {
       return createEl(ConfirmationPage, {
         userSubmittedData: this.state.userSubmittedData,
-        singlePersonHousehold: this.state.singlePersonHousehold
+        singlePersonHousehold: this.state.singlePersonHousehold,
+        fetchDocumentsFromServer: this.fetchDocumentsFromServer
       });
     },
 
