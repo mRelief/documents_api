@@ -12,7 +12,6 @@
     "renting": "false",
     "owns_home": "false",
     "shelter": "false",
-    "has_no_income": "true",
     "living_with_family_or_friends": "false",
     "all_citizens": "true"
   };
