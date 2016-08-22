@@ -20,26 +20,37 @@
 
     renderConfirmationStatement: function () {
       return dom.div({},
-        this.renderNumberOfPeople(),
-        dom.br({}),
-        dom.br({}),
-        this.renderLivingSituation(),
-        dom.br({}),
-        dom.br({}),
-        this.renderEmploymentStatus(),
-        dom.br({}),
-        dom.br({}),
-        this.renderOtherIncomeSources(),
-        this.renderCitizenshipStatus(),
-        dom.br({}),
-        dom.br({}),
+        dom.ul({},
+          dom.li({},
+            this.renderNumberOfPeople(),
+            dom.br({}),
+            dom.br({})
+          ),
+          dom.li({},
+            this.renderLivingSituation(),
+            dom.br({}),
+            dom.br({})
+          ),
+          dom.li({},
+            this.renderEmploymentStatus(),
+            dom.br({}),
+            dom.br({})
+          ),
+          dom.li({},
+            this.renderOtherIncomeSources()
+          ),
+          dom.li({},
+            this.renderCitizenshipStatus()
+          ),
+          dom.br({}),
+          dom.br({})
+        ),
         dom.input({
           type: 'submit',
           value: 'Correct',
           style: window.shared.ButtonStyle,
           onClick: this.props.fetchDocumentsFromServer
         })
-
       );
     },
 
