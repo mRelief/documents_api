@@ -87,12 +87,6 @@
           userSubmittedData.child_support === 'false' &&
           userSubmittedData.has_rental_income === 'false') return null;
 
-      if (single_person) {
-        var sentenceSubjectAndVerb = 'You are receiving';
-      } else {
-        var sentenceSubjectAndVerb = 'Your family is receiving';
-      };
-
       var incomeSources = [];
 
       if (userSubmittedData.disability_benefits === 'true') {
@@ -107,7 +101,21 @@
         incomeSources.push('rental income');
       };
 
-      var incomeSourcesList = incomeSources.join(', ');
+      if (incomeSources.length === 1) {
+        var incomeSourcesList = incomeSources[0];
+      } else if (incomeSources.length === 2) {
+        var incomeSourcesList = incomeSources.join(' and ');
+      } else {
+        var lastItem = incomeSources[incomeSources.length - 1];
+        incomeSources[incomeSources.length - 1] = 'and ' + lastItem;
+        var incomeSourcesList = incomeSources.join(', ');
+      };
+
+      if (single_person) {
+        var sentenceSubjectAndVerb = 'You are receiving';
+      } else {
+        var sentenceSubjectAndVerb = 'Your family is receiving';
+      };
 
       var sentence = [sentenceSubjectAndVerb,incomeSourcesList].join(' ') + '.';
 
