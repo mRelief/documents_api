@@ -3,6 +3,7 @@
   var dom = React.DOM;
   var createEl = React.createElement.bind(React);
   var AdditionalIncomeConfirmation = window.shared.AdditionalIncomeConfirmation;
+  var EmploymentStatusConfirmation = window.shared.EmploymentStatusConfirmation;
 
   window.shared.ConfirmationPage = React.createClass({
 
@@ -32,21 +33,21 @@
             dom.br({}),
             dom.br({})
           ),
-          dom.li({},
-            this.renderEmploymentStatus(),
-            dom.br({}),
-            dom.br({})
-          ),
           createEl(AdditionalIncomeConfirmation, {
               userSubmittedData: this.props.userSubmittedData,
               singlePersonHousehold: this.props.singlePersonHousehold,
             }
           ),
-          dom.li({},
-            this.renderCitizenshipStatus()
+          createEl(EmploymentStatusConfirmation, {
+              userSubmittedData: this.props.userSubmittedData,
+              singlePersonHousehold: this.props.singlePersonHousehold,
+            }
           ),
-          dom.br({}),
-          dom.br({})
+          dom.li({},
+            this.renderCitizenshipStatus(),
+            dom.br({}),
+            dom.br({})
+          )
         ),
         dom.input({
           type: 'submit',
@@ -76,20 +77,6 @@
         return 'You are staying in a shelter.';
       } else if (userSubmittedData.living_with_family_or_friends === 'true') {
         return 'You are living with family or friends.';
-      };
-    },
-
-    renderEmploymentStatus: function () {
-      var userSubmittedData = this.props.userSubmittedData;
-
-      if (userSubmittedData.employee === 'true') {
-        return 'You are an employee.';
-      } else if (userSubmittedData.self_employed === 'true') {
-        return 'You are self-employed.';
-      } else if (userSubmittedData.retired === 'true') {
-        return 'You are retired.';
-      } else if (userSubmittedData.unemployment_benefits === 'true') {
-        return 'You are receiving unemployment benefits.';
       };
     },
 
