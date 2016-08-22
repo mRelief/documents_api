@@ -13,6 +13,11 @@
     render: function () {
       var userSubmittedData = this.props.userSubmittedData;
 
+      if (userSubmittedData.employee === 'false' &&
+          userSubmittedData.self_employed === 'false' &&
+          userSubmittedData.retired === 'false' &&
+          userSubmittedData.unemployment_benefits === 'false') return null;
+
       if (userSubmittedData.employee === 'true') {
         var confirmationSentence = 'You are an employee.';
       } else if (userSubmittedData.self_employed === 'true') {
