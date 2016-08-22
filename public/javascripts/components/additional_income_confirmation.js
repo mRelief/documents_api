@@ -5,37 +5,57 @@
 
   window.shared.AdditionalIncomeConfirmation = React.createClass({
 
+    propTypes: {
+      userSubmittedData: React.PropTypes.object.isRequired,
+      singlePersonHousehold: React.PropTypes.bool.isRequired,
+    },
+
     render: function () {
       var userSubmittedData = this.props.userSubmittedData;
-      var single_person = this.props.singlePersonHousehold;
 
       if (userSubmittedData.disability_benefits === 'false' &&
           userSubmittedData.child_support === 'false' &&
           userSubmittedData.has_rental_income === 'false') return null;
 
-      var incomeSources = [];
+      return dom.li({},
+        dom.span({}, this.confirmationSentence()),
+        dom.br({}),
+        dom.br({})
+      );
+    },
 
-      if (userSubmittedData.disability_benefits === 'true') {
-        incomeSources.push('disability benefits');
-      };
+    incomeSources: function () {
+      var sources = [];
+      var userData = this.props.userSubmittedData;
 
-      if (userSubmittedData.child_support === 'true') {
-        incomeSources.push('child support');
-      };
+      if (userData.disability_benefits === 'true') { sources.push('disability benefits'); };
 
-      if (userSubmittedData.has_rental_income === 'true') {
-        incomeSources.push('rental income');
-      };
+      if (userData.child_support === 'true') { sources.push('child support'); };
 
-      if (incomeSources.length === 1) {
-        var incomeSourcesList = incomeSources[0];
-      } else if (incomeSources.length === 2) {
-        var incomeSourcesList = incomeSources.join(' and ');
+      if (userData.has_rental_income === 'true') { sources.push('rental income'); };
+
+      return sources;
+    },
+
+    incomeSourcesEnglishList: function () {
+      var list;
+      var sources = this.incomeSources();
+
+      if (sources.length === 1) {
+        var list = sources[0];
+      } else if (sources.length === 2) {
+        var list = sources.join(' and ');
       } else {
-        var lastItem = incomeSources[incomeSources.length - 1];
-        incomeSources[incomeSources.length - 1] = 'and ' + lastItem;
-        var incomeSourcesList = incomeSources.join(', ');
+        var lastItem = sources[sources.length - 1];
+        sources[sources.length - 1] = 'and ' + lastItem;
+        var list = sources.join(', ');
       };
+
+      return list;
+    },
+
+    sentenceSubjectAndVerb: function () {
+      var single_person = this.props.singlePersonHousehold;
 
       if (single_person) {
         var sentenceSubjectAndVerb = 'You are receiving';
@@ -43,16 +63,16 @@
         var sentenceSubjectAndVerb = 'Your family is receiving';
       };
 
-      var sentence = [sentenceSubjectAndVerb,incomeSourcesList].join(' ') + '.';
+      return sentenceSubjectAndVerb;
+    },
 
-      return dom.li({},
-        dom.span({}, sentence),
-        dom.br({}),
-        dom.br({})
-      );
+    confirmationSentence: function () {
+      return [
+        this.sentenceSubjectAndVerb(),
+        this.incomeSourcesEnglishList()
+      ].join(' ') + '.';
     },
 
   });
-
 
 })();
