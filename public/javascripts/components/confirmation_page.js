@@ -93,18 +93,26 @@
         var sentenceSubjectAndVerb = 'Your family is receiving';
       };
 
+      var incomeSources = [];
+
       if (userSubmittedData.disability_benefits === 'true') {
-        var incomeSource = 'disability benefits.';
-      } else if (userSubmittedData.child_support === 'true') {
-        var incomeSource = 'child support.';
-      } else if (userSubmittedData.has_rental_income === 'true') {
-        var incomeSource = 'rental income.';
+        incomeSources.push('disability benefits');
       };
 
+      if (userSubmittedData.child_support === 'true') {
+        incomeSources.push('child support');
+      };
+
+      if (userSubmittedData.has_rental_income === 'true') {
+        incomeSources.push('rental income');
+      };
+
+      var incomeSourcesList = incomeSources.join(', ');
+
+      var sentence = [sentenceSubjectAndVerb,incomeSourcesList].join(' ') + '.';
+
       return dom.div({},
-        dom.span({},
-          [sentenceSubjectAndVerb, incomeSource].join(' ')
-        ),
+        dom.span({}, sentence),
         dom.br({}),
         dom.br({})
       );
