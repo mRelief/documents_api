@@ -56,13 +56,13 @@
     renderLivingSituation: function () {
       var userSubmittedData = this.props.userSubmittedData;
 
-      if (userSubmittedData.renting) {
+      if (userSubmittedData.renting === 'true') {
         return 'You are renting.';
-      } else if (userSubmittedData.owns_home) {
+      } else if (userSubmittedData.owns_home === 'true') {
         return 'You own your home.';
-      } else if (userSubmittedData.shelter) {
+      } else if (userSubmittedData.shelter === 'true') {
         return 'You are staying in a shelter.';
-      } else if (userSubmittedData.living_with_family_or_friends) {
+      } else if (userSubmittedData.living_with_family_or_friends === 'true') {
         return 'You are living with family or friends.';
       };
     },
@@ -70,31 +70,40 @@
     renderEmploymentStatus: function () {
       var userSubmittedData = this.props.userSubmittedData;
 
-      if (userSubmittedData.employee) {
+      if (userSubmittedData.employee === 'true') {
         return 'You are an employee.';
-      } else if (userSubmittedData.self_employed) {
+      } else if (userSubmittedData.self_employed === 'true') {
         return 'You are self-employed.';
-      } else if (userSubmittedData.retired) {
+      } else if (userSubmittedData.retired === 'true') {
         return 'You are retired.';
-      } else if (userSubmittedData.unemployment_benefits) {
+      } else if (userSubmittedData.unemployment_benefits === 'true') {
         return 'You are receiving unemployment benefits.';
       };
     },
 
     renderOtherIncomeSources: function () {
       var userSubmittedData = this.props.userSubmittedData;
+      var single_person = this.props.singlePersonHousehold;
 
-      if (userSubmittedData.disability_benefits) {
-        return 'You are receiving disability benefits.';
-      } else if (userSubmittedData.child_support) {
-        return 'You are receiving child support.';
-      } else if (userSubmittedData.has_rental_income) {
-        return 'You are receiving rental income.';
+      if (single_person) {
+        var sentenceSubjectAndVerb = 'You are receiving';
+      } else {
+        var sentenceSubjectAndVerb = 'Your family is receiving';
       };
+
+      if (userSubmittedData.disability_benefits === 'true') {
+        var incomeSource = 'disability benefits.';
+      } else if (userSubmittedData.child_support === 'true') {
+        var incomeSource = 'child support.';
+      } else if (userSubmittedData.has_rental_income === 'true') {
+        var incomeSource = 'rental income.';
+      };
+
+      return [sentenceSubjectAndVerb, incomeSource].join(' ');
     },
 
     renderCitizenshipStatus: function () {
-      var all_citizens = this.props.userSubmittedData.all_citizens;
+      var all_citizens = (this.props.userSubmittedData.all_citizens === 'true');
       var single_person = this.props.singlePersonHousehold;
 
       if (all_citizens && single_person) {
