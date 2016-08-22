@@ -30,8 +30,6 @@
         dom.br({}),
         dom.br({}),
         this.renderOtherIncomeSources(),
-        dom.br({}),
-        dom.br({}),
         this.renderCitizenshipStatus(),
         dom.br({}),
         dom.br({}),
@@ -85,6 +83,10 @@
       var userSubmittedData = this.props.userSubmittedData;
       var single_person = this.props.singlePersonHousehold;
 
+      if (userSubmittedData.disability_benefits === 'false' &&
+          userSubmittedData.child_support === 'false' &&
+          userSubmittedData.has_rental_income === 'false') return null;
+
       if (single_person) {
         var sentenceSubjectAndVerb = 'You are receiving';
       } else {
@@ -99,7 +101,13 @@
         var incomeSource = 'rental income.';
       };
 
-      return [sentenceSubjectAndVerb, incomeSource].join(' ');
+      return dom.div({},
+        dom.span({},
+          [sentenceSubjectAndVerb, incomeSource].join(' ')
+        ),
+        dom.br({}),
+        dom.br({})
+      );
     },
 
     renderCitizenshipStatus: function () {
