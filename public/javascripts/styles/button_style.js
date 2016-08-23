@@ -8,7 +8,8 @@
     borderRadius: '5px',
     fontFamily: 'Open Sans',
     fontSize: '16px',
-    padding: '6px 12px'
+    padding: '6px 12px',
+    marginRight: '12px'
   };
 
 })();

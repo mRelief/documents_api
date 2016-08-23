@@ -51,9 +51,14 @@
         ),
         dom.input({
           type: 'submit',
-          value: 'Correct',
+          value: 'This Is Correct',
           style: window.shared.ButtonStyle,
           onClick: this.props.fetchDocumentsFromServer
+        }),
+        dom.input({
+          type: 'submit',
+          value: 'No, Go Back',
+          style: window.shared.ButtonStyle,
         })
       );
     },
