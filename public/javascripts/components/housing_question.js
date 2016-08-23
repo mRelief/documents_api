@@ -13,6 +13,8 @@
     propTypes: {
       onUpdateLivingSituationField: React.PropTypes.func.isRequired,
       onLivingSituationWithoutSpecialDocuments: React.PropTypes.func.isRequired,
+      userWentBack: React.PropTypes.bool.isRequired,
+      userSubmittedData: React.PropTypes.object.isRequired
     },
 
     render: function () {
@@ -22,7 +24,11 @@
           type: 'radio',
           name: 'livingQuestion',
           onClick: this.props.onUpdateLivingSituationField,
-          data: 'renting'
+          data: 'renting',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.renting === 'true'
+          )
         }),
         dom.label({}, 'Renting'),
         dom.br({}),
@@ -30,7 +36,11 @@
           type: 'radio',
           name: 'livingQuestion',
           onClick: this.props.onUpdateLivingSituationField,
-          data: 'owns_home'
+          data: 'owns_home',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.owns_home === 'true'
+          )
         }),
         dom.label({}, 'Own home'),
         dom.br({}),
@@ -38,7 +48,11 @@
           type: 'radio',
           name: 'livingQuestion',
           onClick: this.props.onUpdateLivingSituationField,
-          data: 'living_with_family_or_friends'
+          data: 'living_with_family_or_friends',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.living_with_family_or_friends === 'true'
+          )
         }),
         dom.label({}, 'Living with family/friends'),
         dom.br({}),
@@ -46,7 +60,11 @@
           type: 'radio',
           name: 'livingQuestion',
           onClick: this.props.onUpdateLivingSituationField,
-          data: 'shelter'
+          data: 'shelter',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.shelter === 'true'
+          )
         }),
         dom.label({}, 'Shelter'),
         dom.br({}),

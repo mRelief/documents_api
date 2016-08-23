@@ -132,7 +132,9 @@
     renderHousingQuestion: function () {
       return createEl(HousingQuestion, {
         onUpdateLivingSituationField: this.onUpdateLivingSituationField,
-        onLivingSituationWithoutSpecialDocuments: this.onLivingSituationWithoutSpecialDocuments
+        onLivingSituationWithoutSpecialDocuments: this.onLivingSituationWithoutSpecialDocuments,
+        userWentBack: this.state.hitBackButton,
+        userSubmittedData: this.state.userSubmittedData,
       });
     },
 
