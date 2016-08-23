@@ -59,6 +59,8 @@
       return createEl(IncomeSourcesQuestion, {
         singlePersonHousehold: this.props.singlePersonHousehold,
         onUpdateDataField: this.props.onUpdateDataField,
+        userSubmittedData: this.props.userSubmittedData,
+        userWentBack: this.props.userWentBack,
       });
     },
 

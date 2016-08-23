@@ -7,6 +7,8 @@
     propTypes: {
       singlePersonHousehold: React.PropTypes.bool.isRequired,
       onUpdateDataField: React.PropTypes.func.isRequired,
+      userSubmittedData: React.PropTypes.object.isRequired,
+      userWentBack: React.PropTypes.bool.isRequired
     },
 
     render: function () {
@@ -16,6 +18,10 @@
           type: 'checkbox',
           onClick: this.props.onUpdateDataField,
           data: 'disability_benefits',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.disability_benefits === 'true'
+          )
         }),
         dom.label({}, 'Disability benefits'),
         dom.br({}),
@@ -23,6 +29,10 @@
           type: 'checkbox',
           onClick: this.props.onUpdateDataField,
           data: 'child_support',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.child_support === 'true'
+          )
         }),
         dom.label({}, 'Child support'),
         dom.br({}),
@@ -30,6 +40,10 @@
           type: 'checkbox',
           onClick: this.props.onUpdateDataField,
           data: 'has_rental_income',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.has_rental_income === 'true'
+          )
         }),
         dom.label({}, 'Rental income'),
         dom.br({}),
