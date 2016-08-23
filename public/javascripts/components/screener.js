@@ -123,7 +123,9 @@
 
     renderNumberOfPeople: function () {
       return createEl(NumberOfPeopleQuestion, {
-        onClickMyFamily: this.onClickMyFamily
+        onClickMyFamily: this.onClickMyFamily,
+        userWentBack: this.state.hitBackButton,
+        singlePersonHousehold: this.state.singlePersonHousehold,
       });
     },
 
