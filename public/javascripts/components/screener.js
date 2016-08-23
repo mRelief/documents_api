@@ -96,7 +96,9 @@
         onCheckYesAllCitizens: this.onCheckYesAllCitizens,
         singlePersonHousehold: this.state.singlePersonHousehold,
         onClickNext: this.onClickNextFromSecondPage,
-        onClickBackButton: this.hitBackButtonFromSecondPage
+        onClickBackButton: this.hitBackButtonFromSecondPage,
+        userSubmittedData: this.state.userSubmittedData,
+        userWentBack: this.state.hitBackButton,
       });
     },
 

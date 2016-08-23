@@ -15,7 +15,9 @@
       onCheckYesAllCitizens: React.PropTypes.func.isRequired,
       singlePersonHousehold: React.PropTypes.bool.isRequired,
       onClickNext: React.PropTypes.func.isRequired,
-      onClickBackButton: React.PropTypes.func.isRequired
+      onClickBackButton: React.PropTypes.func.isRequired,
+      userSubmittedData: React.PropTypes.object.isRequired,
+      userWentBack: React.PropTypes.bool.isRequired
     },
 
     getInitialState: function() {
@@ -48,6 +50,8 @@
       return createEl(EmploymentQuestion, {
         singlePersonHousehold: this.props.singlePersonHousehold,
         onUpdateDataField: this.props.onUpdateDataField,
+        userSubmittedData: this.props.userSubmittedData,
+        userWentBack: this.props.userWentBack,
       });
     },
 

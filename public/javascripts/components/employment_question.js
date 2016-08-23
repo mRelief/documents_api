@@ -13,6 +13,8 @@
     propTypes: {
       singlePersonHousehold: React.PropTypes.bool.isRequired,
       onUpdateDataField: React.PropTypes.func.isRequired,
+      userSubmittedData: React.PropTypes.object.isRequired,
+      userWentBack: React.PropTypes.bool.isRequired
     },
 
     render: function () {
@@ -21,27 +23,39 @@
         dom.input({
           type: 'checkbox',
           onClick: this.props.onUpdateDataField,
-          data: 'employee'
+          data: 'employee',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.employee === 'true'
+          )
         }),
         dom.label({}, 'Employed'),
         dom.br({}),
         dom.input({
           type: 'checkbox',
           onClick: this.props.onUpdateDataField,
-          data: 'self_employed'
+          data: 'self_employed',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.self_employed === 'true'
+          )
         }),
         dom.label({}, 'Self-employed'),
         dom.br({}),
         dom.input({
           type: 'checkbox',
           onClick: this.props.onUpdateDataField,
-          data: 'retired'
+          data: 'retired',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.retired === 'true'
+          )
         }),
         dom.label({}, 'Retired'),
         dom.br({}),
         dom.input({
           type: 'checkbox',
-          onClick: this.onCheckUnemployed
+          onClick: this.onCheckUnemployed,
         }),
         dom.label({}, 'Unemployed'),
         dom.br({}),
