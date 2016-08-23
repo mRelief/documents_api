@@ -95,7 +95,8 @@
         onCheckNotAllCitizens: this.onCheckNotAllCitizens,
         onCheckYesAllCitizens: this.onCheckYesAllCitizens,
         singlePersonHousehold: this.state.singlePersonHousehold,
-        onClickNext: this.onClickNextFromSecondPage
+        onClickNext: this.onClickNextFromSecondPage,
+        onClickBackButton: this.hitBackButtonFromSecondPage
       });
     },
 
@@ -185,6 +186,13 @@
       this.setState({
         hitBackButton: true,
         answeredSecondPage: false
+      });
+    },
+
+    hitBackButtonFromSecondPage: function () {
+      this.setState({
+        hitBackButton: true,
+        answeredFirstPage: false
       });
     },
 

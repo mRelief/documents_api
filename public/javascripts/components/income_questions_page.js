@@ -14,7 +14,8 @@
       onCheckNotAllCitizens: React.PropTypes.func.isRequired,
       onCheckYesAllCitizens: React.PropTypes.func.isRequired,
       singlePersonHousehold: React.PropTypes.bool.isRequired,
-      onClickNext: React.PropTypes.func.isRequired
+      onClickNext: React.PropTypes.func.isRequired,
+      onClickBackButton: React.PropTypes.func.isRequired
     },
 
     getInitialState: function() {
@@ -28,6 +29,12 @@
         this.renderCitizenshipQuestion(),
         dom.br({}),
         this.requiredQuestionWarning(),
+        dom.input({
+          type: 'submit',
+          value: 'Back',
+          style: window.shared.ButtonStyle,
+          onClick: this.props.onClickBackButton
+        }),
         dom.input({
           type: 'submit',
           value: 'Done',
