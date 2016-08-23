@@ -69,7 +69,8 @@
       return createEl(ConfirmationPage, {
         userSubmittedData: this.state.userSubmittedData,
         singlePersonHousehold: this.state.singlePersonHousehold,
-        fetchDocumentsFromServer: this.fetchDocumentsFromServer
+        fetchDocumentsFromServer: this.fetchDocumentsFromServer,
+        onClickBackButton: this.hitBackButtonFromConfirmationPage
       });
     },
 
@@ -178,6 +179,13 @@
       var userSubmittedData = this.state.userSubmittedData;
       userSubmittedData["all_citizens"] = "true";
       this.setState({ userSubmittedData: userSubmittedData });
+    },
+
+    hitBackButtonFromConfirmationPage: function () {
+      this.setState({
+        hitBackButton: true,
+        answeredSecondPage: false
+      });
     },
 
     onClickStartOver: function () {

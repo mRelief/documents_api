@@ -10,7 +10,8 @@
     propTypes: {
       userSubmittedData: React.PropTypes.object.isRequired,
       singlePersonHousehold: React.PropTypes.bool.isRequired,
-      fetchDocumentsFromServer: React.PropTypes.func.isRequired
+      fetchDocumentsFromServer: React.PropTypes.func.isRequired,
+      onClickBackButton: React.PropTypes.func.isRequired
     },
 
     render: function () {
@@ -59,6 +60,7 @@
           type: 'submit',
           value: 'No, Go Back',
           style: window.shared.ButtonStyle,
+          onClick: this.props.onClickBackButton
         })
       );
     },
