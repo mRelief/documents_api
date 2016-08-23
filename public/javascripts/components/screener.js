@@ -132,7 +132,6 @@
     renderHousingQuestion: function () {
       return createEl(HousingQuestion, {
         onUpdateLivingSituationField: this.onUpdateLivingSituationField,
-        onLivingSituationWithoutSpecialDocuments: this.onLivingSituationWithoutSpecialDocuments,
         userWentBack: this.state.hitBackButton,
         userSubmittedData: this.state.userSubmittedData,
       });
@@ -158,18 +157,10 @@
       userSubmittedData['owns_home'] = "false";
       userSubmittedData['shelter'] = "false";
       userSubmittedData['living_with_family_or_friends'] = "false";
+      userSubmittedData['car'] = "false";
+      userSubmittedData['motel'] = "false";
+      userSubmittedData['in_kind'] = "false";
       userSubmittedData[dataField] = "true";
-
-      this.setState({ userSubmittedData: userSubmittedData });
-    },
-
-    onLivingSituationWithoutSpecialDocuments: function () {
-      var userSubmittedData = this.state.userSubmittedData;
-
-      userSubmittedData['renting'] = "false";
-      userSubmittedData['owns_home'] = "false";
-      userSubmittedData['shelter'] = "false";
-      userSubmittedData['living_with_family_or_friends'] = "false";
 
       this.setState({ userSubmittedData: userSubmittedData });
     },

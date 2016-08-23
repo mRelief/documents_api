@@ -12,7 +12,6 @@
 
     propTypes: {
       onUpdateLivingSituationField: React.PropTypes.func.isRequired,
-      onLivingSituationWithoutSpecialDocuments: React.PropTypes.func.isRequired,
       userWentBack: React.PropTypes.bool.isRequired,
       userSubmittedData: React.PropTypes.object.isRequired
     },
@@ -77,9 +76,6 @@
     },
 
     toggleAdditionalOptions: function () {
-      this.props.onLivingSituationWithoutSpecialDocuments();  // If the user leaves this as the
-                                                              // selected radio button, clear all
-                                                              // other living situation fields
       this.setState({ showMoreOptions: true });
     },
 
@@ -87,13 +83,40 @@
       if (this.state.showMoreOptions === false) return null;
 
       return dom.div({},
-        dom.input({ type: 'radio', name: 'livingQuestion', onClick: this.props.onLivingSituationWithoutSpecialDocuments }),
+        dom.input({
+          type: 'radio',
+          name: 'livingQuestion',
+          onClick: this.props.onUpdateLivingSituationField,
+          data: 'car',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.car === 'true'
+          )
+        }),
         dom.label({}, 'Car'),
         dom.br({}),
-        dom.input({ type: 'radio', name: 'livingQuestion', onClick: this.props.onLivingSituationWithoutSpecialDocuments }),
+        dom.input({
+          type: 'radio',
+          name: 'livingQuestion',
+          onClick: this.props.onUpdateLivingSituationField,
+          data: 'motel',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.motel === 'true'
+          )
+        }),
         dom.label({}, 'Motel'),
         dom.br({}),
-        dom.input({ type: 'radio', name: 'livingQuestion', onClick: this.props.onLivingSituationWithoutSpecialDocuments }),
+        dom.input({
+          type: 'radio',
+          name: 'livingQuestion',
+          onClick: this.props.onUpdateLivingSituationField,
+          data: 'in_kind',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.in_kind === 'true'
+          )
+        }),
         dom.label({}, 'In Kind')
       );
     }
