@@ -22,7 +22,8 @@
         documentsDataFromServer: null,
         userSubmittedData: DefaultData,
         singlePersonHousehold: true,
-        errorFromServer: false
+        errorFromServer: false,
+        hitBackButton: false
       };
     },
 
@@ -187,7 +188,8 @@
         documentsDataFromServer: null,
         userSubmittedData: DefaultData,
         singlePersonHousehold: true,
-        errorFromServer: false
+        errorFromServer: false,
+        hitBackButton: false
       });
     },
 
