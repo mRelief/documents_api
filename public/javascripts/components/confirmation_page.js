@@ -84,6 +84,12 @@
         return 'You are staying in a shelter.';
       } else if (userSubmittedData.living_with_family_or_friends === 'true') {
         return 'You are living with family or friends.';
+      } else if (userSubmittedData.car === 'true') {
+        return 'You are staying in your car.';
+      } else if (userSubmittedData.motel === 'true') {
+        return 'You are staying in a motel.';
+      } else if (userSubmittedData.in_kind === 'true') {
+        return 'You are staying somewhere for in-kind work.';
       };
     },
 
