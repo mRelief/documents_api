@@ -77,10 +77,15 @@
     renderShowMoreOptionsButton: function () {
       if (this.state.showMoreOptions === true) return null;
 
-      return dom.a({
-        onClick: this.toggleAdditionalOptions,
-        style: window.shared.LinkStyle
-      }, 'Show More Options');
+      return dom.span({
+        style: {
+          marginLeft: '16px'
+        },
+      }, dom.a({
+          onClick: this.toggleAdditionalOptions,
+          style: window.shared.LinkStyle
+        }, 'Show More Options')
+      );
     },
 
     toggleAdditionalOptions: function () {
