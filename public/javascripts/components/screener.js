@@ -10,17 +10,20 @@
   var HousingQuestion = window.shared.HousingQuestion;
   var ErrorPage = window.shared.ErrorPage;
   var IncomeQuestionsPage = window.shared.IncomeQuestionsPage;
+  var ConfirmationPage = window.shared.ConfirmationPage;
 
   window.shared.Screener = React.createClass({
 
     getInitialState: function() {
       return {
         answeredFirstPage: false,
+        answeredSecondPage: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
         userSubmittedData: DefaultData,
         singlePersonHousehold: true,
-        errorFromServer: false
+        errorFromServer: false,
+        hitBackButton: false
       };
     },
 
@@ -53,10 +56,22 @@
       } else if (this.state.answeredFirstPage === false) {
         // First page
         return this.renderFirstPage();
-      } else {
+      } else if (this.state.answeredSecondPage === false) {
         // Detailed income questions page
         return this.renderIncomeQuestionsPage();
+      } else {
+        // Confirmation page
+        return this.renderConfirmationPage();
       };
+    },
+
+    renderConfirmationPage: function () {
+      return createEl(ConfirmationPage, {
+        userSubmittedData: this.state.userSubmittedData,
+        singlePersonHousehold: this.state.singlePersonHousehold,
+        fetchDocumentsFromServer: this.fetchDocumentsFromServer,
+        onClickBackButton: this.hitBackButtonFromConfirmationPage
+      });
     },
 
     renderFirstPage: function () {
@@ -75,12 +90,15 @@
 
     renderIncomeQuestionsPage: function () {
       return createEl(IncomeQuestionsPage, {
-        fetchDocumentsFromServer: this.fetchDocumentsFromServer,
         singlePersonHousehold: this.state.singlePersonHousehold,
         onUpdateDataField: this.onUpdateDataField,
         onCheckNotAllCitizens: this.onCheckNotAllCitizens,
         onCheckYesAllCitizens: this.onCheckYesAllCitizens,
-        singlePersonHousehold: this.state.singlePersonHousehold
+        singlePersonHousehold: this.state.singlePersonHousehold,
+        onClickNext: this.onClickNextFromSecondPage,
+        onClickBackButton: this.hitBackButtonFromSecondPage,
+        userSubmittedData: this.state.userSubmittedData,
+        userWentBack: this.state.hitBackButton,
       });
     },
 
@@ -101,16 +119,23 @@
       this.setState({ answeredFirstPage: true });
     },
 
+    onClickNextFromSecondPage: function () {
+      this.setState({ answeredSecondPage: true });
+    },
+
     renderNumberOfPeople: function () {
       return createEl(NumberOfPeopleQuestion, {
-        onClickMyFamily: this.onClickMyFamily
+        onClickMyFamily: this.onClickMyFamily,
+        userWentBack: this.state.hitBackButton,
+        singlePersonHousehold: this.state.singlePersonHousehold,
       });
     },
 
     renderHousingQuestion: function () {
       return createEl(HousingQuestion, {
         onUpdateLivingSituationField: this.onUpdateLivingSituationField,
-        onLivingSituationWithoutSpecialDocuments: this.onLivingSituationWithoutSpecialDocuments
+        userWentBack: this.state.hitBackButton,
+        userSubmittedData: this.state.userSubmittedData,
       });
     },
 
@@ -134,18 +159,10 @@
       userSubmittedData['owns_home'] = "false";
       userSubmittedData['shelter'] = "false";
       userSubmittedData['living_with_family_or_friends'] = "false";
+      userSubmittedData['car'] = "false";
+      userSubmittedData['motel'] = "false";
+      userSubmittedData['in_kind'] = "false";
       userSubmittedData[dataField] = "true";
-
-      this.setState({ userSubmittedData: userSubmittedData });
-    },
-
-    onLivingSituationWithoutSpecialDocuments: function () {
-      var userSubmittedData = this.state.userSubmittedData;
-
-      userSubmittedData['renting'] = "false";
-      userSubmittedData['owns_home'] = "false";
-      userSubmittedData['shelter'] = "false";
-      userSubmittedData['living_with_family_or_friends'] = "false";
 
       this.setState({ userSubmittedData: userSubmittedData });
     },
@@ -162,14 +179,30 @@
       this.setState({ userSubmittedData: userSubmittedData });
     },
 
+    hitBackButtonFromConfirmationPage: function () {
+      this.setState({
+        hitBackButton: true,
+        answeredSecondPage: false
+      });
+    },
+
+    hitBackButtonFromSecondPage: function () {
+      this.setState({
+        hitBackButton: true,
+        answeredFirstPage: false
+      });
+    },
+
     onClickStartOver: function () {
       this.setState({
         answeredFirstPage: false,
+        answeredSecondPage: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
         userSubmittedData: DefaultData,
         singlePersonHousehold: true,
-        errorFromServer: false
+        errorFromServer: false,
+        hitBackButton: false
       });
     },
 

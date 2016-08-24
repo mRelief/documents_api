@@ -9,12 +9,15 @@
   window.shared.IncomeQuestionsPage = React.createClass({
 
     propTypes: {
-      fetchDocumentsFromServer: React.PropTypes.func.isRequired,
       singlePersonHousehold: React.PropTypes.bool.isRequired,
       onUpdateDataField: React.PropTypes.func.isRequired,
       onCheckNotAllCitizens: React.PropTypes.func.isRequired,
       onCheckYesAllCitizens: React.PropTypes.func.isRequired,
-      singlePersonHousehold: React.PropTypes.bool.isRequired
+      singlePersonHousehold: React.PropTypes.bool.isRequired,
+      onClickNext: React.PropTypes.func.isRequired,
+      onClickBackButton: React.PropTypes.func.isRequired,
+      userSubmittedData: React.PropTypes.object.isRequired,
+      userWentBack: React.PropTypes.bool.isRequired
     },
 
     getInitialState: function() {
@@ -30,6 +33,12 @@
         this.requiredQuestionWarning(),
         dom.input({
           type: 'submit',
+          value: 'Back',
+          style: window.shared.ButtonStyle,
+          onClick: this.props.onClickBackButton
+        }),
+        dom.input({
+          type: 'submit',
           value: 'Done',
           style: window.shared.ButtonStyle,
           onClick: this.onClickNext
@@ -41,6 +50,8 @@
       return createEl(EmploymentQuestion, {
         singlePersonHousehold: this.props.singlePersonHousehold,
         onUpdateDataField: this.props.onUpdateDataField,
+        userSubmittedData: this.props.userSubmittedData,
+        userWentBack: this.props.userWentBack,
       });
     },
 
@@ -48,6 +59,8 @@
       return createEl(IncomeSourcesQuestion, {
         singlePersonHousehold: this.props.singlePersonHousehold,
         onUpdateDataField: this.props.onUpdateDataField,
+        userSubmittedData: this.props.userSubmittedData,
+        userWentBack: this.props.userWentBack,
       });
     },
 
@@ -61,7 +74,7 @@
 
     onClickNext: function () {
       if (this.atLeastOneChecked()) {
-        this.props.fetchDocumentsFromServer();
+        this.props.onClickNext();
       } else {
         this.setState({ showRequiredQuestionsWarning: true });
       };

@@ -5,7 +5,9 @@
   window.shared.NumberOfPeopleQuestion = React.createClass({
 
     propTypes: {
-      onClickMyFamily: React.PropTypes.func.isRequired
+      onClickMyFamily: React.PropTypes.func.isRequired,
+      userWentBack: React.PropTypes.bool.isRequired,
+      singlePersonHousehold: React.PropTypes.bool.isRequired
     },
 
     render: function () {
@@ -16,14 +18,16 @@
         dom.input({
           type: 'radio',
           name: 'NumberOfPeopleQuestion',
-          onClick: this.props.onClickJustMe
+          onClick: this.props.onClickJustMe,
+          defaultChecked: (this.props.userWentBack && this.props.singlePersonHousehold)
         }),
         dom.label({}, '  Just Me'),
         dom.br({}),
         dom.input({
           type: 'radio',
           name: 'NumberOfPeopleQuestion',
-          onClick: this.props.onClickMyFamily
+          onClick: this.props.onClickMyFamily,
+          defaultChecked: (this.props.userWentBack && !this.props.singlePersonHousehold)
         }),
         dom.label({}, '  My Family'),
         dom.br({}),
