@@ -1,1 +1,3 @@
 local_env.rb
+public/javascripts/vendor/jquery/
+public/javascripts/vendor/react/
