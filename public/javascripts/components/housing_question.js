@@ -68,11 +68,19 @@
         dom.label({}, 'Shelter'),
         dom.br({}),
         this.renderAdditionalOptions(),
-        dom.input({ type: 'radio', name: 'livingQuestion', onClick: this.toggleAdditionalOptions }),
-        dom.label({}, 'None of the above'),
+        this.renderShowMoreOptionsButton(),
         dom.br({}),
         dom.br({})
       );
+    },
+
+    renderShowMoreOptionsButton: function () {
+      if (this.state.showMoreOptions === true) return null;
+
+      return dom.a({
+        onClick: this.toggleAdditionalOptions,
+        style: window.shared.LinkStyle
+      }, 'Show More Options');
     },
 
     toggleAdditionalOptions: function () {
