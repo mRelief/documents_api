@@ -6,9 +6,8 @@
   var DefaultData = window.shared.DefaultData;
 
   var DocumentResultsDisplay = window.shared.DocumentResultsDisplay;
-  var NumberOfPeopleQuestion = window.shared.NumberOfPeopleQuestion;
-  var HousingQuestion = window.shared.HousingQuestion;
   var ErrorPage = window.shared.ErrorPage;
+  var FirstPage = window.shared.FirstPage;
   var IncomeQuestionsPage = window.shared.IncomeQuestionsPage;
   var ConfirmationPage = window.shared.ConfirmationPage;
 
@@ -75,17 +74,14 @@
     },
 
     renderFirstPage: function () {
-      return dom.div({},
-        this.renderNumberOfPeople(),
-        this.renderHousingQuestion(),
-        dom.br({}),
-        dom.input({
-          type: 'submit',
-          value: 'Next',
-          style: window.shared.ButtonStyle,
-          onClick: this.onClickNextFromFirstPage
-        })
-      );
+      return createEl(FirstPage, {
+        onClickNext: this.onClickNextFromFirstPage,
+        onClickMyFamily: this.onClickMyFamily,
+        onUpdateLivingSituationField: this.onUpdateLivingSituationField,
+        userWentBack: this.state.hitBackButton,
+        singlePersonHousehold: this.state.singlePersonHousehold,
+        userSubmittedData: this.state.userSubmittedData
+      });
     },
 
     renderIncomeQuestionsPage: function () {
@@ -121,30 +117,6 @@
 
     onClickNextFromSecondPage: function () {
       this.setState({ answeredSecondPage: true });
-    },
-
-    renderNumberOfPeople: function () {
-      return createEl(NumberOfPeopleQuestion, {
-        onClickMyFamily: this.onClickMyFamily,
-        userWentBack: this.state.hitBackButton,
-        singlePersonHousehold: this.state.singlePersonHousehold,
-      });
-    },
-
-    renderHousingQuestion: function () {
-      return createEl(HousingQuestion, {
-        onUpdateLivingSituationField: this.onUpdateLivingSituationField,
-        userWentBack: this.state.hitBackButton,
-        userSubmittedData: this.state.userSubmittedData,
-      });
-    },
-
-    renderOverallIncomeQuestion: function () {
-      return createEl(OverallIncomeQuestion, {
-        singlePersonHousehold: this.state.singlePersonHousehold,
-        onClickNoIncome: this.onClickNoIncome,
-        onClickYesIncome: this.onClickYesIncome
-      });
     },
 
     onClickMyFamily: function () {
