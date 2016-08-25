@@ -35,7 +35,7 @@
     },
 
     renderInnerBar: function () {
-      var width = String(this.props.step * 0.25 * 100) + '%';
+      var width = String(this.props.step * 0.5 * 100) + '%';
 
       return dom.div({
         style: {
@@ -52,7 +52,7 @@
         style: {
           textAlign: 'right'
         }
-      }, 'Page ' + String(this.props.step) + '/4');
+      }, 'Page ' + String(this.props.step) + '/2');
     },
 
   });

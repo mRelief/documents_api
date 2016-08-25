@@ -17,7 +17,6 @@
 
     render: function () {
       return dom.div({},
-        this.renderProgressBar(),
         dom.h1({}, 'Does this look accurate?'),
         this.renderConfirmationStatement()
       );
@@ -65,10 +64,6 @@
           onClick: this.props.onClickBackButton
         })
       );
-    },
-
-    renderProgressBar: function () {
-      return createEl(ProgressBar, { step: 3 });
     },
 
     renderNumberOfPeople: function () {
