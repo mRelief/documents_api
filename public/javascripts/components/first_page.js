@@ -5,6 +5,7 @@
 
   var NumberOfPeopleQuestion = window.shared.NumberOfPeopleQuestion;
   var HousingQuestion = window.shared.HousingQuestion;
+  var ProgressBar = window.shared.ProgressBar;
 
   window.shared.FirstPage = React.createClass({
 
@@ -45,7 +46,7 @@
     },
 
     renderProgressBar: function () {
-      return dom.div({}, 'Page 1/4');
+      return createEl(ProgressBar, { step: 1 });
     },
 
     renderNumberOfPeople: function () {

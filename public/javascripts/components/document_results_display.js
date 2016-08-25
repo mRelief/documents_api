@@ -5,6 +5,7 @@
   var IdentityDocuments = window.shared.IdentityDocuments;
   var ResidencyDocuments = window.shared.ResidencyDocuments;
   var LinkStyle = window.shared.LinkStyle;
+  var ProgressBar = window.shared.ProgressBar;
 
   window.shared.DocumentResultsDisplay = React.createClass({
 
@@ -70,7 +71,7 @@
     },
 
     renderProgressBar: function () {
-      return dom.div({}, 'Page 4/4');
+      return createEl(ProgressBar, { step: 4 });
     },
 
     renderStateIdSection: function () {

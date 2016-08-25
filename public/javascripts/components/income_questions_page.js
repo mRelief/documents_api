@@ -5,6 +5,7 @@
   var EmploymentQuestion = window.shared.EmploymentQuestion;
   var IncomeSourcesQuestion = window.shared.IncomeSourcesQuestion;
   var CitizenshipQuestion = window.shared.CitizenshipQuestion;
+  var ProgressBar = window.shared.ProgressBar;
 
   window.shared.IncomeQuestionsPage = React.createClass({
 
@@ -48,7 +49,7 @@
     },
 
     renderProgressBar: function () {
-      return dom.div({}, 'Page 2/4');
+      return createEl(ProgressBar, { step: 2 });
     },
 
     renderEmploymentQuestion: function () {
