@@ -12,9 +12,9 @@
       onClickNext: React.PropTypes.func.isRequired,
       onClickMyFamily: React.PropTypes.func.isRequired,
       onUpdateLivingSituationField: React.PropTypes.func.isRequired,
-      userWentBack: React.PropTypes.func.isRequired,
-      singlePersonHousehold: React.PropTypes.func.isRequired,
-      userSubmittedData: React.PropTypes.func.isRequired
+      userWentBack: React.PropTypes.bool.isRequired,
+      singlePersonHousehold: React.PropTypes.bool.isRequired,
+      userSubmittedData: React.PropTypes.object.isRequired
     },
 
     getInitialState: function () {

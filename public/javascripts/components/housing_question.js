@@ -74,8 +74,20 @@
       );
     },
 
+    userSelectedAdditionalOption: function () {
+      return this.props.userWentBack && (
+        (this.props.userSubmittedData.car === 'true') ||
+        (this.props.userSubmittedData.motel === 'true') ||
+        (this.props.userSubmittedData.in_kind === 'true')
+      );
+    },
+
+    shouldShowMoreOptions: function () {
+      return (this.state.showMoreOptions || this.userSelectedAdditionalOption());
+    },
+
     renderShowMoreOptionsButton: function () {
-      if (this.state.showMoreOptions === true) return null;
+      if (this.shouldShowMoreOptions() === true) return null;
 
       return dom.span({
         style: {
@@ -93,7 +105,7 @@
     },
 
     renderAdditionalOptions: function () {
-      if (this.state.showMoreOptions === false) return null;
+      if (this.shouldShowMoreOptions() === false) return null;
 
       return dom.div({},
         dom.input({
