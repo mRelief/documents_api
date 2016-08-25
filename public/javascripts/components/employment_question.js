@@ -4,12 +4,6 @@
 
   window.shared.EmploymentQuestion = React.createClass({
 
-    getInitialState: function () {
-      return {
-        userCheckedUnemployed: false
-      };
-    },
-
     propTypes: {
       singlePersonHousehold: React.PropTypes.bool.isRequired,
       onUpdateDataField: React.PropTypes.func.isRequired,
@@ -111,17 +105,10 @@
 
     onCheckUnemployed: function (event) {
       this.props.onUpdateDataField(event);
-
-      var unemployed = event.target.checked;
-
-      this.setState({ userCheckedUnemployed: unemployed });
     },
 
     showUnemploymentOptions: function () {
-      return (this.props.userWentBack &&
-              this.props.userSubmittedData.unemployed === 'true') ||
-              this.state.userCheckedUnemployed;
-
+      return this.props.userSubmittedData.unemployed === 'true';
     }
 
   });
