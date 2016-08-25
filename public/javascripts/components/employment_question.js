@@ -89,11 +89,24 @@
             type: 'radio',
             name: 'unemploymentBeneftQuestion',
             onClick: this.props.onUpdateDataField,
-            data: 'unemployment_benefits'
+            data: 'unemployment_benefits',
+            defaultChecked: (
+              this.props.userWentBack &&
+              this.props.userSubmittedData.unemployed === 'true' &&
+              this.props.userSubmittedData.unemployment_benefits === 'true'
+            )
           }),
           dom.label({}, 'Yes'),
           dom.br({}),
-          dom.input({ type: 'radio', name: 'unemploymentBeneftQuestion' }),
+          dom.input({
+            type: 'radio',
+            name: 'unemploymentBeneftQuestion',
+            defaultChecked: (
+              this.props.userWentBack &&
+              this.props.userSubmittedData.unemployed === 'true' &&
+              this.props.userSubmittedData.unemployment_benefits === 'false'
+            )
+          }),
           dom.label({}, 'No'),
           dom.br({}),
           dom.br({})
