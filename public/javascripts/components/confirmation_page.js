@@ -16,6 +16,7 @@
 
     render: function () {
       return dom.div({},
+        this.renderProgressBar(),
         dom.h1({}, 'Does this look accurate?'),
         this.renderConfirmationStatement()
       );
@@ -63,6 +64,10 @@
           onClick: this.props.onClickBackButton
         })
       );
+    },
+
+    renderProgressBar: function () {
+      return dom.div({}, 'Page 3/4');
     },
 
     renderNumberOfPeople: function () {

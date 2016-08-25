@@ -42,6 +42,7 @@
 
     render: function () {
       return dom.div({},
+        this.renderProgressBar(),
         dom.h1({}, 'What Documents You Need To Apply For Food Stamps'),
         this.renderDocs(),
         dom.br({}),
@@ -68,6 +69,9 @@
       });
     },
 
+    renderProgressBar: function () {
+      return dom.div({}, 'Page 4/4');
+    },
 
     renderStateIdSection: function () {
       if (this.state.showMoreOptions === true) return null;

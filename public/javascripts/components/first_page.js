@@ -29,6 +29,7 @@
       var showHosuingQuestionWarning = this.state.showPleaseAnswerHousing;
 
       return dom.div({},
+        this.renderProgressBar(),
         this.renderNumberOfPeople(),
         this.requiredQuestionWarning(showNumberOfPeopleWarning),
         this.renderHousingQuestion(),
@@ -41,6 +42,10 @@
           onClick: this.onClickNext
         })
       );
+    },
+
+    renderProgressBar: function () {
+      return dom.div({}, 'Page 1/4');
     },
 
     renderNumberOfPeople: function () {

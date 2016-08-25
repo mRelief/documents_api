@@ -26,6 +26,7 @@
 
     render: function () {
       return dom.div({},
+        this.renderProgressBar(),
         this.renderEmploymentQuestion(),
         this.renderIncomeSourcesQuestion(),
         this.renderCitizenshipQuestion(),
@@ -44,6 +45,10 @@
           onClick: this.onClickNext
         })
       );
+    },
+
+    renderProgressBar: function () {
+      return dom.div({}, 'Page 2/4');
     },
 
     renderEmploymentQuestion: function () {
