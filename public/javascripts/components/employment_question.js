@@ -53,7 +53,7 @@
         dom.input({
           type: 'checkbox',
           name: 'employmentQuestion',
-          onClick: this.onCheckUnemployed,
+          onClick: this.props.onUpdateDataField,
           data: 'unemployed',
           defaultChecked: (
             this.props.userWentBack &&
@@ -101,10 +101,6 @@
       } else {
         return null;
       };
-    },
-
-    onCheckUnemployed: function (event) {
-      this.props.onUpdateDataField(event);
     },
 
     showUnemploymentOptions: function () {
