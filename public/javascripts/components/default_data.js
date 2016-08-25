@@ -7,6 +7,7 @@
     "self_employed": "false",
     "child_support": "false",
     "retired": "false",
+    "unemployed": "false",
     "unemployment_benefits": "false",
     "has_rental_income": "false",
     "renting": "false",

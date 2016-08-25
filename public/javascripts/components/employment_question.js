@@ -60,6 +60,11 @@
           type: 'checkbox',
           name: 'employmentQuestion',
           onClick: this.onCheckUnemployed,
+          data: 'unemployed',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.unemployed === 'true'
+          )
         }),
         dom.label({}, 'Unemployed'),
         dom.br({}),
@@ -83,7 +88,7 @@
     },
 
     renderUnemploymentBenefitsQuestions: function () {
-      if (this.state.userCheckedUnemployed === true) {
+      if (this.showUnemploymentOptions() === true) {
         return dom.div({},
           dom.p({}, 'Are you receiving unemployment benefits?'),
           dom.input({
@@ -105,9 +110,18 @@
     },
 
     onCheckUnemployed: function (event) {
+      this.props.onUpdateDataField(event);
+
       var unemployed = event.target.checked;
 
       this.setState({ userCheckedUnemployed: unemployed });
+    },
+
+    showUnemploymentOptions: function () {
+      return (this.props.userWentBack &&
+              this.props.userSubmittedData.unemployed === 'true') ||
+              this.state.userCheckedUnemployed;
+
     }
 
   });
