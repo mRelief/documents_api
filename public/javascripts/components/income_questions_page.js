@@ -22,14 +22,22 @@
     },
 
     getInitialState: function() {
-      return { showRequiredQuestionsWarning: false };
+      return {
+        showPleaseAnswerEmploymentQuestion: false,
+        showPleaseAnswerAdditionalIncomeQuestion: false
+      };
     },
 
     render: function () {
+      var showEmploymentQuestionWarning = this.state.showPleaseAnswerEmploymentQuestion;
+      var showAdditionalIncomeQuestionWarning = this.state.showPleaseAnswerAdditionalIncomeQuestion;
+
       return dom.div({},
         this.renderProgressBar(),
         this.renderEmploymentQuestion(),
+        this.requiredQuestionWarning(showEmploymentQuestionWarning),
         this.renderIncomeSourcesQuestion(),
+        this.requiredQuestionWarning(showAdditionalIncomeQuestionWarning),
         this.renderCitizenshipQuestion(),
         dom.br({}),
         this.requiredQuestionWarning(),
@@ -79,23 +87,52 @@
     },
 
     onClickNext: function () {
-      if (this.atLeastOneChecked()) {
+      if (this.bothQuestionsAnswered()) {
         this.props.onClickNext();
       } else {
-        this.setState({ showRequiredQuestionsWarning: true });
+        this.validateFirstQuestionAnswered();
+        this.validateSecondQuestionAnswered();
       };
     },
 
-    atLeastOneChecked: function () {
-      return $('[type="checkbox"]').get().map(function(checkbox) {
+    validateFirstQuestionAnswered: function () {
+      if (!this.employmentQuestionAnswered()) {
+        this.setState({ showPleaseAnswerEmploymentQuestion: true });
+      } else {
+        this.setState({ showPleaseAnswerEmploymentQuestion: false });
+      };
+    },
+
+    validateSecondQuestionAnswered: function () {
+      if (!this.additionalIncomeQuestionAnswered()) {
+        this.setState({ showPleaseAnswerAdditionalIncomeQuestion: true });
+      } else {
+        this.setState({ showPleaseAnswerAdditionalIncomeQuestion: false });
+      };
+    },
+
+    employmentQuestionAnswered: function () {
+      return $('[type="checkbox"][name="employmentQuestion"').get().map(function(checkbox) {
         return checkbox.checked;
       }).reduce(function(a, b) {
         return (a || b);
       });
     },
 
-    requiredQuestionWarning: function () {
-      if (this.state.showRequiredQuestionsWarning === false) return null;
+    additionalIncomeQuestionAnswered: function () {
+      return $('[type="checkbox"][name="additionalIncomeQuestion"').get().map(function(checkbox) {
+        return checkbox.checked;
+      }).reduce(function(a, b) {
+        return (a || b);
+      });
+    },
+
+    bothQuestionsAnswered: function () {
+      return (this.employmentQuestionAnswered() && this.additionalIncomeQuestionAnswered());
+    },
+
+    requiredQuestionWarning: function (shouldShow) {
+      if (!shouldShow) return null;
 
       return dom.div({},
         dom.div({
@@ -103,7 +140,7 @@
             color: 'red',
             fontStyle: 'italic'
           }
-        }, 'Please check at least one response.'),
+        }, 'Please select a response.'),
         dom.br({})
       );
     },
