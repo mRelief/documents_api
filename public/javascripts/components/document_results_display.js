@@ -5,6 +5,7 @@
   var IdentityDocuments = window.shared.IdentityDocuments;
   var ResidencyDocuments = window.shared.ResidencyDocuments;
   var LinkStyle = window.shared.LinkStyle;
+  var ProgressBar = window.shared.ProgressBar;
 
   window.shared.DocumentResultsDisplay = React.createClass({
 
@@ -42,6 +43,7 @@
 
     render: function () {
       return dom.div({},
+        this.renderProgressBar(),
         dom.h1({}, 'What Documents You Need To Apply For Food Stamps'),
         this.renderDocs(),
         dom.br({}),
@@ -68,6 +70,9 @@
       });
     },
 
+    renderProgressBar: function () {
+      return createEl(ProgressBar, { step: 4 });
+    },
 
     renderStateIdSection: function () {
       if (this.state.showMoreOptions === true) return null;

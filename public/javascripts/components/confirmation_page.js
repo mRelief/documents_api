@@ -4,6 +4,7 @@
   var createEl = React.createElement.bind(React);
   var AdditionalIncomeConfirmation = window.shared.AdditionalIncomeConfirmation;
   var EmploymentStatusConfirmation = window.shared.EmploymentStatusConfirmation;
+  var ProgressBar = window.shared.ProgressBar;
 
   window.shared.ConfirmationPage = React.createClass({
 
@@ -16,6 +17,7 @@
 
     render: function () {
       return dom.div({},
+        this.renderProgressBar(),
         dom.h1({}, 'Does this look accurate?'),
         this.renderConfirmationStatement()
       );
@@ -63,6 +65,10 @@
           onClick: this.props.onClickBackButton
         })
       );
+    },
+
+    renderProgressBar: function () {
+      return createEl(ProgressBar, { step: 3 });
     },
 
     renderNumberOfPeople: function () {
