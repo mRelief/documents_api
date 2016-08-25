@@ -16,6 +16,7 @@
         dom.p({}, this.question()),
         dom.input({
           type: 'checkbox',
+          name: 'additionalIncomeQuestion',
           onClick: this.props.onUpdateDataField,
           data: 'disability_benefits',
           defaultChecked: (
@@ -27,6 +28,7 @@
         dom.br({}),
         dom.input({
           type: 'checkbox',
+          name: 'additionalIncomeQuestion',
           onClick: this.props.onUpdateDataField,
           data: 'child_support',
           defaultChecked: (
@@ -38,6 +40,7 @@
         dom.br({}),
         dom.input({
           type: 'checkbox',
+          name: 'additionalIncomeQuestion',
           onClick: this.props.onUpdateDataField,
           data: 'has_rental_income',
           defaultChecked: (
@@ -47,7 +50,10 @@
         }),
         dom.label({}, 'Rental income'),
         dom.br({}),
-        dom.input({ type: 'checkbox'}),
+        dom.input({
+          type: 'checkbox',
+          name: 'additionalIncomeQuestion'
+        }),
         dom.label({}, 'None of the above'),
         dom.br({}),
         dom.br({})

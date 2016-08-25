@@ -22,6 +22,7 @@
         dom.p({}, this.renderInstructions()),
         dom.input({
           type: 'checkbox',
+          name: 'employmentQuestion',
           onClick: this.props.onUpdateDataField,
           data: 'employee',
           defaultChecked: (
@@ -33,6 +34,7 @@
         dom.br({}),
         dom.input({
           type: 'checkbox',
+          name: 'employmentQuestion',
           onClick: this.props.onUpdateDataField,
           data: 'self_employed',
           defaultChecked: (
@@ -44,6 +46,7 @@
         dom.br({}),
         dom.input({
           type: 'checkbox',
+          name: 'employmentQuestion',
           onClick: this.props.onUpdateDataField,
           data: 'retired',
           defaultChecked: (
@@ -55,6 +58,7 @@
         dom.br({}),
         dom.input({
           type: 'checkbox',
+          name: 'employmentQuestion',
           onClick: this.onCheckUnemployed,
         }),
         dom.label({}, 'Unemployed'),
