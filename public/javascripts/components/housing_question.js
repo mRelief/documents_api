@@ -68,10 +68,35 @@
         dom.label({}, 'Shelter'),
         dom.br({}),
         this.renderAdditionalOptions(),
-        dom.input({ type: 'radio', name: 'livingQuestion', onClick: this.toggleAdditionalOptions }),
-        dom.label({}, 'None of the above'),
+        this.renderShowMoreOptionsButton(),
         dom.br({}),
         dom.br({})
+      );
+    },
+
+    userSelectedAdditionalOption: function () {
+      return this.props.userWentBack && (
+        (this.props.userSubmittedData.car === 'true') ||
+        (this.props.userSubmittedData.motel === 'true') ||
+        (this.props.userSubmittedData.in_kind === 'true')
+      );
+    },
+
+    shouldShowMoreOptions: function () {
+      return (this.state.showMoreOptions || this.userSelectedAdditionalOption());
+    },
+
+    renderShowMoreOptionsButton: function () {
+      if (this.shouldShowMoreOptions() === true) return null;
+
+      return dom.span({
+        style: {
+          marginLeft: '16px'
+        },
+      }, dom.a({
+          onClick: this.toggleAdditionalOptions,
+          style: window.shared.LinkStyle
+        }, 'Show More Options')
       );
     },
 
@@ -80,7 +105,7 @@
     },
 
     renderAdditionalOptions: function () {
-      if (this.state.showMoreOptions === false) return null;
+      if (this.shouldShowMoreOptions() === false) return null;
 
       return dom.div({},
         dom.input({
