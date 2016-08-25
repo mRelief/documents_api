@@ -52,7 +52,13 @@
         dom.br({}),
         dom.input({
           type: 'checkbox',
-          name: 'additionalIncomeQuestion'
+          name: 'additionalIncomeQuestion',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.has_rental_income === 'false' &&
+            this.props.userSubmittedData.disability_benefits === 'false' &&
+            this.props.userSubmittedData.child_support === 'false'
+          )
         }),
         dom.label({}, 'None of the above'),
         dom.br({}),
