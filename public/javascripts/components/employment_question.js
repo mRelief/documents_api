@@ -4,12 +4,6 @@
 
   window.shared.EmploymentQuestion = React.createClass({
 
-    getInitialState: function () {
-      return {
-        userCheckedUnemployed: false
-      };
-    },
-
     propTypes: {
       singlePersonHousehold: React.PropTypes.bool.isRequired,
       onUpdateDataField: React.PropTypes.func.isRequired,
@@ -59,7 +53,12 @@
         dom.input({
           type: 'checkbox',
           name: 'employmentQuestion',
-          onClick: this.onCheckUnemployed,
+          onClick: this.props.onUpdateDataField,
+          data: 'unemployed',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.unemployed === 'true'
+          )
         }),
         dom.label({}, 'Unemployed'),
         dom.br({}),
@@ -83,7 +82,7 @@
     },
 
     renderUnemploymentBenefitsQuestions: function () {
-      if (this.state.userCheckedUnemployed === true) {
+      if (this.showUnemploymentOptions() === true) {
         return dom.div({},
           dom.p({}, 'Are you receiving unemployment benefits?'),
           dom.input({
@@ -104,10 +103,8 @@
       };
     },
 
-    onCheckUnemployed: function (event) {
-      var unemployed = event.target.checked;
-
-      this.setState({ userCheckedUnemployed: unemployed });
+    showUnemploymentOptions: function () {
+      return this.props.userSubmittedData.unemployed === 'true';
     }
 
   });
