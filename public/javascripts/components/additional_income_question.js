@@ -2,7 +2,7 @@
   window.shared || (window.shared = {});
   var dom = React.DOM;
 
-  window.shared.IncomeSourcesQuestion = React.createClass({
+  window.shared.AdditionalIncomeQuestion = React.createClass({
 
     propTypes: {
       singlePersonHousehold: React.PropTypes.bool.isRequired,
