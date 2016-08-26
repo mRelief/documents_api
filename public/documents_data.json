@@ -1,7 +1,7 @@
 [
   {
-    "official_name": "Pay Stubs",
-    "accessible_name": "Pay Stubs",
+    "official_name": "Pay Stubs for the Past 30 Days",
+    "accessible_name": "Pay Stubs for the Past 30 Days",
     "description": "A document describing your income before taxes are taken out",
     "instructions": {
       "text": "If you don't get paystubs from your employer, the SNAP office will automatically send your employer a letter.",

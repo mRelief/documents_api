@@ -10,7 +10,7 @@ json_string = File.open("public/documents_data.json").read
 raise "Wrong number of docs!" unless @data.size == 26
 
 PAY_STUBS = @data[0]
-raise "Wrong variable!" unless PAY_STUBS[:official_name] == "Pay Stubs"
+raise "Wrong variable!" unless PAY_STUBS[:official_name] == "Pay Stubs for the Past 30 Days"
 
 SOCIAL_SECURITY_CARD = @data[1]
 raise "Wrong variable!" unless SOCIAL_SECURITY_CARD[:official_name] == "Social Security Card"
