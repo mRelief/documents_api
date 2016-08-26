@@ -11,11 +11,10 @@
     render: function () {
       return dom.div({
         style: {
-          marginBottom: '20px'
+          marginBottom: '80px'
         }
       },
-        this.renderOuterBar(),
-        this.renderNumbers()
+        this.renderOuterBar()
       );
     },
 
@@ -27,7 +26,7 @@
             backgroundColor: '#F2F2F2',
             height: '8px',
             borderRadius: '4px',
-            width: '80%'
+            width: '100%'
           }
         },
         this.renderLabels(),
@@ -45,35 +44,37 @@
     },
 
     labelStyle: function (position) {
+      var leftDisplace = (position / 3 * 100) - 1;
+
+      if (this.props.step === position) {
+        var color = 'black';
+      } else {
+        var color = '#A9A9A9';
+      };
+
       return {
-        fontSize: '13px',
+        fontSize: '15px',
         position: 'absolute',
-        left: String(position / 3 * 100) + '%',
-        bottom: '20px'
+        left: String(leftDisplace) + '%',
+        bottom: '20px',
+        color: color,
       }
     },
 
     renderMarker: function () {
-      var position = String(this.props.step * 0.25 * 100) + '%';
+      var position = String((this.props.step) / 3 * 100) + '%';
 
       return dom.div({
         style: {
           position: 'relative',
           left: position,
-          backgroundColor: '#00FF00',
+          bottom: '5px',
+          backgroundColor: '#0060b0',
           height: '20px',
           borderRadius: '20px',
           width: '20px'
         }
       });
-    },
-
-    renderNumbers: function () {
-      return dom.div({
-        style: {
-          textAlign: 'right'
-        }
-      }, 'Page ' + String(this.props.step) + '/4');
     },
 
   });
