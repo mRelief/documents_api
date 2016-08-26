@@ -7,7 +7,7 @@
   var CitizenshipQuestion = window.shared.CitizenshipQuestion;
   var ProgressBar = window.shared.ProgressBar;
 
-  window.shared.IncomeQuestionsPage = React.createClass({
+  window.shared.SecondPage = React.createClass({
 
     propTypes: {
       singlePersonHousehold: React.PropTypes.bool.isRequired,

@@ -8,7 +8,7 @@
   var DocumentResultsDisplay = window.shared.DocumentResultsDisplay;
   var ErrorPage = window.shared.ErrorPage;
   var FirstPage = window.shared.FirstPage;
-  var IncomeQuestionsPage = window.shared.IncomeQuestionsPage;
+  var SecondPage = window.shared.SecondPage;
   var ConfirmationPage = window.shared.ConfirmationPage;
 
   window.shared.Screener = React.createClass({
@@ -57,7 +57,7 @@
         return this.renderFirstPage();
       } else if (this.state.answeredSecondPage === false) {
         // Detailed income questions page
-        return this.renderIncomeQuestionsPage();
+        return this.renderSecondPage();
       } else {
         // Confirmation page
         return this.renderConfirmationPage();
@@ -84,8 +84,8 @@
       });
     },
 
-    renderIncomeQuestionsPage: function () {
-      return createEl(IncomeQuestionsPage, {
+    renderSecondPage: function () {
+      return createEl(SecondPage, {
         singlePersonHousehold: this.state.singlePersonHousehold,
         onUpdateDataField: this.onUpdateDataField,
         onCheckNotAllCitizens: this.onCheckNotAllCitizens,
