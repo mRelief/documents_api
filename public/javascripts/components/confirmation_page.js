@@ -31,17 +31,17 @@
             dom.br({}),
             dom.br({})
           ),
+          createEl(EmploymentStatusConfirmation, {
+              userSubmittedData: this.props.userSubmittedData,
+              singlePersonHousehold: this.props.singlePersonHousehold,
+            }
+          ),
           dom.li({},
             this.renderLivingSituation(),
             dom.br({}),
             dom.br({})
           ),
           createEl(AdditionalIncomeConfirmation, {
-              userSubmittedData: this.props.userSubmittedData,
-              singlePersonHousehold: this.props.singlePersonHousehold,
-            }
-          ),
-          createEl(EmploymentStatusConfirmation, {
               userSubmittedData: this.props.userSubmittedData,
               singlePersonHousehold: this.props.singlePersonHousehold,
             }
