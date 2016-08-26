@@ -24,18 +24,21 @@
     getInitialState: function() {
       return {
         showPleaseAnswerEmploymentQuestion: false,
-        showPleaseAnswerAdditionalIncomeQuestion: false
+        showPleaseAnswerAdditionalIncomeQuestion: false,
+        showInvalidEmploymentResponse: false
       };
     },
 
     render: function () {
       var showEmploymentQuestionWarning = this.state.showPleaseAnswerEmploymentQuestion;
       var showAdditionalIncomeQuestionWarning = this.state.showPleaseAnswerAdditionalIncomeQuestion;
+      var showInvalidEmploymentResponse = this.state.showInvalidEmploymentResponse;
 
       return dom.div({},
         this.renderProgressBar(),
         this.renderEmploymentQuestion(),
         this.requiredQuestionWarning(showEmploymentQuestionWarning),
+        this.invalidQuestionWarning(showInvalidEmploymentResponse),
         this.renderIncomeSourcesQuestion(),
         this.requiredQuestionWarning(showAdditionalIncomeQuestionWarning),
         this.renderCitizenshipQuestion(),
@@ -87,12 +90,48 @@
     },
 
     onClickNext: function () {
-      if (this.bothQuestionsAnswered()) {
+      if (this.valid()) {
         this.props.onClickNext();
       } else {
         this.validateFirstQuestionAnswered();
         this.validateSecondQuestionAnswered();
+        this.validateEmploymentAnswer();
       };
+    },
+
+    valid: function () {
+      return (this.bothQuestionsAnswered() && this.employmentQuestionAnswerValid());
+    },
+
+    validateEmploymentAnswer: function () {
+      if (!this.employmentQuestionAnswerValid()) {
+        this.setState({ showInvalidEmploymentResponse: true });
+      } else {
+        this.setState({ showInvalidEmploymentResponse: false });
+      };
+    },
+
+    employmentQuestionAnswerValid: function () {
+      if (this.props.singlePersonHousehold) {
+        if (this.employedAndUnemployed() || this.employedAndRetired()) {
+          return false;
+        } else {
+          return true;
+        };
+      } else {
+        return true;  // Multi-person household can include one person who is
+                      // employed and another who is retired (for example)
+      };
+    },
+
+    employedAndUnemployed: function () {
+      return this.props.userSubmittedData.employee === 'true' &&
+             this.props.userSubmittedData.unemployed === 'true';
+    },
+
+    employedAndRetired: function () {
+      return this.props.userSubmittedData.employee === 'true' &&
+             this.props.userSubmittedData.retired === 'true';
     },
 
     validateFirstQuestionAnswered: function () {
@@ -144,6 +183,22 @@
         dom.br({})
       );
     },
+
+    invalidQuestionWarning: function (shouldShow) {
+      if (!shouldShow) return null;
+
+      return dom.div({},
+        dom.div({
+          style: {
+            color: 'red',
+            fontStyle: 'italic'
+          }
+        }, 'Please select a valid response. \
+            For a single-person household, \
+            choose between employed/self-employed, unemployed, and retired.'),
+        dom.br({})
+      );
+    }
 
   });
 })();
