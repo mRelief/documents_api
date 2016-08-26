@@ -158,7 +158,7 @@
         var doc = docs[0];
         var doc_name = doc.official_name;
         if (doc_name === 'Pay Stubs for the Past 30 Days' && !this.props.singlePersonHousehold) {
-          doc_name += ' for all employed members of your family';
+          doc_name += ' (for all employed members of your family)';
         };
 
         return dom.div({},
