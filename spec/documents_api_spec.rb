@@ -53,7 +53,7 @@ describe Api::DocumentsRequest do
 
     it "returns correct income documents" do
       expect(subject.fetch_documents[:income_documents].size).to eq 1
-      expect(subject.fetch_documents[:income_documents][0][:official_name]).to eq 'Pay Stubs'
+      expect(subject.fetch_documents[:income_documents][0][:official_name]).to eq 'Pay Stubs for the Past 30 Days'
     end
 
   end
