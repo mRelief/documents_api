@@ -49,7 +49,7 @@
         }),
         dom.input({
           type: 'submit',
-          value: 'Done',
+          value: 'Next',
           style: window.shared.ButtonStyle,
           onClick: this.onClickNext
         })
