@@ -3,7 +3,7 @@
   var dom = React.DOM;
   var createEl = React.createElement.bind(React);
   var EmploymentQuestion = window.shared.EmploymentQuestion;
-  var IncomeSourcesQuestion = window.shared.IncomeSourcesQuestion;
+  var AdditionalIncomeQuestion = window.shared.AdditionalIncomeQuestion;
   var CitizenshipQuestion = window.shared.CitizenshipQuestion;
   var ProgressBar = window.shared.ProgressBar;
 
@@ -39,7 +39,7 @@
         this.renderEmploymentQuestion(),
         this.requiredQuestionWarning(showEmploymentQuestionWarning),
         this.invalidQuestionWarning(showInvalidEmploymentResponse),
-        this.renderIncomeSourcesQuestion(),
+        this.renderAdditionalIncomeQuestion(),
         this.requiredQuestionWarning(showAdditionalIncomeQuestionWarning),
         this.renderCitizenshipQuestion(),
         dom.br({}),
@@ -72,8 +72,8 @@
       });
     },
 
-    renderIncomeSourcesQuestion: function () {
-      return createEl(IncomeSourcesQuestion, {
+    renderAdditionalIncomeQuestion: function () {
+      return createEl(AdditionalIncomeQuestion, {
         singlePersonHousehold: this.props.singlePersonHousehold,
         onUpdateDataField: this.props.onUpdateDataField,
         userSubmittedData: this.props.userSubmittedData,
