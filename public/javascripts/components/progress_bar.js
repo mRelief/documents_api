@@ -30,19 +30,40 @@
             width: '80%'
           }
         },
-        this.renderInnerBar()
+        this.renderLabels(),
+        this.renderMarker()
       );
     },
 
-    renderInnerBar: function () {
-      var width = String(this.props.step * 0.25 * 100) + '%';
+    renderLabels: function () {
+      return dom.div({},
+        dom.div({ style: this.labelStyle(0) }, 'Page 1'),
+        dom.div({ style: this.labelStyle(1) }, 'Page 2'),
+        dom.div({ style: this.labelStyle(2) }, 'Confirmation'),
+        dom.div({ style: this.labelStyle(3) }, 'Results')
+      );
+    },
+
+    labelStyle: function (position) {
+      return {
+        fontSize: '13px',
+        position: 'absolute',
+        left: String(position / 3 * 100) + '%',
+        bottom: '20px'
+      }
+    },
+
+    renderMarker: function () {
+      var position = String(this.props.step * 0.25 * 100) + '%';
 
       return dom.div({
         style: {
+          position: 'relative',
+          left: position,
           backgroundColor: '#00FF00',
-          height: '8px',
-          borderRadius: '4px',
-          width: width
+          height: '20px',
+          borderRadius: '20px',
+          width: '20px'
         }
       });
     },
