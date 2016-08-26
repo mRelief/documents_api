@@ -57,7 +57,7 @@
     },
 
     renderProgressBar: function () {
-      return createEl(ProgressBar, { step: 2 });
+      return createEl(ProgressBar, { step: 1 });
     },
 
     renderEmploymentQuestion: function () {

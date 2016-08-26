@@ -71,7 +71,7 @@
     },
 
     renderProgressBar: function () {
-      return createEl(ProgressBar, { step: 4 });
+      return createEl(ProgressBar, { step: 3 });
     },
 
     renderStateIdSection: function () {

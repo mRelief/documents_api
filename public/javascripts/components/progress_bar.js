@@ -11,11 +11,10 @@
     render: function () {
       return dom.div({
         style: {
-          marginBottom: '20px'
+          marginBottom: '80px'
         }
       },
-        this.renderOuterBar(),
-        this.renderNumbers()
+        this.renderOuterBar()
       );
     },
 
@@ -27,32 +26,55 @@
             backgroundColor: '#F2F2F2',
             height: '8px',
             borderRadius: '4px',
-            width: '80%'
+            width: '100%'
           }
         },
-        this.renderInnerBar()
+        this.renderLabels(),
+        this.renderMarker()
       );
     },
 
-    renderInnerBar: function () {
-      var width = String(this.props.step * 0.25 * 100) + '%';
-
-      return dom.div({
-        style: {
-          backgroundColor: '#00FF00',
-          height: '8px',
-          borderRadius: '4px',
-          width: width
-        }
-      });
+    renderLabels: function () {
+      return dom.div({},
+        dom.div({ style: this.labelStyle(0) }, 'Page 1'),
+        dom.div({ style: this.labelStyle(1) }, 'Page 2'),
+        dom.div({ style: this.labelStyle(2) }, 'Confirmation'),
+        dom.div({ style: this.labelStyle(3) }, 'Results')
+      );
     },
 
-    renderNumbers: function () {
+    labelStyle: function (position) {
+      var leftDisplace = (position / 3 * 100) - 1;
+
+      if (this.props.step === position) {
+        var color = 'black';
+      } else {
+        var color = '#A9A9A9';
+      };
+
+      return {
+        fontSize: '15px',
+        position: 'absolute',
+        left: String(leftDisplace) + '%',
+        bottom: '20px',
+        color: color,
+      }
+    },
+
+    renderMarker: function () {
+      var position = String((this.props.step) / 3 * 100) + '%';
+
       return dom.div({
         style: {
-          textAlign: 'right'
+          position: 'relative',
+          left: position,
+          bottom: '5px',
+          backgroundColor: '#0060b0',
+          height: '20px',
+          borderRadius: '20px',
+          width: '20px'
         }
-      }, 'Page ' + String(this.props.step) + '/4');
+      });
     },
 
   });
