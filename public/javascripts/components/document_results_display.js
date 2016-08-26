@@ -154,14 +154,20 @@
 
       if (docs.length === 0) return null;
 
-      if (docs.length === 1) return dom.div({},
-        dom.span({}, 'You will also need your '),
-        dom.span(
-          { style: { fontWeight: 'bold' } },
-        docs[0].official_name + '.'),
-        dom.br({}),
-        dom.br({})
-      );
+      if (docs.length === 1) {
+        var doc = docs[0];
+        var doc_name = doc.official_name;
+        if (doc_name === 'Pay Stubs for the Past 30 Days' && !this.props.singlePersonHousehold) {
+          doc_name += ' for all employed members of your family';
+        };
+
+        return dom.div({},
+          dom.span({}, 'You will also need your '),
+          dom.span({ style: { fontWeight: 'bold' } }, doc_name + '.'),
+          dom.br({}),
+          dom.br({})
+        );
+      };
 
       if (this.props.singlePersonHousehold) {
         return dom.div({},
