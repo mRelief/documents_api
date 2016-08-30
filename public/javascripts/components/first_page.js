@@ -29,7 +29,12 @@
       var showNumberOfPeopleWarning = this.state.showPleaseAnswerNumberOfPeople;
       var showHosuingQuestionWarning = this.state.showPleaseAnswerHousing;
 
-      return dom.div({},
+      return dom.div({
+          style: {
+            position: 'relative',
+            top: '160px'
+          }
+        },
         this.renderProgressBar(),
         this.renderNumberOfPeople(),
         this.requiredQuestionWarning(showNumberOfPeopleWarning),

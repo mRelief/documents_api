@@ -42,7 +42,12 @@
     },
 
     render: function () {
-      return dom.div({},
+      return dom.div({
+          style: {
+            position: 'relative',
+            top: '160px'
+          }
+        },
         this.renderProgressBar(),
         dom.h1({}, 'What Documents You Need To Apply For Food Stamps:'),
         this.renderDocs(),

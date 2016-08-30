@@ -24,7 +24,12 @@
     },
 
     renderConfirmationStatement: function () {
-      return dom.div({},
+      return dom.div({
+        style: {
+            position: 'relative',
+            top: '160px'
+          }
+        },
         dom.ul({},
           dom.li({},
             this.renderNumberOfPeople(),
