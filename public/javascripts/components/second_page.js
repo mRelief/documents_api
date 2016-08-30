@@ -34,7 +34,13 @@
       var showAdditionalIncomeQuestionWarning = this.state.showPleaseAnswerAdditionalIncomeQuestion;
       var showInvalidEmploymentResponse = this.state.showInvalidEmploymentResponse;
 
-      return dom.div({},
+      return dom.div({
+          style: {
+            position: 'relative',
+            top: '160px',
+            marginBottom: '80px'
+          }
+        },
         this.renderProgressBar(),
         this.renderEmploymentQuestion(),
         this.requiredQuestionWarning(showEmploymentQuestionWarning),

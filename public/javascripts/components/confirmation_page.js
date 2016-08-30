@@ -16,7 +16,13 @@
     },
 
     render: function () {
-      return dom.div({},
+      return dom.div({
+        style: {
+            position: 'relative',
+            top: '160px',
+            marginBottom: '80px'
+          }
+        },
         this.renderProgressBar(),
         dom.h1({}, 'Does this look accurate?'),
         this.renderConfirmationStatement()
