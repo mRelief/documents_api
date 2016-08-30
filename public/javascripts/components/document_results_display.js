@@ -45,7 +45,8 @@
       return dom.div({
           style: {
             position: 'relative',
-            top: '160px'
+            top: '160px',
+            marginBottom: '80px'
           }
         },
         this.renderProgressBar(),
