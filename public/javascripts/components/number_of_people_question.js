@@ -27,7 +27,7 @@
           style: this.helpButtonStyle(),
           'data-for': 'just-me-explanation',
           'data-tip': 'You buy and cook food for just yourself.'
-         }, '?'),
+         }, '(?)'),
         dom.br({}),
         dom.input({
           type: 'radio',
@@ -40,7 +40,7 @@
           style: this.helpButtonStyle(),
           'data-for': 'my-family-explanation',
           'data-tip': 'You buy and cook food for your family.'
-        }, '?'),
+        }, '(?)'),
         dom.br({}),
         dom.br({}),
         createEl(ReactTooltip, { id: 'just-me-explanation' }),
