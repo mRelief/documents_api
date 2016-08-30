@@ -6,7 +6,7 @@
     color: 'white',
     border: '0px',
     borderRadius: '24px',
-    fontFamily: 'Open Sans',
+    fontFamily: 'Montserrat',
     fontSize: '18px',
     padding: '10px 20px',
     marginRight: '12px'
