@@ -10,11 +10,15 @@
 
     render: function () {
       return dom.div({
-        style: {
-          marginBottom: '80px'
-        }
-      },
-        this.renderOuterBar()
+          style: {
+            marginBottom: '80px',
+            position: 'fixed',
+            top: '0px',
+            width: '80%',
+            backgroundColor: 'white',
+            height: '140px'
+          }
+        }, this.renderOuterBar()
       );
     },
 
@@ -22,7 +26,7 @@
       return dom.div({
           style: {
             position: 'relative',
-            top: '14px',
+            top: '80px',
             backgroundColor: '#F2F2F2',
             height: '8px',
             borderRadius: '4px',
