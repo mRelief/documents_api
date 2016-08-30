@@ -16,14 +16,6 @@
     },
 
     render: function () {
-      return dom.div({},
-        this.renderProgressBar(),
-        dom.h1({}, 'Does this look accurate?'),
-        this.renderConfirmationStatement()
-      );
-    },
-
-    renderConfirmationStatement: function () {
       return dom.div({
         style: {
             position: 'relative',
@@ -31,6 +23,14 @@
             marginBottom: '80px'
           }
         },
+        this.renderProgressBar(),
+        dom.h1({}, 'Does this look accurate?'),
+        this.renderConfirmationStatement()
+      );
+    },
+
+    renderConfirmationStatement: function () {
+      return dom.div({},
         dom.ul({},
           dom.li({},
             this.renderNumberOfPeople(),
