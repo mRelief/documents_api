@@ -30,7 +30,7 @@ describe 'SMS conversation' do
         send_sms('YES')  # All citizens
         send_sms('B')    # Self-employed
         send_sms('D')    # None of the above
-        send_sms('YES')   # No State ID
+        send_sms('YES')  # No State ID
         expect(last_response.body).to eq expected_documents
       end
     end
