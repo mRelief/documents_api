@@ -11,7 +11,7 @@ SMS_SCREENER = {
     'B. Own home. ' +
     'C. Living with family/friends. ' +
     'D. Shelter. ' +
-    'For more options, type \'OPTIONS.\''
+    'For more options, type \'options.\''
   ),
   2 => (
     'Is everyone in your household a US citizen? ' +
