@@ -88,7 +88,7 @@ post '/sms' do
   new_session = SessionStepIncrementer.new(session).increment
   session = new_session
 
-  # Return the response for testing purposes
+  # Return the response
   return response
 end
 
