@@ -80,7 +80,7 @@ describe 'SMS conversation' do
         'You will need *ONE* of the following to prove residency: ' +
         'Rent Receipt, Mail, Medical Records. ' +
         'You will also need these documents: ' +
-        'I-90 Documentation for all non-citizen family members, Self-Employment Form.'
+        'I-90 Documentation (for all non-citizen family members), Self-Employment Form.'
       }
 
       it 'responds with the correct documents' do
