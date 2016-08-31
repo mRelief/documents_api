@@ -13,6 +13,7 @@ class ResponseValidator < Struct.new :from, :original_body
     return false if body == 'YES'
     return false if body == 'N'
     return false if body == 'NO'
+    return false if body == 'RESET'
     return true
   end
 
