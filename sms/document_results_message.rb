@@ -76,9 +76,8 @@ class DocumentResultsMessage < Struct.new :session
   end
 
   def residency_docs
-    docs = @document_results[:residency_documents].map { |doc| doc[:official_name] }
-
-    return docs.select { |doc_name| doc_name != 'State ID' }
+    @document_results[:residency_documents].map { |doc| doc[:official_name] }
+                                           .select { |doc_name| doc_name != 'State ID' }
   end
 
   def identity_options
@@ -90,6 +89,7 @@ class DocumentResultsMessage < Struct.new :session
 
   def identity_docs
     @document_results[:identity_documents].map { |doc| doc[:official_name] }
+                                          .select { |doc_name| doc_name != 'State ID' }
   end
 
   def needs_identity_docs
