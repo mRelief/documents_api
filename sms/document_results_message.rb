@@ -1,31 +1,33 @@
 require_relative '../helpers/session_unwrapper'
-require_relative 'income_documents'
+require_relative '../helpers/string_parser'
 require_relative '../api/residency_documents'
 
-class DocumentResultsMessage < Struct.new :original_session
+class DocumentResultsMessage < Struct.new :session
 
   def body
-    p documents
-    session.has_state_id? ? results_with_state_id : results_without_state_id
+    fetch_documents
+    has_state_id? ? results_with_state_id : results_without_state_id
   end
 
-  def documents
+  def fetch_documents
     documents_request = Api::DocumentsRequest.new(
-      has_rental_income: original_session['has_rental_income'],
-      renting: original_session['renting'],
-      owns_home: original_session['owns_home'],
-      shelter: original_session['shelter'],
-      living_with_family_or_friends: original_session['living_with_family_or_friends'],
-      all_citizens: original_session['all_citizens'],
-      employee: original_session['employee'],
-      disability_benefits: original_session['disability_benefits'],
-      child_support: original_session['child_support'],
-      self_employed: original_session['self_employed'],
-      retired: original_session['retired'],
-      unemployment_benefits: original_session['unemployment_benefits'],
+      has_rental_income: session['has_rental_income'],
+      renting: session['renting'],
+      owns_home: session['owns_home'],
+      shelter: session['shelter'],
+      living_with_family_or_friends: session['living_with_family_or_friends'],
+      all_citizens: session['all_citizens'],
+      employee: session['employee'],
+      disability_benefits: session['disability_benefits'],
+      child_support: session['child_support'],
+      self_employed: session['self_employed'],
+      retired: session['retired'],
+      unemployment_benefits: session['unemployment_benefits'],
     )
 
-    return documents_request.fetch_documents
+    @document_results = documents_request.fetch_documents
+
+    return @document_results
   end
 
   private
@@ -39,7 +41,7 @@ class DocumentResultsMessage < Struct.new :original_session
   end
 
   def state_id
-    if session.single_person_household?
+    if single_person_household?
       'State ID'
     else
       'State IDs for everyone you are applying for'
@@ -64,7 +66,7 @@ class DocumentResultsMessage < Struct.new :original_session
   end
 
   def citizenship_plus_income_docs
-    [citizenship_docs, IncomeDocuments.new(session).documents].flatten.compact
+    [citizenship_docs, income_docs].flatten.compact
   end
 
   def residency_options
@@ -96,20 +98,11 @@ class DocumentResultsMessage < Struct.new :original_session
   end
 
   def identity_docs
-    [
-      'School Photo ID',
-      'US Military Card',
-      'Voter Registration Card',
-      'Birth Certificate'
-    ]
+    @document_results[:identity_documents].map { |doc| doc[:official_name] }
   end
 
   def needs_identity_docs
-    !session.employee? &&
-    !session.self_employed? &&
-    !session.disability_benefits? &&
-    !session.child_support? &&
-    !session.unemployment_benefits?
+    @document_results[:identity_documents].size > 0
   end
 
   def citizenship_plus_income_section
@@ -127,15 +120,22 @@ class DocumentResultsMessage < Struct.new :original_session
   # SHARED BY BOTH #
 
   def income_docs
-    IncomeDocuments.new(session).documents
+    @document_results[:income_documents].map { |doc| doc[:official_name] }
   end
 
   def citizenship_docs
-    'I-90 Documentation for all non-citizen family members' unless session.all_citizens?
+    citizenship_results = @document_results[:citizenship_documents]
+
+    return if citizenship_results == []
+    return citizenship_results.map { |doc| doc[:official_name] }
   end
 
-  def session
-    @unwrapped_session ||= SessionUnwrapper.new(original_session)
+  def has_state_id?
+    StringParser.new(session['has_state_id']).to_boolean
+  end
+
+  def single_person_household?
+    StringParser.new(session['single_person_household']).to_boolean
   end
 
 end
