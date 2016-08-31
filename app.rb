@@ -7,6 +7,7 @@ require './local_env' if File.exists?('local_env.rb')
 
 require_relative 'api/documents_api'
 require_relative 'sms/responder'
+require_relative 'sms/response_validator'
 require_relative 'sms/session_data_updater'
 require_relative 'sms/session_step_incrementer'
 
@@ -70,6 +71,11 @@ post '/sms' do
   session['child_support'] ||= 'false'
   session['has_state_id'] ||= 'true'
   session['more_housing_options'] ||= 'false'
+
+  unless session['count'] == 0
+    validator = ResponseValidator.new(params[:From], params[:Body])
+    return validator.respond_to_invalid! if validator.invalid?
+  end
 
   # Update the session data
   new_session = SessionDataUpdater.new(session, params[:Body]).update_data
