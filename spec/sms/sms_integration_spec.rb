@@ -245,4 +245,14 @@ describe 'SMS conversation' do
 
   end
 
+  describe 'user sends invalid response' do
+
+    it 'responds with the correct documents' do
+      send_sms('Hi!')
+      send_sms('Hiiiiiiii!')    # Invalid response to question #1
+
+      expect(last_response.body).to eq 'Sorry, we didn\'t recognize that response.'
+    end
+  end
+
 end
