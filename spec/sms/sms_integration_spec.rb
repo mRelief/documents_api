@@ -70,6 +70,7 @@ describe 'SMS conversation' do
       end
     end
 
+
     describe 'family, renting, citizen, not working, child support and disability, has state ID' do
       let(:expected_documents) {
         'You will need these documents: ' +
@@ -191,6 +192,30 @@ describe 'SMS conversation' do
         send_sms('N')    # No State ID
         send_sms('OK!')  # Start screener again
         expect(last_response.body).to eq expected_outcome
+      end
+    end
+
+   describe '1 person, staying in car, citizen, employee, child support, no state ID' do
+      let(:expected_documents) {
+        'Since you don\'t have a State ID, you will need to prove residency. ' +
+        'You will need *ONE* of the following to prove residency: ' +
+        'Mail, Medical Records. ' +
+        'You will also need these documents: ' +
+        'Pay Stubs for the Past 30 Days, Written Child Support Statement.'
+      }
+
+      it 'responds with the correct documents' do
+        send_sms('Hi!')
+        send_sms('A')          # Just Me
+        send_sms('OPTIONS')    # Asking for more options
+        expect(last_response.body).to eq "Here are some more options: E. Car. F. Motel G. In Kind."
+
+        send_sms('E')          # Staying in car
+        send_sms('Y')          # All citizens
+        send_sms('A')          # Employee
+        send_sms('B')          # Child support
+        send_sms('N')          # No State ID
+        expect(last_response.body).to eq expected_documents
       end
     end
 
