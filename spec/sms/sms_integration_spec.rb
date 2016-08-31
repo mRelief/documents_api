@@ -255,4 +255,20 @@ describe 'SMS conversation' do
     end
   end
 
+  describe 'user resets the survey' do
+    let(:expected_outcome) {
+      'Welcome. ' +
+      'Here you can find out what documents you need to apply for Food Stamps. ' +
+      'How many people are you applying for? A. Just Me. B. My Family.'
+    }
+
+    it 'responds with the correct documents' do
+      send_sms('Hi!')
+      send_sms('A')
+      send_sms('RESET')
+
+      expect(last_response.body).to eq expected_outcome
+    end
+  end
+
 end
