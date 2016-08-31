@@ -39,7 +39,7 @@
         dom.span({
           style: this.helpButtonStyle(),
           'data-for': 'my-family-explanation',
-          'data-tip': 'You buy and cook food for your family.'
+          'data-tip': 'You buy and cook food for you and your family.'
         }, '(?)'),
         dom.br({}),
         dom.br({}),
