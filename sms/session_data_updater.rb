@@ -14,7 +14,7 @@ class SessionDataUpdater < Struct.new :session, :original_body
       new_session['living_with_family_or_friends'] = 'true' if body == 'C'
       new_session['shelter'] = 'true' if body == 'D'
     when 3
-      new_session['all_citizens'] = 'false' if body == 'NO'
+      new_session['all_citizens'] = 'false' if body[0] == 'N'
     when 4
       new_session['employee'] = 'true' if body == 'A'
       new_session['self_employed'] = 'true' if body == 'B'
@@ -25,7 +25,7 @@ class SessionDataUpdater < Struct.new :session, :original_body
       new_session['child_support'] = 'true' if body == 'B'
       new_session['has_rental_income'] = 'true' if body == 'C'
     when 6
-      new_session['has_state_id'] = 'false' if body == 'NO'
+      new_session['has_state_id'] = 'false' if body[0] == 'N'
     end
 
     return new_session
