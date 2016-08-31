@@ -70,6 +70,44 @@ describe 'SMS conversation' do
       end
     end
 
+    describe 'family, renting, citizen, not working, child support and disability, has state ID' do
+      let(:expected_documents) {
+        'You will need these documents: ' +
+        'State IDs for everyone you are applying for, ' +
+        'Written Child Support Statement, Award Letter for Disability.'
+      }
+
+      it 'responds with the correct documents' do
+        send_sms('Hi!')
+        send_sms('B')    # Family
+        send_sms('A')    # Renting
+        send_sms('Y')    # All citizens
+        send_sms('E')    # Not working
+        send_sms('BA')   # Child support and disability
+        send_sms('Y')    # Has State ID
+        expect(last_response.body).to eq expected_documents
+      end
+    end
+
+    describe 'family, renting, citizen, employee plus self employed, has state ID' do
+      let(:expected_documents) {
+        'You will need these documents: ' +
+        'State IDs for everyone you are applying for, ' +
+        'Pay Stubs for the Past 30 Days, Self-Employment Form.'
+      }
+
+      it 'responds with the correct documents' do
+        send_sms('Hi!')
+        send_sms('B')    # Family
+        send_sms('A')    # Renting
+        send_sms('Y')    # All citizens
+        send_sms('AB')   # Employee plus self-employed family members
+        send_sms('D')    # No additional income sources
+        send_sms('Y')    # Has State ID
+        expect(last_response.body).to eq expected_documents
+      end
+    end
+
   end
 
   describe 'no state ID' do
@@ -111,6 +149,27 @@ describe 'SMS conversation' do
         send_sms('B')    # Self-employed
         send_sms('D')    # None of the above
         send_sms('NO')  # No State ID
+        expect(last_response.body).to eq expected_documents
+      end
+    end
+
+    describe 'family, renting, citizen, employee plus self employed, no state ID' do
+      let(:expected_documents) {
+        'Since you don\'t have a State ID, you will need to prove residency. ' +
+        'You will need *ONE* of the following to prove residency: ' +
+        'Rent Receipt, Mail, Medical Records. ' +
+        'You will also need these documents: ' +
+        'Pay Stubs for the Past 30 Days, Self-Employment Form.'
+      }
+
+      it 'responds with the correct documents' do
+        send_sms('Hi!')
+        send_sms('B')    # Family
+        send_sms('A')    # Renting
+        send_sms('Y')    # All citizens
+        send_sms('AB')   # Employee plus self-employed family members
+        send_sms('D')    # No additional income sources
+        send_sms('N')    # No State ID
         expect(last_response.body).to eq expected_documents
       end
     end
