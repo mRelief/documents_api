@@ -5,7 +5,27 @@ require_relative '../api/residency_documents'
 class DocumentResultsMessage < Struct.new :original_session
 
   def body
+    p documents
     session.has_state_id? ? results_with_state_id : results_without_state_id
+  end
+
+  def documents
+    documents_request = Api::DocumentsRequest.new(
+      has_rental_income: original_session['has_rental_income'],
+      renting: original_session['renting'],
+      owns_home: original_session['owns_home'],
+      shelter: original_session['shelter'],
+      living_with_family_or_friends: original_session['living_with_family_or_friends'],
+      all_citizens: original_session['all_citizens'],
+      employee: original_session['employee'],
+      disability_benefits: original_session['disability_benefits'],
+      child_support: original_session['child_support'],
+      self_employed: original_session['self_employed'],
+      retired: original_session['retired'],
+      unemployment_benefits: original_session['unemployment_benefits'],
+    )
+
+    return documents_request.fetch_documents
   end
 
   private
