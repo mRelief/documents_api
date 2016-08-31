@@ -93,7 +93,7 @@ describe 'SMS conversation' do
       let(:expected_documents) {
         'You will need these documents: ' +
         'State IDs for everyone you are applying for, ' +
-        'Written Child Support Statement, Award Letter for Disability.'
+        'Pay Stubs for the Past 30 Days, Self-Employment Form.'
       }
 
       it 'responds with the correct documents' do
