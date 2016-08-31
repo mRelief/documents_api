@@ -73,7 +73,8 @@ describe 'SMS conversation' do
     describe 'family, renting, citizen, not working, child support and disability, has state ID' do
       let(:expected_documents) {
         'You will need these documents: ' +
-        'State ID, Pay Stubs for the Past 30 Days, Written Child Support Statement.'
+        'State IDs for everyone you are applying for, ' +
+        'Written Child Support Statement, Award Letter for Disability.'
       }
 
       it 'responds with the correct documents' do
