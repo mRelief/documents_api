@@ -70,6 +70,24 @@ describe 'SMS conversation' do
       end
     end
 
+    describe 'family, renting, citizen, not working, child support and disability, has state ID' do
+      let(:expected_documents) {
+        'You will need these documents: ' +
+        'State ID, Pay Stubs for the Past 30 Days, Written Child Support Statement.'
+      }
+
+      it 'responds with the correct documents' do
+        send_sms('Hi!')
+        send_sms('B')    # Family
+        send_sms('A')    # Renting
+        send_sms('Y')    # All citizens
+        send_sms('E')    # Not working
+        send_sms('BA')   # Child support and disability
+        send_sms('Y')    # Has State ID
+        expect(last_response.body).to eq expected_documents
+      end
+    end
+
   end
 
   describe 'no state ID' do
