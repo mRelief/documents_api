@@ -26,6 +26,8 @@ class Responder < Struct.new :from, :session
   def message
     if send_results?
       DocumentResultsMessage.new(session).body
+    elsif session['more_housing_options'] == 'true'
+      'Here are some more options: E. Car. F. Motel G. In Kind.'
     else
       SMS_SCREENER[step]
     end
