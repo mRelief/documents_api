@@ -69,6 +69,7 @@ post '/sms' do
   session['disability_benefits'] ||= 'false'
   session['child_support'] ||= 'false'
   session['has_state_id'] ||= 'true'
+  session['more_housing_options'] ||= 'false'
 
   # Update the session data
   new_session = SessionDataUpdater.new(session, params[:Body]).update_data

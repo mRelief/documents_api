@@ -13,6 +13,7 @@ class SessionDataUpdater < Struct.new :session, :original_body
       new_session['owns_home'] = 'true' if body.include? 'B'
       new_session['living_with_family_or_friends'] = 'true' if body.include? 'C'
       new_session['shelter'] = 'true' if body.include? 'D'
+      new_session['more_housing_options'] = 'true' if body.include? 'OPTIONS'
     when 3
       new_session['all_citizens'] = 'false' if body[0] == 'N'
     when 4
