@@ -174,7 +174,26 @@ describe 'SMS conversation' do
       end
     end
 
+    describe 'user retakes the screener' do
+      let(:expected_outcome) {
+        'Welcome. ' +
+        'Here you can find out what documents you need to apply for Food Stamps. ' +
+        'How many people are you applying for? A. Just Me. B. My Family.'
+      }
+
+      it 'responds with the correct documents' do
+        send_sms('Hi!')
+        send_sms('B')    # Family
+        send_sms('A')    # Renting
+        send_sms('Y')    # All citizens
+        send_sms('AB')   # Employee plus self-employed family members
+        send_sms('D')    # No additional income sources
+        send_sms('N')    # No State ID
+        send_sms('OK!')  # Start screener again
+        expect(last_response.body).to eq expected_outcome
+      end
+    end
+
   end
 
 end
-
