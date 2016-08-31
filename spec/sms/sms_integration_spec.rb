@@ -37,7 +37,7 @@ describe 'SMS conversation' do
 
     describe '1 person, renting, citizen, employee, no other income, has state ID' do
       let(:expected_documents) {
-        'You will need these documents: State ID, Pay Stubs.'
+        'You will need these documents: State ID, Pay Stubs for the Past 30 Days.'
       }
 
       it 'responds with the correct documents' do
@@ -55,7 +55,7 @@ describe 'SMS conversation' do
     describe '1 person, owns home, citizen, employee, child support, has state ID' do
       let(:expected_documents) {
         'You will need these documents: ' +
-        'State ID, Pay Stubs, Written Child Support Statement.'
+        'State ID, Pay Stubs for the Past 30 Days, Written Child Support Statement.'
       }
 
       it 'responds with the correct documents' do
