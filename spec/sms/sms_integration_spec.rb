@@ -153,6 +153,27 @@ describe 'SMS conversation' do
       end
     end
 
+    describe 'family, renting, citizen, employee plus self employed, no state ID' do
+      let(:expected_documents) {
+        'Since you don\'t have a State ID, you will need to prove residency. ' +
+        'You will need *ONE* of the following to prove residency: ' +
+        'Rent Receipt, Mail, Medical Records. ' +
+        'You will also need these documents: ' +
+        'Pay Stubs for the Past 30 Days, Self-Employment Form.'
+      }
+
+      it 'responds with the correct documents' do
+        send_sms('Hi!')
+        send_sms('B')    # Family
+        send_sms('A')    # Renting
+        send_sms('Y')    # All citizens
+        send_sms('AB')   # Employee plus self-employed family members
+        send_sms('D')    # No additional income sources
+        send_sms('N')    # No State ID
+        expect(last_response.body).to eq expected_documents
+      end
+    end
+
   end
 
 end
