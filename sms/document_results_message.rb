@@ -76,18 +76,9 @@ class DocumentResultsMessage < Struct.new :session
   end
 
   def residency_docs
-    documents = ResidencyDocuments.new(
-      renting: session.renting?,
-      owns_home: session.owns_home?,
-      shelter: session.shelter?,
-      living_with_family_or_friends: session.living_with_family_or_friends?,
-    ).documents
+    docs = @document_results[:residency_documents].map { |doc| doc[:official_name] }
 
-    with_names = documents.map { |doc| doc[:official_name] }
-
-    without_state_id = with_names.select { |doc_name| doc_name != 'State ID' }
-
-    return without_state_id
+    return docs.select { |doc_name| doc_name != 'State ID' }
   end
 
   def identity_options
