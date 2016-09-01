@@ -74,7 +74,7 @@ post '/sms' do
 
   unless session['count'] == 0
     validator = ResponseValidator.new(params[:From], params[:Body], session)
-    return validator.respond_to_invalid! if validator.invalid?
+    return validator.respond_to_invalid! unless validator.valid?
   end
 
   # Update the session data

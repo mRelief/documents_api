@@ -1,20 +1,20 @@
 class ResponseValidator < Struct.new :from, :original_body, :session
 
-  def invalid?
-    return false if body == 'OPTIONS'
-    return false if body.include? 'A'
-    return false if body.include? 'B'
-    return false if body.include? 'C'
-    return false if body.include? 'D'
-    return false if body == 'E'
-    return false if body == 'F'
-    return false if body == 'G'
-    return false if body == 'Y'
-    return false if body == 'YES'
-    return false if body == 'N'
-    return false if body == 'NO'
-    return false if body == 'RESET'
-    return true
+  def valid?
+    return true if body == 'OPTIONS'
+    return true if body.include? 'A'
+    return true if body.include? 'B'
+    return true if body.include? 'C'
+    return true if body.include? 'D'
+    return true if body == 'E'
+    return true if body == 'F'
+    return true if body == 'G'
+    return true if body == 'Y'
+    return true if body == 'YES'
+    return true if body == 'N'
+    return true if body == 'NO'
+    return true if body == 'RESET'
+    return false
   end
 
   def respond_to_invalid!
