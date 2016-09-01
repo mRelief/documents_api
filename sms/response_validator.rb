@@ -1,10 +1,26 @@
-class ResponseValidator < Struct.new :from, :original_body, :session
+class ResponseValidator < Struct.new :from, :original_body, :session_count
 
   def valid?
     return true if body == 'OPTIONS'
     return true if body == 'RESET'
-    return true if valid_for_multiple_choice?
-    return true if valid_for_yes_no?
+
+    valid_response = case session_count
+    when 1
+      valid_for_multiple_choice?
+    when 2
+      valid_for_multiple_choice?
+    when 3
+      valid_for_yes_no?
+    when 4
+      valid_for_multiple_choice?
+    when 5
+      valid_for_multiple_choice?
+    when 6
+      valid_for_yes_no?
+    end
+
+    return true if valid_response
+
     return false
   end
 
@@ -39,7 +55,7 @@ class ResponseValidator < Struct.new :from, :original_body, :session
   private
 
   def body
-    original_body.upcase.strip
+    @cleaned_up_body ||= original_body.upcase.strip
   end
 
   def message
