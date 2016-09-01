@@ -2,6 +2,7 @@ class ResponseValidator < Struct.new :from, :original_body, :session
 
   def valid?
     return true if body == 'OPTIONS'
+    return true if body == 'RESET'
     return true if body.include? 'A'
     return true if body.include? 'B'
     return true if body.include? 'C'
@@ -13,7 +14,6 @@ class ResponseValidator < Struct.new :from, :original_body, :session
     return true if body == 'YES'
     return true if body == 'N'
     return true if body == 'NO'
-    return true if body == 'RESET'
     return false
   end
 
