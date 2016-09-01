@@ -3,29 +3,36 @@ class ResponseValidator < Struct.new :from, :original_body, :session_count
   def valid?
     return true if body == 'OPTIONS'
     return true if body == 'RESET'
+    return true if valid_response?
 
-    valid_response = case session_count
-    when 1
-      valid_for_multiple_choice?
-    when 2
-      valid_for_multiple_choice?
-    when 3
-      valid_for_yes_no?
-    when 4
-      valid_for_multiple_choice?
-    when 5
-      valid_for_multiple_choice?
-    when 6
-      valid_for_yes_no?
+    return false
+  end
+
+  def valid_response?
+    question_data[:allow_multiple] ? valid_allow_multiple : valid_allow_one
+  end
+
+  def valid_allow_multiple
+    return false if body.size > valid_options.size
+
+    body.chars.each do |character|
+      return false unless valid_options.include?(character)
     end
 
-    return true if valid_response
+    return true
+  end
 
+  def valid_allow_one
+    return true if question_data[:options].include?(body)
     return false
   end
 
   def question_data
     @data ||= question_data_by_session_count[session_count]
+  end
+
+  def valid_options
+    @options ||= question_data[:options]
   end
 
   def question_data_by_session_count
@@ -49,30 +56,12 @@ class ResponseValidator < Struct.new :from, :original_body, :session_count
       5 => {
         options: ['A', 'B', 'C', 'D'],
         allow_multiple: true
-      }
+      },
       6 => {
         options: ['Y', 'YES', 'N', 'NO'],
         allow_multiple: false
       }
     }
-  end
-
-  def valid_for_multiple_choice?
-    return true if body.include? 'A'
-    return true if body.include? 'B'
-    return true if body.include? 'C'
-    return true if body.include? 'D'
-    return true if body == 'E'
-    return true if body == 'F'
-    return true if body == 'G'
-    return false
-  end
-
-  def valid_for_yes_no?
-    return true if body == 'Y'
-    return true if body == 'YES'
-    return true if body == 'N'
-    return true if body == 'NO'
   end
 
   def respond_to_invalid!
