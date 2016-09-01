@@ -15,7 +15,7 @@ SMS_SCREENER = {
   ),
   2 => (
     'Is everyone in your household a US citizen? ' +
-    'Yes or No.'
+    'Y or N.'
   ),
   3 => (
     'Select all that describe you: ' +
@@ -33,6 +33,6 @@ SMS_SCREENER = {
     'D. None of the above.'
   ),
   5 => (
-    'Do you have a State ID? Yes or No.'
+    'Do you have a State ID? Y or N.'
   )
 }
