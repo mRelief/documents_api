@@ -24,6 +24,10 @@ class ResponseValidator < Struct.new :from, :original_body, :session_count
     return false
   end
 
+  def question_data
+    @data ||= question_data_by_session_count[session_count]
+  end
+
   def question_data_by_session_count
     return {
       1 => {
