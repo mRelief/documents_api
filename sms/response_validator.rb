@@ -1,4 +1,4 @@
-class ResponseValidator < Struct.new :from, :original_body, :session
+class ResponseValidator < Struct.new :from, :original_body, :session_count
 
   def valid?
     return true if body == 'OPTIONS'
