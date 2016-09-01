@@ -336,4 +336,22 @@ describe 'SMS conversation' do
     end
   end
 
+  describe 'user sends all texts with a signature' do
+    let(:expected_documents) {
+      'You will need these documents: State ID, Self-Employment Form.'
+    }
+
+    it 'gets the same outcome' do
+      send_sms('Hi! -Alex')
+      send_sms('A -Alex')    # Just Me
+      send_sms('A -Alex')    # Renting
+      send_sms('YES -Alex')  # All citizens
+      send_sms('B -Alex')    # Self-employed
+      send_sms('D -Alex')    # None of the above
+      send_sms('YES -Alex')  # Has State ID
+      expect(last_response.body).to eq expected_documents
+    end
+
+  end
+
 end

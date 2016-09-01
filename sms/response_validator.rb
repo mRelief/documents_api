@@ -1,4 +1,4 @@
-class ResponseValidator < Struct.new :from, :original_body, :session_count
+class ResponseValidator < Struct.new :from, :body, :session_count
 
   def valid?
     return true if body == 'OPTIONS'
@@ -75,10 +75,6 @@ class ResponseValidator < Struct.new :from, :original_body, :session_count
   end
 
   private
-
-  def body
-    @cleaned_up_body ||= original_body.upcase.strip
-  end
 
   def message
     question_data[:allow_multiple] ? message_allow_multiple : message_allow_one
