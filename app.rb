@@ -73,8 +73,8 @@ post '/sms' do
   session['more_housing_options'] ||= 'false'
 
   unless session['count'] == 0
-    validator = ResponseValidator.new(params[:From], params[:Body])
-    return validator.respond_to_invalid! if validator.invalid?
+    validator = ResponseValidator.new(params[:From], params[:Body], session)
+    return validator.respond_to_invalid! unless validator.valid?
   end
 
   # Update the session data
