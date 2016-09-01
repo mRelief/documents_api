@@ -39,7 +39,7 @@ class ResponseValidator < Struct.new :from, :original_body, :session_count
   private
 
   def body
-    original_body.upcase.strip
+    @cleaned_up_body ||= original_body.upcase.strip
   end
 
   def message
