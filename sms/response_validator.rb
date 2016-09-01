@@ -81,7 +81,15 @@ class ResponseValidator < Struct.new :from, :original_body, :session_count
   end
 
   def message
-    'Sorry, we didn\'t recognize that response.'
+    question_data[:allow_multiple] ? message_allow_multiple : message_allow_one
+  end
+
+  def message_allow_multiple
+    'Please select one or more from these options: ' +  valid_options.join(', ') + '.'
+  end
+
+  def message_allow_one
+    'Please select one of these options: ' + valid_options.join(', ') + '.'
   end
 
   def client

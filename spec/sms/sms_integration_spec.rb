@@ -294,7 +294,7 @@ describe 'SMS conversation' do
         send_sms('Hi!')
         send_sms('Hiiiiiiii!')    # Invalid response to question #1
 
-        expect(last_response.body).to eq 'Sorry, we didn\'t recognize that response.'
+        expect(last_response.body).to eq 'Please select one of these options: A, B.'
       end
     end
 
@@ -303,7 +303,7 @@ describe 'SMS conversation' do
         send_sms('Hi!')
         send_sms('Y')             # Invalid response to question #1, valid for other questions tho
 
-        expect(last_response.body).to eq 'Sorry, we didn\'t recognize that response.'
+        expect(last_response.body).to eq 'Please select one of these options: A, B.'
       end
     end
 
@@ -313,6 +313,8 @@ describe 'SMS conversation' do
         send_sms('B')    # Family
         send_sms('A')    # Renting
         send_sms('A')    # Invalid response to citizenship question
+
+        expect(last_response.body).to eq 'Please select one of these options: Y, YES, N, NO.'
       end
     end
 
