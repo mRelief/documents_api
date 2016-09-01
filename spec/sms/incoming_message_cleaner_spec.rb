@@ -26,6 +26,13 @@ describe IncomingMessageCleaner do
       end
     end
 
+    context 'period included' do
+      let(:body) { '  yes.' }
+      it 'strips the period' do
+        expect(result).to eq 'YES'
+      end
+    end
+
   end
 
 end
