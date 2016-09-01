@@ -1,7 +1,7 @@
 require 'rack/test'
 
-require_relative "support/spec_helper"
-require_relative "../app"
+require_relative '../support/spec_helper'
+require_relative '../../app'
 
 describe "queries against API endpoints" do
   let(:default_params) {
