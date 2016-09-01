@@ -15,6 +15,48 @@ describe 'SMS conversation' do
     }
   end
 
+  describe 'sends all the right questions in the right order' do
+
+    describe 'family, renting, citizens, employee, child support, has state ID' do
+
+      it 'responds with the correct documents' do
+        send_sms('Hi!')
+
+        expect(last_response.body).to eq ('Welcome. ' +
+          'Here you can find out what documents you need to apply for Food Stamps. ' +
+          'How many people are you applying for? A. Just Me. B. My Family.')
+        send_sms('B')    # My Family
+
+        expect(last_response.body).to eq ('Describe your living situation: ' +
+          'A. Renting. B. Own home. C. Living with family/friends. ' +
+          'D. Shelter. For more options, type \'options.\'')
+        send_sms('A')    # Renting
+
+        expect(last_response.body).to eq 'Is everyone in your household a US citizen? Y or N.'
+        send_sms('YES')  # All citizens
+
+        expect(last_response.body).to eq ('Select all that describe you: ' +
+          'A. Employed. B. Self-employed. C. Retired. ' +
+          'D. Receiving unemployment benefits. E. None of the above.')
+        send_sms('A')    # Employed
+
+        expect(last_response.body).to eq ('Which of the following do you receive: ' +
+          'A. Disability benefits. B. Child support. C. Rental income. ' +
+          'D. None of the above.')
+        send_sms('B')    # Child support
+
+        expect(last_response.body).to eq 'Do you have a State ID? Y or N.'
+        send_sms('YES')  # State ID
+
+        expect(last_response.body).to eq('You will need these documents: ' +
+          'State IDs for everyone you are applying for, ' +
+          'Pay Stubs for the Past 30 Days, Written Child Support Statement.')
+      end
+
+    end
+
+  end
+
   describe 'has State ID' do
 
     describe 'family, renting, citizens, self-employed, no other income, has state ID' do
