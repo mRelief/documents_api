@@ -289,12 +289,28 @@ describe 'SMS conversation' do
 
   describe 'user sends invalid response' do
 
-    it 'responds with the correct documents' do
-      send_sms('Hi!')
-      send_sms('Hiiiiiiii!')    # Invalid response to question #1
+    describe 'sends nonsense' do
 
-      expect(last_response.body).to eq 'Sorry, we didn\'t recognize that response.'
+      it 'responds with a "sorry" message' do
+        send_sms('Hi!')
+        send_sms('Hiiiiiiii!')    # Invalid response to question #1
+
+        expect(last_response.body).to eq 'Sorry, we didn\'t recognize that response.'
+      end
+
     end
+
+    describe 'sends Y/N answer to an A/B question' do
+
+      it 'responds with a "sorry" message' do
+        send_sms('Hi!')
+        send_sms('Y')             # Invalid response to question #1, valid for other questions tho
+
+        expect(last_response.body).to eq 'Sorry, we didn\'t recognize that response.'
+      end
+
+    end
+
   end
 
   describe 'user resets the survey' do
