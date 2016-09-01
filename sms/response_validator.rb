@@ -24,6 +24,35 @@ class ResponseValidator < Struct.new :from, :original_body, :session_count
     return false
   end
 
+  def question_data_by_session_count
+    return {
+      1 => {
+        options: ['A', 'B'],
+        allow_multiple: false
+      },
+      2 => {
+        options: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
+        allow_multiple: false
+      },
+      3 => {
+        options: ['Y', 'YES', 'N', 'NO'],
+        allow_multiple: false
+      },
+      4 => {
+        options: ['A', 'B', 'C', 'D', 'E'],
+        allow_multiple: true
+      },
+      5 => {
+        options: ['A', 'B', 'C', 'D'],
+        allow_multiple: true
+      }
+      6 => {
+        options: ['Y', 'YES', 'N', 'NO'],
+        allow_multiple: false
+      }
+    }
+  end
+
   def valid_for_multiple_choice?
     return true if body.include? 'A'
     return true if body.include? 'B'
