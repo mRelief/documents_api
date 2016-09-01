@@ -6,6 +6,7 @@ require          'twilio-ruby'
 require './local_env' if File.exists?('local_env.rb')
 
 require_relative 'api/documents_api'
+require_relative 'sms/incoming_message_cleaner'
 require_relative 'sms/responder'
 require_relative 'sms/response_validator'
 require_relative 'sms/session_data_updater'
@@ -72,13 +73,15 @@ post '/sms' do
   session['has_state_id'] ||= 'true'
   session['more_housing_options'] ||= 'false'
 
+  body = IncomingMessageCleaner.new(params[:Body]).cleaned
+
   unless session['count'] == 0
-    validator = ResponseValidator.new(params[:From], params[:Body], session['count'])
+    validator = ResponseValidator.new(params[:From], body, session['count'])
     return validator.respond_to_invalid! unless validator.valid?
   end
 
   # Update the session data
-  new_session = SessionDataUpdater.new(session, params[:Body]).update_data
+  new_session = SessionDataUpdater.new(session, body).update_data
   session = new_session
 
   # Send a response

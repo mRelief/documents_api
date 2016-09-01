@@ -1,4 +1,4 @@
-class SessionDataUpdater < Struct.new :session, :original_body
+class SessionDataUpdater < Struct.new :session, :body
 
   def update_data
     new_session = session.clone
@@ -38,10 +38,6 @@ class SessionDataUpdater < Struct.new :session, :original_body
 
   def reset?
     body == 'RESET'
-  end
-
-  def body
-    original_body.upcase
   end
 
   def clean_session
