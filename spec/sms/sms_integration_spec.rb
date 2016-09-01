@@ -290,25 +290,30 @@ describe 'SMS conversation' do
   describe 'user sends invalid response' do
 
     describe 'sends nonsense' do
-
       it 'responds with a "sorry" message' do
         send_sms('Hi!')
         send_sms('Hiiiiiiii!')    # Invalid response to question #1
 
         expect(last_response.body).to eq 'Sorry, we didn\'t recognize that response.'
       end
-
     end
 
     describe 'sends Y/N answer to an A/B question' do
-
       it 'responds with a "sorry" message' do
         send_sms('Hi!')
         send_sms('Y')             # Invalid response to question #1, valid for other questions tho
 
         expect(last_response.body).to eq 'Sorry, we didn\'t recognize that response.'
       end
+    end
 
+    describe 'sends A/B answer to Y/N question' do
+      it 'responds with a "sorry" message' do
+        send_sms('Hi!')
+        send_sms('B')    # Family
+        send_sms('A')    # Renting
+        send_sms('A')    # Invalid response to citizenship question
+      end
     end
 
   end
