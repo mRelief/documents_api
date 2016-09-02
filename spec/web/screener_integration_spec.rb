@@ -12,29 +12,31 @@ describe 'web screener', type: :feature, js: true do
   end
 
   context 'user clicks "My Family, Own Home, Next"' do
-
     it 'takes the user to the next page, shows copy for multi-person household' do
-      visit '/screener'
-      choose('justMeRadioButton')
-      choose('rentingRadioButton')
-      click_on('nextButton')
+      select_family_and_owns_home
+      click_next
       expect(page).to have_content 'Select all that describe you'
       expect(page).to have_content 'Which of the following do you receive'
     end
+  end
 
+  context '... then user clicks "Employed", "Child Support", "All Citizens"' do
+    it 'returns the correct confirmation page' do
+      select_family_and_owns_home
+      click_next
+      select_employed_and_child_support_and_all_citizens
+      click_next
+      expect(page).to have_content 'Does this'
+    end
   end
 
   context 'user clicks "Just Me, Renting, Next"' do
-
     it 'takes the user to the next page, shows copy for single-person household' do
-      visit '/screener'
-      choose('myFamilyRadioButton')
-      choose('ownsHomeRadioButton')
-      click_on('nextButton')
+      select_just_me_and_renting
+      click_next
       expect(page).to have_content 'Select all that describe you and your family'
       expect(page).to have_content 'Which of the following does your family receive'
     end
-
   end
 
   context 'user clicks "Show More Options" on living situation question' do

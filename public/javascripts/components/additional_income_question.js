@@ -27,6 +27,7 @@
         dom.label({}, 'Disability benefits'),
         dom.br({}),
         dom.input({
+          id: 'childSupportCheckbox',
           type: 'checkbox',
           name: 'additionalIncomeQuestion',
           onClick: this.props.onUpdateDataField,

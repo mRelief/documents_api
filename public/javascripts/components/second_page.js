@@ -57,6 +57,7 @@
           onClick: this.props.onClickBackButton
         }),
         dom.input({
+          id: 'nextButton',
           type: 'submit',
           value: 'Next',
           style: window.shared.ButtonStyle,

@@ -15,6 +15,7 @@
       return dom.div({},
         dom.p({}, this.renderInstructions()),
         dom.input({
+          id: 'employeeCheckBox',
           type: 'checkbox',
           name: 'employmentQuestion',
           onClick: this.props.onUpdateDataField,
