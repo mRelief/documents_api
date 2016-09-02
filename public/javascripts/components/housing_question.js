@@ -20,6 +20,7 @@
       return dom.div({},
         dom.p({}, 'Describe your living situation:'),
         dom.input({
+          id: 'rentingRadioButton',
           type: 'radio',
           name: 'livingQuestion',
           onClick: this.props.onUpdateLivingSituationField,
@@ -32,6 +33,7 @@
         dom.label({}, 'Renting'),
         dom.br({}),
         dom.input({
+          id: 'ownsHomeRadioButton',
           type: 'radio',
           name: 'livingQuestion',
           onClick: this.props.onUpdateLivingSituationField,

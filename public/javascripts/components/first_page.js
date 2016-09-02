@@ -43,6 +43,7 @@
         this.requiredQuestionWarning(showHosuingQuestionWarning),
         dom.br({}),
         dom.input({
+          id: 'nextButton',
           type: 'submit',
           value: 'Next',
           style: window.shared.ButtonStyle,

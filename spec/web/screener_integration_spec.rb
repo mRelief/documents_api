@@ -15,7 +15,11 @@ describe 'web screener', type: :feature, js: true do
 
     it 'takes the user to the next page, shows copy for multi-person household' do
       visit '/screener'
-      save_and_open_page
+      choose('justMeRadioButton')
+      choose('rentingRadioButton')
+      click_on('nextButton')
+      expect(page).to have_content 'Select all that describe you'
+      expect(page).to have_content 'Which of the following do you receive'
     end
 
   end
@@ -24,7 +28,11 @@ describe 'web screener', type: :feature, js: true do
 
     it 'takes the user to the next page, shows copy for single-person household' do
       visit '/screener'
-      save_and_open_page
+      choose('myFamilyRadioButton')
+      choose('ownsHomeRadioButton')
+      click_on('nextButton')
+      expect(page).to have_content 'Select all that describe you and your family'
+      expect(page).to have_content 'Which of the following does your family receive'
     end
 
   end
@@ -33,7 +41,6 @@ describe 'web screener', type: :feature, js: true do
 
     it 'shows more options' do
       visit '/screener'
-
     end
 
   end
