@@ -16,4 +16,5 @@ group :test do
   gem 'rack-test'
   gem 'capybara'
   gem 'launchy'
+  gem 'capybara-webkit', '~> 1.7', '>= 1.7.1'
 end

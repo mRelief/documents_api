@@ -1,5 +1,3 @@
-require 'rack/test'
-
 require_relative '../support/spec_helper'
 require_relative '../../app'
 
