@@ -96,6 +96,7 @@
           marginLeft: '16px'
         },
       }, dom.a({
+          id: 'showMoreOptions',
           onClick: this.toggleAdditionalOptions,
           style: window.shared.LinkStyle
         }, 'Show More Options')

@@ -41,6 +41,8 @@ describe 'web screener', type: :feature, js: true do
 
     it 'shows more options' do
       visit '/screener'
+      pending
+      click_on(find('#showMoreOptions'))
     end
 
   end
