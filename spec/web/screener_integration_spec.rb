@@ -11,6 +11,14 @@ describe 'web screener', type: :feature, js: true do
     expect(page).to have_content 'See what documents you need for Food Stamps:'
   end
 
+  context 'user tries to click "Next" without selecting any answers' do
+    it 'shows the correct required question messages' do
+      visit '/screener'
+      click_next
+      expect(page).to have_content 'Please select a response.'
+    end
+  end
+
   context 'user clicks "My Family, Own Home, Next"' do
     it 'takes the user to the next page, shows copy for multi-person household' do
       select_family_and_owns_home
