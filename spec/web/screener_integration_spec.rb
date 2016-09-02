@@ -26,7 +26,8 @@ describe 'web screener', type: :feature, js: true do
       click_next
       select_employed_and_child_support_and_all_citizens
       click_next
-      expect(page).to have_content 'Does this'
+      pending
+      expect(page).to have_content 'Does this look accurate?'
     end
   end
 
