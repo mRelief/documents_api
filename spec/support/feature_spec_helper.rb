@@ -7,6 +7,20 @@ class CapybaraConfig
     Capybara.app_host = "http://localhost:4567"
     Capybara.server_host = "localhost"
     Capybara.server_port = "4567"
+
+    Capybara::Webkit.configure do |config|
+      config.allow_url("https://fonts.googleapis.com/css?family=Montserrat:400,700")
+      config.allow_url("fonts.googleapis.com")
+      config.allow_url("fb.me")
+      config.allow_url("https://fb.me/react-15.1.0.js")
+      config.allow_url("https://fb.me/react-dom-15.1.0.js")
+      config.allow_url("https://code.jquery.com/jquery-3.0.0.min.js")
+      config.allow_url("code.jquery.com")
+      config.allow_url("https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-xap1/t39.3284-6/12726956_279572999043766_1590663715_n.js")
+      config.allow_url("fbcdn-dragon-a.akamaihd.net")
+      config.allow_url("https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-xpt1/t39.3284-6/13176340_977137305734260_1146243719_n.js")
+      config.allow_url("fbcdn-dragon-a.akamaihd.net")
+    end
   end
 end
 
