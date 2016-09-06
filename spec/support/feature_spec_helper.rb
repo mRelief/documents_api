@@ -4,9 +4,6 @@ class CapybaraConfig
     require 'capybara-webkit'
     Capybara.app = Sinatra::Application.new
     Capybara.javascript_driver = :webkit
-    Capybara.app_host = "http://localhost:4567"
-    Capybara.server_host = "localhost"
-    Capybara.server_port = "4567"
 
     Capybara::Webkit.configure do |config|
       config.allow_url("https://fonts.googleapis.com/css?family=Montserrat:400,700")
