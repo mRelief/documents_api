@@ -14,6 +14,6 @@ Select All Confusion | | | | :heavy_check_mark: | "You can select multiple optio
 
 # Notes
 
-1. Buy House
+1. Buy Mouse
 2. Do elderly have to apply on own?
 3. Valid Mail
