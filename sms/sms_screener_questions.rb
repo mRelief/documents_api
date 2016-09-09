@@ -4,7 +4,8 @@ SMS_SCREENER = {
     'Here you can find out what documents you need to apply for Food Stamps. ' +
     'How many people are you applying for? ' +
     'A. Just Me. B. Me and My Family. ' +
-    'Please enter A or B.'
+    'Please enter A or B. ' +
+    'If you make a mistake, text \'reset\'.'
   ),
   1 => (
     'Describe your living situation: ' +
