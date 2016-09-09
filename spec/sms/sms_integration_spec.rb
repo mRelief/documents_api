@@ -24,12 +24,14 @@ describe 'SMS conversation' do
 
         expect(last_response.body).to eq ('Welcome. ' +
           'Here you can find out what documents you need to apply for Food Stamps. ' +
-          'How many people are you applying for? A. Just Me. B. Me and My Family.')
+          'How many people are you applying for? A. Just Me. B. Me and My Family. ' +
+          'Please enter A or B.')
         send_sms('B')    # My Family
 
         expect(last_response.body).to eq ('Describe your living situation: ' +
-          'A. Renting. B. Own home. C. Living with family/friends. ' +
-          'D. Shelter. For more options, type \'options.\'')
+          'A. Renting. B. Own home. C. Living with family/friends. D. Shelter. ' +
+          'Please enter A, B, C, or D. ' +
+          'For more options, type \'options.\'')
         send_sms('A')    # Renting
 
         expect(last_response.body).to eq 'Is everyone in your household a US citizen? Y or N.'
@@ -37,12 +39,14 @@ describe 'SMS conversation' do
 
         expect(last_response.body).to eq ('Select all that describe you: ' +
           'A. Employed. B. Self-employed. C. Retired. ' +
-          'D. Receiving unemployment benefits. E. None of the above.')
+          'D. Receiving unemployment benefits. E. None of the above. ' +
+          'Please enter A, B, C, D, E, or a combination. For example: AB.')
         send_sms('A')    # Employed
 
         expect(last_response.body).to eq ('Which of the following do you receive: ' +
-          'A. Disability benefits. B. Child support. C. Rental income. ' +
-          'D. None of the above.')
+          'A. Disability benefits. B. Child support. ' +
+          'C. Rental income. D. None of the above. ' +
+          'Please enter A, B, C, D, or a combination. For example: BC.')
         send_sms('B')    # Child support
 
         expect(last_response.body).to eq 'Do you have a State ID? Y or N.'
@@ -223,7 +227,8 @@ describe 'SMS conversation' do
       let(:expected_outcome) {
         'Welcome. ' +
         'Here you can find out what documents you need to apply for Food Stamps. ' +
-        'How many people are you applying for? A. Just Me. B. Me and My Family.'
+        'How many people are you applying for? A. Just Me. B. Me and My Family. ' +
+        'Please enter A or B.'
       }
 
       it 'responds with the correct documents' do
@@ -326,7 +331,8 @@ describe 'SMS conversation' do
     let(:expected_outcome) {
       'Welcome. ' +
       'Here you can find out what documents you need to apply for Food Stamps. ' +
-      'How many people are you applying for? A. Just Me. B. Me and My Family.'
+      'How many people are you applying for? A. Just Me. B. Me and My Family. ' +
+      'Please enter A or B.'
     }
 
     it 'responds with the correct documents' do
