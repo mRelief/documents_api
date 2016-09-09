@@ -34,7 +34,7 @@ class DocumentResultsMessage < Struct.new :session
   # WITH STATE ID #
 
   def results_with_state_id
-    'You will need these documents: ' +
+    'You will need these documents to complete your Food Stamps application: ' +
     [state_id, citizenship_docs, income_docs].flatten.compact.join(', ') +
     '.'
   end
