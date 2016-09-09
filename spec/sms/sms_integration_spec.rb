@@ -48,7 +48,8 @@ describe 'SMS conversation' do
         expect(last_response.body).to eq 'Do you have a State ID? Y or N.'
         send_sms('YES')  # State ID
 
-        expect(last_response.body).to eq('You will need these documents: ' +
+        expect(last_response.body).to eq('You will need these documents ' +
+          'to complete your Food Stamps application: ' +
           'State IDs for everyone you are applying for, ' +
           'Pay Stubs for the Past 30 Days, Written Child Support Statement.')
       end
@@ -61,7 +62,7 @@ describe 'SMS conversation' do
 
     describe 'family, renting, citizens, self-employed, no other income, has state ID' do
       let(:expected_documents) {
-        'You will need these documents: ' +
+        'You will need these documents to complete your Food Stamps application: ' +
         'State IDs for everyone you are applying for, Self-Employment Form.'
       }
 
@@ -79,7 +80,8 @@ describe 'SMS conversation' do
 
     describe '1 person, renting, citizen, employee, no other income, has state ID' do
       let(:expected_documents) {
-        'You will need these documents: State ID, Pay Stubs for the Past 30 Days.'
+        'You will need these documents to complete your Food Stamps application: ' +
+        'State ID, Pay Stubs for the Past 30 Days.'
       }
 
       it 'responds with the correct documents' do
@@ -96,7 +98,7 @@ describe 'SMS conversation' do
 
     describe '1 person, owns home, citizen, employee, child support, has state ID' do
       let(:expected_documents) {
-        'You will need these documents: ' +
+        'You will need these documents to complete your Food Stamps application: ' +
         'State ID, Pay Stubs for the Past 30 Days, Written Child Support Statement.'
       }
 
@@ -115,7 +117,7 @@ describe 'SMS conversation' do
 
     describe 'family, renting, citizen, not working, child support and disability, has state ID' do
       let(:expected_documents) {
-        'You will need these documents: ' +
+        'You will need these documents to complete your Food Stamps application: ' +
         'State IDs for everyone you are applying for, ' +
         'Written Child Support Statement, Award Letter for Disability.'
       }
@@ -134,7 +136,7 @@ describe 'SMS conversation' do
 
     describe 'family, renting, citizen, employee plus self employed, has state ID' do
       let(:expected_documents) {
-        'You will need these documents: ' +
+        'You will need these documents to complete your Food Stamps application: ' +
         'State IDs for everyone you are applying for, ' +
         'Pay Stubs for the Past 30 Days, Self-Employment Form.'
       }
@@ -338,7 +340,9 @@ describe 'SMS conversation' do
 
   describe 'user sends all texts with a signature' do
     let(:expected_documents) {
-      'You will need these documents: State ID, Self-Employment Form.'
+      'You will need these documents ' +
+      'to complete your Food Stamps application: ' +
+      'State ID, Self-Employment Form.'
     }
 
     it 'gets the same outcome' do
