@@ -38,7 +38,7 @@ class ResponseValidator < Struct.new :from, :body, :session_count
   def question_data_by_session_count
     return {
       1 => {
-        options: ['A', 'B'],
+        options: ['A', 'B', 'ME', 'JUST ME', 'MY FAMILY', 'ME AND MY FAMILY'],
         allow_multiple: false
       },
       2 => {
