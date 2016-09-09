@@ -10,6 +10,8 @@ class SessionDataUpdater < Struct.new :session, :body
     case new_session[:count]
     when 1
       new_session['single_person_household'] = 'false' if body.include? 'B'
+      new_session['single_person_household'] = 'false' if body == 'MY FAMILY'
+      new_session['single_person_household'] = 'false' if body == 'ME AND MY FAMILY'
     when 2
       new_session['renting'] = 'true' if body.include? 'A'
       new_session['owns_home'] = 'true' if body.include? 'B'

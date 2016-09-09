@@ -294,7 +294,7 @@ describe 'SMS conversation' do
         send_sms('Hi!')
         send_sms('Hiiiiiiii!')    # Invalid response to question #1
 
-        expect(last_response.body).to eq 'Please select one of these options: A, B.'
+        expect(last_response.body).to eq 'Please select one of these options: A, B, ME, JUST ME, MY FAMILY, ME AND MY FAMILY.'
       end
     end
 
@@ -303,7 +303,7 @@ describe 'SMS conversation' do
         send_sms('Hi!')
         send_sms('Y')             # Invalid response to question #1, valid for other questions tho
 
-        expect(last_response.body).to eq 'Please select one of these options: A, B.'
+        expect(last_response.body).to eq 'Please select one of these options: A, B, ME, JUST ME, MY FAMILY, ME AND MY FAMILY.'
       end
     end
 
