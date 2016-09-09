@@ -30,18 +30,6 @@
           type: 'checkbox',
           name: 'employmentQuestion',
           onClick: this.props.onUpdateDataField,
-          data: 'self_employed',
-          defaultChecked: (
-            this.props.userWentBack &&
-            this.props.userSubmittedData.self_employed === 'true'
-          )
-        }),
-        dom.label({}, 'Self-employed'),
-        dom.br({}),
-        dom.input({
-          type: 'checkbox',
-          name: 'employmentQuestion',
-          onClick: this.props.onUpdateDataField,
           data: 'retired',
           defaultChecked: (
             this.props.userWentBack &&
@@ -62,8 +50,19 @@
         }),
         dom.label({}, 'Unemployed'),
         dom.br({}),
-        dom.br({}),
-        this.renderUnemploymentBenefitsQuestions()
+        this.renderUnemploymentBenefitsQuestions(),
+        dom.input({
+          type: 'checkbox',
+          name: 'employmentQuestion',
+          onClick: this.props.onUpdateDataField,
+          data: 'self_employed',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.self_employed === 'true'
+          )
+        }),
+        dom.label({}, 'Self-employed'),
+        dom.br({})
       );
     },
 
