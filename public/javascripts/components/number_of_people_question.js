@@ -35,7 +35,7 @@
           onClick: this.props.onClickMyFamily,
           defaultChecked: (this.props.userWentBack && !this.props.singlePersonHousehold)
         }),
-        dom.label({}, '  My Family'),
+        dom.label({}, '  Me and My Family'),
         dom.span({
           style: this.helpButtonStyle(),
           'data-for': 'my-family-explanation',

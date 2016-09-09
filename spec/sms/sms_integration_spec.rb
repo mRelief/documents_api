@@ -24,7 +24,7 @@ describe 'SMS conversation' do
 
         expect(last_response.body).to eq ('Welcome. ' +
           'Here you can find out what documents you need to apply for Food Stamps. ' +
-          'How many people are you applying for? A. Just Me. B. My Family.')
+          'How many people are you applying for? A. Just Me. B. Me and My Family.')
         send_sms('B')    # My Family
 
         expect(last_response.body).to eq ('Describe your living situation: ' +
@@ -221,7 +221,7 @@ describe 'SMS conversation' do
       let(:expected_outcome) {
         'Welcome. ' +
         'Here you can find out what documents you need to apply for Food Stamps. ' +
-        'How many people are you applying for? A. Just Me. B. My Family.'
+        'How many people are you applying for? A. Just Me. B. Me and My Family.'
       }
 
       it 'responds with the correct documents' do
@@ -324,7 +324,7 @@ describe 'SMS conversation' do
     let(:expected_outcome) {
       'Welcome. ' +
       'Here you can find out what documents you need to apply for Food Stamps. ' +
-      'How many people are you applying for? A. Just Me. B. My Family.'
+      'How many people are you applying for? A. Just Me. B. Me and My Family.'
     }
 
     it 'responds with the correct documents' do
