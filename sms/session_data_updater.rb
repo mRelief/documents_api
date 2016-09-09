@@ -22,9 +22,9 @@ class SessionDataUpdater < Struct.new :session, :body
       new_session['all_citizens'] = 'false' if body[0] == 'N'
     when 4
       new_session['employee'] = 'true' if body.include? 'A'
-      new_session['self_employed'] = 'true' if body.include? 'B'
+      new_session['unemployment_benefits'] = 'true' if body.include? 'B'
       new_session['retired'] = 'true' if body.include? 'C'
-      new_session['unemployment_benefits'] = 'true' if body.include? 'D'
+      new_session['self_employed'] = 'true' if body.include? 'D'
     when 5
       new_session['disability_benefits'] = 'true' if body.include? 'A'
       new_session['child_support'] = 'true' if body.include? 'B'

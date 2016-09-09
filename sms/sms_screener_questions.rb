@@ -23,11 +23,11 @@ SMS_SCREENER = {
   3 => (
     'Select all that describe you: ' +
     'A. Employed. ' +
-    'B. Self-employed. ' +
+    'B. Receiving unemployment benefits. ' +
     'C. Retired. ' +
-    'D. Receiving unemployment benefits. ' +
+    'D. Self-employed. ' +
     'E. None of the above. ' +
-    'Please enter A, B, C, D, E, or a combination. For example: AB.'
+    'Please enter A, B, C, D, E, or a combination. For example: AD.'
   ),
   4 => (
     'Which of the following do you receive: ' +
