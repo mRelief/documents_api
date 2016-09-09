@@ -39,9 +39,9 @@ describe 'SMS conversation' do
         send_sms('YES')  # All citizens
 
         expect(last_response.body).to eq ('Select all that describe you: ' +
-          'A. Employed. B. Self-employed. C. Retired. ' +
-          'D. Receiving unemployment benefits. E. None of the above. ' +
-          'Please enter A, B, C, D, E, or a combination. For example: AB.')
+          'A. Employed. B. Receiving unemployment benefits. ' +
+          'C. Retired. D. Self-employed. E. None of the above. ' +
+          'Please enter A, B, C, D, E, or a combination. For example: AD.')
         send_sms('A')    # Employed
 
         expect(last_response.body).to eq ('Which of the following do you receive: ' +
@@ -76,7 +76,7 @@ describe 'SMS conversation' do
         send_sms('B')    # My Family
         send_sms('A')    # Renting
         send_sms('YES')  # All citizens
-        send_sms('B')    # Self-employed
+        send_sms('D')    # Self-employed
         send_sms('D')    # None of the above
         send_sms('YES')  # No State ID
         expect(last_response.body).to eq expected_documents
@@ -151,7 +151,7 @@ describe 'SMS conversation' do
         send_sms('B')    # Family
         send_sms('A')    # Renting
         send_sms('Y')    # All citizens
-        send_sms('AB')   # Employee plus self-employed family members
+        send_sms('AD')   # Employee plus self-employed family members
         send_sms('D')    # No additional income sources
         send_sms('Y')    # Has State ID
         expect(last_response.body).to eq expected_documents
@@ -176,7 +176,7 @@ describe 'SMS conversation' do
         send_sms('A')    # 1 Person
         send_sms('A')    # Renting
         send_sms('NO')   # Not citizen
-        send_sms('B')    # Self-employed
+        send_sms('D')    # Self-employed
         send_sms('D')    # None of the above
         send_sms('NO')   # No State ID
         expect(last_response.body).to eq expected_documents
@@ -196,7 +196,7 @@ describe 'SMS conversation' do
         send_sms('A')    # Just Me
         send_sms('A')    # Renting
         send_sms('YES')  # All citizens
-        send_sms('B')    # Self-employed
+        send_sms('D')    # Self-employed
         send_sms('D')    # None of the above
         send_sms('NO')  # No State ID
         expect(last_response.body).to eq expected_documents
@@ -217,7 +217,7 @@ describe 'SMS conversation' do
         send_sms('B')    # Family
         send_sms('A')    # Renting
         send_sms('Y')    # All citizens
-        send_sms('AB')   # Employee plus self-employed family members
+        send_sms('AD')   # Employee plus self-employed family members
         send_sms('D')    # No additional income sources
         send_sms('N')    # No State ID
         expect(last_response.body).to eq expected_documents
@@ -238,7 +238,7 @@ describe 'SMS conversation' do
         send_sms('B')    # Family
         send_sms('A')    # Renting
         send_sms('Y')    # All citizens
-        send_sms('AB')   # Employee plus self-employed family members
+        send_sms('AD')   # Employee plus self-employed family members
         send_sms('D')    # No additional income sources
         send_sms('N')    # No State ID
         send_sms('OK!')  # Start screener again
@@ -359,7 +359,7 @@ describe 'SMS conversation' do
       send_sms('A -Alex')    # Just Me
       send_sms('A -Alex')    # Renting
       send_sms('YES -Alex')  # All citizens
-      send_sms('B -Alex')    # Self-employed
+      send_sms('D -Alex')    # Self-employed
       send_sms('D -Alex')    # None of the above
       send_sms('YES -Alex')  # Has State ID
       expect(last_response.body).to eq expected_documents
