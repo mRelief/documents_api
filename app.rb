@@ -39,6 +39,7 @@ get '/api' do
     self_employed: params['self_employed'],
     retired: params['retired'],
     unemployment_benefits: params['unemployment_benefits'],
+    recently_lost_job_and_received_paycheck: params['recently_lost_job_and_received_paycheck']
   )
 
   @outcome = documents_request.fetch_documents
@@ -72,6 +73,7 @@ post '/sms' do
   session['child_support'] ||= 'false'
   session['has_state_id'] ||= 'true'
   session['more_housing_options'] ||= 'false'
+  session['recently_lost_job_and_received_paycheck'] ||= 'false'
 
   body = IncomingMessageCleaner.new(params[:Body]).cleaned
 

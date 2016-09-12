@@ -17,7 +17,8 @@ module Api
                    child_support:,
                    self_employed:,
                    retired:,
-                   unemployment_benefits:
+                   unemployment_benefits:,
+                   recently_lost_job_and_received_paycheck:
       )
 
       @has_rental_income = StringParser.new(has_rental_income).to_boolean
@@ -32,6 +33,7 @@ module Api
       @child_support = StringParser.new(child_support).to_boolean
       @retired = StringParser.new(retired).to_boolean
       @unemployment_benefits = StringParser.new(unemployment_benefits).to_boolean
+      @recently_lost_job_and_received_paycheck = StringParser.new(recently_lost_job_and_received_paycheck).to_boolean
 
       raise "Invalid data" unless valid_data?
     end
@@ -141,7 +143,7 @@ module Api
     end
 
     def documents_based_on_employment
-      PAY_STUBS if @employee
+      PAY_STUBS if (@employee || @recently_lost_job_and_received_paycheck)
     end
 
     def documents_based_on_self_employment

@@ -88,4 +88,19 @@ describe "queries against API endpoints" do
       expect(residency_document_names).to include "Homeless Shelter Statement"
     end
   end
+
+  context "unemployed but received pay check within last 30 days" do
+    let(:params) do
+      these_params = default_params
+      these_params[:recently_lost_job_and_received_paycheck] = "true"
+      these_params
+    end
+
+    it "returns correct income documents" do
+      get path, format: :json
+      expect(response_json["income_documents"].size).to eq 1
+      expect(response_json["income_documents"][0]["official_name"]).to eq "Pay Stubs for the Past 30 Days"
+    end
+  end
+
 end
