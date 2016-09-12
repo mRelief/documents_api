@@ -166,16 +166,7 @@
     },
 
     onClickStartOver: function () {
-      this.setState({
-        answeredFirstPage: false,
-        answeredSecondPage: false,
-        hasResponseFromServer: false,
-        documentsDataFromServer: null,
-        userSubmittedData: DefaultData,
-        singlePersonHousehold: true,
-        errorFromServer: false,
-        hitBackButton: false
-      });
+      this.setState(this.getInitialState());
     },
 
     renderResultsFromServer: function () {
