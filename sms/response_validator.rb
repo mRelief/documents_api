@@ -65,13 +65,7 @@ class ResponseValidator < Struct.new :from, :body, :session_count
   end
 
   def respond_to_invalid!
-    client.messages.create(
-      from: ENV['twilio_number'],
-      to: from,
-      body: message
-    )
-
-    return message
+    SendMessage.new(message, from).send
   end
 
   private
@@ -86,10 +80,6 @@ class ResponseValidator < Struct.new :from, :body, :session_count
 
   def message_allow_one
     'Please select one of these options: ' + valid_options.join(', ') + '.'
-  end
-
-  def client
-    Twilio::REST::Client.new(ENV['account_sid'], ENV['auth_token'])
   end
 
 end
