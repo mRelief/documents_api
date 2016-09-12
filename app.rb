@@ -84,7 +84,7 @@ post '/sms' do
   if session['count'] == 0
     welcome_message = 'Welcome. ' +
                       'Here you can find out what documents you need to complete your Food Stamps application. ' +
-                      'If you make a mistake, text \'reset\'.'
+                      'If you make a mistake, text \'reset\'. (1/2)'
     SendMessage.new(welcome_message, params[:From]).send
   else
     validator = ResponseValidator.new(params[:From], body, session)

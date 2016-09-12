@@ -24,7 +24,7 @@ describe 'SMS conversation' do
 
         expect(last_response.body).to eq (
           'How many people are you applying for? A. Just Me. B. Me and My Family. ' +
-          'Please enter A or B. ')
+          'Please enter A or B. (2/2)')
         send_sms('B')    # My Family
 
         expect(last_response.body).to eq ('Describe your living situation: ' +
@@ -290,7 +290,7 @@ describe 'SMS conversation' do
     describe 'user retakes the screener' do
       let(:expected_outcome) {
         'How many people are you applying for? A. Just Me. B. Me and My Family. ' +
-        'Please enter A or B. '
+        'Please enter A or B. (2/2)'
       }
 
       it 'responds with the correct documents' do
@@ -392,7 +392,7 @@ describe 'SMS conversation' do
   describe 'user resets the survey' do
     let(:expected_outcome) {
       'How many people are you applying for? A. Just Me. B. Me and My Family. ' +
-      'Please enter A or B. '
+      'Please enter A or B. (2/2)'
     }
 
     it 'responds with the correct documents' do
