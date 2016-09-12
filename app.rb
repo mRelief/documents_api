@@ -6,6 +6,7 @@ require          'twilio-ruby'
 require './local_env' if File.exists?('local_env.rb')
 
 require_relative 'api/documents_api'
+require_relative 'sms/send_message'
 require_relative 'sms/incoming_message_cleaner'
 require_relative 'sms/responder'
 require_relative 'sms/response_validator'
