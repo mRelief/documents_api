@@ -157,7 +157,6 @@
 
     renderIncomeDocs: function () {
       var docs = this.incomeDocs();
-
       if (docs.length === 0) return null;
 
       if (docs.length === 1) {
@@ -167,9 +166,21 @@
           doc_name += ' (for all employed members of your family)';
         };
 
+        doc_name += '.';
+
+        if (doc.url_to_document) {
+          var doc_presentation = dom.a({
+            href: doc.url_to_document,
+            target: '_blank',
+            rel: 'noopener noreferrer'
+          }, doc_name);
+        } else {
+          var doc_presentation = doc_name;
+        };
+
         return dom.div({},
           dom.span({}, 'You will also need your '),
-          dom.span({ style: { fontWeight: 'bold' } }, doc_name + '.'),
+          dom.span({ style: { fontWeight: 'bold' } }, doc_presentation),
           dom.br({}),
           dom.br({})
         );
@@ -194,7 +205,17 @@
 
     incomeDocsList: function () {
       return this.incomeDocs().map(function (document) {
-        return dom.li({}, document.official_name);
+        if (document.url_to_document) {
+          return dom.li({},
+            dom.a({
+              href: document.url_to_document,
+              target: '_blank',
+              rel: 'noopener noreferrer'
+            }, document.official_name)
+          );
+        } else {
+          return dom.li({}, document.official_name);
+        };
       });
     },
 
