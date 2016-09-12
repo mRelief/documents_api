@@ -50,7 +50,7 @@
         }),
         dom.label({}, 'Unemployed'),
         dom.br({}),
-        this.renderUnemploymentBenefitsQuestions(),
+        this.renderUnemploymentQuestions(),
         dom.input({
           type: 'checkbox',
           name: 'employmentQuestion',
@@ -80,39 +80,36 @@
       };
     },
 
-    renderUnemploymentBenefitsQuestions: function () {
-      if (this.showUnemploymentOptions() === true) {
-        return dom.div({},
-          dom.p({}, 'Are you receiving unemployment benefits?'),
-          dom.input({
-            type: 'radio',
-            name: 'unemploymentBeneftQuestion',
-            onClick: this.props.onUpdateDataField,
-            data: 'unemployment_benefits',
-            defaultChecked: (
-              this.props.userWentBack &&
-              this.props.userSubmittedData.unemployed === 'true' &&
-              this.props.userSubmittedData.unemployment_benefits === 'true'
-            )
-          }),
-          dom.label({}, 'Yes'),
-          dom.br({}),
-          dom.input({
-            type: 'radio',
-            name: 'unemploymentBeneftQuestion',
-            defaultChecked: (
-              this.props.userWentBack &&
-              this.props.userSubmittedData.unemployed === 'true' &&
-              this.props.userSubmittedData.unemployment_benefits === 'false'
-            )
-          }),
-          dom.label({}, 'No'),
-          dom.br({}),
-          dom.br({})
-        );
-      } else {
-        return null;
-      };
+    renderUnemploymentQuestions: function () {
+    if (this.showUnemploymentOptions() !== true) return null;
+      return dom.div({},
+        dom.p({}, 'Are you receiving unemployment benefits?'),
+        dom.input({
+          type: 'radio',
+          name: 'unemploymentBeneftQuestion',
+          onClick: this.props.onUpdateDataField,
+          data: 'unemployment_benefits',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.unemployed === 'true' &&
+            this.props.userSubmittedData.unemployment_benefits === 'true'
+          )
+        }),
+        dom.label({}, 'Yes'),
+        dom.br({}),
+        dom.input({
+          type: 'radio',
+          name: 'unemploymentBeneftQuestion',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.unemployed === 'true' &&
+            this.props.userSubmittedData.unemployment_benefits === 'false'
+          )
+        }),
+        dom.label({}, 'No'),
+        dom.br({}),
+        dom.br({})
+      );
     },
 
     showUnemploymentOptions: function () {
