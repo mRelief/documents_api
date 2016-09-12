@@ -37,7 +37,7 @@ describe 'SMS conversation' do
         send_sms('YES')  # All citizens
 
         expect(last_response.body).to eq ('Select all that describe you: ' +
-          'A. Employed. B. Receiving unemployment benefits. ' +
+          'A. Employed. B. Unemployed. ' +
           'C. Retired. D. Self-employed. E. None of the above. ' +
           'Please enter A, B, C, D, E, or a combination. For example: AD.')
         send_sms('A')    # Employed
@@ -154,6 +154,71 @@ describe 'SMS conversation' do
         send_sms('Y')    # Has State ID
         expect(last_response.body).to eq expected_documents
       end
+    end
+
+    describe 'tiered unemployment questions' do
+
+      describe 'unemployed, receiving benefits, no paycheck within last 30 days' do
+        let(:expected_documents) {
+          'You will need these documents to complete your Food Stamps application: ' +
+          'State IDs for everyone you are applying for, Award Letter for Unemployment.'
+        }
+
+        it 'responds with the correct documents' do
+          send_sms('Hi!')
+          send_sms('B')    # Family
+          send_sms('A')    # Renting
+          send_sms('Y')    # All citizens
+          send_sms('B')    # Unemployed
+          send_sms('Y')    # Receiving benefits
+          send_sms('N')    # No paycheck within 30 days
+          send_sms('D')    # No additional income sources
+          send_sms('Y')    # Has State ID
+          expect(last_response.body).to eq expected_documents
+        end
+      end
+
+      describe 'unemployed, not receiving benefits, paycheck within last 30 days' do
+        let(:expected_documents) {
+          'You will need these documents to complete your Food Stamps application: ' +
+          'State IDs for everyone you are applying for, Pay Stubs for the Past 30 Days.'
+        }
+
+        it 'responds with the correct documents' do
+          send_sms('Hi!')
+          send_sms('B')    # Family
+          send_sms('A')    # Renting
+          send_sms('Y')    # All citizens
+          send_sms('B')    # Unemployed
+          send_sms('N')    # Not receiving benefits
+          send_sms('Y')    # Paycheck within 30 days
+          send_sms('D')    # No additional income sources
+          send_sms('Y')    # Has State ID
+          expect(last_response.body).to eq expected_documents
+        end
+      end
+
+      describe 'unemployed, receiving benefits, paycheck within last 30 days' do
+        let(:expected_documents) {
+          'You will need these documents to complete your Food Stamps application: ' +
+          'State IDs for everyone you are applying for, ' +
+          'Pay Stubs for the Past 30 Days, Award Letter for Unemployment.'
+        }
+
+        it 'responds with the correct documents' do
+          send_sms('Hi!')
+          send_sms('B')    # Family
+          send_sms('A')    # Renting
+          send_sms('Y')    # All citizens
+          send_sms('B')    # Unemployed
+          send_sms('Y')    # Receiving benefits
+          send_sms('Y')    # Paycheck within 30 days
+          send_sms('D')    # No additional income sources
+          send_sms('Y')    # Has State ID
+          expect(last_response.body).to eq expected_documents
+        end
+      end
+
     end
 
   end

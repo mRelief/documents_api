@@ -73,8 +73,11 @@ post '/sms' do
   session['disability_benefits'] ||= 'false'
   session['child_support'] ||= 'false'
   session['has_state_id'] ||= 'true'
-  session['more_housing_options'] ||= 'false'
   session['recently_lost_job_and_received_paycheck'] ||= 'false'
+
+  session['more_housing_options'] ||= 'false'
+  session['tiered_unemployment_question_one'] ||= 'false'
+  session['tiered_unemployment_question_two'] ||= 'false'
 
   body = IncomingMessageCleaner.new(params[:Body]).cleaned
 
@@ -84,7 +87,7 @@ post '/sms' do
                       'If you make a mistake, text \'reset\'.'
     SendMessage.new(welcome_message, params[:From]).send
   else
-    validator = ResponseValidator.new(params[:From], body, session['count'])
+    validator = ResponseValidator.new(params[:From], body, session)
     return validator.respond_to_invalid! unless validator.valid?
   end
 
