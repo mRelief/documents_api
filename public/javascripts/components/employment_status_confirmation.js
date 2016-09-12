@@ -16,7 +16,9 @@
       if (userSubmittedData.employee === 'false' &&
           userSubmittedData.self_employed === 'false' &&
           userSubmittedData.retired === 'false' &&
-          userSubmittedData.unemployment_benefits === 'false') return null;
+          userSubmittedData.unemployment_benefits === 'false' &&
+          userSubmittedData.recently_lost_job_and_received_paycheck === 'false'
+          ) return null;
 
       return dom.li({},
         this.confirmationSentence(),
@@ -87,10 +89,24 @@
     },
 
     confirmationSentence: function () {
-      return [
+      var sentence = [
         this.sentenceSubjectAndVerb(),
         this.incomeSourcesEnglishList()
       ].join(' ') + '.';
+
+      if (this.incomeSources().length === 0) {
+        sentence = '';
+      };
+
+      if (this.userRecentlyLostJobAndReceivedPaycheck()) {
+        sentence += ' You recently lost a job and received a paycheck within the last 30 days.';
+      };
+
+      return sentence;
+    },
+
+    userRecentlyLostJobAndReceivedPaycheck: function () {
+      return this.props.userSubmittedData.recently_lost_job_and_received_paycheck === 'true';
     },
 
   });
