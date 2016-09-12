@@ -19,7 +19,7 @@
         answeredSecondPage: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
-        userSubmittedData: DefaultData,
+        userSubmittedData: $.extend(true, {}, DefaultData),
         singlePersonHousehold: true,
         errorFromServer: false,
         hitBackButton: false
