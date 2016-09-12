@@ -143,7 +143,7 @@ module Api
     end
 
     def documents_based_on_employment
-      PAY_STUBS if @employee
+      PAY_STUBS if (@employee || @recently_lost_job_and_received_paycheck)
     end
 
     def documents_based_on_self_employment
