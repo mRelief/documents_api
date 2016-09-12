@@ -50,7 +50,6 @@
         }),
         dom.label({}, 'Unemployed'),
         dom.br({}),
-        this.renderUnemploymentQuestions(),
         dom.input({
           type: 'checkbox',
           name: 'employmentQuestion',
@@ -62,7 +61,9 @@
           )
         }),
         dom.label({}, 'Self-employed'),
-        dom.br({})
+        dom.br({}),
+        dom.br({}),
+        this.renderUnemploymentQuestions()
       );
     },
 
@@ -104,6 +105,32 @@
             this.props.userWentBack &&
             this.props.userSubmittedData.unemployed === 'true' &&
             this.props.userSubmittedData.unemployment_benefits === 'false'
+          )
+        }),
+        dom.label({}, 'No'),
+        dom.br({}),
+        dom.br({}),
+        dom.p({}, 'If you recently lost a job, have you received a pay check in the last 30 days?'),
+        dom.input({
+          type: 'radio',
+          name: 'recentyLostJobQuestion',
+          onClick: this.props.onUpdateDataField,
+          data: 'recently_lost_job_and_received_paycheck',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.unemployed === 'true' &&
+            this.props.userSubmittedData.recently_lost_job_and_received_paycheck === 'true'
+          )
+        }),
+        dom.label({}, 'Yes'),
+        dom.br({}),
+        dom.input({
+          type: 'radio',
+          name: 'recentyLostJobQuestion',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.unemployed === 'true' &&
+            this.props.userSubmittedData.recently_lost_job_and_received_paycheck === 'false'
           )
         }),
         dom.label({}, 'No'),

@@ -14,7 +14,8 @@
     "owns_home": "false",
     "shelter": "false",
     "living_with_family_or_friends": "false",
-    "all_citizens": "true"
+    "all_citizens": "true",
+    "recently_lost_job_and_received_paycheck": "false"
   };
 
 })();
