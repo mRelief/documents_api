@@ -37,7 +37,7 @@ describe 'SMS conversation' do
         send_sms('YES')  # All citizens
 
         expect(last_response.body).to eq ('Select all that describe you: ' +
-          'A. Employed. B. Receiving unemployment benefits. ' +
+          'A. Employed. B. Unemployed. ' +
           'C. Retired. D. Self-employed. E. None of the above. ' +
           'Please enter A, B, C, D, E, or a combination. For example: AD.')
         send_sms('A')    # Employed
