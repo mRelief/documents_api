@@ -22,11 +22,9 @@ describe 'SMS conversation' do
       it 'responds with the correct documents' do
         send_sms('Hi!')
 
-        expect(last_response.body).to eq ('Welcome. ' +
-          'Here you can find out what documents you need to complete your Food Stamps application. ' +
+        expect(last_response.body).to eq (
           'How many people are you applying for? A. Just Me. B. Me and My Family. ' +
-          'Please enter A or B. ' +
-          'If you make a mistake, text \'reset\'.')
+          'Please enter A or B. ')
         send_sms('B')    # My Family
 
         expect(last_response.body).to eq ('Describe your living situation: ' +
@@ -226,11 +224,8 @@ describe 'SMS conversation' do
 
     describe 'user retakes the screener' do
       let(:expected_outcome) {
-        'Welcome. ' +
-        'Here you can find out what documents you need to complete your Food Stamps application. ' +
         'How many people are you applying for? A. Just Me. B. Me and My Family. ' +
-        'Please enter A or B. ' +
-        'If you make a mistake, text \'reset\'.'
+        'Please enter A or B. '
       }
 
       it 'responds with the correct documents' do
@@ -331,11 +326,8 @@ describe 'SMS conversation' do
 
   describe 'user resets the survey' do
     let(:expected_outcome) {
-      'Welcome. ' +
-      'Here you can find out what documents you need to complete your Food Stamps application. ' +
       'How many people are you applying for? A. Just Me. B. Me and My Family. ' +
-      'Please enter A or B. ' +
-      'If you make a mistake, text \'reset\'.'
+      'Please enter A or B. '
     }
 
     it 'responds with the correct documents' do

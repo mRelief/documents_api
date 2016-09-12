@@ -6,6 +6,7 @@ require          'twilio-ruby'
 require './local_env' if File.exists?('local_env.rb')
 
 require_relative 'api/documents_api'
+require_relative 'sms/send_message'
 require_relative 'sms/incoming_message_cleaner'
 require_relative 'sms/responder'
 require_relative 'sms/response_validator'
@@ -77,7 +78,12 @@ post '/sms' do
 
   body = IncomingMessageCleaner.new(params[:Body]).cleaned
 
-  unless session['count'] == 0
+  if session['count'] == 0
+    welcome_message = 'Welcome. ' +
+                      'Here you can find out what documents you need to complete your Food Stamps application. ' +
+                      'If you make a mistake, text \'reset\'.'
+    SendMessage.new(welcome_message, params[:From]).send
+  else
     validator = ResponseValidator.new(params[:From], body, session['count'])
     return validator.respond_to_invalid! unless validator.valid?
   end

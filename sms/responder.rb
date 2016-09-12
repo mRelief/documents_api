@@ -4,13 +4,7 @@ require_relative 'sms_screener_questions'
 class Responder < Struct.new :from, :session
 
   def respond
-    client.messages.create(
-      from: ENV['twilio_number'],
-      to: from,
-      body: message
-    )
-
-    return message
+    SendMessage.new(message, from).send
   end
 
   private
@@ -33,8 +27,5 @@ class Responder < Struct.new :from, :session
     end
   end
 
-  def client
-    Twilio::REST::Client.new(ENV['account_sid'], ENV['auth_token'])
-  end
 
 end
