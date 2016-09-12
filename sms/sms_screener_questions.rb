@@ -2,7 +2,7 @@ SMS_SCREENER = {
   0 => (
     'How many people are you applying for? ' +
     'A. Just Me. B. Me and My Family. ' +
-    'Please enter A or B. '
+    'Please enter A or B. (2/2)'
   ),
   1 => (
     'Describe your living situation: ' +
