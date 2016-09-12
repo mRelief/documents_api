@@ -77,7 +77,16 @@ post '/sms' do
 
   body = IncomingMessageCleaner.new(params[:Body]).cleaned
 
-  unless session['count'] == 0
+  if session['count'] == 0
+    client = Twilio::REST::Client.new(ENV['account_sid'], ENV['auth_token'])
+    client.messages.create(
+      from: ENV['twilio_number'],
+      to: params[:From],
+      body: ('Welcome. ' +
+             'Here you can find out what documents you need to complete your Food Stamps application. ' +
+             'If you make a mistake, text \'reset\'.')
+    )
+  else
     validator = ResponseValidator.new(params[:From], body, session['count'])
     return validator.respond_to_invalid! unless validator.valid?
   end
