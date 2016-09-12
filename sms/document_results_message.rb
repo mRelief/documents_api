@@ -22,6 +22,7 @@ class DocumentResultsMessage < Struct.new :session
       self_employed: session['self_employed'],
       retired: session['retired'],
       unemployment_benefits: session['unemployment_benefits'],
+      recently_lost_job_and_received_paycheck: session['recently_lost_job_and_received_paycheck']
     )
 
     @document_results = documents_request.fetch_documents
