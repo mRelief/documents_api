@@ -7,6 +7,8 @@ class SessionDataUpdater < Struct.new :session, :body
 
     return clean_session if reset?
 
+    return handle_tiered_question(new_session) if tiered_question?(new_session)
+
     case new_session[:count]
     when 1
       new_session['single_person_household'] = 'false' if body.include? 'B'
@@ -22,7 +24,12 @@ class SessionDataUpdater < Struct.new :session, :body
       new_session['all_citizens'] = 'false' if body[0] == 'N'
     when 4
       new_session['employee'] = 'true' if body.include? 'A'
-      new_session['unemployment_benefits'] = 'true' if body.include? 'B'
+
+      if body.include? 'B'
+        new_session['tiered_unemployment_question_one'] = 'true'
+        new_session['tiered_unemployment_question_two'] = 'true'
+      end
+
       new_session['retired'] = 'true' if body.include? 'C'
       new_session['self_employed'] = 'true' if body.include? 'D'
     when 5
@@ -37,6 +44,23 @@ class SessionDataUpdater < Struct.new :session, :body
   end
 
   private
+
+  def handle_tiered_question(new_session)
+    if new_session['tiered_unemployment_question_one'] == 'true'
+      new_session['unemployment_benefits'] = 'true' if body.include? 'Y'
+      new_session['tiered_unemployment_question_one'] = 'false'
+    elsif new_session['tiered_unemployment_question_two'] == 'true'
+      new_session['recently_lost_job_and_received_paycheck'] = 'true' if body.include? 'Y'
+      new_session['tiered_unemployment_question_two'] = 'false'
+    end
+
+    return new_session
+  end
+
+  def tiered_question?(session)
+    session['tiered_unemployment_question_one'] == 'true' ||
+    session['tiered_unemployment_question_two'] == 'true'
+  end
 
   def reset?
     body == 'RESET'

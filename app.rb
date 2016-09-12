@@ -87,7 +87,7 @@ post '/sms' do
                       'If you make a mistake, text \'reset\'.'
     SendMessage.new(welcome_message, params[:From]).send
   else
-    validator = ResponseValidator.new(params[:From], body, session['count'])
+    validator = ResponseValidator.new(params[:From], body, session)
     return validator.respond_to_invalid! unless validator.valid?
   end
 

@@ -1,4 +1,4 @@
-class ResponseValidator < Struct.new :from, :body, :session_count
+class ResponseValidator < Struct.new :from, :body, :session
 
   def valid?
     return true if body == 'OPTIONS'
@@ -60,7 +60,11 @@ class ResponseValidator < Struct.new :from, :body, :session_count
       6 => {
         options: ['Y', 'YES', 'N', 'NO'],
         allow_multiple: false
-      }
+      },
+      'tiered_unemployment_question' => {
+        options: ['Y', 'YES', 'N', 'NO'],
+        allow_multiple: false
+      },
     }
   end
 
@@ -80,6 +84,12 @@ class ResponseValidator < Struct.new :from, :body, :session_count
 
   def message_allow_one
     'Please select one of these options: ' + valid_options.join(', ') + '.'
+  end
+
+  def session_count
+    return 'tiered_unemployment_question' if (session['tiered_unemployment_question_one'] == 'true' ||
+                                              session['tiered_unemployment_question_two'] == 'true')
+    return session['count']
   end
 
 end
