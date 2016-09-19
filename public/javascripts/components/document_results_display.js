@@ -79,7 +79,7 @@
     },
 
     renderProgressBar: function () {
-      return createEl(ProgressBar, { step: 3 });
+      return createEl(ProgressBar, { step: 4 });
     },
 
     renderStateIdSection: function () {

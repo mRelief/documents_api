@@ -9,6 +9,7 @@
   var ErrorPage = window.shared.ErrorPage;
   var FirstPage = window.shared.FirstPage;
   var SecondPage = window.shared.SecondPage;
+  var ThirdPage = window.shared.ThirdPage;
   var ConfirmationPage = window.shared.ConfirmationPage;
 
   window.shared.Screener = React.createClass({
@@ -17,6 +18,7 @@
       return {
         answeredFirstPage: false,
         answeredSecondPage: false,
+        answeredThirdPage: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
         userSubmittedData: $.extend(true, {}, DefaultData),
@@ -46,6 +48,8 @@
     },
 
     render: function() {
+      console.log('rendering!');
+      console.log(this.state);
       if (this.state.hasResponseFromServer === true) {
         // Results from server
         return this.renderResultsFromServer();
@@ -56,8 +60,11 @@
         // First page
         return this.renderFirstPage();
       } else if (this.state.answeredSecondPage === false) {
-        // Detailed income questions page
+        // Second page
         return this.renderSecondPage();
+      } else if (this.state.answeredThirdPage === false) {
+        // Third page
+        return this.renderThirdPage();
       } else {
         // Confirmation page
         return this.renderConfirmationPage();
@@ -96,6 +103,21 @@
         userSubmittedData: this.state.userSubmittedData,
         userWentBack: this.state.hitBackButton,
       });
+    },
+
+    renderThirdPage: function () {
+      return createEl(ThirdPage, {
+        onClickRadioButtonYes: this.onClickRadioButtonYes,
+        onClickRadioButtonNo: this.onClickRadioButtonNo,
+        onClickNext: this.onClickNextFromThirdPage,
+        onClickBackButton: this.hitBackButtonFromThirdPage,
+        userSubmittedData: this.state.userSubmittedData,
+        userWentBack: this.state.hitBackButton,
+      });
+    },
+
+    onClickNextFromThirdPage: function () {
+      this.setState({ answeredThirdPage: true });
     },
 
     onUpdateDataField: function (event) {
@@ -153,18 +175,16 @@
       this.setState({ userSubmittedData: userSubmittedData });
     },
 
-    hitBackButtonFromConfirmationPage: function () {
-      this.setState({
-        hitBackButton: true,
-        answeredSecondPage: false
-      });
+    hitBackButtonFromSecondPage: function () {
+      this.setState({ hitBackButton: true, answeredFirstPage: false });
     },
 
-    hitBackButtonFromSecondPage: function () {
-      this.setState({
-        hitBackButton: true,
-        answeredFirstPage: false
-      });
+    hitBackButtonFromThirdPage: function () {
+      this.setState({ hitBackButton: true, answeredSecondPage: false });
+    },
+
+    hitBackButtonFromConfirmationPage: function () {
+      this.setState({ hitBackButton: true, answeredThirdPage: false });
     },
 
     onClickStartOver: function () {

@@ -84,7 +84,7 @@
     },
 
     renderProgressBar: function () {
-      return createEl(ProgressBar, { step: 2 });
+      return createEl(ProgressBar, { step: 3 });
     },
 
     renderNumberOfPeople: function () {
