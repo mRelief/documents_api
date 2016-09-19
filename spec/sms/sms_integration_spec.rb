@@ -335,7 +335,7 @@ describe 'SMS conversation' do
         'Since you don\'t have a State ID, you will need to prove residency and identity. ' +
         'You will need *ONE* of the following to prove residency: Mail, Medical Records. ' +
         'You will need *ONE* of the following to prove identity: ' +
-        'School Photo ID, U.S. Military ID Card, Voter Registration Card, Birth Certificate. ' +
+        'School Photo ID, U.S. Military ID Card, Voter Registration Card. ' +
         'You will also need a I-90 Documentation (for all non-citizen family members).'
       }
 

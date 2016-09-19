@@ -1,5 +1,4 @@
 require 'rack/test'
-
 require_relative '../support/spec_helper'
 require_relative '../../app'
 
@@ -18,6 +17,8 @@ describe "queries against API endpoints" do
       shelter: "false",
       living_with_family_or_friends: "false",
       all_citizens: "true",
+      has_birth_certificate: "false",
+      has_social_security_card: "false",
     }
   }
 
@@ -37,7 +38,7 @@ describe "queries against API endpoints" do
       ]
 
       expect(response_json["residency_documents"].size).to eq 3
-      expect(response_json["identity_documents"].size).to eq 5
+      expect(response_json["identity_documents"].size).to eq 4
       expect(response_json["citizenship_documents"].size).to eq 0
       expect(response_json["income_documents"].size).to eq 0
     end

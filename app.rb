@@ -40,7 +40,9 @@ get '/api' do
     self_employed: params['self_employed'],
     retired: params['retired'],
     unemployment_benefits: params['unemployment_benefits'],
-    recently_lost_job_and_received_paycheck: params['recently_lost_job_and_received_paycheck']
+    recently_lost_job_and_received_paycheck: params['recently_lost_job_and_received_paycheck'],
+    has_birth_certificate: params['has_birth_certificate'],
+    has_social_security_card: params['has_social_security_card'],
   )
 
   @outcome = documents_request.fetch_documents
@@ -74,6 +76,8 @@ post '/sms' do
   session['child_support'] ||= 'false'
   session['has_state_id'] ||= 'true'
   session['recently_lost_job_and_received_paycheck'] ||= 'false'
+  session['has_birth_certificate'] ||= 'false'
+  session['has_social_security_card'] ||= 'false'
 
   session['more_housing_options'] ||= 'false'
   session['tiered_unemployment_question_one'] ||= 'false'
