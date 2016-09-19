@@ -101,12 +101,16 @@ module Api
 
     ## IDENTITY DOCUMENTS ##
 
-    def needs_identity_docs
+    def identity_satisfied_with_other_docs
       !@employee &&
       !@self_employed &&
       !@disability_benefits &&
       !@child_support &&
       !@unemployment_benefits
+    end
+
+    def needs_identity_docs
+      identity_satisfied_with_other_docs || @has_birth_certificate || @has_social_security_card
     end
 
     def identity_documents

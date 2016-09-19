@@ -60,6 +60,7 @@
     renderDocs: function () {
       return dom.div({},
         this.renderStateIdSection(),
+        this.renderBirthCertificateAndSocialSecuritySection(),
         this.renderMoreResidencyAndIdentityOptions(),
         this.renderIncomeDocs(),
         this.renderCitizenshipDocs(),
@@ -153,6 +154,37 @@
     toggleShowMoreOptions: function () {
       var currentStatus = this.state.showMoreOptions;
       this.setState({ showMoreOptions: !currentStatus });
+    },
+
+    renderBirthCertificateAndSocialSecuritySection: function () {
+      var identityDocs = this.identityDocs();
+      var identityDocNames = identityDocs.map(function(doc) { return doc.official_name; });
+
+      var hasBirthCertificate = (identityDocNames.indexOf('Birth Certificate') > -1);
+      var hasSocial = (identityDocNames.indexOf('Social Security Card') > -1);
+
+      if (hasBirthCertificate && hasSocial) {
+        return dom.div({},
+          dom.div({},
+            'Since you have a birth certificate and social security card, bring them just in case.'
+          ),
+          dom.br({})
+        );
+      } else if (hasSocial) {
+        return dom.div({},
+          dom.div({},
+            'Since you have a social security card, bring it just in case you need it.'
+          ),
+          dom.br({})
+        );
+      } else if (hasBirthCertificate) {
+        return dom.div({},
+          dom.div({},
+            'Since you have a birth certificate, bring it just in case you need it.'
+          ),
+          dom.br({})
+        );
+      };
     },
 
     renderIncomeDocs: function () {
