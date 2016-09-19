@@ -6,6 +6,7 @@
   var ResidencyDocuments = window.shared.ResidencyDocuments;
   var LinkStyle = window.shared.LinkStyle;
   var ProgressBar = window.shared.ProgressBar;
+  var BirthCertificateAndSocialCardSection = window.shared.BirthCertificateAndSocialCardSection;
 
   window.shared.DocumentResultsDisplay = React.createClass({
 
@@ -163,28 +164,10 @@
       var hasBirthCertificate = (identityDocNames.indexOf('Birth Certificate') > -1);
       var hasSocial = (identityDocNames.indexOf('Social Security Card') > -1);
 
-      if (hasBirthCertificate && hasSocial) {
-        return dom.div({},
-          dom.div({},
-            'Since you have a birth certificate and social security card, bring them just in case.'
-          ),
-          dom.br({})
-        );
-      } else if (hasSocial) {
-        return dom.div({},
-          dom.div({},
-            'Since you have a social security card, bring it just in case you need it.'
-          ),
-          dom.br({})
-        );
-      } else if (hasBirthCertificate) {
-        return dom.div({},
-          dom.div({},
-            'Since you have a birth certificate, bring it just in case you need it.'
-          ),
-          dom.br({})
-        );
-      };
+      return createEl(BirthCertificateAndSocialCardSection, {
+        hasBirthCertificate: hasBirthCertificate,
+        hasSocial: hasSocial,
+      });
     },
 
     renderIncomeDocs: function () {
