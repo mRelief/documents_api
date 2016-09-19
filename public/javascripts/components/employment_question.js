@@ -66,8 +66,8 @@
           onClick: this.toggleIdExplanation,
           style: LinkStyle,
           'data-for': 'self-employed-question',
-          'data-tip': 'Self-employment includes small business, sales of cosmetics and furniture,<br/>\
-                       farming, dressmaking, child care, home repair, yard work, animal care, roomers<br/>\
+          'data-tip': 'Self-employment includes small business, sales of cosmetics, farming,<br/>\
+                       child care, home repair, yard work, animal care, roomers<br/>\
                        or boarders.<br/>\
                        <br/><br/><br/>\
                        If you received rental income due to managing a property, include this if<br/>\
