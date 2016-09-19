@@ -11,6 +11,8 @@
     },
 
     render: function () {
+      if (!this.props.hasSocial && !this.props.hasBirthCertificate) return null;
+
       return dom.div({},
         dom.span({},
           this.statement(),
