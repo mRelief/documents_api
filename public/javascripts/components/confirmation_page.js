@@ -56,6 +56,16 @@
             this.renderCitizenshipStatus(),
             dom.br({}),
             dom.br({})
+          ),
+          dom.li({},
+            this.renderBirthCertificateStatement(),
+            dom.br({}),
+            dom.br({})
+          ),
+          dom.li({},
+            this.renderSocialSecurityCardStatement(),
+            dom.br({}),
+            dom.br({})
           )
         ),
         dom.input({
@@ -118,7 +128,31 @@
       } else if (!all_citizens && !single_person) {
         return 'Not everyone in your household is a citizen.';
       };
-    }
+    },
+
+    renderBirthCertificateStatement: function () {
+      var has_birth_certificate = (
+        this.props.userSubmittedData.has_birth_certificate === 'true'
+      );
+
+      if (has_birth_certificate) {
+        return 'You have a Birth Certificate.';
+      } else {
+        return 'You don\'t have a Birth Certificate.';
+      };
+    },
+
+    renderSocialSecurityCardStatement: function () {
+      var has_social_security_card = (
+        this.props.userSubmittedData.has_social_security_card === 'true'
+      );
+
+      if (has_social_security_card) {
+        return 'You have a Social Security Card.';
+      } else {
+        return 'You don\'t have a Social Security Card.';
+      };
+    },
 
   });
 })();

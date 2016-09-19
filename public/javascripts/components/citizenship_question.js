@@ -5,8 +5,8 @@
   window.shared.CitizenshipQuestion = React.createClass({
 
     propTypes: {
-      onCheckNotAllCitizens: React.PropTypes.func.isRequired,
-      onCheckYesAllCitizens: React.PropTypes.func.isRequired,
+      onClickRadioButtonYes: React.PropTypes.func.isRequired,
+      onClickRadioButtonNo: React.PropTypes.func.isRequired,
       singlePersonHousehold: React.PropTypes.bool.isRequired
     },
 
@@ -16,14 +16,16 @@
         dom.input({
           type: 'radio',
           name: 'citizenshipQuestion',
-          onClick: this.props.onCheckYesAllCitizens,
+          data: 'all_citizens',
+          onClick: this.props.onClickRadioButtonYes,
         }),
         dom.label({}, 'Yes'),
         dom.br({}),
         dom.input({
           type: 'radio',
           name: 'citizenshipQuestion',
-          onClick: this.props.onCheckNotAllCitizens,
+          data: 'all_citizens',
+          onClick: this.props.onClickRadioButtonNo,
         }),
         dom.label({}, 'No'),
         dom.br({}),
