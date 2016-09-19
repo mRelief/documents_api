@@ -103,13 +103,23 @@
         dom.input({
           type: 'radio',
           name: 'birthCertificateQuestion',
-          onClick: this.onCheckYesBirthCertificate,
+          onClick: this.props.onUpdateDataField,
+          data: 'has_birth_certificate',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.has_birth_certificate === 'true'
+          )
         }),
         dom.label({}, 'Yes'),
         dom.br({}),
         dom.input({
           type: 'radio',
           name: 'birthCertificateQuestion',
+          data: 'has_birth_certificate',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.has_birth_certificate === 'false'
+          )
         }),
         dom.label({}, 'No'),
         dom.br({}),
@@ -123,26 +133,28 @@
         dom.input({
           type: 'radio',
           name: 'socialSecurityCardQuestion',
-          onClick: this.onCheckYesSocialSecurityCard,
+          data: 'has_social_security_card',
+          onClick: this.props.onUpdateDataField,
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.has_social_security_card === 'true'
+          )
         }),
         dom.label({}, 'Yes'),
         dom.br({}),
         dom.input({
           type: 'radio',
           name: 'socialSecurityCardQuestion',
+          data: 'has_social_security_card',
+          defaultChecked: (
+            this.props.userWentBack &&
+            this.props.userSubmittedData.has_social_security_card === 'false'
+          )
         }),
         dom.label({}, 'No'),
         dom.br({}),
         dom.br({})
       );
-    },
-
-    onCheckYesBirthCertificate: function () {
-      return null;
-    },
-
-    onCheckYesSocialSecurityCard: function () {
-      return null;
     },
 
     onClickNext: function () {
