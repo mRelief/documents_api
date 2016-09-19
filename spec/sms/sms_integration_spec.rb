@@ -49,7 +49,13 @@ describe 'SMS conversation' do
         send_sms('B')    # Child support
 
         expect(last_response.body).to eq 'Do you have a State ID? Y or N.'
-        send_sms('YES')  # State ID
+        send_sms('YES')
+
+        expect(last_response.body).to eq('Do you have a Birth Certificate? Y or N.')
+        send_sms('YES')
+
+        expect(last_response.body).to eq('Do you have a Social Security Card? Y or N.')
+        send_sms('YES')
 
         expect(last_response.body).to eq('You will need these documents ' +
           'to complete your Food Stamps application: ' +
@@ -76,7 +82,10 @@ describe 'SMS conversation' do
         send_sms('YES')  # All citizens
         send_sms('D')    # Self-employed
         send_sms('D')    # None of the above
-        send_sms('YES')  # No State ID
+        send_sms('YES')  # State ID
+        send_sms('YES')  # Birth Certificate
+        send_sms('YES')  # Social Security Card
+
         expect(last_response.body).to eq expected_documents
       end
     end
@@ -95,6 +104,9 @@ describe 'SMS conversation' do
         send_sms('A')    # Employee
         send_sms('D')    # None of the above
         send_sms('YES')  # Has State ID
+        send_sms('YES')  # Birth Certificate
+        send_sms('YES')  # Social Security Card
+
         expect(last_response.body).to eq expected_documents
       end
     end
@@ -113,6 +125,9 @@ describe 'SMS conversation' do
         send_sms('A')    # Employee
         send_sms('B')    # Child support
         send_sms('YES')  # Has State ID
+        send_sms('YES')  # Birth Certificate
+        send_sms('YES')  # Social Security Card
+
         expect(last_response.body).to eq expected_documents
       end
     end
@@ -133,6 +148,9 @@ describe 'SMS conversation' do
         send_sms('E')    # Not working
         send_sms('BA')   # Child support and disability
         send_sms('Y')    # Has State ID
+        send_sms('YES')  # Birth Certificate
+        send_sms('YES')  # Social Security Card
+
         expect(last_response.body).to eq expected_documents
       end
     end
@@ -152,6 +170,9 @@ describe 'SMS conversation' do
         send_sms('AD')   # Employee plus self-employed family members
         send_sms('D')    # No additional income sources
         send_sms('Y')    # Has State ID
+        send_sms('YES')  # Birth Certificate
+        send_sms('YES')  # Social Security Card
+
         expect(last_response.body).to eq expected_documents
       end
     end
@@ -174,6 +195,9 @@ describe 'SMS conversation' do
           send_sms('N')    # No paycheck within 30 days
           send_sms('D')    # No additional income sources
           send_sms('Y')    # Has State ID
+          send_sms('YES')  # Birth Certificate
+          send_sms('YES')  # Social Security Card
+
           expect(last_response.body).to eq expected_documents
         end
       end
@@ -194,6 +218,9 @@ describe 'SMS conversation' do
           send_sms('Y')    # Paycheck within 30 days
           send_sms('D')    # No additional income sources
           send_sms('Y')    # Has State ID
+          send_sms('YES')  # Birth Certificate
+          send_sms('YES')  # Social Security Card
+
           expect(last_response.body).to eq expected_documents
         end
       end
@@ -215,6 +242,9 @@ describe 'SMS conversation' do
           send_sms('Y')    # Paycheck within 30 days
           send_sms('D')    # No additional income sources
           send_sms('Y')    # Has State ID
+          send_sms('YES')  # Birth Certificate
+          send_sms('YES')  # Social Security Card
+
           expect(last_response.body).to eq expected_documents
         end
       end
@@ -242,6 +272,9 @@ describe 'SMS conversation' do
         send_sms('D')    # Self-employed
         send_sms('D')    # None of the above
         send_sms('NO')   # No State ID
+        send_sms('YES')  # Birth Certificate
+        send_sms('YES')  # Social Security Card
+
         expect(last_response.body).to eq expected_documents
       end
     end
@@ -261,7 +294,10 @@ describe 'SMS conversation' do
         send_sms('YES')  # All citizens
         send_sms('D')    # Self-employed
         send_sms('D')    # None of the above
-        send_sms('NO')  # No State ID
+        send_sms('NO')   # No State ID
+        send_sms('YES')  # Birth Certificate
+        send_sms('YES')  # Social Security Card
+
         expect(last_response.body).to eq expected_documents
       end
     end
@@ -283,6 +319,9 @@ describe 'SMS conversation' do
         send_sms('AD')   # Employee plus self-employed family members
         send_sms('D')    # No additional income sources
         send_sms('N')    # No State ID
+        send_sms('YES')  # Birth Certificate
+        send_sms('YES')  # Social Security Card
+
         expect(last_response.body).to eq expected_documents
       end
     end
@@ -302,6 +341,9 @@ describe 'SMS conversation' do
         send_sms('D')    # No additional income sources
         send_sms('N')    # No State ID
         send_sms('OK!')  # Start screener again
+        send_sms('YES')  # Birth Certificate
+        send_sms('YES')  # Social Security Card
+
         expect(last_response.body).to eq expected_outcome
       end
     end
@@ -326,6 +368,9 @@ describe 'SMS conversation' do
         send_sms('A')          # Employee
         send_sms('B')          # Child support
         send_sms('N')          # No State ID
+        send_sms('YES')  # Birth Certificate
+        send_sms('YES')  # Social Security Card
+
         expect(last_response.body).to eq expected_documents
       end
     end
@@ -350,6 +395,9 @@ describe 'SMS conversation' do
         send_sms('E')          # No employment-related income
         send_sms('D')          # No additional income
         send_sms('N')          # No State ID
+        send_sms('YES')  # Birth Certificate
+        send_sms('YES')  # Social Security Card
+
         expect(last_response.body).to eq expected_documents
       end
     end
@@ -419,6 +467,9 @@ describe 'SMS conversation' do
       send_sms('D -Alex')    # Self-employed
       send_sms('D -Alex')    # None of the above
       send_sms('YES -Alex')  # Has State ID
+      send_sms('YES -Alex')  # Birth Certificate
+      send_sms('YES -Alex')  # Social Security Card
+
       expect(last_response.body).to eq expected_documents
     end
 
