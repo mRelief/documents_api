@@ -48,6 +48,8 @@
         this.renderAdditionalIncomeQuestion(),
         this.requiredQuestionWarning(showAdditionalIncomeQuestionWarning),
         this.renderCitizenshipQuestion(),
+        this.renderBirthCertificateQuestion(),
+        this.renderSocialSecurityCardQuestion(),
         dom.br({}),
         this.requiredQuestionWarning(),
         dom.input({
@@ -93,6 +95,54 @@
         onCheckYesAllCitizens: this.props.onCheckYesAllCitizens,
         singlePersonHousehold: this.props.singlePersonHousehold
       });
+    },
+
+    renderBirthCertificateQuestion: function () {
+      return dom.div({},
+        dom.p({}, 'Do you have a birth certificate?'),
+        dom.input({
+          type: 'radio',
+          name: 'birthCertificateQuestion',
+          onClick: this.onCheckYesBirthCertificate,
+        }),
+        dom.label({}, 'Yes'),
+        dom.br({}),
+        dom.input({
+          type: 'radio',
+          name: 'birthCertificateQuestion',
+        }),
+        dom.label({}, 'No'),
+        dom.br({}),
+        dom.br({})
+      );
+    },
+
+    renderSocialSecurityCardQuestion: function () {
+      return dom.div({},
+        dom.p({}, 'Do you have a social security card?'),
+        dom.input({
+          type: 'radio',
+          name: 'socialSecurityCardQuestion',
+          onClick: this.onCheckYesSocialSecurityCard,
+        }),
+        dom.label({}, 'Yes'),
+        dom.br({}),
+        dom.input({
+          type: 'radio',
+          name: 'socialSecurityCardQuestion',
+        }),
+        dom.label({}, 'No'),
+        dom.br({}),
+        dom.br({})
+      );
+    },
+
+    onCheckYesBirthCertificate: function () {
+      return null;
+    },
+
+    onCheckYesSocialSecurityCard: function () {
+      return null;
     },
 
     onClickNext: function () {
