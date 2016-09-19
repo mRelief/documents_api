@@ -9,4 +9,10 @@
     fontStyle: 'italic'
   };
 
+  window.shared.LessIntenseLinkStyle = {
+    color: '#0645AD',
+    textDecoration: 'underline',
+    cursor: 'pointer',
+  }
+
 })();
