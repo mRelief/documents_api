@@ -18,7 +18,9 @@ describe Api::DocumentsRequest do
       shelter: "false",
       living_with_family_or_friends: "false",
       all_citizens: "true",
-      recently_lost_job_and_received_paycheck: "false"
+      recently_lost_job_and_received_paycheck: "false",
+      has_birth_certificate: "false",
+      has_social_security_card: "false",
     }
   }
 
@@ -37,7 +39,6 @@ describe Api::DocumentsRequest do
           { official_name: "School Photo ID"},
           { official_name: "U.S. Military ID Card"},
           { official_name: "Voter Registration Card"},
-          { official_name: "Birth Certificate"}
         ],
         citizenship_documents: [],
         income_documents: [],

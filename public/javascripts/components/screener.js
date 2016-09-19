@@ -88,8 +88,8 @@
       return createEl(SecondPage, {
         singlePersonHousehold: this.state.singlePersonHousehold,
         onUpdateDataField: this.onUpdateDataField,
-        onCheckNotAllCitizens: this.onCheckNotAllCitizens,
-        onCheckYesAllCitizens: this.onCheckYesAllCitizens,
+        onClickRadioButtonYes: this.onClickRadioButtonYes,
+        onClickRadioButtonNo: this.onClickRadioButtonNo,
         singlePersonHousehold: this.state.singlePersonHousehold,
         onClickNext: this.onClickNextFromSecondPage,
         onClickBackButton: this.hitBackButtonFromSecondPage,
@@ -120,7 +120,7 @@
     },
 
     onClickMyFamily: function () {
-      this.setState({ singlePersonHousehold: false, });
+      this.setState({ singlePersonHousehold: false });
     },
 
     onUpdateLivingSituationField: function (event) {
@@ -139,15 +139,17 @@
       this.setState({ userSubmittedData: userSubmittedData });
     },
 
-    onCheckNotAllCitizens: function () {
+    onClickRadioButtonYes: function (event) {
+      var dataField = event.target.getAttribute('data');
       var userSubmittedData = this.state.userSubmittedData;
-      userSubmittedData["all_citizens"] = "false";
+      userSubmittedData[dataField] = 'true';
       this.setState({ userSubmittedData: userSubmittedData });
     },
 
-    onCheckYesAllCitizens: function () {
+    onClickRadioButtonNo: function (event) {
+      var dataField = event.target.getAttribute('data');
       var userSubmittedData = this.state.userSubmittedData;
-      userSubmittedData["all_citizens"] = "true";
+      userSubmittedData[dataField] = 'false';
       this.setState({ userSubmittedData: userSubmittedData });
     },
 

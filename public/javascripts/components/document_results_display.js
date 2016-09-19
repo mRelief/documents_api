@@ -6,6 +6,7 @@
   var ResidencyDocuments = window.shared.ResidencyDocuments;
   var LinkStyle = window.shared.LinkStyle;
   var ProgressBar = window.shared.ProgressBar;
+  var BirthCertificateAndSocialCardSection = window.shared.BirthCertificateAndSocialCardSection;
 
   window.shared.DocumentResultsDisplay = React.createClass({
 
@@ -61,6 +62,7 @@
       return dom.div({},
         this.renderStateIdSection(),
         this.renderMoreResidencyAndIdentityOptions(),
+        this.renderBirthCertificateAndSocialSecuritySection(),
         this.renderIncomeDocs(),
         this.renderCitizenshipDocs(),
         createEl(ReactTooltip, { id: 'state-id-explanation' })
@@ -153,6 +155,19 @@
     toggleShowMoreOptions: function () {
       var currentStatus = this.state.showMoreOptions;
       this.setState({ showMoreOptions: !currentStatus });
+    },
+
+    renderBirthCertificateAndSocialSecuritySection: function () {
+      var identityDocs = this.identityDocs();
+      var identityDocNames = identityDocs.map(function(doc) { return doc.official_name; });
+
+      var hasBirthCertificate = (identityDocNames.indexOf('Birth Certificate') > -1);
+      var hasSocial = (identityDocNames.indexOf('Social Security Card') > -1);
+
+      return createEl(BirthCertificateAndSocialCardSection, {
+        hasBirthCertificate: hasBirthCertificate,
+        hasSocial: hasSocial,
+      });
     },
 
     renderIncomeDocs: function () {

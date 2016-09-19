@@ -18,8 +18,9 @@ module Api
                    self_employed:,
                    retired:,
                    unemployment_benefits:,
-                   recently_lost_job_and_received_paycheck:
-      )
+                   recently_lost_job_and_received_paycheck:,
+                   has_birth_certificate:,
+                   has_social_security_card:)
 
       @has_rental_income = StringParser.new(has_rental_income).to_boolean
       @renting = StringParser.new(renting).to_boolean
@@ -34,6 +35,8 @@ module Api
       @retired = StringParser.new(retired).to_boolean
       @unemployment_benefits = StringParser.new(unemployment_benefits).to_boolean
       @recently_lost_job_and_received_paycheck = StringParser.new(recently_lost_job_and_received_paycheck).to_boolean
+      @has_birth_certificate = StringParser.new(has_birth_certificate).to_boolean
+      @has_social_security_card = StringParser.new(has_social_security_card).to_boolean
 
       raise "Invalid data" unless valid_data?
     end
@@ -98,7 +101,7 @@ module Api
 
     ## IDENTITY DOCUMENTS ##
 
-    def needs_identity_docs
+    def identity_satisfied_with_other_docs
       !@employee &&
       !@self_employed &&
       !@disability_benefits &&
@@ -106,18 +109,26 @@ module Api
       !@unemployment_benefits
     end
 
+    def needs_identity_docs
+      identity_satisfied_with_other_docs || @has_birth_certificate || @has_social_security_card
+    end
+
     def identity_documents
       needs_identity_docs ? identity_documents_list : []
     end
 
     def identity_documents_list
-      [
+      list = [
         STATE_ID,
         SCHOOL_PHOTO_ID,
         US_MILITARY_CARD,
         VOTER_REGISTRATION_CARD,
-        BIRTH_CERTIFICATE
       ]
+
+      list << BIRTH_CERTIFICATE if @has_birth_certificate
+      list << SOCIAL_SECURITY_CARD if @has_social_security_card
+
+      return list
     end
 
 
