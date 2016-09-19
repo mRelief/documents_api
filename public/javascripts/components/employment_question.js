@@ -1,6 +1,8 @@
 (function() {
   window.shared || (window.shared = {});
   var dom = React.DOM;
+  var LinkStyle = window.shared.LessIntenseLinkStyle;
+  var createEl = React.createElement.bind(React);
 
   window.shared.EmploymentQuestion = React.createClass({
 
@@ -60,10 +62,21 @@
             this.props.userSubmittedData.self_employed === 'true'
           )
         }),
-        dom.label({}, 'Self-employed'),
+        dom.label({
+          onClick: this.toggleIdExplanation,
+          style: LinkStyle,
+          'data-for': 'self-employed-question',
+          'data-tip': 'Self-employment includes small business, sales of cosmetics and furniture,<br/>\
+                       farming, dressmaking, child care, home repair, yard work, animal care, roomers<br/>\
+                       or boarders.<br/>\
+                       <br/><br/><br/>\
+                       If you received rental income due to managing a property, include this if<br/>\
+                       it is at least an average of 20 hours per week.'
+        }, 'Self-employed'),
         dom.br({}),
         dom.br({}),
-        this.renderUnemploymentQuestions()
+        this.renderUnemploymentQuestions(),
+        createEl(ReactTooltip, { id: 'self-employed-question', multiline: true })
       );
     },
 
