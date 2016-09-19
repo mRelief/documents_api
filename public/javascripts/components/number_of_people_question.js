@@ -17,6 +17,7 @@
         dom.br({}),
         dom.p({}, 'How many people are you applying for?'),
         dom.input({
+          id: 'justMeRadioButton',
           type: 'radio',
           name: 'NumberOfPeopleQuestion',
           onClick: this.props.onClickJustMe,
@@ -30,6 +31,7 @@
          }, '(?)'),
         dom.br({}),
         dom.input({
+          id: 'myFamilyRadioButton',
           type: 'radio',
           name: 'NumberOfPeopleQuestion',
           onClick: this.props.onClickMyFamily,

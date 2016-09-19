@@ -1,5 +1,7 @@
 ENV['RACK_ENV'] = 'test'
 
+require 'rack/test'
+
 module RSpecMixin
   include Rack::Test::Methods
 

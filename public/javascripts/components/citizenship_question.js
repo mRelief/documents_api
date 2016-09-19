@@ -14,6 +14,7 @@
       return dom.div({},
         dom.p({}, this.renderQuestionString()),
         dom.input({
+          id: 'yesAllCitizensRadioBox',
           type: 'radio',
           name: 'citizenshipQuestion',
           onClick: this.props.onCheckYesAllCitizens,
@@ -21,6 +22,7 @@
         dom.label({}, 'Yes'),
         dom.br({}),
         dom.input({
+          id: 'notAllCitizensRadioBox',
           type: 'radio',
           name: 'citizenshipQuestion',
           onClick: this.props.onCheckNotAllCitizens,
