@@ -3,10 +3,12 @@
   var dom = React.DOM;
   var createEl = React.createElement.bind(React);
   var ProgressBar = window.shared.ProgressBar;
+  var CitizenshipQuestion = window.shared.CitizenshipQuestion;
 
   window.shared.ThirdPage = React.createClass({
 
     propTypes: {
+      singlePersonHousehold: React.PropTypes.bool.isRequired,
       onClickRadioButtonYes: React.PropTypes.func.isRequired,
       onClickRadioButtonNo: React.PropTypes.func.isRequired,
       onClickNext: React.PropTypes.func.isRequired,
@@ -28,6 +30,9 @@
           }
         },
         this.renderProgressBar(),
+        dom.h1({}, 'What documents do you have on hand?'),
+        dom.h3({}, '(This will help us make better recommendations for you.)'),
+        dom.br({}),
         dom.p({}, 'Do you have a birth certificate?'),
         dom.input({
           type: 'radio',
@@ -106,6 +111,8 @@
         dom.label({}, 'No'),
         dom.br({}),
         dom.br({}),
+        this.renderCitizenshipQuestion(),
+        dom.br({}),
         dom.br({}),
         dom.input({
           type: 'submit',
@@ -120,6 +127,14 @@
           onClick: this.props.onClickNext
         })
       );
+    },
+
+    renderCitizenshipQuestion: function () {
+      return createEl(CitizenshipQuestion, {
+        onClickRadioButtonYes: this.props.onClickRadioButtonYes,
+        onClickRadioButtonNo: this.props.onClickRadioButtonNo,
+        singlePersonHousehold: this.props.singlePersonHousehold
+      });
     },
 
   });

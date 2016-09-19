@@ -13,8 +13,6 @@
 
     render: function () {
       return dom.div({},
-        dom.h1({}, 'See what documents you need for Food Stamps:'),
-        dom.br({}),
         dom.p({}, 'How many people are you applying for?'),
         dom.input({
           type: 'radio',
@@ -24,10 +22,10 @@
         }),
         dom.label({}, '  Just Me'),
         dom.span({
-          style: this.helpButtonStyle(),
+          style: window.shared.SmallLinkStyle,
           'data-for': 'just-me-explanation',
           'data-tip': 'You buy and cook food for just yourself.'
-         }, '(?)'),
+         }, '\u00a0 (?)'),
         dom.br({}),
         dom.input({
           type: 'radio',
@@ -37,23 +35,15 @@
         }),
         dom.label({}, '  Me and My Family'),
         dom.span({
-          style: this.helpButtonStyle(),
+          style: window.shared.SmallLinkStyle,
           'data-for': 'my-family-explanation',
           'data-tip': 'You buy and cook food for you and your family.'
-        }, '(?)'),
+        }, '\u00a0 (?)'),
         dom.br({}),
         dom.br({}),
         createEl(ReactTooltip, { id: 'just-me-explanation' }),
         createEl(ReactTooltip, { id: 'my-family-explanation' })
       );
-    },
-
-    helpButtonStyle: function () {
-      return {
-        fontSize: '12px',
-        marginLeft: '12px',
-        cursor: 'pointer'
-      };
     }
 
   });

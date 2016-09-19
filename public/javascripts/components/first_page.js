@@ -37,6 +37,8 @@
           }
         },
         this.renderProgressBar(),
+        dom.h1({}, 'See what documents you need for Food Stamps:'),
+        dom.br({}),
         this.renderNumberOfPeople(),
         this.requiredQuestionWarning(showNumberOfPeopleWarning),
         this.renderHousingQuestion(),

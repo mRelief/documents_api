@@ -4,7 +4,6 @@
   var createEl = React.createElement.bind(React);
   var EmploymentQuestion = window.shared.EmploymentQuestion;
   var AdditionalIncomeQuestion = window.shared.AdditionalIncomeQuestion;
-  var CitizenshipQuestion = window.shared.CitizenshipQuestion;
   var ProgressBar = window.shared.ProgressBar;
 
   window.shared.SecondPage = React.createClass({
@@ -41,13 +40,14 @@
             marginBottom: '80px'
           }
         },
+        dom.h1({}, 'Next, please answer two quick questions about income.'),
+        dom.br({}),
         this.renderProgressBar(),
         this.renderEmploymentQuestion(),
         this.requiredQuestionWarning(showEmploymentQuestionWarning),
         this.invalidQuestionWarning(showInvalidEmploymentResponse),
         this.renderAdditionalIncomeQuestion(),
         this.requiredQuestionWarning(showAdditionalIncomeQuestionWarning),
-        this.renderCitizenshipQuestion(),
         dom.br({}),
         this.requiredQuestionWarning(),
         dom.input({
@@ -84,14 +84,6 @@
         onUpdateDataField: this.props.onUpdateDataField,
         userSubmittedData: this.props.userSubmittedData,
         userWentBack: this.props.userWentBack,
-      });
-    },
-
-    renderCitizenshipQuestion: function () {
-      return createEl(CitizenshipQuestion, {
-        onCheckNotAllCitizens: this.props.onCheckNotAllCitizens,
-        onCheckYesAllCitizens: this.props.onCheckYesAllCitizens,
-        singlePersonHousehold: this.props.singlePersonHousehold
       });
     },
 

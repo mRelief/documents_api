@@ -13,6 +13,12 @@
     color: '#0645AD',
     textDecoration: 'underline',
     cursor: 'pointer',
-  }
+  };
+
+  window.shared.SmallLinkStyle = {
+    color: '#0645AD',
+    fontSize: '12px',
+    cursor: 'pointer'
+  };
 
 })();

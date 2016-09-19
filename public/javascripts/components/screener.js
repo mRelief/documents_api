@@ -108,6 +108,7 @@
     renderThirdPage: function () {
       return createEl(ThirdPage, {
         onClickRadioButtonYes: this.onClickRadioButtonYes,
+        singlePersonHousehold: this.state.singlePersonHousehold,
         onClickRadioButtonNo: this.onClickRadioButtonNo,
         onClickNext: this.onClickNextFromThirdPage,
         onClickBackButton: this.hitBackButtonFromThirdPage,
