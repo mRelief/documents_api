@@ -38,6 +38,10 @@ class SessionDataUpdater < Struct.new :session, :body
       new_session['has_rental_income'] = 'true' if body.include? 'C'
     when 6
       new_session['has_state_id'] = 'false' if body[0] == 'N'
+    when 7
+      new_session['has_birth_certificate'] = 'true' if body[0] == 'Y'
+    when 8
+      new_session['has_social_security_card'] = 'true' if body[0] == 'Y'
     end
 
     return new_session
@@ -86,6 +90,8 @@ class SessionDataUpdater < Struct.new :session, :body
     new_session['has_state_id'] = 'true'
     new_session['more_housing_options'] = 'false'
     new_session['recently_lost_job_and_received_paycheck'] = 'false'
+    new_session['has_birth_certificate'] = 'false'
+    new_session['has_social_security_card'] = 'false'
 
     return new_session
   end

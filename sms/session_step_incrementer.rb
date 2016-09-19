@@ -8,7 +8,7 @@ class SessionStepIncrementer < Struct.new :session
     elsif (new_session['tiered_unemployment_question_one'] == 'true' ||
            new_session['tiered_unemployment_question_two'] == 'true')
       nil
-    elsif 6 > new_session[:count]
+    elsif 8 > new_session[:count]
       new_session[:count] += 1
     else
       new_session[:count] = 0
