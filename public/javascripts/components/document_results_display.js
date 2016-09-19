@@ -61,8 +61,8 @@
     renderDocs: function () {
       return dom.div({},
         this.renderStateIdSection(),
-        this.renderBirthCertificateAndSocialSecuritySection(),
         this.renderMoreResidencyAndIdentityOptions(),
+        this.renderBirthCertificateAndSocialSecuritySection(),
         this.renderIncomeDocs(),
         this.renderCitizenshipDocs(),
         createEl(ReactTooltip, { id: 'state-id-explanation' })
