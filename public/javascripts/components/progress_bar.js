@@ -24,15 +24,16 @@
             backgroundColor: 'white',
             height: '140px'
           }
-        }, this.renderOuterBar()
+        }, this.renderBar(),
+           this.renderLineBeneath()
       );
     },
 
-    renderOuterBar: function () {
+    renderBar: function () {
       return dom.div({
           style: {
             position: 'relative',
-            top: '80px',
+            top: '70px',
             backgroundColor: '#F2F2F2',
             height: '8px',
             borderRadius: '4px',
@@ -42,6 +43,19 @@
         this.renderLabels(),
         this.renderMarker()
       );
+    },
+
+    renderLineBeneath: function () {
+      return dom.div({
+        style: {
+          width: '200%',
+          height: '1px',
+          borderBottom: '2px solid #F2F2F2',
+          position: 'relative',
+          left: '-200px',
+          top: '110px'
+        }
+      });
     },
 
     renderLabels: function () {
@@ -55,7 +69,7 @@
     },
 
     labelStyle: function (position) {
-      var leftDisplace = (position / this.state.totalSteps * 100) - 1;
+      var leftDisplace = (position / this.state.totalSteps * 100) - (position / 2) - 1;
 
       if (this.props.step === position) {
         var color = 'black';

@@ -6,6 +6,14 @@ body {
 
 #center-area {
   background-color: white;
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
+  float: right;
+}
+
+#sidebar {
+  background-color: #0060b0;
+  width: 5%;
+  height: 120%;
+  float: left;
 }
