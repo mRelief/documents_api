@@ -21,6 +21,7 @@ describe Api::DocumentsRequest do
       recently_lost_job_and_received_paycheck: "false",
       has_birth_certificate: "false",
       has_social_security_card: "false",
+      has_state_id: "true"
     }
   }
 
