@@ -66,6 +66,11 @@
             this.renderSocialSecurityCardStatement(),
             dom.br({}),
             dom.br({})
+          ),
+          dom.li({},
+            this.renderStateIdStatement(),
+            dom.br({}),
+            dom.br({})
           )
         ),
         dom.input({
@@ -151,6 +156,16 @@
         return 'You have a Social Security Card.';
       } else {
         return 'You don\'t have a Social Security Card.';
+      };
+    },
+
+    renderStateIdStatement: function () {
+      var has_state_id = (this.props.userSubmittedData.has_state_id === 'true');
+
+      if (has_state_id) {
+        return 'You have a State ID.';
+      } else {
+        return 'You don\'t have a State ID.';
       };
     },
 
