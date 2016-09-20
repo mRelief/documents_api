@@ -2,10 +2,9 @@
   window.shared || (window.shared = {});
   var dom = React.DOM;
   var createEl = React.createElement.bind(React);
-  var IdentityDocuments = window.shared.IdentityDocuments;
-  var ResidencyDocuments = window.shared.ResidencyDocuments;
   var LinkStyle = window.shared.LinkStyle;
   var ProgressBar = window.shared.ProgressBar;
+  var IncomeDocumentsList = window.shared.IncomeDocumentsList;
   var BirthCertificateAndSocialCardSection = window.shared.BirthCertificateAndSocialCardSection;
 
   window.shared.DocumentResultsDisplay = React.createClass({
@@ -40,7 +39,8 @@
         this.renderRequiredDocs(),
         this.renderSuggestedDocs(),
         dom.br({}),
-        this.renderStartOverButton()
+        this.renderStartOverButton(),
+        this.renderReactTooltips()
       );
     },
 
@@ -53,8 +53,7 @@
           this.renderCitizenshipDocs()
         ),
         this.renderResidencyDocs(),
-        this.renderAlternativeIdentityDocs(),
-        createEl(ReactTooltip, { id: 'state-id-explanation' })
+        this.renderAlternativeIdentityDocs()
       );
     },
 
@@ -84,22 +83,27 @@
       var hasStateId = this.hasStateId();
 
       if (hasStateId) {
-        return dom.li({}, 'State ID');
+        return dom.li({}, 'State ID', this.renderStateIdTooltip());
       } else if (hasBirthCertificate || hasSocial) {
         return this.renderBirthCertificateAndOrSocial();
+      } else {
+        return null;
       };
     },
 
     renderBirthCertificateAndOrSocial: function () {
       var hasBirthCertificate = this.hasBirthCertificate();
-      var hasStateId = this.hasStateId();
+      var hasSocial = this.hasSocial();
 
       if (hasBirthCertificate && hasSocial) {
-        return dom.span({}, dom.li({}, 'Birth Certificate'), dom.li({}, 'Social Security Card'));
+        return dom.span({},
+          dom.li({}, 'Birth Certificate', this.renderIdentityTooltip()),
+          dom.li({}, 'Social Security Card', this.renderIdentityTooltip())
+        );
       } else if (hasBirthCertificate) {
-        return dom.li({}, 'Birth Certificate');
+        return dom.li({}, 'Birth Certificate', this.renderIdentityTooltip());
       } else if (hasSocial) {
-        return dom.li({}, 'Social Security Card');
+        return dom.li({}, 'Social Security Card', this.renderIdentityTooltip());
       };
     },
 
@@ -111,7 +115,6 @@
       });
 
       return dom.div({},
-        dom.br({}),
         dom.p({}, 'You will need *ONE* of these documents to prove residency:'),
         dom.ul({}, residencyDocumentList)
       );
@@ -154,20 +157,10 @@
     },
 
     renderIncomeDocs: function () {
-      var self = this;
-      return this.props.incomeDocuments.map(function (doc) {
-        if (doc.url_to_document) {
-          return dom.li({},
-            dom.a({
-              href: doc.url_to_document, target: '_blank', rel: 'noopener noreferrer'
-            }, doc.official_name)
-          );
-        } else if (doc.official_name === 'Pay Stubs for the Past 30 Days' &&
-                   self.multiMemberHousehold()) {
-          return dom.li({}, doc.official_name + ' (for all employed members of your family)');
-        } else {
-          return dom.li({}, doc.official_name);
-        };
+      return createEl(IncomeDocumentsList, {
+        documents: this.props.incomeDocuments,
+        multiMemberHousehold: this.multiMemberHousehold(),
+        renderTooltip: this.renderIncomeTooltip,
       });
     },
 
@@ -187,6 +180,38 @@
 
     renderProgressBar: function () {
       return createEl(ProgressBar, { step: 4 });
+    },
+
+    renderReactTooltips: function () {
+      return dom.div({},
+        createEl(ReactTooltip, { id: 'state-id-explanation' }),
+        createEl(ReactTooltip, { id: 'income-explanation' }),
+        createEl(ReactTooltip, { id: 'identity-explanation' })
+      );
+    },
+
+    renderStateIdTooltip: function () {
+      return dom.span({
+        style: window.shared.SmallLinkStyle,
+        'data-for': 'state-id-explanation',
+        'data-tip': 'This verifies your residency and identity.'
+       }, '\u00a0 (?)');
+    },
+
+    renderIncomeTooltip: function () {
+      return dom.span({
+        style: window.shared.SmallLinkStyle,
+        'data-for': 'income-explanation',
+        'data-tip': 'This verifies your income.'
+       }, '\u00a0 (?)');
+    },
+
+    renderIdentityTooltip: function () {
+      return dom.span({
+        style: window.shared.SmallLinkStyle,
+        'data-for': 'income-explanation',
+        'data-tip': 'This verifies your identity.'
+       }, '\u00a0 (?)');
     },
 
   });
