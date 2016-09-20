@@ -48,8 +48,6 @@
     },
 
     render: function() {
-      window.scrollTo(0, 0);
-
       if (this.state.hasResponseFromServer === true) {
         // Results from server
         return this.renderResultsFromServer();
@@ -117,10 +115,6 @@
       });
     },
 
-    onClickNextFromThirdPage: function () {
-      this.setState({ answeredThirdPage: true });
-    },
-
     onUpdateDataField: function (event) {
       var dataField = event.target.getAttribute('data');
       var userSubmittedData = this.state.userSubmittedData;
@@ -135,11 +129,18 @@
     },
 
     onClickNextFromFirstPage: function () {
+      window.scrollTo(0, 0);
       this.setState({ answeredFirstPage: true });
     },
 
     onClickNextFromSecondPage: function () {
+      window.scrollTo(0, 0);
       this.setState({ answeredSecondPage: true });
+    },
+
+    onClickNextFromThirdPage: function () {
+      window.scrollTo(0, 0);
+      this.setState({ answeredThirdPage: true });
     },
 
     onClickMyFamily: function () {
