@@ -12,6 +12,7 @@ describe ResidencyDocuments do
           owns_home: true,
           shelter: false,
           living_with_family_or_friends: false,
+          has_state_id: true
         )
       }
 
