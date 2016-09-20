@@ -21,28 +21,29 @@ describe Api::DocumentsRequest do
       recently_lost_job_and_received_paycheck: "false",
       has_birth_certificate: "false",
       has_social_security_card: "false",
+      has_state_id: "true"
     }
   }
 
   context "default params from screener" do
     let(:params) { default_params }
+    let(:outcome) { subject.fetch_documents }
+    let(:residency_documents) { outcome[:residency_documents] }
+    let(:identity_documents) { outcome[:identity_documents] }
 
     it "returns the correct documents data" do
-      expect(subject.fetch_documents).to eq({
-        residency_documents: [
-          { official_name: "State ID", description: "State ID"},
-          { official_name: "Mail", description: "Mail document showing postmark within last 30 days with Illinois address"},
-          { official_name: "Medical Records", description: "Medical records/clinic cards"}
-        ],
-        identity_documents: [
-          { official_name: "State ID", description: "State ID"},
-          { official_name: "School Photo ID"},
-          { official_name: "U.S. Military ID Card"},
-          { official_name: "Voter Registration Card"},
-        ],
-        citizenship_documents: [],
-        income_documents: [],
-      })
+      expect(residency_documents).to eq([
+        { official_name: "State ID", description: "State ID"},
+        { official_name: "Mail", description: "Mail document showing postmark within last 30 days with Illinois address"},
+        { official_name: "Medical Records", description: "Medical records/clinic cards"},
+      ])
+
+      expect(identity_documents).to eq([
+        { official_name: "School Photo ID"},
+        { official_name: "U.S. Military ID Card"},
+        { official_name: "Voter Registration Card"},
+        { official_name: "State ID", description: "State ID"},
+      ])
     end
   end
 
