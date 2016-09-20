@@ -85,7 +85,7 @@ describe "queries against API endpoints" do
 
     it "returns correct income documents" do
       get path, format: :json
-      expect(response_json["residency_documents"].size).to eq 4
+      expect(response_json["residency_documents"].size).to eq 3
       expect(residency_document_names).to include "Homeless Shelter Statement"
     end
   end
