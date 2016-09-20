@@ -2,10 +2,9 @@
   window.shared || (window.shared = {});
   var dom = React.DOM;
   var createEl = React.createElement.bind(React);
-  var IdentityDocuments = window.shared.IdentityDocuments;
-  var ResidencyDocuments = window.shared.ResidencyDocuments;
   var LinkStyle = window.shared.LinkStyle;
   var ProgressBar = window.shared.ProgressBar;
+  var IncomeDocumentsList = window.shared.IncomeDocumentsList;
   var BirthCertificateAndSocialCardSection = window.shared.BirthCertificateAndSocialCardSection;
 
   window.shared.DocumentResultsDisplay = React.createClass({
@@ -19,27 +18,11 @@
     propTypes: {
       singlePersonHousehold: React.PropTypes.bool.isRequired,
       results: React.PropTypes.object.isRequired,
-      onClickStartOver: React.PropTypes.func.isRequired
-    },
-
-    needsIdentityDocs: function () {
-      return (this.props.results.identity_documents.length > 0);
-    },
-
-    identityDocs: function () {
-      return this.props.results.identity_documents;
-    },
-
-    residencyDocs: function () {
-      return this.props.results.residency_documents;
-    },
-
-    citizenshipDocs: function () {
-      return this.props.results.citizenship_documents;
-    },
-
-    incomeDocs: function () {
-      return this.props.results.income_documents;
+      onClickStartOver: React.PropTypes.func.isRequired,
+      identityDocuments: React.PropTypes.array.isRequired,      // One-of-the-above
+      residencyDocuments: React.PropTypes.array.isRequired,     // One-of-the-above
+      citizenshipDocuments: React.PropTypes.array.isRequired,   // Single item
+      incomeDocuments: React.PropTypes.array.isRequired,        // All-of-the-above
     },
 
     render: function () {
@@ -52,21 +35,151 @@
         },
         this.renderProgressBar(),
         dom.h1({}, 'What Documents You Need To Apply For Food Stamps:'),
-        this.renderDocs(),
         dom.br({}),
-        this.renderStartOverButton()
+        this.renderRequiredDocs(),
+        this.renderSuggestedDocs(),
+        dom.br({}),
+        this.renderStartOverButton(),
+        this.renderReactTooltips()
       );
     },
 
-    renderDocs: function () {
+    renderRequiredDocs: function () {
       return dom.div({},
-        this.renderStateIdSection(),
-        this.renderMoreResidencyAndIdentityOptions(),
-        this.renderBirthCertificateAndSocialSecuritySection(),
-        this.renderIncomeDocs(),
-        this.renderCitizenshipDocs(),
-        createEl(ReactTooltip, { id: 'state-id-explanation' })
+        this.renderAllOfTheAboveList(),
+        this.renderResidencyDocs(),
+        this.renderAlternativeIdentityDocs()
       );
+    },
+
+    renderAllOfTheAboveList: function () {
+      if (this.props.incomeDocuments.length === 0 &&
+          this.props.citizenshipDocuments.length === 0 &&
+          !(this.hasBirthCertificate()) &&
+          !(this.hasSocial()) &&
+          !(this.hasStateId())) return null;
+
+      return dom.div({},
+        dom.p({}, 'You will need all of these documents:'),
+        dom.ul({},
+          this.renderIdentityDocs(),
+          this.renderIncomeDocs(),
+          this.renderCitizenshipDocs()
+        )
+      );
+    },
+
+    identityDocumentNames: function () {
+      return this.props.identityDocuments.map(function(doc) { return doc.official_name });
+    },
+
+    hasBirthCertificate: function () {
+      return this.identityDocumentNames().indexOf('Birth Certificate') > -1;
+    },
+
+    hasSocial: function () {
+      return this.identityDocumentNames().indexOf('Social Security Card') > -1;
+    },
+
+    hasStateId: function () {
+      return this.identityDocumentNames().indexOf('State ID') > -1;
+    },
+
+    multiMemberHousehold: function () {
+      return !(this.props.singlePersonHousehold);
+    },
+
+    renderIdentityDocs: function () {
+      var hasSocial = this.hasSocial();
+      var hasBirthCertificate = this.hasBirthCertificate();
+      var hasStateId = this.hasStateId();
+
+      if (hasStateId) {
+        return dom.li({}, 'State ID', this.renderStateIdTooltip());
+      } else if (hasBirthCertificate || hasSocial) {
+        return this.renderBirthCertificateAndOrSocial();
+      } else {
+        return null;
+      };
+    },
+
+    renderBirthCertificateAndOrSocial: function () {
+      var hasBirthCertificate = this.hasBirthCertificate();
+      var hasSocial = this.hasSocial();
+
+      if (hasBirthCertificate && hasSocial) {
+        return dom.span({},
+          dom.li({}, 'Birth Certificate', this.renderIdentityTooltip()),
+          dom.li({}, 'Social Security Card', this.renderIdentityTooltip())
+        );
+      } else if (hasBirthCertificate) {
+        return dom.li({}, 'Birth Certificate', this.renderIdentityTooltip());
+      } else if (hasSocial) {
+        return dom.li({}, 'Social Security Card', this.renderIdentityTooltip());
+      };
+    },
+
+    renderResidencyDocs: function () {
+      if (this.hasStateId()) return null;
+
+      var residencyDocumentList = this.props.residencyDocuments.map(function(document) {
+        return dom.li({}, document.official_name);
+      });
+
+      return dom.div({},
+        dom.br({}),
+        dom.p({}, 'You will need *ONE* of these documents to prove residency:'),
+        dom.ul({}, residencyDocumentList)
+      );
+    },
+
+    renderAlternativeIdentityDocs: function () {
+      var hasSocial = this.hasSocial();
+      var hasBirthCertificate = this.hasBirthCertificate();
+      var hasStateId = this.hasStateId();
+
+      if (hasSocial || hasBirthCertificate || hasStateId) return null;
+
+      var alternativeIdentityDocuments = this.props.identityDocuments;
+
+      if (alternativeIdentityDocuments.length === 0) return null;
+
+      return dom.div({},
+        dom.br({}),
+        dom.p({}, 'You will need *ONE* of these documents to prove identity:'),
+        dom.ul({},
+          alternativeIdentityDocuments.map(function(doc) { return dom.li({}, doc.official_name); })
+        )
+      );
+    },
+
+    renderSuggestedDocs: function () {
+      var hasSocial = this.hasSocial();
+      var hasBirthCertificate = this.hasBirthCertificate();
+      var hasStateId = this.hasStateId();
+
+      if (!hasSocial && !hasBirthCertificate) return null;
+      if (!hasStateId) return null;   // If the applicant has no State ID,
+                                      // Birth Certificate/Social are required,
+                                      // not suggested.
+
+      return createEl(BirthCertificateAndSocialCardSection, {
+        hasSocial: this.hasStateId(),
+        hasBirthCertificate: this.hasBirthCertificate()
+      });
+    },
+
+    renderIncomeDocs: function () {
+      return createEl(IncomeDocumentsList, {
+        documents: this.props.incomeDocuments,
+        multiMemberHousehold: this.multiMemberHousehold(),
+        renderTooltip: this.renderIncomeTooltip,
+      });
+    },
+
+    renderCitizenshipDocs: function () {
+      if (this.props.citizenshipDocuments.length === 0) return null;
+      return dom.li({}, 'I-90 Documentation for all non-citizen family members');
     },
 
     renderStartOverButton: function () {
@@ -79,171 +192,40 @@
     },
 
     renderProgressBar: function () {
-      return createEl(ProgressBar, { step: 3 });
+      return createEl(ProgressBar, { step: 4 });
     },
 
-    renderStateIdSection: function () {
-      if (this.state.showMoreOptions === true) return null;
-
+    renderReactTooltips: function () {
       return dom.div({},
-        this.renderStateIdStatement(),
-        dom.span({}, '\u00a0 \u00a0'),
-        dom.br({}),
-        dom.a({
-          onClick: this.toggleIdExplanation,
-          style: LinkStyle,
-          'data-for': 'state-id-explanation',
-          'data-tip': this.stateIdExplanation()
-        }, 'Why?'),
-        dom.span({}, '\u00a0 \u00a0'),
-        dom.a({
-          onClick: this.toggleShowMoreOptions,
-          style: LinkStyle
-        }, this.noStateIdString()),
-        dom.br({}),
-        dom.br({})
+        createEl(ReactTooltip, { id: 'state-id-explanation' }),
+        createEl(ReactTooltip, { id: 'income-explanation' }),
+        createEl(ReactTooltip, { id: 'identity-explanation' })
       );
     },
 
-    renderStateIdStatement: function () {
-      if (this.props.singlePersonHousehold) {
-        return dom.span({},
-          dom.span({}, 'You will need your '),
-          dom.span({ style: { fontWeight: 'bold' } }, 'State ID.')
-        )
-      } else {
-        return dom.span({},
-          dom.span({}, 'You will need a '),
-          dom.span({ style: { fontWeight: 'bold' } }, 'State ID'),
-          dom.span({}, ' for all adult members of your family.')
-        )
-      }
+    renderStateIdTooltip: function () {
+      return dom.span({
+        style: window.shared.SmallLinkStyle,
+        'data-for': 'state-id-explanation',
+        'data-tip': 'This verifies your residency and identity.'
+       }, '\u00a0 (?)');
     },
 
-    noStateIdString: function () {
-      if (this.props.singlePersonHousehold) {
-        return 'I don\'t have a state ID.';
-      } else {
-        return 'Someone doesn\'t have a state ID.';
-      }
+    renderIncomeTooltip: function () {
+      return dom.span({
+        style: window.shared.SmallLinkStyle,
+        'data-for': 'income-explanation',
+        'data-tip': 'This verifies your income.'
+       }, '\u00a0 (?)');
     },
 
-    renderMoreResidencyAndIdentityOptions: function () {
-      if (this.state.showMoreOptions === false) return null;
-
-      if (this.needsIdentityDocs()) {
-        var identityDocs = createEl(IdentityDocuments, { documents: this.identityDocs() });
-      } else {
-        var identityDocs = null;
-      };
-
-      var residencyDocs = createEl(ResidencyDocuments, { documents: this.residencyDocs() });
-
-      return dom.div({}, identityDocs, residencyDocs);
+    renderIdentityTooltip: function () {
+      return dom.span({
+        style: window.shared.SmallLinkStyle,
+        'data-for': 'income-explanation',
+        'data-tip': 'This verifies your identity.'
+       }, '\u00a0 (?)');
     },
-
-    stateIdExplanation: function () {
-      if (this.needsIdentityDocs() === true) {
-        var reasons = 'residency and identity.'
-      } else {
-        var reasons = 'residency.'
-      };
-
-      return 'You need your State ID to prove ' + reasons;
-    },
-
-    toggleShowMoreOptions: function () {
-      var currentStatus = this.state.showMoreOptions;
-      this.setState({ showMoreOptions: !currentStatus });
-    },
-
-    renderBirthCertificateAndSocialSecuritySection: function () {
-      var identityDocs = this.identityDocs();
-      var identityDocNames = identityDocs.map(function(doc) { return doc.official_name; });
-
-      var hasBirthCertificate = (identityDocNames.indexOf('Birth Certificate') > -1);
-      var hasSocial = (identityDocNames.indexOf('Social Security Card') > -1);
-
-      return createEl(BirthCertificateAndSocialCardSection, {
-        hasBirthCertificate: hasBirthCertificate,
-        hasSocial: hasSocial,
-      });
-    },
-
-    renderIncomeDocs: function () {
-      var docs = this.incomeDocs();
-      if (docs.length === 0) return null;
-
-      if (docs.length === 1) {
-        var doc = docs[0];
-        var doc_name = doc.official_name;
-        if (doc_name === 'Pay Stubs for the Past 30 Days' && !this.props.singlePersonHousehold) {
-          doc_name += ' (for all employed members of your family)';
-        };
-
-        doc_name += '.';
-
-        if (doc.url_to_document) {
-          var doc_presentation = dom.a({
-            href: doc.url_to_document,
-            target: '_blank',
-            rel: 'noopener noreferrer'
-          }, doc_name);
-        } else {
-          var doc_presentation = doc_name;
-        };
-
-        return dom.div({},
-          dom.span({}, 'You will also need your '),
-          dom.span({ style: { fontWeight: 'bold' } }, doc_presentation),
-          dom.br({}),
-          dom.br({})
-        );
-      };
-
-      if (this.props.singlePersonHousehold) {
-        return dom.div({},
-          dom.span({}, 'You will also need '),
-          dom.span({ style: { fontWeight: 'bold' } }, 'all '),
-          dom.span({}, 'of the following documents:'),
-          dom.ul({}, this.incomeDocsList())
-        );
-      } else {
-        return dom.div({},
-          dom.span({}, 'You will also need '),
-          dom.span({ style: { fontWeight: 'bold' } }, 'all '),
-          dom.span({}, 'of these documents for family members receiving income:'),
-          dom.ul({}, this.incomeDocsList())
-        );
-      }
-    },
-
-    incomeDocsList: function () {
-      return this.incomeDocs().map(function (document) {
-        if (document.url_to_document) {
-          return dom.li({},
-            dom.a({
-              href: document.url_to_document,
-              target: '_blank',
-              rel: 'noopener noreferrer'
-            }, document.official_name)
-          );
-        } else {
-          return dom.li({}, document.official_name);
-        };
-      });
-    },
-
-    renderCitizenshipDocs: function () {
-      if (this.citizenshipDocs().length === 0) return null;
-
-      return dom.div({},
-        dom.span({}, 'You will need '),
-        dom.span({ style: { fontWeight: 'bold' } }, 'I-90 Documentation'),
-        dom.span({}, ' for all non-citizen family members.'),
-        dom.br({})
-      );
-    }
 
   });
 })();

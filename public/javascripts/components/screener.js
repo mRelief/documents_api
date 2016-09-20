@@ -9,6 +9,7 @@
   var ErrorPage = window.shared.ErrorPage;
   var FirstPage = window.shared.FirstPage;
   var SecondPage = window.shared.SecondPage;
+  var ThirdPage = window.shared.ThirdPage;
   var ConfirmationPage = window.shared.ConfirmationPage;
 
   window.shared.Screener = React.createClass({
@@ -17,6 +18,7 @@
       return {
         answeredFirstPage: false,
         answeredSecondPage: false,
+        answeredThirdPage: false,
         hasResponseFromServer: false,
         documentsDataFromServer: null,
         userSubmittedData: $.extend(true, {}, DefaultData),
@@ -56,8 +58,11 @@
         // First page
         return this.renderFirstPage();
       } else if (this.state.answeredSecondPage === false) {
-        // Detailed income questions page
+        // Second page
         return this.renderSecondPage();
+      } else if (this.state.answeredThirdPage === false) {
+        // Third page
+        return this.renderThirdPage();
       } else {
         // Confirmation page
         return this.renderConfirmationPage();
@@ -98,6 +103,18 @@
       });
     },
 
+    renderThirdPage: function () {
+      return createEl(ThirdPage, {
+        onClickRadioButtonYes: this.onClickRadioButtonYes,
+        singlePersonHousehold: this.state.singlePersonHousehold,
+        onClickRadioButtonNo: this.onClickRadioButtonNo,
+        onClickNext: this.onClickNextFromThirdPage,
+        onClickBackButton: this.hitBackButtonFromThirdPage,
+        userSubmittedData: this.state.userSubmittedData,
+        userWentBack: this.state.hitBackButton,
+      });
+    },
+
     onUpdateDataField: function (event) {
       var dataField = event.target.getAttribute('data');
       var userSubmittedData = this.state.userSubmittedData;
@@ -112,11 +129,18 @@
     },
 
     onClickNextFromFirstPage: function () {
+      window.scrollTo(0, 0);
       this.setState({ answeredFirstPage: true });
     },
 
     onClickNextFromSecondPage: function () {
+      window.scrollTo(0, 0);
       this.setState({ answeredSecondPage: true });
+    },
+
+    onClickNextFromThirdPage: function () {
+      window.scrollTo(0, 0);
+      this.setState({ answeredThirdPage: true });
     },
 
     onClickMyFamily: function () {
@@ -153,18 +177,16 @@
       this.setState({ userSubmittedData: userSubmittedData });
     },
 
-    hitBackButtonFromConfirmationPage: function () {
-      this.setState({
-        hitBackButton: true,
-        answeredSecondPage: false
-      });
+    hitBackButtonFromSecondPage: function () {
+      this.setState({ hitBackButton: true, answeredFirstPage: false });
     },
 
-    hitBackButtonFromSecondPage: function () {
-      this.setState({
-        hitBackButton: true,
-        answeredFirstPage: false
-      });
+    hitBackButtonFromThirdPage: function () {
+      this.setState({ hitBackButton: true, answeredSecondPage: false });
+    },
+
+    hitBackButtonFromConfirmationPage: function () {
+      this.setState({ hitBackButton: true, answeredThirdPage: false });
     },
 
     onClickStartOver: function () {
@@ -174,7 +196,10 @@
     renderResultsFromServer: function () {
       return createEl(DocumentResultsDisplay, {
           singlePersonHousehold: this.state.singlePersonHousehold,
-          results: this.state.documentsDataFromServer,
+          identityDocuments: this.state.documentsDataFromServer.identity_documents,
+          residencyDocuments: this.state.documentsDataFromServer.residency_documents,
+          citizenshipDocuments: this.state.documentsDataFromServer.citizenship_documents,
+          incomeDocuments: this.state.documentsDataFromServer.income_documents,
           onClickStartOver: this.onClickStartOver
         }
       );

@@ -4,7 +4,6 @@
   var createEl = React.createElement.bind(React);
   var EmploymentQuestion = window.shared.EmploymentQuestion;
   var AdditionalIncomeQuestion = window.shared.AdditionalIncomeQuestion;
-  var CitizenshipQuestion = window.shared.CitizenshipQuestion;
   var ProgressBar = window.shared.ProgressBar;
 
   window.shared.SecondPage = React.createClass({
@@ -41,15 +40,14 @@
             marginBottom: '80px'
           }
         },
+        dom.h1({}, 'Next, please answer two quick questions about income.'),
+        dom.br({}),
         this.renderProgressBar(),
         this.renderEmploymentQuestion(),
         this.requiredQuestionWarning(showEmploymentQuestionWarning),
         this.invalidQuestionWarning(showInvalidEmploymentResponse),
         this.renderAdditionalIncomeQuestion(),
         this.requiredQuestionWarning(showAdditionalIncomeQuestionWarning),
-        this.renderCitizenshipQuestion(),
-        this.renderBirthCertificateQuestion(),
-        this.renderSocialSecurityCardQuestion(),
         dom.br({}),
         this.requiredQuestionWarning(),
         dom.input({
@@ -62,7 +60,7 @@
           type: 'submit',
           value: 'Next',
           style: window.shared.ButtonStyle,
-          onClick: this.onClickNext
+          onClick: this.props.onClickNext
         })
       );
     },
@@ -87,76 +85,6 @@
         userSubmittedData: this.props.userSubmittedData,
         userWentBack: this.props.userWentBack,
       });
-    },
-
-    renderCitizenshipQuestion: function () {
-      return createEl(CitizenshipQuestion, {
-        onCheckNotAllCitizens: this.props.onCheckNotAllCitizens,
-        onCheckYesAllCitizens: this.props.onCheckYesAllCitizens,
-        singlePersonHousehold: this.props.singlePersonHousehold
-      });
-    },
-
-    renderBirthCertificateQuestion: function () {
-      return dom.div({},
-        dom.p({}, 'Do you have a birth certificate?'),
-        dom.input({
-          type: 'radio',
-          name: 'birthCertificateQuestion',
-          onClick: this.props.onClickRadioButtonYes,
-          data: 'has_birth_certificate',
-          defaultChecked: (
-            this.props.userWentBack &&
-            this.props.userSubmittedData.has_birth_certificate === 'true'
-          )
-        }),
-        dom.label({}, 'Yes'),
-        dom.br({}),
-        dom.input({
-          type: 'radio',
-          name: 'birthCertificateQuestion',
-          onClick: this.props.onClickRadioButtonNo,
-          data: 'has_birth_certificate',
-          defaultChecked: (
-            this.props.userWentBack &&
-            this.props.userSubmittedData.has_birth_certificate === 'false'
-          )
-        }),
-        dom.label({}, 'No'),
-        dom.br({}),
-        dom.br({})
-      );
-    },
-
-    renderSocialSecurityCardQuestion: function () {
-      return dom.div({},
-        dom.p({}, 'Do you have a social security card?'),
-        dom.input({
-          type: 'radio',
-          name: 'socialSecurityCardQuestion',
-          data: 'has_social_security_card',
-          onClick: this.props.onClickRadioButtonYes,
-          defaultChecked: (
-            this.props.userWentBack &&
-            this.props.userSubmittedData.has_social_security_card === 'true'
-          )
-        }),
-        dom.label({}, 'Yes'),
-        dom.br({}),
-        dom.input({
-          type: 'radio',
-          name: 'socialSecurityCardQuestion',
-          data: 'has_social_security_card',
-          onClick: this.props.onClickRadioButtonNo,
-          defaultChecked: (
-            this.props.userWentBack &&
-            this.props.userSubmittedData.has_social_security_card === 'false'
-          )
-        }),
-        dom.label({}, 'No'),
-        dom.br({}),
-        dom.br({})
-      );
     },
 
     onClickNext: function () {
