@@ -34,6 +34,7 @@ describe ResidencyDocuments do
           owns_home: false,
           shelter: false,
           living_with_family_or_friends: true,
+          has_state_id: true
         )
       }
 
