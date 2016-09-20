@@ -46,14 +46,26 @@
 
     renderRequiredDocs: function () {
       return dom.div({},
+        this.renderAllOfTheAboveList(),
+        this.renderResidencyDocs(),
+        this.renderAlternativeIdentityDocs()
+      );
+    },
+
+    renderAllOfTheAboveList: function () {
+      if (this.props.incomeDocuments.length === 0 &&
+          this.props.citizenshipDocuments.length === 0 &&
+          !(this.hasBirthCertificate()) &&
+          !(this.hasSocial()) &&
+          !(this.hasStateId())) return null;
+
+      return dom.div({},
         dom.p({}, 'You will need all of these documents:'),
         dom.ul({},
           this.renderIdentityDocs(),
           this.renderIncomeDocs(),
           this.renderCitizenshipDocs()
-        ),
-        this.renderResidencyDocs(),
-        this.renderAlternativeIdentityDocs()
+        )
       );
     },
 
@@ -115,6 +127,7 @@
       });
 
       return dom.div({},
+        dom.br({}),
         dom.p({}, 'You will need *ONE* of these documents to prove residency:'),
         dom.ul({}, residencyDocumentList)
       );
