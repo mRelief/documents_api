@@ -20,7 +20,8 @@ module Api
                    unemployment_benefits:,
                    recently_lost_job_and_received_paycheck:,
                    has_birth_certificate:,
-                   has_social_security_card:)
+                   has_social_security_card:,
+                   has_state_id:)
 
       @has_rental_income = StringParser.new(has_rental_income).to_boolean
       @renting = StringParser.new(renting).to_boolean
@@ -37,16 +38,17 @@ module Api
       @recently_lost_job_and_received_paycheck = StringParser.new(recently_lost_job_and_received_paycheck).to_boolean
       @has_birth_certificate = StringParser.new(has_birth_certificate).to_boolean
       @has_social_security_card = StringParser.new(has_social_security_card).to_boolean
+      @has_state_id = StringParser.new(has_state_id).to_boolean
 
       raise "Invalid data" unless valid_data?
     end
 
     def fetch_documents
       return {
-        "residency_documents": residency_documents,
-        "identity_documents": identity_documents,
-        "citizenship_documents": citizenship_documents,
-        "income_documents": income_documents,
+        "residency_documents": residency_documents,      # One-of-the-above
+        "identity_documents": identity_documents,        # One-of-the-above
+        "citizenship_documents": citizenship_documents,  # Single item
+        "income_documents": income_documents,            # All-of-the-above
       }
     end
 
@@ -94,7 +96,8 @@ module Api
         renting: @renting,
         owns_home: @owns_home,
         shelter: @shelter,
-        living_with_family_or_friends: @living_with_family_or_friends
+        living_with_family_or_friends: @living_with_family_or_friends,
+        has_state_id: @has_state_id
       ).documents
     end
 
@@ -119,12 +122,12 @@ module Api
 
     def identity_documents_list
       list = [
-        STATE_ID,
         SCHOOL_PHOTO_ID,
         US_MILITARY_CARD,
         VOTER_REGISTRATION_CARD,
       ]
 
+      list << STATE_ID if @has_state_id
       list << BIRTH_CERTIFICATE if @has_birth_certificate
       list << SOCIAL_SECURITY_CARD if @has_social_security_card
 

@@ -43,6 +43,7 @@ get '/api' do
     recently_lost_job_and_received_paycheck: params['recently_lost_job_and_received_paycheck'],
     has_birth_certificate: params['has_birth_certificate'],
     has_social_security_card: params['has_social_security_card'],
+    has_state_id: params['has_state_id'],
   )
 
   @outcome = documents_request.fetch_documents
@@ -78,6 +79,7 @@ post '/sms' do
   session['recently_lost_job_and_received_paycheck'] ||= 'false'
   session['has_birth_certificate'] ||= 'false'
   session['has_social_security_card'] ||= 'false'
+  session['has_state_id'] ||= 'false'
 
   session['more_housing_options'] ||= 'false'
   session['tiered_unemployment_question_one'] ||= 'false'

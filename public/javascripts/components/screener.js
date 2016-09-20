@@ -48,8 +48,6 @@
     },
 
     render: function() {
-      console.log('rendering!');
-      console.log(this.state);
       if (this.state.hasResponseFromServer === true) {
         // Results from server
         return this.renderResultsFromServer();
@@ -195,7 +193,10 @@
     renderResultsFromServer: function () {
       return createEl(DocumentResultsDisplay, {
           singlePersonHousehold: this.state.singlePersonHousehold,
-          results: this.state.documentsDataFromServer,
+          identityDocuments: this.state.documentsDataFromServer.identity_documents,
+          residencyDocuments: this.state.documentsDataFromServer.residency_documents,
+          citizenshipDocuments: this.state.documentsDataFromServer.citizenship_documents,
+          incomeDocuments: this.state.documentsDataFromServer.income_documents,
           onClickStartOver: this.onClickStartOver
         }
       );

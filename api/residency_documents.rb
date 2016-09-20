@@ -1,15 +1,21 @@
 class ResidencyDocuments
 
-  def initialize(renting:, owns_home:, shelter:, living_with_family_or_friends:)
+  def initialize(renting:,
+                 owns_home:,
+                 shelter:,
+                 living_with_family_or_friends:,
+                 has_state_id:)
+
     @renting = renting
     @owns_home = owns_home
     @shelter = shelter
     @living_with_family_or_friends = living_with_family_or_friends
+    @has_state_id = has_state_id
   end
 
   def documents
     [
-      STATE_ID,
+      state_id,
       rental_documents,
       homeowner_documents,
       shelter_documents,
@@ -17,6 +23,10 @@ class ResidencyDocuments
       MAIL,
       MEDICAL_RECORDS,
     ].flatten.compact
+  end
+
+  def state_id
+    STATE_ID if @has_state_id
   end
 
   def rental_documents
