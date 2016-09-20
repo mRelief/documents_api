@@ -147,18 +147,10 @@
                                       // Birth Certificate/Social are required,
                                       // not suggested.
 
-      if (hasSocial && hasBirthCertificate) {
-         var statement = 'Since you have a Birth Certificate and Social Security Card, bring them just in case.';
-      } else if (hasBirthCertificate) {
-         var statement = 'Since you have a Birth Certificate, bring it just in case.';
-      } else if (hasSocial) {
-         var statement = 'Since you have a Social Security Card, bring it just in case.';
-      };
-
-      return dom.div({},
-        dom.p({}, statement),
-        dom.br({})
-      )
+      return createEl(BirthCertificateAndSocialCardSection, {
+        hasSocial: this.hasStateId(),
+        hasBirthCertificate: this.hasBirthCertificate()
+      });
     },
 
     renderIncomeDocs: function () {
