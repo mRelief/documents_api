@@ -7,6 +7,14 @@
 
   window.shared.ThirdPage = React.createClass({
 
+    getInitialState: function() {
+      return {
+        showPleaseAnswerBirthCertificateQuestion: false,
+        showPleaseAnswerSocialSecurityQuestion: false,
+        showPleaseAnswerStateIdQuestion: false
+      };
+    },
+
     propTypes: {
       singlePersonHousehold: React.PropTypes.bool.isRequired,
       onClickRadioButtonYes: React.PropTypes.func.isRequired,
@@ -59,6 +67,7 @@
         dom.label({}, 'No'),
         dom.br({}),
         dom.br({}),
+        this.requiredQuestionWarning(this.state.showPleaseAnswerBirthCertificateQuestion),
         dom.p({}, 'Do you have a social security card?'),
         dom.input({
           type: 'radio',
@@ -85,6 +94,7 @@
         dom.label({}, 'No'),
         dom.br({}),
         dom.br({}),
+        this.requiredQuestionWarning(this.state.showPleaseAnswerSocialSecurityQuestion),
         dom.p({}, 'Do you have a State ID?'),
         dom.input({
           type: 'radio',
@@ -111,6 +121,7 @@
         dom.label({}, 'No'),
         dom.br({}),
         dom.br({}),
+        this.requiredQuestionWarning(this.state.showPleaseAnswerStateIdQuestion),
         this.renderCitizenshipQuestion(),
         dom.br({}),
         dom.br({}),
@@ -124,9 +135,19 @@
           type: 'submit',
           value: 'Next',
           style: window.shared.ButtonStyle,
-          onClick: this.props.onClickNext
+          onClick: this.onClickNext
         })
       );
+    },
+
+    onClickNext: function () {
+      if (this.valid()) {
+        this.props.onClickNext();
+      } else {
+        this.validateBirthCertificateQuestion();
+        this.validateSocialSecurityQuestion();
+        this.validateStateIdQuestion();
+      };
     },
 
     renderCitizenshipQuestion: function () {
@@ -135,6 +156,74 @@
         onClickRadioButtonNo: this.props.onClickRadioButtonNo,
         singlePersonHousehold: this.props.singlePersonHousehold
       });
+    },
+
+    valid: function () {
+      return (this.answeredBirthCertificateQuestion() &&
+              this.answeredSocialSecurityQuestion() &&
+              this.answeredStateIdQuestion());
+    },
+
+    answeredBirthCertificateQuestion: function () {
+      return $('[type="radio"][name="birthCertificateQuestion"').get().map(function(input) {
+        return input.checked;
+      }).reduce(function(a, b) {
+        return (a || b);
+      });
+    },
+
+    answeredSocialSecurityQuestion: function () {
+      return $('[type="radio"][name="socialSecurityCardQuestion"').get().map(function(input) {
+        return input.checked;
+      }).reduce(function(a, b) {
+        return (a || b);
+      });
+    },
+
+    answeredStateIdQuestion: function () {
+      return $('[type="radio"][name="stateIdQuestion"').get().map(function(input) {
+        return input.checked;
+      }).reduce(function(a, b) {
+        return (a || b);
+      });
+    },
+
+    validateBirthCertificateQuestion: function () {
+      if (this.answeredBirthCertificateQuestion()) {
+        this.setState({ showPleaseAnswerBirthCertificateQuestion: false });
+      } else {
+        this.setState({ showPleaseAnswerBirthCertificateQuestion: true });
+      };
+    },
+
+    validateSocialSecurityQuestion: function () {
+      if (this.answeredSocialSecurityQuestion()) {
+        this.setState({ showPleaseAnswerSocialSecurityQuestion: false });
+      } else {
+        this.setState({ showPleaseAnswerSocialSecurityQuestion: true });
+      };
+    },
+
+    validateStateIdQuestion: function () {
+      if (this.answeredStateIdQuestion()) {
+        this.setState({ showPleaseAnswerStateIdQuestion: false });
+      } else {
+        this.setState({ showPleaseAnswerStateIdQuestion: true });
+      };
+    },
+
+    requiredQuestionWarning: function (shouldShow) {
+      if (!shouldShow) return null;
+
+      return dom.div({},
+        dom.div({
+          style: {
+            color: 'red',
+            fontStyle: 'italic'
+          }
+        }, 'Please select a response.'),
+        dom.br({})
+      );
     },
 
   });
