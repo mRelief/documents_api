@@ -117,6 +117,31 @@ describe 'SMS conversation' do
       end
     end
 
+    describe '1 person, renting, citizen, employee, no other income, has state ID but no\
+              birth certificate or social security card' do
+
+      let(:expected_documents) {
+        'You will need these documents to complete your Food Stamps application: ' +
+        'State ID, Pay Stubs for the Past 30 Days. ' +
+        'Since you have a Birth Certificate and a Social Security Card, ' +
+        'bring them just in case they are needed.'
+      }
+
+      it 'responds with the correct documents' do
+        send_sms('Hi!')
+        send_sms('A')    # Just Me
+        send_sms('A')    # Renting
+        send_sms('YES')  # All citizens
+        send_sms('A')    # Employee
+        send_sms('D')    # None of the above
+        send_sms('YES')  # Has State ID
+        send_sms('N')    # Birth Certificate
+        send_sms('N')    # Social Security Card
+
+        expect(last_response.body).to eq expected_documents
+      end
+    end
+
     describe '1 person, owns home, citizen, employee, child support, has state ID' do
       let(:expected_documents) {
         'You will need these documents to complete your Food Stamps application: ' +
@@ -345,6 +370,30 @@ describe 'SMS conversation' do
       end
     end
 
+    describe 'family, renting, citizen, employee, no state ID or birth certificate or social' do
+      let(:expected_documents) {
+        'You will need these documents to complete your Food Stamps application: ' +
+        'Birth Certificate, Social Security Card, Pay Stubs for the Past 30 Days, ' +
+        'Self-Employment Form. ' +
+        'You will need *ONE* of these documents to prove residency: ' +
+        'Rent Receipt, Mail, Medical Records.'
+      }
+
+      it 'responds with the correct documents' do
+        send_sms('Hi!')
+        send_sms('B')    # Family
+        send_sms('A')    # Renting
+        send_sms('Y')    # All citizens
+        send_sms('AD')   # Employee plus self-employed family members
+        send_sms('D')    # No additional income sources
+        send_sms('N')    # No State ID
+        send_sms('NO')  # Birth Certificate
+        send_sms('NO')  # Social Security Card
+
+        expect(last_response.body).to eq expected_documents
+      end
+    end
+
     describe 'user retakes the screener' do
       let(:expected_outcome) {
         'How many people are you applying for? A. Just Me. B. Me and My Family. ' +
@@ -391,7 +440,7 @@ describe 'SMS conversation' do
       end
     end
 
-   describe '1 person, staying in motel, not citizen, no income, no state ID' do
+    describe '1 person, staying in motel, not citizen, no income, no state ID' do
       let(:expected_documents) {
         'You will need these documents to complete your Food Stamps application: ' +
         'Birth Certificate, Social Security Card, ' +
