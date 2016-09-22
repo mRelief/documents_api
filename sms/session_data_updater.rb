@@ -87,11 +87,11 @@ class SessionDataUpdater < Struct.new :session, :body
     new_session['has_rental_income'] = 'false'
     new_session['disability_benefits'] = 'false'
     new_session['child_support'] = 'false'
-    new_session['has_state_id'] = 'true'
     new_session['more_housing_options'] = 'false'
     new_session['recently_lost_job_and_received_paycheck'] = 'false'
     new_session['has_birth_certificate'] = 'false'
     new_session['has_social_security_card'] = 'false'
+    new_session['has_state_id'] = 'false'
 
     return new_session
   end
