@@ -47,7 +47,7 @@ class DocumentResultsMessage < Struct.new :document_results, :single_person_hous
         suggested_identity_documents,
         citizenship_documents,
         income_documents,
-      ].flatten.join(', ')
+      ].compact.flatten.join(', ')
   end
 
   def suggested_identity_documents
