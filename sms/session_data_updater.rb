@@ -37,7 +37,7 @@ class SessionDataUpdater < Struct.new :session, :body
       new_session['child_support'] = 'true' if body.include? 'B'
       new_session['has_rental_income'] = 'true' if body.include? 'C'
     when 6
-      new_session['has_state_id'] = 'false' if body[0] == 'N'
+      new_session['has_state_id'] = 'true' if body[0] == 'Y'
     when 7
       new_session['has_birth_certificate'] = 'true' if body[0] == 'Y'
     when 8
