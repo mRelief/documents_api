@@ -371,8 +371,7 @@ describe 'SMS conversation' do
     describe 'family, renting, citizen, employee, no state ID or birth certificate or social' do
       let(:expected_documents) {
         'You will need these documents to complete your Food Stamps application: ' +
-        'Birth Certificate, Social Security Card, Pay Stubs for the Past 30 Days, ' +
-        'Self-Employment Form. ' +
+        'Pay Stubs for the Past 30 Days, Self-Employment Form. ' +
         'You will need *ONE* of these documents to prove residency: ' +
         'Rent Receipt, Mail, Medical Records.'
       }
