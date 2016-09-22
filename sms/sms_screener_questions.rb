@@ -34,7 +34,7 @@ SMS_SCREENER = {
     'D. None of the above. ' +
     'Please enter A, B, C, D, or a combination. For example: BC.'
   ),
-  5 => (
-    'Do you have a State ID? Y or N.'
-  )
+  5 => ('Do you have a State ID? Y or N.'),
+  6 => ('Do you have a Birth Certificate? Y or N.'),
+  7 => ('Do you have a Social Security Card? Y or N.')
 }

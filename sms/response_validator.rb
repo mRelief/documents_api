@@ -61,6 +61,14 @@ class ResponseValidator < Struct.new :from, :body, :session
         options: ['Y', 'YES', 'N', 'NO'],
         allow_multiple: false
       },
+      7 => {
+        options: ['Y', 'YES', 'N', 'NO'],
+        allow_multiple: false
+      },
+      8 => {
+        options: ['Y', 'YES', 'N', 'NO'],
+        allow_multiple: false
+      },
       'tiered_unemployment_question' => {
         options: ['Y', 'YES', 'N', 'NO'],
         allow_multiple: false

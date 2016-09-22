@@ -113,7 +113,7 @@ module Api
     end
 
     def needs_identity_docs
-      identity_satisfied_with_other_docs || @has_birth_certificate || @has_social_security_card
+      identity_satisfied_with_other_docs || @has_birth_certificate || @has_social_security_card || @has_state_id
     end
 
     def identity_documents

@@ -75,7 +75,6 @@ post '/sms' do
   session['has_rental_income'] ||= 'false'
   session['disability_benefits'] ||= 'false'
   session['child_support'] ||= 'false'
-  session['has_state_id'] ||= 'true'
   session['recently_lost_job_and_received_paycheck'] ||= 'false'
   session['has_birth_certificate'] ||= 'false'
   session['has_social_security_card'] ||= 'false'

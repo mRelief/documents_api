@@ -10,7 +10,7 @@ class Responder < Struct.new :from, :session
   private
 
   def send_results?
-    session[:count] == 6
+    session[:count] == 8
   end
 
   def step
@@ -19,7 +19,30 @@ class Responder < Struct.new :from, :session
 
   def message
     if send_results?
-      DocumentResultsMessage.new(session).body
+      documents_request = Api::DocumentsRequest.new(
+        has_rental_income: session['has_rental_income'],
+        renting: session['renting'],
+        owns_home: session['owns_home'],
+        shelter: session['shelter'],
+        living_with_family_or_friends: session['living_with_family_or_friends'],
+        all_citizens: session['all_citizens'],
+        employee: session['employee'],
+        disability_benefits: session['disability_benefits'],
+        child_support: session['child_support'],
+        self_employed: session['self_employed'],
+        retired: session['retired'],
+        unemployment_benefits: session['unemployment_benefits'],
+        recently_lost_job_and_received_paycheck: session['recently_lost_job_and_received_paycheck'],
+        has_birth_certificate: session['has_birth_certificate'],
+        has_social_security_card: session['has_social_security_card'],
+        has_state_id: session['has_state_id'],
+      )
+
+      document_results = documents_request.fetch_document_names
+
+      single_person_household = StringParser.new(session['single_person_household']).to_boolean
+
+      DocumentResultsMessage.new(document_results, single_person_household).body
     elsif tiered_question_message(session)
       tiered_question_message(session)
     else
