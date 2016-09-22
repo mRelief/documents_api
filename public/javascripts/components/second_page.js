@@ -60,7 +60,7 @@
           type: 'submit',
           value: 'Next',
           style: window.shared.ButtonStyle,
-          onClick: this.props.onClickNext
+          onClick: this.onClickNext
         })
       );
     },
