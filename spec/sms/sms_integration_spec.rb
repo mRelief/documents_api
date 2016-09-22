@@ -384,8 +384,8 @@ describe 'SMS conversation' do
         send_sms('AD')   # Employee plus self-employed family members
         send_sms('D')    # No additional income sources
         send_sms('N')    # No State ID
-        send_sms('NO')  # Birth Certificate
-        send_sms('NO')  # Social Security Card
+        send_sms('NO')   # Birth Certificate
+        send_sms('NO')   # Social Security Card
 
         expect(last_response.body).to eq expected_documents
       end
