@@ -122,9 +122,7 @@ describe 'SMS conversation' do
 
       let(:expected_documents) {
         'You will need these documents to complete your Food Stamps application: ' +
-        'State ID, Pay Stubs for the Past 30 Days. ' +
-        'Since you have a Birth Certificate and a Social Security Card, ' +
-        'bring them just in case they are needed.'
+        'State ID, Pay Stubs for the Past 30 Days.'
       }
 
       it 'responds with the correct documents' do
