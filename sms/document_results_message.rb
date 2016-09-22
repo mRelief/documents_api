@@ -1,135 +1,102 @@
 require_relative '../helpers/string_parser'
 require_relative '../api/residency_documents'
 
-class DocumentResultsMessage < Struct.new :session
+class DocumentResultsMessage < Struct.new :document_results, :single_person_household
 
   def body
-    fetch_documents
-    has_state_id? ? results_with_state_id : results_without_state_id
-  end
-
-  def fetch_documents
-    documents_request = Api::DocumentsRequest.new(
-      has_rental_income: session['has_rental_income'],
-      renting: session['renting'],
-      owns_home: session['owns_home'],
-      shelter: session['shelter'],
-      living_with_family_or_friends: session['living_with_family_or_friends'],
-      all_citizens: session['all_citizens'],
-      employee: session['employee'],
-      disability_benefits: session['disability_benefits'],
-      child_support: session['child_support'],
-      self_employed: session['self_employed'],
-      retired: session['retired'],
-      unemployment_benefits: session['unemployment_benefits'],
-      recently_lost_job_and_received_paycheck: session['recently_lost_job_and_received_paycheck'],
-      has_birth_certificate: session['has_birth_certificate'],
-      has_social_security_card: session['has_social_security_card'],
-      has_state_id: session['has_state_id'],
-    )
-
-    @document_results = documents_request.fetch_documents
-
-    return @document_results
+    [required_documents_message, suggested_documents_message].compact.join(' ')
   end
 
   private
 
-  # WITH STATE ID #
-
-  def results_with_state_id
-    'You will need these documents to complete your Food Stamps application: ' +
-    [state_id, citizenship_docs, income_docs].flatten.compact.join(', ') +
-    '.'
-  end
-
-  def state_id
-    if single_person_household?
-      'State ID'
-    else
-      'State IDs for everyone you are applying for'
-    end
-  end
-
-
-  # WITHOUT STATE ID #
-
-  def results_without_state_id
+  def required_documents_message
     [
-      no_state_id_statement,
-      residency_options,
-      identity_options,
-      citizenship_plus_income_section
-    ].compact.join(' ')
+      all_of_the_above_documents_list,
+      residency_documents_list,
+      alternative_identity_documents_list,
+    ].compact.map { |sentence| sentence + '.' }.join(' ')
   end
 
-  def no_state_id_statement
-    return 'Since you don\'t have a State ID, you will need to prove residency.' unless needs_identity_docs
-    return 'Since you don\'t have a State ID, you will need to prove residency and identity.'
+  def suggested_documents_message
+    return if !has_state_id
+    return if (!has_birth_certificate && !has_social_security_card)
+
+    document_description_hash = {
+      has_birth_certificate: 'a Birth Certificate',
+      has_social_security_card: 'a Social Security Card'
+    }
+
+    suggested_documents_list =  []
+    suggested_documents_list << 'a Birth Certificate' if has_birth_certificate
+    suggested_documents_list << 'a Social Security Card' if has_social_security_card
+
+    suggested_documents = suggested_documents_list.join(' and ')
+
+    return "Since you have #{suggested_documents}, bring them just in case they are needed."
   end
 
-  def citizenship_plus_income_docs
-    [citizenship_docs, income_docs].flatten.compact
+  def all_of_the_above_documents_list
+    return if (income_documents.size == 0 &&
+               citizenship_documents.size == 0 &&
+               !has_birth_certificate &&
+               !has_social_security_card &&
+               !has_state_id)
+
+    'You will need these documents to complete your Food Stamps application: ' +
+      [
+        suggested_identity_documents,
+        citizenship_documents,
+        income_documents,
+      ].flatten.join(', ')
   end
 
-  def residency_options
-    'You will need *ONE* of the following to prove residency: ' +
-    residency_docs.join(', ') +
-    '.'
+  def suggested_identity_documents
+    return 'State ID' if has_state_id && single_person_household
+    return 'State IDs for everyone you are applying for' if has_state_id && !single_person_household
+    return ['Birth Certificate', 'Social Security Card'] if has_birth_certificate &&
+                                                            has_social_security_card
+    return 'Birth Certificate' if has_birth_certificate
+    return 'Social Security Card' if has_social_security_card
   end
 
-  def residency_docs
-    @document_results[:residency_documents].map { |doc| doc[:official_name] }
-                                           .select { |doc_name| doc_name != 'State ID' }
+  def residency_documents_list
+    return if has_state_id
+
+    'You will need *ONE* of these documents to prove residency: ' + residency_documents.join(', ')
   end
 
-  def identity_options
-    return unless needs_identity_docs
-    'You will need *ONE* of the following to prove identity: ' +
-    identity_docs.join(', ') +
-    '.'
+  def alternative_identity_documents_list
+    return if (has_state_id || has_birth_certificate || has_social_security_card)
+    return if (identity_documents.size == 0)
+    'You will need *ONE* of these documents to prove identityq: ' + identity_documents.join(', ')
   end
 
-  def identity_docs
-    @document_results[:identity_documents].map { |doc| doc[:official_name] }
-                                          .select { |doc_name| doc_name != 'State ID' }
+  def identity_documents
+    document_results[:identity_documents]
   end
 
-  def needs_identity_docs
-    @document_results[:identity_documents].size > 0
+  def citizenship_documents
+    document_results[:citizenship_documents]
   end
 
-  def citizenship_plus_income_section
-    return if citizenship_plus_income_docs.size == 0
-
-    return ('You will also need a ' + citizenship_plus_income_docs.first + '.') if citizenship_plus_income_docs.size == 1
-
-    return 'You will also need these documents: ' + [
-      citizenship_docs,
-      income_docs
-    ].flatten.compact.join(', ') + '.'
+  def income_documents
+    document_results[:income_documents]
   end
 
-
-  # SHARED BY BOTH #
-
-  def income_docs
-    @document_results[:income_documents].map { |doc| doc[:official_name] }
+  def residency_documents
+    document_results[:residency_documents]
   end
 
-  def citizenship_docs
-    citizenship_results = @document_results[:citizenship_documents]
-
-    return if citizenship_results == []
-    return citizenship_results.map { |doc| doc[:official_name] }
+  def has_birth_certificate
+    identity_documents.include? 'Birth Certificate'
   end
 
-  def has_state_id?
-    StringParser.new(session['has_state_id']).to_boolean
+  def has_social_security_card
+    identity_documents.include? 'Social Security Card'
   end
 
-  def single_person_household?
-    StringParser.new(session['single_person_household']).to_boolean
+  def has_state_id
+    identity_documents.include? 'State ID'
   end
 
 end
