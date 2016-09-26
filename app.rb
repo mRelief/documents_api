@@ -51,12 +51,12 @@ get '/api' do
   JSON.pretty_generate(@outcome)
 end
 
-get '/screener' do
+get '/il/snap' do
   erb :show
 end
 
 get '/' do
-  redirect to '/screener'
+  redirect to '/il/snap'
 end
 
 post '/sms' do
