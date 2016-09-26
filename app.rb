@@ -52,6 +52,12 @@ get '/api' do
 end
 
 get '/il/snap' do
+  @program = 'IL SNAP'
+  erb :show
+end
+
+get '/ca/calfresh' do
+  @program = 'CalFresh'
   erb :show
 end
 
